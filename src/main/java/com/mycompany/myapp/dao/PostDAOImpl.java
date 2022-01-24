@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
-import com.mycompany.myapp.vo.postVO;
+import com.mycompany.myapp.vo.PostVO;
 
 @Repository("PostDAO")
 public class PostDAOImpl implements PostDAO{
@@ -28,7 +28,7 @@ public class PostDAOImpl implements PostDAO{
 	}
 
 	@Override
-	public postVO selectPost(int post_id) throws DataAccessException {
+	public PostVO selectPost(int postId) throws DataAccessException {
 		// TODO Auto-generated method stub
 		return null;
 	}
