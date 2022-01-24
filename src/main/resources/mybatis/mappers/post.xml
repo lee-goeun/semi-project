@@ -4,17 +4,17 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.post">
 <resultMap id="postResult" type="postVO">
-	<result property="post_id" column="post_id"/>
-	<result property="post_date;" column="post_date;"/>
+	<result property="postId" column="postId"/>
+	<result property="postDate;" column="postDate;"/>
 	<result property="category;" column="category;"/>
 	<result property="price; " column="price; "/>
-	<result property="delivery_fee;" column="delivery_fee;"/>
+	<result property="deliveryFee;" column="deliveryFee;"/>
 	<result property="deadline;" column="deadline;"/>
-	<result property="MAX_member;" column="MAX_member;"/>
+	<result property="maxMember;" column="maxMember;"/>
 	<result property="title;" column="title;"/>
 	<result property="image;" column="image;"/>
 	<result property="isTogether;" column="isTogether;"/>
-	<result property="revision_date;" column="revision_date;"/>
+	<result property="revisionDate;" column="revisionDate;"/>
 	<result property="isDeleted;" column="isDeleted;"/>
 	<result property="isRevised;" column="isRevised;"/>
 </resultMap>
@@ -29,7 +29,7 @@
 </insert>
 
 <!-- id값으로 post선택 -->
-<select id="selectPost" resultType="post_id" parameterType="int">
+<select id="selectPost" resultType="postId" parameterType="int">
 </select>
 
 <!-- 포스트 수정 -->
