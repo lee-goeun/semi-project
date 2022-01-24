@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.post">
+<resultMap id="postResult" type="postVO">
+	<result property="post_id" column="post_id"/>
+	<result property="post_date;" column="post_date;"/>
+	<result property="category;" column="category;"/>
+	<result property="price; " column="price; "/>
+	<result property="delivery_fee;" column="delivery_fee;"/>
+	<result property="deadline;" column="deadline;"/>
+	<result property="MAX_member;" column="MAX_member;"/>
+	<result property="title;" column="title;"/>
+	<result property="image;" column="image;"/>
+	<result property="isTogether;" column="isTogether;"/>
+	<result property="revision_date;" column="revision_date;"/>
+	<result property="isDeleted;" column="isDeleted;"/>
+	<result property="isRevised;" column="isRevised;"/>
+</resultMap>
+
+<!-- 전체 선택 -->
+<select id="selectAllPostsList" resultMap="postResult">
+
+</select>
+
+<!-- 포스트 추가 -->
+<insert id="insertNewPost" parameterType="java.util.Map">
+</insert>
+
+<!-- id값으로 post선택 -->
+<select id="selectPost" resultType="post_id" parameterType="int">
+</select>
+
+<!-- 포스트 수정 -->
+<update id="updatePost" parameterType="java.util.Map">
+</update>
+
+<!-- 포스트 삭제 -->
+<delete id="deletePost" parameterType="int">
+
+</delete>
+</mapper>
