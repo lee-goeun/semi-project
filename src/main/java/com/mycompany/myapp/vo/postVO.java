@@ -1,4 +1,4 @@
-package com.mycompany.myapp.post.vo;
+package com.mycompany.myapp.vo;
 
 import java.util.Date;
 
