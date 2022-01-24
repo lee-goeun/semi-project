@@ -5,47 +5,47 @@ import java.util.Date;
 import org.springframework.stereotype.Component;
 
 @Component("postVO")
-public class postVO {
-	private int post_id;
-	private String user_id;
-	private Date post_date;
+public class PostVO {
+	private int postId;
+	private String userId;
+	private Date postDate;
 	private String category;
 	private int price; //배달료 제외 주문가격
-	private int delivery_fee;
+	private int deliveryFee;
 	private Date deadline;
-	private int MAX_member;
+	private int maxMember;
 	private String title;
 	private String image;
 	private Boolean isTogether;
-	private Date revision_date;
+	private Date revisionDate;
 	private Boolean isDeleted;
 	private Boolean isRevised;
 	
-	public postVO() {
+	public PostVO() {
 	}
 
-	public int getPost_id() {
-		return post_id;
+	public int getPostId() {
+		return postId;
 	}
 
-	public void setPost_id(int post_id) {
-		this.post_id = post_id;
+	public void setPostId(int postId) {
+		this.postId = postId;
 	}
 
-	public String getUser_id() {
-		return user_id;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public Date getPost_date() {
-		return post_date;
+	public Date getPostDate() {
+		return postDate;
 	}
 
-	public void setPost_date(Date post_date) {
-		this.post_date = post_date;
+	public void setPostDate(Date postDate) {
+		this.postDate = postDate;
 	}
 
 	public String getCategory() {
@@ -64,12 +64,12 @@ public class postVO {
 		this.price = price;
 	}
 
-	public int getDelivery_fee() {
-		return delivery_fee;
+	public int getDeliveryFee() {
+		return deliveryFee;
 	}
 
-	public void setDelivery_fee(int delivery_fee) {
-		this.delivery_fee = delivery_fee;
+	public void setDeliveryFee(int deliveryFee) {
+		this.deliveryFee = deliveryFee;
 	}
 
 	public Date getDeadline() {
@@ -80,12 +80,12 @@ public class postVO {
 		this.deadline = deadline;
 	}
 
-	public int getMAX_member() {
-		return MAX_member;
+	public int getMaxMember() {
+		return maxMember;
 	}
 
-	public void setMAX_member(int mAX_member) {
-		MAX_member = mAX_member;
+	public void setMaxMember(int maxMember) {
+		this.maxMember = maxMember;
 	}
 
 	public String getTitle() {
@@ -112,12 +112,12 @@ public class postVO {
 		this.isTogether = isTogether;
 	}
 
-	public Date getRevision_date() {
-		return revision_date;
+	public Date getRevisionDate() {
+		return revisionDate;
 	}
 
-	public void setRevision_date(Date revision_date) {
-		this.revision_date = revision_date;
+	public void setRevisionDate(Date revisionDate) {
+		this.revisionDate = revisionDate;
 	}
 
 	public Boolean getIsDeleted() {
@@ -135,7 +135,6 @@ public class postVO {
 	public void setIsRevised(Boolean isRevised) {
 		this.isRevised = isRevised;
 	}
-	
 	
 	
 }
