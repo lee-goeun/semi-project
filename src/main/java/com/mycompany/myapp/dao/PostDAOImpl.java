@@ -15,34 +15,34 @@ public class PostDAOImpl implements PostDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
+	//포스트 조회
 	@Override
 	public List selectAllPostsList() throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectList("mapper.post.selectAllPostsList");
 	}
-
+	
+	//포스트 추가
 	@Override
-	public int insertNewPost(Map postMap) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return 0;
+	public void insertNewPost(Map postMap) throws DataAccessException {
+		sqlSession.insert("mapper.post.insertNewPost", postMap);
 	}
-
+	
+	//포스트 상세조회
 	@Override
 	public PostVO selectPost(int postId) throws DataAccessException {
-		// TODO Auto-generated method stub
-		return null;
+		return sqlSession.selectOne("mapper.post.selectPost", postId);
 	}
-
+	
+	//포스트 수정
 	@Override
 	public void updatePost(Map postMap) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+		sqlSession.update("mapper.post.updatePost", postMap);
 	}
-
+	
+	//포스트 삭제
 	@Override
-	public void deletePost(int post_id) throws DataAccessException {
-		// TODO Auto-generated method stub
-		
+	public void deletePost(int postId) throws DataAccessException {
+		sqlSession.delete("mapper.post.deletePost", postId);
 	}
 
 }
