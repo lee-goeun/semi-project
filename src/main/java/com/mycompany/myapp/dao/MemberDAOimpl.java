@@ -9,7 +9,7 @@ import com.mycompany.myapp.vo.MemberVO;
 
 
 
-@Repository
+@Repository("MemberDAO")
 public class MemberDAOimpl implements MemberDAO {
 	
 	@Autowired 
@@ -17,7 +17,8 @@ public class MemberDAOimpl implements MemberDAO {
 	
 	@Override
 	public void memberjoin(MemberVO membervo) throws Exception {
-		sql.insert("com.mycompany.mapper.MemberMapper.memberJoin", membervo);
+		sql.insert("com.mycompany.myapp.mapper.MemberMapper.memberJoin", membervo);
+		
 		
 		
 	}
@@ -25,7 +26,7 @@ public class MemberDAOimpl implements MemberDAO {
 	@Override
 	public MemberVO memberlogin(MemberVO membervo) throws Exception {
 	
-		return sql.selectOne("com.mycompany.mapper.MemberMapper.memberLogin", membervo);
+		return sql.selectOne("com.mycompany.myapp.mapper.MemberMapper.memberLogin", membervo);
 	}
 	
 	
