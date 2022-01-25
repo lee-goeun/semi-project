@@ -33,7 +33,7 @@ $(document).ready(function(){
 	alert("로그아웃 실행")
 	$("#logout_form").attr("action", "/member/logout").submit();
 	});
-	 
+	  
 	
 	$(".mypage_btn").click(function(){
 		alert("마이페이지 이동")
