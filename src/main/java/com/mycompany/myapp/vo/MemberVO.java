@@ -6,19 +6,14 @@ import org.springframework.stereotype.Component;
 public class MemberVO {
 	private String uid;
 	private String upass;
-	private String uname;
+	private String name;
 	private String email;
 	private String address;
 	private int signupDate;
 	private int authority;
 	private int grade;
+		
 	
-	public String getUname() {
-		return uname;
-	}
-	public void setUname(String uname) {
-		this.uname = uname;
-	}
 	public String getUid() {
 		return uid;
 	}
@@ -30,6 +25,12 @@ public class MemberVO {
 	}
 	public void setUpass(String upass) {
 		this.upass = upass;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getEmail() {
 		return email;
@@ -61,18 +62,7 @@ public class MemberVO {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
-	@Override
-	public String toString() {
-		return "MemberVO [uid=" + uid + ", upass=" + upass + ", uname=" + uname + ", email=" + email + ", address="
-				+ address + ", signupDate=" + signupDate + ", authority=" + authority + ", grade=" + grade + "]";
-	}
-	
 	
 	
 
-	
-	
-	
-	
-	
 }
