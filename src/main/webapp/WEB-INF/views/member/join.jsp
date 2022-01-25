@@ -31,7 +31,7 @@
 
 		<div class="id_name">성명</div>
 		<div class="id_input_box">
-			<input class="id_input" name="uname">
+			<input class="id_input" name="name">
 		</div>
 
 		<div class="pw_name">이메일</div>

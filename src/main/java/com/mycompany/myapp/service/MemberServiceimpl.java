@@ -63,7 +63,7 @@ public class MemberServiceimpl implements MemberService {
 	
 	
 	
-	}
+	}// end class();
 
 	  
 	
