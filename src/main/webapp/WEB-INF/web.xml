@@ -5,7 +5,7 @@
 
 	<context-param> 
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/spring/root.xml</param-value>
+		<param-value>/WEB-INF/spring/action-mybatis.xml</param-value>
 	</context-param>
 	
 	<!-- Creates the Spring Container shared by asdsdldsdl Servlets and Filters -->
