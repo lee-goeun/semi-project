@@ -20,7 +20,7 @@
 		<property name="mapperLocations" >
 			<list>
 				<value>classpath:mybatis/mappers/MemberMapper.xml</value>
-				<value>classpath:mybatis/mappers/post.xml</value> 
+		<!-- 		<value>classpath:mybatis/mappers/post.xml</value>  -->
 			</list>
 		</property>
 	</bean>
