@@ -17,7 +17,7 @@ public interface PostController {
 	public ResponseEntity addNewPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
 	//포스트상세조회
-	public ModelAndView viewPost(@RequestParam("post_id") int post_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView viewPost(@RequestParam("postId") int postId, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	//포스트수정
 	public ResponseEntity modPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;

@@ -1,13 +1,25 @@
 package com.mycompany.myapp.controller;
 
+import java.io.File;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,6 +31,7 @@ import com.mycompany.myapp.vo.PostVO;
 @Controller("postController")
 @RequestMapping("/post")
 public class PostControllerImpl implements PostController{
+	private static final String POST_IMAGE_REPO = "C:\\semi_project\\post_image";
 	@Autowired
 	private PostService postService;
 	@Autowired
@@ -31,38 +44,108 @@ public class PostControllerImpl implements PostController{
 	@Override
 	@RequestMapping(value="/list", method= RequestMethod.GET)
 	public ModelAndView listPosts(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		return null;
+		String viewName = (String)request.getAttribute("viewName");
+		List<PostVO> postsList = postService.listPosts();
+		ModelAndView mav = new ModelAndView(viewName); 
+		return mav;
 	}
 	
 	//포스트 추가
 	@Override
-	@RequestMapping(value="postForm", method=RequestMethod.GET)
+	@RequestMapping(value="/postForm", method=RequestMethod.GET)
 	public String addFormPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
-
-		return null;
+		String viewName = (String)request.getAttribute("viewName");
+		return viewName;
 	}
 	
 	@Override
 	@RequestMapping(value="/addPost", method=RequestMethod.POST)
 	public ResponseEntity addNewPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> postMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name =(String)enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			postMap.put(name,value);
+		}
+		String image = upload(multipartRequest);
+		HttpSession session = multipartRequest.getSession();
+		
+		//TODO : memberId넣기
+		/*
+		 * memberVO memeberVO = (MemberVO) session.getAttribute("member"); String uid =
+		 * memberVO.getId(); postMap.put("uid", uid);
+		 */
+		
+		postMap.put("image", image);
+		
+		String msg;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		int postId = (int) postMap.get("postId");
+		try {
+		if(image != null && image.length() !=0) {
+			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+			File destDir = new File(POST_IMAGE_REPO + "\\" + postId);
+			FileUtils.moveFileToDirectory(srcFile, destDir, true);
+		}
+		
+		msg = "<script>";
+		msg += " alert('새 글을 추가했습니다');";
+		msg += " location.href='" + multipartRequest.getContextPath() + "/post/list';";
+		msg += " </script>";
+		resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+			srcFile.delete();
+			
+			msg = " <script>";
+			msg += " alert('오류가 발생했습니다. 다시 시도애 주세요.');";
+			msg += " location.href='" + multipartRequest.getContextPath() + "/post/postForm';";
+			msg += "</script>";
+			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
+		}
 		return null;
 	}
 	
 	//포스트 상세 조회
 	@Override
-	@RequestMapping(value="/postForm", method=RequestMethod.GET)
-	public ModelAndView viewPost(int post_id, HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value="/viewPost", method=RequestMethod.GET)
+	public ModelAndView viewPost(int postId, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		return null;
+		String viewName = (String)request.getAttribute("viewName");
+		postVO = postService.viewPost(postId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("post",postVO);
+		return mav;
 	}
 	
 	//포스트 수정
 	@Override
-	@RequestMapping(value="modPost", method=RequestMethod.POST)
+	@RequestMapping(value="/modPost", method=RequestMethod.POST)
 	public ResponseEntity modPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
+		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> postMap = new HashMap<String, Object>();
+		Enumeration enu = multipartRequest.getParameterNames();
+		while(enu.hasMoreElements()) {
+			String name = (String)enu.nextElement();
+			String value = multipartRequest.getParameter(name);
+			postMap.put(name, value);
+		}
+		String image = upload(multipartRequest);
+		postMap.put("image", image);
+		
+		int postId = (int)postMap.get("postId"); 
+		String msg;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		return null;
 	}
 	
@@ -71,9 +154,30 @@ public class PostControllerImpl implements PostController{
 	@RequestMapping(value="/removePost", method=RequestMethod.POST)
 	public ResponseEntity removePost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
+		//postService.removePost(postId);
 		return null;
 	}
 
+	//이미지 업로드
+	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
+		String image = null;
+		Iterator<String> fileNames = multipartRequest.getFileNames();
+		
+		while(fileNames.hasNext()) {
+			System.out.println(fileNames);
+			String fileName = fileNames.next();
+			MultipartFile mFile = multipartRequest.getFile(fileName);
+			image=mFile.getOriginalFilename();
+			File file = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
+			if(mFile.getSize() != 0) { //file null check
+				if(!file.exists()) {
+					file.getParentFile().mkdirs();
+					mFile.transferTo(new File(POST_IMAGE_REPO+"\\"+ "temp" + image));
+				}
+			}
+		}
+		return image;
+	}
 	
 	
 }
