@@ -23,7 +23,8 @@ public interface PostController {
 	public ResponseEntity modPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
 	//포스트삭제
-	public ResponseEntity removePost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
+	public ResponseEntity removePost(@RequestParam("postId") int postId, HttpServletRequest request, HttpServletResponse response)
+			throws Exception;
 	
 	
 	
