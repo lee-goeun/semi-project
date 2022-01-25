@@ -7,3 +7,4 @@ public interface MemberDAO {
 
 	public MemberVO memberlogin(MemberVO membervo) throws Exception;
 }
+	
