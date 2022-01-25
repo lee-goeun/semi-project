@@ -22,8 +22,8 @@
 		<property name="configLocation" value="classpath:mybatis/model/modelConfig.xml" />
 		<property name="mapperLocations" >
 			<list>
-				<!-- <value>classpath:mybatis/mappers/member.xml</value>
-				<value>classpath:mybatis/mappers/board_mysql.xml</value> -->
+				<value>classpath:mybatis/mappers/MemberMapper.xml</value>
+		<!-- 		<value>classpath:mybatis/mappers/post.xml</value>  -->
 			</list>
 		</property>
 	</bean>

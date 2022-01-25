@@ -19,11 +19,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.service.PostService;
+import com.mycompany.myapp.vo.MemberVO;
 import com.mycompany.myapp.vo.PostVO;
 
 //http://localhost:8090/post/list
@@ -73,21 +76,19 @@ public class PostControllerImpl implements PostController{
 		String image = upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		
-		//TODO : memberId넣기
-		/*
-		 * memberVO memeberVO = (MemberVO) session.getAttribute("member"); String uid =
-		 * memberVO.getId(); postMap.put("uid", uid);
-		 */
+		 MemberVO memberVO = (MemberVO) session.getAttribute("member"); 
+		 String uid = memberVO.getUid(); 
+		 postMap.put("uid", uid);
+		 postMap.put("image", image);
 		
-		postMap.put("image", image);
+		 int postId = (int) postMap.get("postId");
+		 String msg;
+		 ResponseEntity resEnt = null;
+		 HttpHeaders responseHeaders = new HttpHeaders();
+		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
-		String msg;
-		ResponseEntity resEnt = null;
-		HttpHeaders responseHeaders = new HttpHeaders();
-		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		
-		int postId = (int) postMap.get("postId");
 		try {
+		postService.addNewPost(postMap);
 		if(image != null && image.length() !=0) {
 			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
 			File destDir = new File(POST_IMAGE_REPO + "\\" + postId);
@@ -146,16 +147,60 @@ public class PostControllerImpl implements PostController{
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
-		return null;
+		try {
+			postService.modPost(postMap);
+			if(image != null && image.length() !=0) {
+				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + image);
+				File destDir = new File(POST_IMAGE_REPO + "\\" + "temp" + postId);
+				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+				
+				String originalFileName = (String)postMap.get("originalFileName");
+				File oldFile = new File(POST_IMAGE_REPO + "\\" + postId + "\\" + originalFileName);
+				oldFile.delete();
+			}
+			msg = "<script>";
+			msg += " alert('글을 수정했습니다');";
+			msg += " location.href='" + multipartRequest.getContextPath() + "/post/viewPost?postId=" + postId +"';";
+			msg += "</script>";
+			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+			srcFile.delete();
+			msg = "<script>";
+			msg += " alert('오류가 발생했습니다.다시 수정해주세요');";
+			msg += " location.href='" + multipartRequest.getContextPath() + "/post/viewPost?postId=" + postId + "';";
+			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
+		}
+		return resEnt;
 	}
 	
 	//포스트 삭제
 	@Override
 	@RequestMapping(value="/removePost", method=RequestMethod.POST)
-	public ResponseEntity removePost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
+	@ResponseBody
+	public ResponseEntity removePost(@RequestParam("postId") int postId, 
+			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		//postService.removePost(postId);
-		return null;
+		response.setContentType("text/html; charset=UTF-8");
+		String msg;
+		ResponseEntity resEnt = null;
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
+		
+		try {
+			postService.removePost(postId);
+			
+			msg = "<script>";
+			msg += " alert('글을 삭제했습니다.');";
+			msg += " location.href='" + request.getContextPath() + "/post/list';";
+			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
+		}catch(Exception e) {
+			msg = "<script>";
+			msg += " alert('작업 중 오류가 발생했습니다. 다시 시도해주세요.');";
+			msg += " location.href='" + request.getContextPath() + "/post/list';";
+			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
+		}
+		return resEnt;
 	}
 
 	//이미지 업로드
