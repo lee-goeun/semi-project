@@ -5,13 +5,13 @@ import java.util.Map;
 
 import com.mycompany.myapp.vo.PostVO;
 public interface PostService {
-	//리스트 조회
+	//포스트 조회
 	public List<PostVO> listPosts() throws Exception;
 	
 	//포스트 추가
-	public int addNewPost(Map postMap) throws Exception;
+	public void addNewPost(Map postMap) throws Exception;
 	
-	//세부 포스트
+	//포스트 상세조회
 	public PostVO viewPost(int postId) throws Exception;
 	
 	//포스트 수정

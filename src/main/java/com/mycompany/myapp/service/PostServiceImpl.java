@@ -14,34 +14,39 @@ public class PostServiceImpl implements PostService{
 	@Autowired
 	private PostDAO postDAO;
 	
+	public PostServiceImpl() {
+	}
+	
+	//포스트 조회
 	@Override
 	public List<PostVO> listPosts() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<PostVO> postList = postDAO.selectAllPostsList();
+		return postList;
 	}
-
+	
+	//포스트 추가
 	@Override
-	public int addNewPost(Map postMap) throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+	public void addNewPost(Map postMap) throws Exception {
+		postDAO.insertNewPost(postMap);
 	}
-
+	
+	//포스트 상세조회
 	@Override
 	public PostVO viewPost(int postId) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		PostVO postVO = postDAO.selectPost(postId);
+		return postVO;
 	}
-
+	
+	//포스트 수정
 	@Override
 	public void modPost(Map postMap) throws Exception {
-		// TODO Auto-generated method stub
-		
+		postDAO.updatePost(postMap);
 	}
-
+	
+	//포스트 삭제
 	@Override
 	public void removePost(int postId) throws Exception {
-		// TODO Auto-generated method stub
-		
+		postDAO.deletePost(postId);
 	}
 	
 }
