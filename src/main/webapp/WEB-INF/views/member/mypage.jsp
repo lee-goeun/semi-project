@@ -8,18 +8,6 @@
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <script type="text/javascript">
-
-$(document).ready(function(){
-	// 취소
-	$(".cencle").on("click", function(){
-		
-		location.href = "/";
-				    
-	})
-
- 
-
-
 </script>
 
 <body>
