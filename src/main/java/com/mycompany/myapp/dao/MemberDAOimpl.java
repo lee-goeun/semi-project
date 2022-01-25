@@ -28,6 +28,15 @@ public class MemberDAOimpl implements MemberDAO {
 	
 		return sql.selectOne("com.mycompany.myapp.mapper.MemberMapper.memberLogin", membervo);
 	}
+
+	@Override
+	public void memberUpdate(MemberVO membervo) throws Exception {
+		
+		sql.selectOne("com.mycompany.myapp.mapper.MemberMapper.memberUpdate", membervo);
+		
+	}
+	
+	
 	
 	
 	

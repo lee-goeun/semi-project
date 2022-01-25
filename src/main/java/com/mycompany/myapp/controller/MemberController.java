@@ -53,7 +53,7 @@ public class MemberController {
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public void joinGET() {
 
-		// logger.info("로그인 페이지 진입");
+		logger.info("로그인 페이지 진입");
 
 	}
 
@@ -61,34 +61,68 @@ public class MemberController {
 	//로그인 check 
 	@RequestMapping(value = "/loginchk", method = RequestMethod.POST)
 	public String login(MemberVO membervo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
-		logger.info("로그인 성공");
+		logger.info("로그인 진행중");
 
 		HttpSession session = req.getSession();
 		MemberVO memberlogin = memberservice.memberlogin(membervo);
 
-		if (memberlogin == null) {
-			logger.info("실패");
+		if (memberlogin == null) { //memlogin값이 null이면 회원가입 필요함 
+			session.setAttribute("member", null);
+			rttr.addFlashAttribute("msg",false);
+			
+			return "member/join";
 
-			return "redirect:/main";
+		} else { // memberlogin값이 null이 아니면 => 회원가입 필요 x 
+			session.setAttribute("member", memberlogin);
+			return "member/temp";
+		}
 
-		} else {
-			logger.info("로그인 성공");
-
-			return "/member/temp";
+			
 
 		}
 
-	}
-
+	
+	//logout Controller
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpSession session) throws Exception {
-
+	public String logout(HttpServletRequest req) throws Exception {
+		
+		logger.info("===================로그아웃 완료=================");
+		
+		HttpSession session = req.getSession();
+		
 		session.invalidate();
-
-		return "redirect:/";
+		logger.info("로그아웃 버튼 확인");
+		return "/main";
+		
+		
 	}
 	
+	// 마이페이지 이동
+	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
+	public String  mypage(MemberVO membervo) throws Exception {
+		return "member/mypage";
+		
 
+		
+	}
+	
+	// 회원정보 수정 버튼
+	@RequestMapping(value="/memberUpdate", method = RequestMethod.POST)
+	public String registerUpdate(MemberVO membervo, HttpSession session) throws Exception{
+		
+		memberservice.memberUpdate(membervo);
+		
+		session.invalidate();
+		
+		return "redirect:/main";
+	}
+	
+	
+	
+	
+	
+	
+//msg controller
 	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET) 
 	@ResponseBody public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기 
 		int randomNumber = (int)((Math.random()* (9999 - 1000 + 1)) + 1000);//난수 생성 
@@ -96,6 +130,8 @@ public class MemberController {
 		return Integer.toString(randomNumber); 
 		}
 	 
+	
+	
 
 		
 

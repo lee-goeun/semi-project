@@ -10,4 +10,7 @@ public interface MemberService {
 		public MemberVO memberlogin(MemberVO membervo) throws Exception;
 		
 		public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber);
+		
+		public void memberUpdate(MemberVO membervo) throws Exception;
+		
 }

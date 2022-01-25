@@ -30,9 +30,15 @@ public class MemberServiceimpl implements MemberService {
 			
 		return dao.memberlogin(membervo);
 	}
-	
-	
-	
+
+
+	@Override
+	public void memberUpdate(MemberVO membervo) throws Exception {
+		dao.memberUpdate(membervo);
+		
+	}
+
+	//sms 
 	@Override
 	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
 		String api_key = "NCSHYSJMYM84M2G6"; 
@@ -54,16 +60,12 @@ public class MemberServiceimpl implements MemberService {
 			System.out.println(e.getCode());
 			} 
 		}
+}// end class();
 	
 	
 	
 	
 	
-	
-	
-	
-	
-	}// end class();
 
 	  
 	

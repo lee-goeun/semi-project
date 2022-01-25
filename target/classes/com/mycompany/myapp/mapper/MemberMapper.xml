@@ -12,5 +12,19 @@
   	<select id="memberLogin" resultType="com.mycompany.myapp.vo.MemberVO">
   	SELECT uid, upass FROM userTbl WHERE uid=#{uid} AND upass = #{upass}
   	</select>
+  	
+  	
+  	<update id = "memberUpdate">
+  	UPDATE userTbl SET uid = #{uid}, name = #{name}, upass = #{upass}, email = #{email}, address =#{address}
+  	WHERE uid = #{uid}
+  	
+  	
+  	
+  	
+  	
+  	</update>
+  	
+  	
+  	
   </mapper>
   

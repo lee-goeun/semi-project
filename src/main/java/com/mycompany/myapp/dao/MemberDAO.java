@@ -6,5 +6,7 @@ public interface MemberDAO {
 	public void memberjoin(MemberVO membervo) throws Exception;
 
 	public MemberVO memberlogin(MemberVO membervo) throws Exception;
+	
+	public void memberUpdate(MemberVO membervo) throws Exception;
 }
 	
