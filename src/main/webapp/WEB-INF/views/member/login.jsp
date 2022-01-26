@@ -9,20 +9,37 @@
 
 </head>
 <body>
-<form id ="login_form" method="post">
-	<span>칙칙폭폭</span>
+    <div id="loginHead">
+        <!-- <img src="이미지 경로" alt="칰칰폭폭 로고"> -->
+        <span id="loginTitle">칰칰폭폭</span>
+    </div>
 
-	<div class="id_input_box">
-		<input class="id_input" name="uid">
-	</div>
+    <form id ="login_form" action="" method="post">    
+        <div class="input_row" id="id_line">
+            <span class="icon_cell" id="id_cell"></span>
+            <input type="text" id="id" name="uid" placeholder="아이디">
+        </div>
 
-	<div class="pw_input_box">
-		<input class="pw_iput" name="upass">
-	</div>
+        <div class="input_row" id="pw_line">
+            <span class="icon_cell" id="pw_cell"></span>
+            <input type="password" id="pw" name="upass" placeholder="비밀번호">
+        </div>
 
+        <div class="login_wrap">
+            <button type="submit" class="login_button" id="login_button">
+                <span>로그인</span>
+            </button>
+        </div>
+    </form>
 
-	<input type="button" class="login_button" value="로그인">
-</form>
+    <script>
+        // JS로 login_button 이벤트 정의
+        
+
+        // JS로 id_line 값 기재시 clear버튼 활성화
+
+        // JS로 pw_line 값 기재시 clear버튼 활성화
+    </script>
 
 
 <script>
