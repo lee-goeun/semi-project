@@ -38,7 +38,7 @@ public class PostControllerImpl implements PostController{
 	@Autowired
 	private PostService postService;
 	@Autowired
-	private PostVO postVO;
+	private PostVO postVO ;
 	
 	public PostControllerImpl() {
 	}

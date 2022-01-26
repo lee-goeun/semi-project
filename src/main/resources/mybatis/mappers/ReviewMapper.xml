@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="reviewMapper">
+
+	<!-- 게시판 목록 -->
+	<select id="reviewList" resultType="com.mycompany.myapp.vo.ReviewVO">
+		select * from review_tbl
+	</select>
+	
+	<!-- 게시판 작성 -->
+	<insert id="reviewWrite">
+		insert into review_tbl(uid, title, content) values (#{uid}, #{title}, #{content})
+	</insert>
+	
+	<!-- 게시판 상세 -->
+	<select id="reviewDetail" resultType="com.mycompany.myapp.vo.ReviewVO">
+		select * from review_tbl where reviewId = #{reviewId}
+	</select>
+	
+	<!-- 게시판 수정 -->
+	<update id="reviewRevise">
+		update review_tbl 
+		set title = #{title}, content = #{content}, isRevised = 1, revisedDate = now()
+		where reviewId = #{reviewId}
+	</update>
+	
+	<!-- 게시판 삭제 -->
+	<update id="reviewDelete">
+		update review_tbl 
+		set isDeleted = 1, deletedDate = now()
+		where reviewId = #{reviewId}
+	</update>
+	
+	<!-- 조회수 증가 -->
+	<update id="reviewViews">
+		update review_tbl set viewCount = viewCount + 1 where reviewId = #{reviewId}
+	</update>
+	
+	<!-- 검색 조건문 -->
+	 <sql id="criteria">
+        <trim prefix="where (" suffix=")" prefixOverrides="OR">
+            <foreach collection="typeArr" item="type">
+                <trim prefix="OR">
+                    <choose>
+                        <when test="type == 'T'.toString()">
+                            title like concat('%',#{keyword},'%') 
+                        </when>
+                        <when test="type == 'C'.toString()">
+                            content like concat('%',#{keyword},'%') 
+                        </when>
+                        <when test="type == 'W'.toString()">
+                            uid like concat('%',#{keyword},'%' )
+                        </when>
+<!--                         <when test="type == 'A'.toString()"> -->
+<!--                             address like concat('%',#{keyword},'%' ) -->
+<!--                         </when> -->
+                    </choose>
+                </trim>
+            </foreach>
+        </trim>
+    </sql>
+	
+	<!-- 게시판 목록 + 페이징 + 검색 -->
+	<select id="reviewListPaging" resultType="com.mycompany.myapp.vo.ReviewVO">
+		select * from (
+                select *
+                from review_tbl
+                <if test="keyword != null">
+                    <include refid="criteria"></include>
+                </if>
+                order by reviewId desc) as T1 
+        limit #{skip}, #{amount}
+	</select>
+	
+	<!-- 게시물 총 개수 -->
+	<select id="reviewTotal" resultType="int">
+		select count(*) from review_tbl
+		<if test="keyword != null">
+			<include refid="criteria"></include>
+        </if>
+	</select>
+	
+</mapper>

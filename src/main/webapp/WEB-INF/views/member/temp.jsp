@@ -12,8 +12,10 @@
 <h1> 로그인 성공 page</h1>
 
 
+
 <div>
 	<p>${member.uid}님 환영합니다 !!</p>
+	
 
 </div>
 
@@ -27,6 +29,17 @@
 	<input type="button" class="mypage_btn" value="마이페이지">
 </form>
 
+
+
+
+<c:if test="${member.uid=='admin'}">
+<form id="admin_form">
+<input type="button" class="admin_btn" value="회원전체목록(관리자용)">
+</form>
+</c:if>
+
+
+
 <script>
 $(document).ready(function(){
 	$(".logout_btn").click(function(){
@@ -39,7 +52,15 @@ $(document).ready(function(){
 		alert("마이페이지 이동")
 		$("#mypage_form").attr("action", "/member/mypage").submit();
 		});
-});
+
+
+$(".admin_btn").click(function(){
+	alert("관리자님 안녕하세요")
+	$("#admin_form").attr("action", "/member/memberview").submit();
+	});
+}); // end func()
+
+
 </script>
 </body>
 </html>
