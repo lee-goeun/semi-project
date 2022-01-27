@@ -22,6 +22,7 @@
 		<property name="mapperLocations">
 			<list>
 <!-- 				<value>classpath:mybatis/mappers/PostMapper.xml</value> -->
+				<value>classpath:mybatis/mappers/ReviewMapper.xml</value>
 			</list>
 		</property>
 	</bean>

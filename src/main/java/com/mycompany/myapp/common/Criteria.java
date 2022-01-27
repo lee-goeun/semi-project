@@ -14,7 +14,7 @@ public class Criteria {
 	
 	/* 기본 셋팅 */
 	public Criteria() {
-		this(1, 10);	// pageNum = 1, amount = 10
+		this(1, 6);	// pageNum = 1, amount = 6
 		this.skip = 0;
 	}
 	
