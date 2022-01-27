@@ -20,6 +20,7 @@ public class PostServiceImpl implements PostService{
 	//포스트 조회
 	@Override
 	public List<PostVO> listPosts() throws Exception {
+		
 		List<PostVO> postList = postDAO.selectAllPostsList();
 		return postList;
 	}
@@ -28,6 +29,12 @@ public class PostServiceImpl implements PostService{
 	@Override
 	public void addNewPost(Map postMap) throws Exception {
 		postDAO.insertNewPost(postMap);
+	}
+	
+	//추가된 포스트 아이디 조회
+	@Override
+	public int selectNewId() throws Exception{
+		return postDAO.selectNewId();
 	}
 	
 	//포스트 상세조회

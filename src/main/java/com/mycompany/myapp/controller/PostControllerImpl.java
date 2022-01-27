@@ -48,14 +48,17 @@ public class PostControllerImpl implements PostController{
 	@RequestMapping(value="/list", method= RequestMethod.GET)
 	public ModelAndView listPosts(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
-		List<PostVO> postsList = postService.listPosts();
 		ModelAndView mav = new ModelAndView(viewName); 
+		
+		List<PostVO> postsList = postService.listPosts();
+		mav.addObject("postsList",postsList);
+		
 		return mav;
 	}
 	
 	//포스트 추가
 	@Override
-	@RequestMapping(value="/postForm", method=RequestMethod.GET)
+	@RequestMapping(value="/form", method=RequestMethod.GET)
 	public String addFormPost(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		return viewName;
@@ -73,44 +76,49 @@ public class PostControllerImpl implements PostController{
 			String value = multipartRequest.getParameter(name);
 			postMap.put(name,value);
 		}
+		
 		String image = upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		
-		 MemberVO memberVO = (MemberVO) session.getAttribute("member"); 
-		 String uid = memberVO.getUid(); 
-		 postMap.put("uid", uid);
+		/*
+		 * MemberVO memberVO = (MemberVO) session.getAttribute("member"); String uid =
+		 * memberVO.getUid();
+		 */
+		 postMap.put("uid", "test");
 		 postMap.put("image", image);
-		
-		 int postId = (int) postMap.get("postId");
+		 
 		 String msg;
 		 ResponseEntity resEnt = null;
 		 HttpHeaders responseHeaders = new HttpHeaders();
 		 responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		
-		try {
-		postService.addNewPost(postMap);
-		if(image != null && image.length() !=0) {
-			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
-			File destDir = new File(POST_IMAGE_REPO + "\\" + postId);
-			FileUtils.moveFileToDirectory(srcFile, destDir, true);
-		}
+		 postService.addNewPost(postMap);
 		
-		msg = "<script>";
-		msg += " alert('새 글을 추가했습니다');";
-		msg += " location.href='" + multipartRequest.getContextPath() + "/post/list';";
-		msg += " </script>";
-		resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
+		try {
+			if(image != null && image.length() !=0) {
+				int postId = postService.selectNewId();
+				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+				
+				File destDir = new File(POST_IMAGE_REPO + "\\" + postId);
+				FileUtils.moveFileToDirectory(srcFile, destDir, true);
+			}
+			
+			msg = "<script>";
+			msg += "alert('새 글을 추가했습니다');";
+			msg += "location.href='" + multipartRequest.getContextPath() + "/post/list';";
+			msg += "</script>";
+			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
 			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
 			srcFile.delete();
 			
 			msg = " <script>";
-			msg += " alert('오류가 발생했습니다. 다시 시도애 주세요.');";
-			msg += " location.href='" + multipartRequest.getContextPath() + "/post/postForm';";
+			msg += " alert('오류가 발생했습니다. 다시 시도해 주세요.');";
+			msg += " location.href='" + multipartRequest.getContextPath() + "/post/form';";
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		}
-		return null;
+		return resEnt;
 	}
 	
 	//포스트 상세 조회
@@ -209,7 +217,6 @@ public class PostControllerImpl implements PostController{
 		Iterator<String> fileNames = multipartRequest.getFileNames();
 		
 		while(fileNames.hasNext()) {
-			System.out.println(fileNames);
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			image=mFile.getOriginalFilename();
@@ -217,7 +224,7 @@ public class PostControllerImpl implements PostController{
 			if(mFile.getSize() != 0) { //file null check
 				if(!file.exists()) {
 					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(POST_IMAGE_REPO+"\\"+ "temp" + image));
+					mFile.transferTo(new File(POST_IMAGE_REPO+"\\"+ "temp" +"\\" +  image));
 				}
 			}
 		}

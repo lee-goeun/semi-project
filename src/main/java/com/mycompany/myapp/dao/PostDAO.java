@@ -14,6 +14,9 @@ public interface PostDAO {
 	//포스트 추가
 	public void insertNewPost(Map postMap) throws DataAccessException;
 	
+	//추가된 포스트아이디 조회
+	public int selectNewId() throws DataAccessException;
+	
 	//포스트 상세조회
 	public PostVO selectPost(int postId) throws DataAccessException;
 	

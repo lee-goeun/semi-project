@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.post">
+ <resultMap id="postResult" type="com.mycompany.myapp.vo.PostVO">
+ 	<result property="postId" column="postId"/>
+	<result property="uid" column="uid"/>
+	<result property="title" column="title"/>
+	<result property="content " column="content "/>
+	<result property="maxMember" column="maxMember"/>
+	<result property="image" column="image"/>
+	<result property="price" column="price"/>
+	<result property="deliveryFee" column="deliveryFee"/>
+	<result property="category" column="category"/>
+	<result property="deadline" column="deadline"/>
+	<result property="isTogether" column="isTogether"/>
+	<result property="postedDate" column="postedDate"/>
+	<result property="isRevised" column="isRevised"/>
+	<result property="revisedDate" column="revisedDate"/>
+	<result property="isDeleted" column="isDeleted"/>
+	<result property="deletedDate" column="deletedDate"/>
+	<result property="viewCount" column="viewCount"/>
+</resultMap> 
+
+<!-- 전체 선택 -->
+	<select id="selectAllPostsList" resultMap="postResult">
+		<![CDATA[
+			SELECT * FROM gatherTbl
+		]]>
+	</select>
+
+<!-- 포스트 추가 -->
+<insert id="insertNewPost" parameterType="java.util.Map">
+	<![CDATA[
+			INSERT into gatherTbl(uid, category, isTogether, title, price, maxMember, deadline, deliveryFee, image) VALUES	
+			(#{uid}, #{category}, #{isTogether},#{title},#{price},#{maxMember},#{deadline},#{deliveryFee},#{image})
+		]]>
+</insert>
+
+<!-- 최근 입력한 데이터 id 조회 -->
+	<select id="selectNewPostId" resultType="int">
+		<![CDATA[
+		SELECT postId FROM gatherTbl ORDER BY postedDate DESC LIMIT 1
+	]]> 
+	</select>
+
+<!-- 포스트 상세 조회 -->
+	<select id="selectPost" resultMap="postResult" parameterType="int">
+		<![CDATA[
+			SELECT * FROM gatherTbl 
+			where postId = #{postId}
+		]]>
+	</select>	
+</mapper>

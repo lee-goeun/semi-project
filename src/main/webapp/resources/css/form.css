@@ -1,7 +1,7 @@
 @charset "UTF-8";
 section{width:80%; margin:0 auto;}
         .page_name{font-size:28px;}
-        form .submit_btn .btn{width:100px; height:50px; line-height:50px; margin-bottom:20px; background-color: #E1E1E1; border-radius: 10px; float:right;}
+        form .submit_btn #btn{width:100px; height:50px; line-height:50px; margin-bottom:20px; background-color: #E1E1E1; border-radius: 10px; float:right;}
         form label{width:0; height:0;  display:none;}
         form .pic_area{position:relative; float:left; width:40%; margin-top:40px;}
         form .pic_area label{
@@ -9,7 +9,7 @@ section{width:80%; margin:0 auto;}
             margin-bottom:20px; margin-left:320px; 
         }
         form .pic_area input[type="file"]{display:none;}
-        form .pic_area #preview{width:400px; height:400px; background-image: url("../img/outline_photo_camera_black_24dp.png"); background-repeat: no-repeat;
+        form .pic_area #preview{width:400px; height:400px; background-repeat: no-repeat;
            background-position:center center; border:2px solid #ccc; border-radius:10px; }
 
         form .text_area{float:left; width:60%;}

@@ -11,6 +11,9 @@ public interface PostService {
 	//포스트 추가
 	public void addNewPost(Map postMap) throws Exception;
 	
+	//추가된 포스트 아이디 조회
+	public int selectNewId() throws Exception;
+	
 	//포스트 상세조회
 	public PostVO viewPost(int postId) throws Exception;
 	

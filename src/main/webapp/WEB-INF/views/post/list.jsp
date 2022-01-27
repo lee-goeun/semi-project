@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -39,21 +40,22 @@
                     <c:choose>
                         <c:when test="${postsList == null }">
                         <li>
-                            <a href="${contextPath}/post/viewPost?postId=1234">등록된 상품이 없습니다.</a>
+                            <a href=>등록된 상품이 없습니다.</a>
                         </li>
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="post" items="${postsList}" varStatus="postNum">
-    							<a>
-	                                <li>
-	                                     <div class="item_img"><img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/></div> 
-	                                    <%-- <div>
-	                                         <p class="name">${post.title}</p>  
-	                                         <p class="location"><span>오산동</span><span>5초</span>전</p>
-	                                         <p class="price"><span>${post.price}</span>원</p> 
-	                                    </div> --%>
-	                                </li>
-                                </a>
+	                            <li>
+	                        		<a href="${contextPath}/post/viewPost?postId=${post.postId}">
+	                        			<div class="item_img"><img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/></div> 
+	                       				<div>
+	                         				<p class="name">${post.title}</p>
+	                           				<p class="location"><span>유성구 봉명동</span></p>
+	                          				<p class="maxMember"><span>1/${post.maxMember }</span></p>
+	                           				<p class="deadline">마감시간 : <span><fmt:formatDate value="${post.deadline}" pattern="hh:mm"/></span></p>
+	                         			</div>
+	                        		</a>
+	                        	</li>
                             </c:forEach>
                         </c:otherwise>
                     </c:choose>

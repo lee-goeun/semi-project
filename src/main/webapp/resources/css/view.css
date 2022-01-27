@@ -9,7 +9,7 @@
          .text_area div{width:100%; margin:5px 0; overflow:hidden;}
          .text_area div.person_area{height:60px;}
          .text_area div.person_area div{margin-right:10px; width:auto;}
-         .text_area div.person_area div:nth-child(1){float:left; background-image:url("../img/baseline_person_black_24dp.png"); background-repeat: no-repeat; background-position: center; background-size:60%; width:50px; height:50px; border-radius: 25px; border:1px solid #ccc;}
+         .text_area div.person_area div:nth-child(1){float:left; background-repeat: no-repeat; background-position: center; background-size:60%; width:50px; height:50px; border-radius: 25px; border:1px solid #ccc;}
          .text_area div.person_area div:nth-child(2) .uid{font-weight:700;}
          .text_area div .title{font-size:24px; font-weight:700;}
          .text_area div .isTogether{font-size:20px; font-weight:700;}

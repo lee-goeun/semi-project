@@ -20,13 +20,13 @@
 	
 	<definition name="/post/form" extends="baseLayout">
 		<put-attribute name="title" value="작성페이지"/>
-		<put-attribute name="css" value="/resources/css/form.css"/> 
+		<put-attribute name="css" value="/resources/css/form.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/form.jsp"/>
 	</definition>
 	
 	<definition name="/post/viewPost" extends="baseLayout">
 		<put-attribute name="title" value="상세페이지"/>
-		<put-attribute name="css" value="/resources/css/view.css"/> 
+		<put-attribute name="css" value="/resources/css/view.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/view.jsp"/>
 	</definition>
 

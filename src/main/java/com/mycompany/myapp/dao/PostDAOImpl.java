@@ -27,6 +27,11 @@ public class PostDAOImpl implements PostDAO{
 		sqlSession.insert("mapper.post.insertNewPost", postMap);
 	}
 	
+	//최근 추가한 포스트아이디 조회
+	public int selectNewId() throws DataAccessException{
+		return sqlSession.selectOne("mapper.post.selectNewPostId");
+	}
+	
 	//포스트 상세조회
 	@Override
 	public PostVO selectPost(int postId) throws DataAccessException {
