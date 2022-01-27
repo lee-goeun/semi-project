@@ -1,0 +1,24 @@
+@charset "UTF-8";section{width:80%; margin:0 auto;}
+        .page_name{font-size:28px;}
+         .submit_btn .btn{width:100px; height:50px; line-height:50px; margin-bottom:20px; background-color: #E1E1E1; border-radius: 10px; float:right;}
+         label{width:0; height:0;  display:none;}
+         .pic_area{position:relative; float:left; width:40%; margin-top:40px;}
+         .pic_area #preview{width:400px; height:400px; border-radius:10px; }
+         .pic_area #preview img{width:100%;}
+         .text_area{float:left; width:60%;}
+         .text_area div{width:100%; margin:5px 0; overflow:hidden;}
+         .text_area div.person_area{height:60px;}
+         .text_area div.person_area div{margin-right:10px; width:auto;}
+         .text_area div.person_area div:nth-child(1){float:left; background-image:url("../img/baseline_person_black_24dp.png"); background-repeat: no-repeat; background-position: center; background-size:60%; width:50px; height:50px; border-radius: 25px; border:1px solid #ccc;}
+         .text_area div.person_area div:nth-child(2) .uid{font-weight:700;}
+         .text_area div .title{font-size:24px; font-weight:700;}
+         .text_area div .isTogether{font-size:20px; font-weight:700;}
+
+         .text_area .gather_area p{float:left; margin-right:20px; font-size:20px; margin-bottom:20px;}
+         .text_area div span{font-weight: 700;}
+         .text_area div .left{float:left;}
+         .text_area div .right{float:right;}
+         .text_area div .grey{font-size:12px; color:#ccc; text-decoration: line-through;}
+         .text_area .total_price{margin-top:20px; font-size:20px; font-weight:700;}
+         .text_area .btn_area {width:340px; float:right;}
+         .btn_area input{margin-top:10px; width:100px; height:40px; line-height:40px; border-radius:10px; margin-right:10px; background-color: #8BE0B0; color:#fff;}

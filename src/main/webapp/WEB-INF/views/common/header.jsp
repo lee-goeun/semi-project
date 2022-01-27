@@ -6,7 +6,7 @@
 	request.setCharacterEncoding("UTF-8");
 %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
- <a class="img_wrap" href="${contextPath}/home"><img src="${contextPath}/resources/image/logo.png"/></a>
+ <a class="img_wrap" href="${contextPath}/post/list"><img src="${contextPath}/resources/image/logo.png"/></a>
 <nav>
     <ul>
         <li><a href="#none">모집게시판</a></li>
@@ -16,7 +16,7 @@
 <div class="text_wrap">
     <p><span>동동국수</span> 님, 안녕하세요</p>
     <ul>
-        <li><img src="${contextPath}/resources/image/outline_question_answer_black_24dp.png"/></li>
-        <li><img src="${contextPath}/resources/image/baseline_notifications_none_black_24dp.png"/></li>
+        <li><img src="${contextPath}/resources/image/outline_account_circle_black_24dp.png"/></li>
+        <li><img src="${contextPath}/resources/image/outline_logout_black_24dp.png"/></li>
     </ul>
 </div> 
