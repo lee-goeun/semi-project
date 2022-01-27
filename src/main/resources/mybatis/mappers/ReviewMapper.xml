@@ -41,7 +41,8 @@
 	
 	<!-- 검색 조건문 -->
 	 <sql id="criteria">
-        <trim prefix="where (" suffix=")" prefixOverrides="OR">
+<!--         <trim prefix="where (" suffix=")" prefixOverrides="OR"> -->
+        <trim prefix="and (" suffix=")" prefixOverrides="OR">
             <foreach collection="typeArr" item="type">
                 <trim prefix="OR">
                     <choose>
@@ -68,6 +69,7 @@
 		select * from (
                 select *
                 from review_tbl
+                where isDeleted = 0
                 <if test="keyword != null">
                     <include refid="criteria"></include>
                 </if>
@@ -78,6 +80,7 @@
 	<!-- 게시물 총 개수 -->
 	<select id="reviewTotal" resultType="int">
 		select count(*) from review_tbl
+		where isDeleted = 0
 		<if test="keyword != null">
 			<include refid="criteria"></include>
         </if>
