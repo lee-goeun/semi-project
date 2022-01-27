@@ -1,5 +1,7 @@
 package com.mycompany.myapp.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -36,6 +38,21 @@ public class MemberDAOimpl implements MemberDAO {
 		
 	}
 	
+	
+	@Override
+	public List<MemberVO> memberView() throws Exception {
+		
+		return sql.selectList("com.mycompany.myapp.mapper.MemberMapper.memberview");
+	}
+	
+	
+	@Override
+	public void memberDelete(String uid) throws Exception {
+		
+		sql.delete("com.mycompany.myapp.mapper.MemberMapper.memberdelete");
+		
+		
+	}
 	
 	
 	

@@ -5,15 +5,16 @@ import org.springframework.stereotype.Component;
 @Component("memberVO")
 public class MemberVO {
 	private String uid;
+	private String nickname;
 	private String upass;
 	private String name;
 	private String email;
+	private String postCode;
 	private String address;
+	private String addressSpecific;
 	private int signupDate;
 	private int authority;
 	private int grade;
-		
-	
 	public String getUid() {
 		return uid;
 	}
@@ -38,11 +39,23 @@ public class MemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	public String getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
 	public String getAddress() {
 		return address;
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public String getAddressSpecific() {
+		return addressSpecific;
+	}
+	public void setAddressSpecific(String addressSpecific) {
+		this.addressSpecific = addressSpecific;
 	}
 	public int getSignupDate() {
 		return signupDate;
@@ -62,7 +75,12 @@ public class MemberVO {
 	public void setGrade(int grade) {
 		this.grade = grade;
 	}
+	public String getNickname() {
+		return nickname;
+	}
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
 	
 	
-
 }

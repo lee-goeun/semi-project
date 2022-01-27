@@ -39,7 +39,17 @@
 		</div>
 		
 		<div>
-		<label for="address">거주지</label> 
+		<label for="address">우편번호</label> 
+		<input type ="text" id="address" name="address" />
+		
+		</div>
+		<div>
+		<label for="address">거주지 도로명 주소</label> 
+		<input type ="text" id="address" name="address" />
+		
+		</div>
+		<div>
+		<label for="address"> 거주지 상세 주소 </label> 
 		<input type ="text" id="address" name="address" />
 		
 		</div>

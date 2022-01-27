@@ -1,5 +1,8 @@
 package com.mycompany.myapp.controller;
 
+import java.util.List;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -7,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,19 +71,20 @@ public class MemberController {
 		MemberVO memberlogin = memberservice.memberlogin(membervo);
 
 		if (memberlogin == null) { //memlogin값이 null이면 회원가입 필요함 
-			session.setAttribute("member", null);
-			rttr.addFlashAttribute("msg",false);
+			int result =0;
+			rttr.addFlashAttribute("result",result);
 			
-			return "member/join";
-
-		} else { // memberlogin값이 null이 아니면 => 회원가입 필요 x 
+			return "redirect:/member/login";
+		}
+		
 			session.setAttribute("member", memberlogin);
-			return "member/temp";
-		}
-
 			
-
+			return "/member/temp";
+			
+			
 		}
+		
+	
 
 	
 	//logout Controller
@@ -117,11 +122,28 @@ public class MemberController {
 		return "redirect:/main";
 	}
 	
+	//회원정보 보기
+	@RequestMapping(value="/memberview")
+	public String memberView(Locale locale, Model model) throws Exception{
+		List<MemberVO> memberview = memberservice.memberView();
+		model.addAttribute("memberview" , memberview);
+		return "member/memberview";
+	}
 	
+//	//회원 삭제
+//	@RequestMapping(value="/memberdelete", method = RequestMethod.GET)
+//	public String memberDelete(MemberVO membervo) throws Exception{
+//		logger.info("삭제 진행중");
+//		
+//		memberservice.memberDelete(membervo.getUid());
+//		
+//		logger.info(membervo.getUid());
+//		
+//		return "redirect:/member/memberview";
+//		
+//	}
 	
-	
-	
-	
+
 //msg controller
 	@RequestMapping(value = "/phoneCheck", method = RequestMethod.GET) 
 	@ResponseBody public String sendSMS(@RequestParam("phone") String userPhoneNumber) { // 휴대폰 문자보내기 

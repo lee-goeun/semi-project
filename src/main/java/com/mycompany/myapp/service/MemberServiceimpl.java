@@ -1,6 +1,7 @@
 package com.mycompany.myapp.service;
 
 import java.util.HashMap;
+import java.util.List;
 
 import javax.inject.Inject;
 
@@ -37,6 +38,31 @@ public class MemberServiceimpl implements MemberService {
 		dao.memberUpdate(membervo);
 		
 	}
+	
+	
+	@Override
+	public List<MemberVO> memberView() throws Exception {
+		
+		return dao.memberView();
+	}
+	
+	
+	@Override
+	public void memberDelete(String uid) throws Exception {
+		dao.memberDelete(uid);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	//sms 
 	@Override

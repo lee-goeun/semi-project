@@ -1,5 +1,7 @@
 package com.mycompany.myapp.service;
 
+import java.util.List;
+
 import com.mycompany.myapp.vo.MemberVO;
 
 public interface MemberService {
@@ -13,4 +15,7 @@ public interface MemberService {
 		
 		public void memberUpdate(MemberVO membervo) throws Exception;
 		
+		public List<MemberVO> memberView() throws Exception;
+		
+		public void memberDelete(String uid) throws Exception;
 }

@@ -8,4 +8,5 @@ public interface MemberMapper {
 
 	public void memberLogin(MemberVO membervo);
 	
+	
 }

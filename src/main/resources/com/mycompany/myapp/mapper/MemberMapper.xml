@@ -5,7 +5,7 @@
   <mapper namespace="com.mycompany.myapp.mapper.MemberMapper">
 
   	<insert id="memberJoin">
-  	INSERT INTO userTbl values(#{uid}, #{name}, #{upass}, #{email}, #{address}, now(), 1, 1)
+  	INSERT INTO userTbl values(#{uid}, #{upass}, #{name}, #{nickname}, #{email},#{postCode}, #{address},#{addressSpecific} ,now(), 1, 1)
   	</insert>
 
 
@@ -15,16 +15,21 @@
   	
   	
   	<update id = "memberUpdate">
-  	UPDATE userTbl SET uid = #{uid}, name = #{name}, upass = #{upass}, email = #{email}, address =#{address}
+  	UPDATE userTbl SET uid = #{uid}, name = #{name}, upass = #{upass}, email = #{email}, address =#{address}, 
+  	nick=#{nickname}, postCode=#{postCode}, address=#{address}, addressSpecific=#{addressSpecific}
   	WHERE uid = #{uid}
-  	
-  	
-  	
-  	
-  	
+
   	</update>
   	
   	
+  	<select id="memberview" resultType="com.mycompany.myapp.vo.MemberVO">
+  	SELECT uid,name,upass,email,address,postCode,addressSpecific,nickname FROM usertbl
+  	</select>
+  	
+  	
+  	<delete id ="memberdelete" parameterType="String">
+  	DELETE FROM usertbl where uid= #{uid}
+  	</delete>
   	
   </mapper>
   

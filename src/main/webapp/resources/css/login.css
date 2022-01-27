@@ -1,0 +1,121 @@
+@charset "UTF-8";
+
+
+.content *{
+    vertical-align: middle;}
+    
+
+#all { 
+position: absolute;
+left:50%;
+top:50%;
+transform :translate(-50%,-50%);
+align-items:center;
+}
+
+.logo{
+height:110px;
+width:110px;
+margin-right: 10px;
+}
+
+
+#loginTitle{
+font-size: 35px;
+font-weight: bold;
+vertical-align: middle;
+
+}
+
+
+#loginHead{
+     display: flex;
+    justify-content: center;
+}
+
+.textbox{
+
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+width:400px;
+height:100px;
+background-repeat:no-repeat;
+padding-left:20px;
+}
+
+
+#id {
+background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    width:400px;
+	height:70px;
+	margin-top: 10px;
+}
+
+#id::-webkit-input-placeholder{
+  background-image: url(/resources/image/baseline_person_black_24dp.png) ;
+  background-size: contain;
+  background-position:  1px center;
+  background-repeat: no-repeat;
+  text-align: center;
+  text-indent: 0;
+}
+
+#pw {
+    background-repeat: no-repeat;
+    border: 1px solid #ccc;
+    width:400px;
+	height:70px;
+	margin-top:30px;
+}
+
+#pw::-webkit-input-placeholder{
+  background-image: url(/resources/image/sample.png) ;
+  background-size: contain;
+  background-position:  1px center;
+  background-repeat: no-repeat;
+  text-align: center;
+  text-indent: 0;
+}
+
+
+.login_button{
+background: #8BE0B0;
+border-radius: 30px;
+width:350px;
+height:52px;
+margin-top:30px;
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 25px;
+line-height: 42px;
+text-align: center;
+color: #FFFFFF;
+border: 0px;
+
+
+}
+
+#login_form{
+align-items: center;
+
+}
+
+.container { 
+  position: absolute;
+  width: 400px; 
+  height: 400px; 
+  text-align: center; 
+  margin-left: -200px; 
+  margin-top: -200px; 
+  left: 50%; 
+  top: 50%; 
+}
+
+.logchk{
+   margin-top:30px;
+   text-align:center;
+   color: red;
+}

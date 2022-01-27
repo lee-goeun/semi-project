@@ -1,0 +1,59 @@
+@charset "utf-8";
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0 auto;}
+
+
+a{text-decoration: none}
+
+
+
+#all{ 
+position: absolute;
+left:50%;
+top:50%;
+transform : translate(-50%,-50%);
+}
+
+#midcon{
+margin-top:40px;
+text-align : center;
+font-weight: bold;
+}
+
+#start{
+text-align : center;
+margin-top:40px;
+background: #8BE0B0;
+border-radius: 30px;
+width: 260px;
+height: 40px;
+
+
+}
+
+.login_button{
+text-align : center;
+margin-top:25px;
+font-family: Roboto;
+font-weight: bolder;
+font-size: 13px;
+
+}
+
+#btn{
+font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 17px;
+line-height: 42px;
+text-align: center;
+color: #FFFFFF;
+vertical-align: middle
+}
+
+#log{
+color: #8BE0B0;
+
+}
