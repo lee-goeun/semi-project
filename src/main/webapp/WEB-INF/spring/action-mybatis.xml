@@ -19,13 +19,9 @@
 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis/model/modelConfig.xml" />
-		<property name="mapperLocations" >
+		<property name="mapperLocations">
 			<list>
-
-			
-
-	
+				<value>classpath:mybatis/mappers/PostMapper.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -35,5 +31,5 @@
 			<constructor-arg ref="sqlSessionFactory" />
 		</bean>
 		
-		<mybatis-spring:scan base-package="com.mycompany.myapp.mapper"/>	
+		<mybatis-spring:scan base-package="com.mycompany.myapp.mapper"/>
 	</beans>
