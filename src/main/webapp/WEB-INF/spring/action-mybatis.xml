@@ -21,7 +21,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="mapperLocations">
 			<list>
-				<value>classpath:mybatis/mappers/PostMapper.xml</value>
+<!-- 				<value>classpath:mybatis/mappers/PostMapper.xml</value> -->
 			</list>
 		</property>
 	</bean>
