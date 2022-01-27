@@ -8,12 +8,12 @@
 			<div class="write_wrap">
 				<form id="writeForm" method="post" action="/review/write.do">
 					<div class="input_wrap">
-						<input type="text" name="title" class="title" placeholder="제목을 입력해주세요.">
+						<input type="text" name="title" class="title" placeholder="제목을 입력해주세요." maxlength="30">
 					</div>
 					<div class="input_wrap">
 						<textarea name="content" class="content" placeholder="후기를 자유롭게 작성해주세요."></textarea>
 					</div>
-					<div class="input_wrap" style="display: none">
+					<div class="input_wrap" style="display: ">
 						<input type="text" name="uid" placeholder="작성자">
 					</div>
 					<div class="btn_wrap">
@@ -43,4 +43,5 @@
 		});
 
 	});
+	
 </script>

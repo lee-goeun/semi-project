@@ -11,10 +11,10 @@
 				<form id="reviseForm" method="post" action="/review/write.do">
 					<input type="hidden" name="reviewId" id="reviewId" value="${rDetail.reviewId}">
 					<div class="input_wrap">
-						<input type="text" name="title" id="title" value='<c:out value="${rDetail.title}"/>' placeholder="제목을 입력해주세요,">
+						<input type="text" name="title" id="title" value='<c:out value="${rDetail.title}"/>' placeholder="제목을 입력해주세요" maxlength="30">
 					</div>
 					<div class="input_wrap">
-						<textarea name="content" id="content" placeholder="자유롭게 후기를 작성해주세요."><c:out value="${rDetail.content}" /></textarea>
+						<textarea name="content" id="content" placeholder="후기를 자유롭게 작성해주세요."><c:out value="${rDetail.content}" /></textarea>
 					</div>
 					<div class="input_wrap" style="display:none">
 						<input type="text" name="uid" readonly="readonly" value='<c:out value="${rDetail.uid}"/>' placeholder="작성자">
