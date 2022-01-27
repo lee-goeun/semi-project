@@ -1,0 +1,243 @@
+@charset "UTF-8";
+
+/* /////////////////////////////공통 부분인데 */
+/* 폰트 초기화 */
+body, input, textarea, select, button, table {
+	font-size: 16px;
+	font-family: "Noto Sans KR";
+	color: #000;
+}
+/* 제목 태그 초기화 */
+h1, h2, h3, h4, h5, h6 {
+	font-size: 16px;
+	font-weight: normal;
+}
+/* placeholder 폰트 색상 */
+::placeholder {
+	color: #ccc;
+}
+/* /////////////////////////////공통 부분인데 */
+.contents {
+	/* 	padding-top: calc(26vh - 160px); */
+	padding-top: calc(30vh - 220px);
+}
+
+/* 검색창 */
+.search_wrap {
+	width: 300px;
+	height: 35px;
+	padding-left: 10px;
+	border: 2px solid #ccc;
+	border-radius: 17.5px;
+}
+
+.search_wrap .searchSelect {
+	width: 75px;
+	height: 35px;
+	border-radius: 17.5px 0 0 17.5px;
+	outline: none;
+	text-align: center;
+}
+
+.search_wrap .searchInput {
+	width: 180px;
+	height: 35px;
+	text-indent: 10px;
+}
+
+.search_wrap .searchBtn {
+	width: 30px;
+	height: 30px;
+	color: #ccc;
+	font-size: 18px;
+	border-radius: 50%;
+}
+
+.test {
+	display: inline-block;
+	width: 100px;
+	height: 100px;
+	background-color: aqua;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+/* 게시물 목록 */
+.list_wrap {
+	/* height: calc(48vh + 70px); */
+	position: relative;
+	margin-top: 20px;
+}
+
+.list_wrap table {
+	position: relative;
+	width: 100%;
+	text-align: center;
+	background: #e1e1e1;
+	border-collapse: separate;
+	border-spacing: 0 10px;
+}
+
+.list_wrap table tbody {
+	margin: 0 10px;
+}
+
+.list_wrap table tbody tr {
+	height: 8vh;
+	background: #fff;
+}
+
+.list_wrap table tbody tr td {
+	position: relative;
+}
+
+.list_wrap table tbody tr td.reviewId {
+	width: 8%;
+}
+
+.list_wrap table tbody tr td.title_wrap {
+	/* background-color: aqua; */
+	padding-left: 10px;
+	text-align: left;
+}
+
+.list_wrap table tbody tr td.title_wrap a {
+	
+}
+
+.list_wrap table tbody tr td.title_wrap .title {
+	
+}
+
+.list_wrap table tbody tr td.title_wrap .count_wrap {
+	
+}
+
+.list_wrap table tbody tr td.title_wrap .count_wrap span {
+	display: inline-block;
+	margin-right: 10px;
+	font-size: 12px;
+}
+
+.list_wrap table tbody tr td.title_wrap .count_wrap .replyCount {
+	
+}
+
+.list_wrap table tbody tr td.title_wrap .count_wrap .replyCount i {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	background: url(../../image/round_maps_ugc_black_24dp.png) no-repeat;
+	background-size: 15px;
+	vertical-align: -6px;
+}
+
+.list_wrap table tbody tr td.title_wrap .count_wrap .viewCount {
+	
+}
+
+.list_wrap table tbody tr td.title_wrap .count_wrap .viewCount i {
+	display: inline-block;
+	width: 18px;
+	height: 18px;
+	padding-left: 3px;
+	background: url(../../image/outline_visibility_black_24dp.png) no-repeat;
+	background-size: 18px;
+	vertical-align: -5.3px;
+}
+
+.list_wrap table tbody tr td.uid {
+	width: 17%;
+	padding-right: 20px;
+	text-align: right;
+}
+
+.list_wrap table tbody tr td.address {
+	width: 11%;
+}
+
+.list_wrap table tbody tr td.reviewedDate {
+	width: 12%;
+	padding-right: 10px;
+}
+
+.list_wrap table tbody tr td.address::after, .list_wrap table tbody tr td.reviewedDate::after
+	{
+	content: "";
+	width: 3px;
+	height: 3px;
+	background-color: #000;
+	border-radius: 50%;
+	position: absolute;
+	top: calc(50% - 1.5px);
+	left: -1.5px;
+}
+
+.list_wrap table tbody tr td.title_wrap:hover .title {
+	text-decoration: underline;
+}
+
+.list_wrap table tbody tr.reviewSearchNone, .list_wrap table tbody tr.reviewNone
+	{
+	height: 100px;
+}
+/* 페이징 */
+.paging_wrap {
+	width: 100%;
+	position: absolute;
+	bottom: -60px;
+	left: 50%;
+	transform: translate(-50%, 0);
+}
+
+.paging_wrap ul.pageInfo {
+	text-align: center;
+}
+
+.paging_wrap ul.pageInfo li {
+	display: inline-block;
+	padding: 10px 15px;
+}
+
+.paging_wrap ul.pageInfo li.preBtn {
+	margin-right: 10px;
+}
+
+.paging_wrap ul.pageInfo li.nextBtn {
+	margin-left: 10px;
+}
+
+.paging_wrap ul.pageInfo li a {
+	
+}
+
+.paging_wrap ul.pageInfo li a i {
+	font-weight: bold;
+}
+
+/* 버튼 */
+.btn_wrap {
+	position: absolute;
+	bottom: -55px;
+	right: 0;
+}
+
+.btn_wrap a.writeBtn {
+	display: inline-block;
+	width: 80px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	background: #e1e1e1;
+	border-radius: 10px;
+}
+
+.btn_wrap a.writeBtn:hover {
+	background: #bbb;
+}
+
+li.active {
+	font-weight: bold;
+	text-decoration: underline;
+}
