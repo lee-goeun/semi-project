@@ -5,4 +5,14 @@
 
 <mapper namespace="reviewReplyMapper">
 
+	<!-- 댓글 목록-->
+	<select id="listReply" resultType="com.mycompany.myapp.vo.ReviewReplyVO">
+    	select r.replyId, r.reviewId, r.uid, r.replyContent, r.repliedDate, r.isRevised, r.revisedDate, r.isDeleted, r.deletedDate, u.nickname, u.address
+		from replyTbl r left outer join userTbl u on r.uid = u.uid
+		where reviewId = #{reviewId}
+		order by repliedDate;
+	</select>
+	
+	
+	
 </mapper>

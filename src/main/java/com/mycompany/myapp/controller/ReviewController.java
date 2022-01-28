@@ -1,5 +1,7 @@
 package com.mycompany.myapp.controller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.mycompany.myapp.common.Criteria;
 import com.mycompany.myapp.common.PageMaker;
+import com.mycompany.myapp.service.ReviewReplyService;
 import com.mycompany.myapp.service.ReviewService;
+import com.mycompany.myapp.vo.ReviewReplyVO;
 import com.mycompany.myapp.vo.ReviewVO;
 
 //http://localhost:8090/review/list
@@ -24,6 +28,9 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	@Autowired
+	private ReviewReplyService replyService;
 	
 	/* 후기게시판 목록 페이지 + 페이징 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
@@ -65,8 +72,13 @@ public class ReviewController {
 		model.addAttribute("rDetail", reviewService.reviewDetail(reviewId));
 		
 		model.addAttribute("cri", cri);
+		
+		/* 댓글 목록 */
+		List<ReviewReplyVO> listReply = replyService.listReply(reviewId);
+		
+		model.addAttribute("listReply", listReply);
 	}
-
+	
 	/* 후기게시판 수정 페이지 */
 	@RequestMapping(value = "/revise", method = RequestMethod.GET)
 	public void reviewReviseGET(int reviewId, Model model, Criteria cri) throws Exception {

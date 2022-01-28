@@ -36,22 +36,25 @@
 
 			<div class="reply_wrap">
 				<ul>
-					<li>
-						<div class="replyNick_wrap">
-							<span class="nickImg"></span> <span class="nick">사리곰탕
-								<div class="replyBtn_wrap">
-									<span class="dropBtn"><i class="fas fa-ellipsis-h"></i></span>
-									<div class="replyBtn" style="display: none;">
-										<button class="replyReviseBtn">수정</button>
-										<button class="replyDeleteBtn">삭제</button>
+					<c:forEach items="${listReply}" var="listReply">
+						<li class="replyInfo">
+							<div class="replyNick_wrap">
+								<span class="nickImg"></span> <span class="nick">
+									<c:out value="${listReply.nickname}"/>
+									<div class="replyBtn_wrap">
+										<span class="dropBtn"><i class="fas fa-ellipsis-h"></i></span>
+										<div class="replyBtn" style="display: none;">
+											<button class="replyReviseBtn">수정</button>
+											<button class="replyDeleteBtn">삭제</button>
+										</div>
 									</div>
-								</div>
-							</span> <span class="address">유성구 봉명동</span>
-						</div>
-						<div class="replyContent">
-							<input type="text" value="사리곰탕이 더 맛있어요" readonly>
-						</div>
-					</li>
+								</span> <span class="address"><c:out value="${listReply.address}"/></span>
+							</div>
+							<div class="replyContent">
+								<input type="text" value='<c:out value="${listReply.replyContent}"/>' readonly>
+							</div>
+						</li>
+					</c:forEach>
 				</ul>
 				<div class="replyNone" style="display: none;">
 					<i class="far fa-comment-dots fa-flip-horizontal"></i>
@@ -66,7 +69,6 @@
 			
 			<form id="detailForm" method="get">
 				<input type="hidden" id="reviewId" name="reviewId" value='<c:out value="${rDetail.reviewId}"/>'>
-				<!-- 게시물 번호 -->
 				<input type="hidden" name="pageNum" value='<c:out value="${cri.pageNum}"/>'>
 				<input type="hidden" name="amount" value='<c:out value="${cri.amount}"/>'>
 				<input type="hidden" name="type" value='<c:out value="${cri.type}"/>'>
@@ -84,6 +86,12 @@
 		/* 수정 완료 ALERT */
 		if ('<c:out value="${result}"/>' === "revise success") {
 			alert("수정이 완료되었습니다.");
+		}
+		
+		/* 댓글이 없을 경우 */
+		const isReplyInfo = document.querySelectorAll('.replyInfo');
+		if (isReplyInfo.length <= 0) {
+			document.querySelector(".replyNone").style.display = '';
 		}
 
 	});

@@ -2,9 +2,13 @@ package com.mycompany.myapp.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+@Component("reviewReplyVO")
 public class ReviewReplyVO {
 	
 	private int replyId;			// 댓글 식별자
+	private int reviewId;			// 게시글 식별자
 	private String uid;				// 댓글 작성자 아이디
 	private String replyContent;	// 댓글 내용
 	private Date repliedDate;		// 댓글 작성일
@@ -24,6 +28,14 @@ public class ReviewReplyVO {
 		this.replyId = replyId;
 	}
 	
+	public int getReviewId() {
+		return reviewId;
+	}
+
+	public void setReviewId(int reviewId) {
+		this.reviewId = reviewId;
+	}
+
 	public String getUid() {
 		return uid;
 	}
@@ -98,11 +110,11 @@ public class ReviewReplyVO {
 
 	@Override
 	public String toString() {
-		return "ReviewReplyVO [replyId=" + replyId + ", uid=" + uid + ", replyContent=" + replyContent
-				+ ", repliedDate=" + repliedDate + ", revisedDate=" + revisedDate + ", deletedDate=" + deletedDate
-				+ ", isRevised=" + isRevised + ", isDeleted=" + isDeleted + ", nickname=" + nickname + ", address="
-				+ address + "]";
+		return "ReviewReplyVO [replyId=" + replyId + ", reviewId=" + reviewId + ", uid=" + uid + ", replyContent="
+				+ replyContent + ", repliedDate=" + repliedDate + ", revisedDate=" + revisedDate + ", deletedDate="
+				+ deletedDate + ", isRevised=" + isRevised + ", isDeleted=" + isDeleted + ", nickname=" + nickname
+				+ ", address=" + address + "]";
 	}
-	
+
 }
 
