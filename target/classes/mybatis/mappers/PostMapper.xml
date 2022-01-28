@@ -23,13 +23,22 @@
 	<result property="viewCount" column="viewCount"/>
 </resultMap> 
 
-<!-- 전체 선택 -->
-	<select id="selectAllPostsList" resultMap="postResult">
-		<![CDATA[
-			SELECT * FROM gatherTbl
-		]]>
+<!-- 포스트 조회(+검색) -->
+	<select id="selectAllPostsList" resultMap="postResult" parameterType="com.mycompany.myapp.vo.PostVO">
+		SELECT * FROM gatherTbl
+		<where>
+			<if test="title != null and title != ''">
+				title LIKE CONCAT('%', #{title}, '%')
+			</if>
+			<if test="category != null and category !=''">
+				or category LIKE CONCAT('%', #{category}, '%')
+			</if>
+			<if test="isTogether != null and isTogether !=''">
+				or isTogether = #{isTogether}
+			</if>
+		</where>
 	</select>
-
+	
 <!-- 포스트 추가 -->
 <insert id="insertNewPost" parameterType="java.util.Map">
 	<![CDATA[

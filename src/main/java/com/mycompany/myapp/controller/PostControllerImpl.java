@@ -43,18 +43,19 @@ public class PostControllerImpl implements PostController{
 	public PostControllerImpl() {
 	}
 	
-	//포스트 조회
+	//포스트 조회(+검색)
 	@Override
 	@RequestMapping(value="/list", method= RequestMethod.GET)
-	public ModelAndView listPosts(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public ModelAndView listPosts(HttpServletRequest request, HttpServletResponse response, PostVO vo) throws Exception {
 		String viewName = (String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName); 
 		
-		List<PostVO> postsList = postService.listPosts();
+		List<PostVO> postsList = postService.listPosts(vo);
 		mav.addObject("postsList",postsList);
 		
 		return mav;
 	}
+	
 	
 	//포스트 추가
 	@Override
