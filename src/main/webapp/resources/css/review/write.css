@@ -11,6 +11,23 @@ h1,h2,h3,h4,h5,h6 { font-size: 16px; font-weight: normal; }
 }
 /* /////////////////////////////공통 부분인데 */
 
+/* common */
+section {
+  /* background-color: #aaa; */
+  width: 100%;
+  height: calc(100vh - 150px);
+/*   padding-top: 100px; */
+  box-sizing: border-box;
+}
+
+.container {
+  background-color: #fff;
+  width: 1100px;
+  margin: 0 auto;
+  height: 100%;
+}
+/* //common */
+
 .contents {
 /* 	padding-top: calc(26vh - 160px); */
 padding-top: calc(30vh - 215px);

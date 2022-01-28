@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- <section id="main"> -->
-<!-- 	<div class="container"> -->
+	<div class="container">
 		<div class="contents">
 			<h3 class="subTitle">후기 게시판 글쓰기</h3>
 			<div class="write_wrap">
@@ -23,7 +23,7 @@
 				</form>
 			</div>
 		</div>
-<!-- 	</div> -->
+	</div>
 <!-- </section> -->
 
 <script>
