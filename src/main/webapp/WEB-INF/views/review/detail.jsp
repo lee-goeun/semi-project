@@ -48,7 +48,9 @@
 								</div>
 							</span> <span class="address">유성구 봉명동</span>
 						</div>
-						<div class="replyContent">사리곰탕이 더 맛있어요</div>
+						<div class="replyContent">
+							<input type="text" value="사리곰탕이 더 맛있어요" readonly>
+						</div>
 					</li>
 				</ul>
 				<div class="replyNone" style="display: none;">
