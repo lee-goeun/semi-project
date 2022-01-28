@@ -60,7 +60,6 @@
 	<!-- script  -->
 	<script>
 		$(document).ready(function() {
-
 			/* 수정 완료 ALERT */
 			if ('<c:out value="${result}"/>' === "revise success") {
 				alert("수정이 완료되었습니다.");
