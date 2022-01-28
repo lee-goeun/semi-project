@@ -7,36 +7,39 @@
 
 	<!-- 게시판 목록 -->
 	<select id="reviewList" resultType="com.mycompany.myapp.vo.ReviewVO">
-		select * from replyTbl
+		select *
+		from reviewTbl r left outer join userTbl u on r.uid = u.uid;
 	</select>
 	
 	<!-- 게시판 작성 -->
 	<insert id="reviewWrite">
-		insert into replyTbl(uid, title, content) values (#{uid}, #{title}, #{content})
+		insert into reviewTbl(uid, title, content) values (#{uid}, #{title}, #{content})
 	</insert>
 	
 	<!-- 게시판 상세 -->
 	<select id="reviewDetail" resultType="com.mycompany.myapp.vo.ReviewVO">
-		select * from replyTbl where reviewId = #{reviewId}
+		select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, u.nickname, u.address
+		from reviewTbl r left outer join userTbl u on r.uid = u.uid
+		where reviewId = #{reviewId}
 	</select>
 	
 	<!-- 게시판 수정 -->
 	<update id="reviewRevise">
-		update replyTbl 
+		update reviewTbl 
 		set title = #{title}, content = #{content}, isRevised = 1, revisedDate = now()
 		where reviewId = #{reviewId}
 	</update>
 	
 	<!-- 게시판 삭제 -->
 	<update id="reviewDelete">
-		update replyTbl 
+		update reviewTbl 
 		set isDeleted = 1, deletedDate = now()
 		where reviewId = #{reviewId}
 	</update>
 	
 	<!-- 조회수 증가 -->
 	<update id="reviewViews">
-		update replyTbl set viewCount = viewCount + 1 where reviewId = #{reviewId}
+		update reviewTbl set viewCount = viewCount + 1 where reviewId = #{reviewId}
 	</update>
 	
 	<!-- 검색 조건문 -->
@@ -53,7 +56,7 @@
                             content like concat('%',#{keyword},'%') 
                         </when>
                         <when test="type == 'W'.toString()">
-                            uid like concat('%',#{keyword},'%' )
+                            nickname like concat('%',#{keyword},'%' )
                         </when>
 <!--                         <when test="type == 'A'.toString()"> -->
 <!--                             address like concat('%',#{keyword},'%' ) -->
@@ -65,21 +68,34 @@
     </sql>
 	
 	<!-- 게시판 목록 + 페이징 + 검색 -->
+<!-- 	<select id="reviewListPaging" resultType="com.mycompany.myapp.vo.ReviewVO"> -->
+<!-- 		select * from ( -->
+<!--                 select * -->
+<!--                 from reviewTbl -->
+<!--                 where isDeleted = 0 -->
+<!--                 <if test="keyword != null"> -->
+<!--                     <include refid="criteria"></include> -->
+<!--                 </if> -->
+<!--                 order by reviewId desc) as T1  -->
+<!--         limit #{skip}, #{amount} -->
+<!-- 	</select> -->
 	<select id="reviewListPaging" resultType="com.mycompany.myapp.vo.ReviewVO">
-		select * from (
-                select *
-                from replyTbl
-                where isDeleted = 0
-                <if test="keyword != null">
+		select *
+		from (
+				select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, u.nickname, u.address
+				from reviewTbl r left outer join userTbl u on r.uid = u.uid
+				where r.isDeleted = 0
+				<if test="keyword != null">
                     <include refid="criteria"></include>
                 </if>
-                order by reviewId desc) as T1 
-        limit #{skip}, #{amount}
+				order by reviewId desc) as T1 
+		limit #{skip}, #{amount}
 	</select>
 	
 	<!-- 게시물 총 개수 -->
 	<select id="reviewTotal" resultType="int">
-		select count(*) from replyTbl
+		select count(*)
+		from reviewTbl r left outer join userTbl u on r.uid = u.uid
 		where isDeleted = 0
 		<if test="keyword != null">
 			<include refid="criteria"></include>

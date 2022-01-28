@@ -24,6 +24,20 @@ public class ReviewController {
 
 	@Autowired
 	private ReviewService reviewService;
+	
+	/* 후기게시판 목록 페이지 + 페이징 */
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public void reviewListGET(Model model, Criteria cri) throws Exception {
+		logger.info("후기게시판 목록 페이지입니다.");
+
+		model.addAttribute("rList", reviewService.reviewListPaging(cri));
+		
+		int total = reviewService.reviewTotal(cri);
+		
+		PageMaker pageMake = new PageMaker(cri, total);
+		
+		model.addAttribute("pageMaker", pageMake);
+	}
 
 	/* 후기게시판 작성 페이지 */
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
@@ -41,20 +55,6 @@ public class ReviewController {
 		rttr.addFlashAttribute("result", "write success");
 
 		return "redirect:/review/list";
-	}
-
-	/* 후기게시판 목록 페이지 + 페이징 */
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public void reviewListGET(Model model, Criteria cri) throws Exception {
-		logger.info("후기게시판 목록 페이지입니다.");
-
-		model.addAttribute("rList", reviewService.reviewListPaging(cri));
-		
-		int total = reviewService.reviewTotal(cri);
-		
-		PageMaker pageMake = new PageMaker(cri, total);
-		
-		model.addAttribute("pageMaker", pageMake);
 	}
 	
 	/* 후기게시판 상세 페이지 */

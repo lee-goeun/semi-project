@@ -10,8 +10,8 @@
 			<div class="detail_wrap">
 				<div class="nick_wrap">
 					<span class="nickImg"></span>
-					<span name="uid" class="nick"><c:out value="${rDetail.uid}"/></span>
-					<span name="" class="address">유성구 봉명동</span>
+					<span name="uid" class="nick"><c:out value="${rDetail.nickname}"/></span>
+					<span name="" class="address"><c:out value="${rDetail.address}"/></span>
 
 					<div class="btn_wrap">
 						<div class="writerBtn_wrap">

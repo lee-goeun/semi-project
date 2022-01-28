@@ -42,8 +42,8 @@
 											</div>
 										</a>
 									</td>
-									<td class="uid"><c:out value="${rList.uid}" /></td>
-									<td class="address">((지역 넣기))</td>
+									<td class="nickname"><c:out value="${rList.nickname}" /></td>
+									<td class="address"><c:out value="${rList.address}" /></td>
 									<td class="reviewedDate"><c:out value="${rList.reviewedDate}" /></td>
 								</tr>
 <%-- 							</c:if> --%>

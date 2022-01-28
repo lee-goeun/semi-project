@@ -18,6 +18,10 @@ public class ReviewVO {
 	private int isRevised;		// 게시글 수정 여부
 	private int isDeleted;		// 게시글 삭제 여부
 	
+	/* userTbl에서 가져옴 */
+	private String nickname;	// 작성자 닉네임
+	private String address;		// 작성자 주소
+	
 	public int getReviewId() {
 		return reviewId;
 	}
@@ -96,6 +100,30 @@ public class ReviewVO {
 	
 	public void setIsDeleted(int isDeleted) {
 		this.isDeleted = isDeleted;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	@Override
+	public String toString() {
+		return "ReviewVO [reviewId=" + reviewId + ", uid=" + uid + ", title=" + title + ", content=" + content
+				+ ", viewCount=" + viewCount + ", reviewedDate=" + reviewedDate + ", revisedDate=" + revisedDate
+				+ ", deletedDate=" + deletedDate + ", isRevised=" + isRevised + ", isDeleted=" + isDeleted
+				+ ", nickname=" + nickname + ", address=" + address + "]";
 	}
 	
 }

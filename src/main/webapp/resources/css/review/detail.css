@@ -299,7 +299,7 @@ section {
 	font-size: 18px;
 	text-indent: 20px;
 	border-radius: 25px;
-	background: #e1e1e1;
+	background: #eee;
 }
 
 .reply_wrap .replyInput_wrap .replyInput::placeholder {
