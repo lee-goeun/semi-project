@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <!-- <section id="main"> -->
-<!-- 	<div class="container"> -->
+	<div class="container">
 
 		<div class="contents">
 
@@ -19,6 +19,7 @@
 				<button class="searchBtn">
 					<i class="fas fa-search"></i>
 				</button>
+				<a href="/review/list" class="searchReset" style="display:none">취소</a>
 			</div>
 
 			<!-- 게시물 목록 -->
@@ -89,7 +90,7 @@
 			
 		</div>
 		
-<!-- 	</div> -->
+	</div>
 <!-- </section> -->
 
 <!-- script  -->
@@ -113,6 +114,13 @@
 			} else {
 				document.querySelector(".reviewNone").style.display = '';
 			}
+		}
+		
+		/* 검색하면 취소 버튼 표시 */
+		if (keyword) {
+				document.querySelector(".searchReset").style.display = '';
+		} else {
+				document.querySelector(".searchReset").style.display = 'none';
 		}
 		
 	});
