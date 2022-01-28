@@ -17,11 +17,11 @@ public class PostServiceImpl implements PostService{
 	public PostServiceImpl() {
 	}
 	
-	//포스트 조회
+	//포스트 조회(+검색)
 	@Override
-	public List<PostVO> listPosts() throws Exception {
+	public List<PostVO> listPosts(PostVO postVO) throws Exception {
 		
-		List<PostVO> postList = postDAO.selectAllPostsList();
+		List<PostVO> postList = postDAO.selectAllPostsList(postVO);
 		return postList;
 	}
 	
@@ -55,5 +55,7 @@ public class PostServiceImpl implements PostService{
 	public void removePost(int postId) throws Exception {
 		postDAO.deletePost(postId);
 	}
+
+	
 	
 }

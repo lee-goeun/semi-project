@@ -8,9 +8,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.mycompany.myapp.vo.PostVO;
+
 public interface PostController {
-	//포스트조회
-	public ModelAndView listPosts(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	//포스트조회(+검색)
+	public ModelAndView listPosts(HttpServletRequest request, HttpServletResponse response, PostVO vo) throws Exception;
 	
 	//포스트추가
 	public String addFormPost(HttpServletRequest request, HttpServletResponse response) throws Exception;

@@ -8,8 +8,8 @@ import org.springframework.dao.DataAccessException;
 import com.mycompany.myapp.vo.PostVO;
 
 public interface PostDAO {
-	//포스트 조회
-	public List selectAllPostsList() throws DataAccessException;
+	//포스트 조회(+검색)
+	public List selectAllPostsList(PostVO vo) throws DataAccessException;
 	
 	//포스트 추가
 	public void insertNewPost(Map postMap) throws DataAccessException;

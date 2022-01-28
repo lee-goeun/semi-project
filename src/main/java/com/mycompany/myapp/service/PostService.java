@@ -5,8 +5,8 @@ import java.util.Map;
 
 import com.mycompany.myapp.vo.PostVO;
 public interface PostService {
-	//포스트 조회
-	public List<PostVO> listPosts() throws Exception;
+	//포스트 조회(+검색)
+	public List<PostVO> listPosts(PostVO PostVO) throws Exception;
 	
 	//포스트 추가
 	public void addNewPost(Map postMap) throws Exception;

@@ -8,7 +8,7 @@ section{width:85%; margin:0 auto;}
         .search_area div:nth-child(1){width:92%; height:100%;}
         .search_area div:nth-child(1) input{width:100%;}
         .search_area div:nth-child(2){width:50px;}
-        .search_area div:nth-child(2) input{width:40px; height:80%; margin:10% 0; border-radius:20px; background-image:url('img/outline_search_white_24dp.png'); background-repeat:no-repeat; background-size:70%; background-position: center;}
+        .search_area div:nth-child(2) button{width:40px; background-color: #E1E1E1; height:80%; margin:10% 0; border-radius:20px; background-image:url('img/outline_search_white_24dp.png'); background-repeat:no-repeat; background-size:70%; background-position: center;}
         .stt_area{float:left; width:130px; height:40px; line-height:40px; font-size:14px; margin-top:5px; text-align:center; border-radius: 10px; background-color: #E1E1E1;}
 
         .tab{width:400px; height:30px; margin-top:20px;}

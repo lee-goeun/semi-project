@@ -15,10 +15,10 @@ public class PostDAOImpl implements PostDAO{
 	@Autowired
 	private SqlSession sqlSession;
 	
-	//포스트 조회
+	//포스트 조회(+검색)
 	@Override
-	public List selectAllPostsList() throws DataAccessException {
-		return sqlSession.selectList("mapper.post.selectAllPostsList");
+	public List selectAllPostsList(PostVO vo) throws DataAccessException {
+		return sqlSession.selectList("mapper.post.selectAllPostsList", vo);
 	}
 	
 	//포스트 추가
