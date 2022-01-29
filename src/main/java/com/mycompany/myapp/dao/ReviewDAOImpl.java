@@ -63,4 +63,10 @@ public class ReviewDAOImpl implements ReviewDAO {
 		return sqlSession.selectOne("reviewMapper.reviewTotal", cri);
 	}
 
+	/* 게시물 댓글 수 갱신 */
+	@Override
+	public void replyCountUpdate(int reviewId) throws Exception {
+		sqlSession.update("reviewMapper.replyCountUpdate", reviewId);
+	}
+
 }

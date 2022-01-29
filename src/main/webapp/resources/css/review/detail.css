@@ -40,6 +40,7 @@ section {
 	padding-top: calc(30vh - 215px);
 	padding-bottom: 50px;
 }
+
 /* 게시글 정보 */
 .detail_wrap {
 	/* background-color: aquamarine; */
@@ -117,7 +118,7 @@ section {
 .btn_wrap .listBtn {
 	width: 80px;
 	height: 40px;
-	background: #e1e1e1;
+	background: #eee;
 	border-radius: 10px;
 }
 
@@ -142,7 +143,6 @@ section {
 }
 
 .detail_wrap .content textarea {
-	/* background-color: yellow; */
 	display: block;
 	width: 100%;
 	min-height: 20vh;
@@ -217,10 +217,10 @@ section {
 
 .reply_wrap ul li .replyNick_wrap .nickImg {
 	display: inline-block;
-	width: 40px;
-	height: 40px;
+	width: 35px;
+	height: 35px;
 	background: url(../../image/baseline_person_black_24dp.png) no-repeat;
-	background-size: 25px;
+	background-size: 22px;
 	background-position: center;
 	border: 2px solid #ccc;
 	border-radius: 50%;
@@ -228,15 +228,15 @@ section {
 
 .reply_wrap ul li .replyNick_wrap .nick {
 	position: absolute;
-	top: 0px;
-	left: 55px;
+	top: -2px;
+	left: 48px;
 	font-weight: bold;
 }
 
 .reply_wrap ul li .replyNick_wrap .address {
 	position: absolute;
-	bottom: 9px;
-	left: 55px;
+	bottom: 8px;
+	left: 48px;
 	font-size: 12px;
 }
 /* 댓글 버튼 영역 */
@@ -246,7 +246,7 @@ section {
 	margin-left: 3px;
 	font-size: 14px;
 	color: #aaa;
-	vertical-align: 1px;
+	vertical-align: 2px;
 }
 
 .replyBtn_wrap .dropBtn {
@@ -268,13 +268,48 @@ section {
 	font-size: 14px;
 }
 
-.reply_wrap ul li .replyContent {
-	/* background-color: #bbb; */
-	padding-left: 10px;
+/* 댓글 수정시 버튼 */
+.replyReviseBtn_wrap {
+	/* background: yellow; */
+	position: absolute;
+	top: 10px;
+	right: 15px;
 }
 
-.reply_wrap ul li .replyContent input {
-	font-size: 18px;
+.replyReviseBtn_wrap button {
+	margin-left: 15px;
+	color: #aaa;
+}
+
+.replyReviseBtn_wrap .replyReviseCancle {
+	
+}
+
+.replyReviseBtn_wrap .replyReviseWrite {
+	
+}
+
+.reply_wrap ul li .replyContent {
+	/* background-color: #bbb; */
+	/* padding-left: 10px; */
+	
+}
+
+.reply_wrap ul li .replyContent textarea {
+	width: calc(100% - 50px);
+	margin-left: 48px;
+	padding: 10px;
+	background: #eee;
+	border: none;
+	border-radius: 10px;
+	box-sizing: border-box;
+	resize: none;
+	outline: none;
+	overflow: hidden;
+}
+
+.reply_wrap ul li .replyContent textarea.readonlyF {
+	border: 2px solid #ccc;
 }
 
 /* 댓글이 없을 경우 */
@@ -312,7 +347,7 @@ section {
 .reply_wrap .replyInput_wrap .replyInputBtn {
 	position: absolute;
 	top: 20px;
-	right: 20px;
+	right: 25px;
 	color: #aaa;
 	font-size: 18px;
 }

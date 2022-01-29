@@ -11,12 +11,13 @@ public class ReviewVO {
 	private String uid;			// 게시글 작성자
 	private String title;		// 게시글 제목
 	private String content;		// 게시글 내용
-	private String viewCount;	// 게시글 조회수
+	private int viewCount;		// 게시글 조회수
 	private Date reviewedDate;	// 게시글 등록일
 	private Date revisedDate;	// 게시글 수정일
 	private Date deletedDate;	// 게시글 삭제일
 	private int isRevised;		// 게시글 수정 여부
 	private int isDeleted;		// 게시글 삭제 여부
+	private int replyCount;		// 게시글 댓글수
 	
 	/* userTbl에서 가져옴 */
 	private String nickname;	// 작성자 닉네임
@@ -54,11 +55,11 @@ public class ReviewVO {
 		this.content = content;
 	}
 	
-	public String getViewCount() {
+	public int getViewCount() {
 		return viewCount;
 	}
 	
-	public void setViewCount(String viewCount) {
+	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
 	
@@ -101,6 +102,14 @@ public class ReviewVO {
 	public void setIsDeleted(int isDeleted) {
 		this.isDeleted = isDeleted;
 	}
+	
+	public int getReplyCount() {
+		return replyCount;
+	}
+
+	public void setReplyCount(int replyCount) {
+		this.replyCount = replyCount;
+	}
 
 	public String getNickname() {
 		return nickname;
@@ -123,7 +132,7 @@ public class ReviewVO {
 		return "ReviewVO [reviewId=" + reviewId + ", uid=" + uid + ", title=" + title + ", content=" + content
 				+ ", viewCount=" + viewCount + ", reviewedDate=" + reviewedDate + ", revisedDate=" + revisedDate
 				+ ", deletedDate=" + deletedDate + ", isRevised=" + isRevised + ", isDeleted=" + isDeleted
-				+ ", nickname=" + nickname + ", address=" + address + "]";
+				+ ", replyCount=" + replyCount + ", nickname=" + nickname + ", address=" + address + "]";
 	}
-	
+
 }

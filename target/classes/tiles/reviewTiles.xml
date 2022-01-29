@@ -27,7 +27,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/review/write.jsp"/>
 	</definition>
 	
-	<definition name="review/detail" extends="baseLayout">
+	<definition name="/review/detail" extends="baseLayout">
 		<put-attribute name="title" value="후기 게시판"/>
 		<put-attribute name="css" value="/resources/css/review/detail.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/review/detail.jsp"/>

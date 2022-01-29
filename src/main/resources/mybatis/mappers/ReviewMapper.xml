@@ -18,7 +18,7 @@
 	
 	<!-- 게시판 상세 -->
 	<select id="reviewDetail" resultType="com.mycompany.myapp.vo.ReviewVO">
-		select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, u.nickname, u.address
+		select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, r.replyCount, u.nickname, u.address
 		from reviewTbl r left outer join userTbl u on r.uid = u.uid
 		where reviewId = #{reviewId}
 	</select>
@@ -82,7 +82,7 @@
 	<select id="reviewListPaging" resultType="com.mycompany.myapp.vo.ReviewVO">
 		select *
 		from (
-				select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, u.nickname, u.address
+				select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, r.replyCount, u.nickname, u.address
 				from reviewTbl r left outer join userTbl u on r.uid = u.uid
 				where r.isDeleted = 0
 				<if test="keyword != null">
@@ -101,5 +101,14 @@
 			<include refid="criteria"></include>
         </if>
 	</select>
+	
+	<!-- 게시물 댓글 수 갱신 -->
+	<update id="replyCountUpdate">
+		UPDATE reviewTbl
+		SET reviewTbl.replyCount = (SELECT count(replyId)
+									FROM replyTbl
+									WHERE reviewId = #{reviewId} AND isDeleted = 0)
+		WHERE reviewTbl.reviewId = #{reviewId};
+	</update>
 	
 </mapper>

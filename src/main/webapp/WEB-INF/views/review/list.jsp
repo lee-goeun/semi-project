@@ -37,7 +37,7 @@
 												<c:out value="${rList.title}" />
 											</div>
 											<div class="count_wrap">
-												<span class="replyCount"><i></i>답변 (답변수)</span>
+												<span class="replyCount"><i></i>답변 <c:out value="${rList.replyCount}" /></span>
 												<span class="viewCount"><i></i>조회수 <c:out value="${rList.viewCount}" /></span>
 											</div>
 										</a>

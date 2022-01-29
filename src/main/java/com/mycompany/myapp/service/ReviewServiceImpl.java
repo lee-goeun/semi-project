@@ -31,8 +31,10 @@ public class ReviewServiceImpl implements ReviewService {
 	@Override
 	public ReviewVO reviewDetail(int reviewId) throws Exception {
 		/* 조회수 증가 */
-		reviewDAO.reviewViews(reviewId);
-		
+//		reviewDAO.reviewViews(reviewId);
+		/* 댓글수 갱신 */
+		reviewDAO.replyCountUpdate(reviewId);
+
 		return reviewDAO.reviewDetail(reviewId);
 	}
 
@@ -47,12 +49,12 @@ public class ReviewServiceImpl implements ReviewService {
 	public void reviewDelete(ReviewVO reviewVO) throws Exception {
 		reviewDAO.reviewDelete(reviewVO);
 	}
-
+	
 	/* 조회수 증가 */
-//	@Override
-//	public void reviewViews(int reviewId) throws Exception {
-//		reviewDAO.reviewViews(reviewId);
-//	}
+	@Override
+	public void reviewViews(int reviewId) throws Exception {
+		reviewDAO.reviewViews(reviewId);
+	}
 	
 	/* 게시판 목록 + 페이징 */
 	@Override
@@ -65,5 +67,11 @@ public class ReviewServiceImpl implements ReviewService {
 	public int reviewTotal(Criteria cri) throws Exception{
 		return reviewDAO.reviewTotal(cri);
 	}
+
+	/* 게시물 댓글 수 갱신 */
+//	@Override
+//	public void replyCountUpdate(int reviewId) throws Exception {
+//		reviewDAO.replyCountUpdate(reviewId);
+//	}
 
 }

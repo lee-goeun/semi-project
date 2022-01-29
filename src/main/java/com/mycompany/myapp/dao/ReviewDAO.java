@@ -30,5 +30,8 @@ public interface ReviewDAO {
 	
 	/* 개시물 총 개수 */
 	public int reviewTotal(Criteria cri) throws Exception;
+	
+	/* 게시물 댓글 수 갱신 */
+	public void replyCountUpdate(int reviewId) throws Exception;
 
 }
