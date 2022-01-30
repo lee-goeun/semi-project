@@ -60,7 +60,7 @@
          <div class="btn_area">
          	 <a href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
          	 <a id="btn_delete" onclick="deletePost('${contextPath}/post/removePost', ${param.postId})">삭제하기</a>
-         	 <a href="">참여하기</a>
+         	 <a id="btn_join" href="#none">참여하기</a>
          </div>
      </div>
 	    <script type="text/javascript">
@@ -98,12 +98,18 @@
         		
         	});
         	
+        	//삭제
         	$('#btn_delete').click(function(){
         		var cnfrm = confirm("정말 삭제하시겠습니까?");
         		if(!cnfrm){
         			return false;
         		}
         	});
+        	
+        	//채팅
+        	$('#btn_join').click(function(){
+                window.open("${contextPath}/post/chat","_blank","width=430,height=700");
+            });
         	
         	
             $(".text_area").find('.person_area').find('div').eq(0).css({
