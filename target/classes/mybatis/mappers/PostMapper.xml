@@ -27,16 +27,17 @@
 	<select id="selectAllPostsList" resultMap="postResult" parameterType="com.mycompany.myapp.vo.PostVO">
 		SELECT * FROM gatherTbl
 		<where>
+			<if test="isTogether != null and isTogether !=''">
+				isTogether = #{isTogether}
+			</if>
 			<if test="title != null and title != ''">
-				title LIKE CONCAT('%', #{title}, '%')
+				or title LIKE CONCAT('%', #{title}, '%')
 			</if>
 			<if test="category != null and category !=''">
 				or category LIKE CONCAT('%', #{category}, '%')
 			</if>
-			<if test="isTogether != null and isTogether !=''">
-				or isTogether = #{isTogether}
-			</if>
 		</where>
+		ORDER BY deadline DESC
 	</select>
 	
 <!-- 포스트 추가 -->
@@ -60,5 +61,20 @@
 			SELECT * FROM gatherTbl 
 			where postId = #{postId}
 		]]>
-	</select>	
+	</select>
+	
+<!-- 포스트 수정 -->
+	<update id="updatePost" parameterType="java.util.Map">
+		update gatherTbl set title=#{title}, deadline=#{deadline}, isTogether=#{isTogether}, maxMember=#{maxMember},
+		price=#{price}, deliveryFee=#{deliveryFee}, isRevised = '1'
+		<if test="image != '' and image != null">
+		, image=#{image}
+		</if>
+		where postId=#{postId}
+	</update>
+
+<!-- 포스트 삭제 -->
+	<update id="deletePost" parameterType="int">
+		update gatherTbl set isDeleted = '1' where postId=#{postId}
+	</update>	
 </mapper>
