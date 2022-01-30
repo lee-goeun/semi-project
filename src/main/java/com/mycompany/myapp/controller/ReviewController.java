@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,6 +22,7 @@ import com.mycompany.myapp.common.Criteria;
 import com.mycompany.myapp.common.PageMaker;
 import com.mycompany.myapp.service.ReviewReplyService;
 import com.mycompany.myapp.service.ReviewService;
+import com.mycompany.myapp.vo.MemberVO;
 import com.mycompany.myapp.vo.ReviewReplyVO;
 import com.mycompany.myapp.vo.ReviewVO;
 import com.mysql.cj.util.StringUtils;
@@ -61,8 +63,12 @@ public class ReviewController {
 
 	/* 후기게시판 게시물 작성 */
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
-	public String reviewWritePOST(ReviewVO reviewVO, RedirectAttributes rttr) throws Exception {
+	public String reviewWritePOST(ReviewVO reviewVO, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		logger.info("후기게시판 게시물 작성");
+		
+		// 로그인 체크
+//		HttpSession session = request.getSession();
+//		MemberVO mvo = (MemberVO) session.getAttribute("member");
 
 		reviewService.reviewWrite(reviewVO);
 

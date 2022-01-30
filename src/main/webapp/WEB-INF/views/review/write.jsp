@@ -14,7 +14,7 @@
 						<textarea name="content" class="content" placeholder="후기를 자유롭게 작성해주세요."></textarea>
 					</div>
 					<div class="input_wrap" style="display: ">
-						<input type="text" name="uid" placeholder="작성자">
+						<input type="hidden" name="uid" value="${member.uid}" placeholder="작성자" readonly>
 					</div>
 					<div class="btn_wrap">
 						<button type="button" class="cancleBtn" onclick="location.href='/review/list'">취소</button>

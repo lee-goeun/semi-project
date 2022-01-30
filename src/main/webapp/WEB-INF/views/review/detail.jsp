@@ -12,15 +12,18 @@
 					<span class="nickImg"></span>
 					<span name="uid" class="nick"><c:out value="${rDetail.nickname}"/></span>
 					<span name="" class="address"><c:out value="${rDetail.address}"/></span>
-
+					
 					<div class="btn_wrap">
-						<div class="writerBtn_wrap">
-							<span class="dropBtn"><i class="fas fa-ellipsis-h"></i></span>
-							<div class="writerBtn" style="display: none;">
-									<button type="button" class="reviseBtn">수정</button>
-									<button type="button" class="deleteBtn">삭제</button>
+						<!-- 로그인한 회원과 게시물 작성자가 동일한 경우 표시 -->
+<%-- 						<c:if test="${member.uid eq rDetail.uid}"> --%>
+							<div class="writerBtn_wrap">
+								<span class="dropBtn"><i class="fas fa-ellipsis-h"></i></span>
+								<div class="writerBtn" style="display: none;">
+										<button type="button" class="reviseBtn">수정</button>
+										<button type="button" class="deleteBtn">삭제</button>
+								</div>
 							</div>
-						</div>
+<%-- 						</c:if> --%>
 						<button type="button" class="listBtn">목록</button>
 					</div>
 				</div>
@@ -41,15 +44,15 @@
 						<li class="replyInfo">
 							<div class="replyNick_wrap">
 								<span class="nickImg"></span>
+								<span class="uid" style="display: none"><c:out value="${listReply.uid}"/></span>
 								<span class="nick"><c:out value="${listReply.nickname}"/>
-									<div class="replyBtn_wrap">
-										<span class="dropBtn"><i class="fas fa-ellipsis-h"></i></span>
-										<div class="replyBtn" style="display: none;">
-											<button type="button" class="replyReviseBtn">수정</button>
-											<button type="button" class="replyDeleteBtn">삭제</button>
-<%-- 											<a href="/review/replyDelete.do?replyId=${listReply.replyId}" class="cancleBtn">삭제</a> --%>
-										</div>
+								<div class="replyBtn_wrap">
+									<span class="dropBtn"><i class="fas fa-ellipsis-h"></i></span>
+									<div class="replyBtn" style="display: none;">
+										<button type="button" class="replyReviseBtn">수정</button>
+										<button type="button" class="replyDeleteBtn">삭제</button>
 									</div>
+								</div>
 								</span>
 								<span class="address"><c:out value="${listReply.address}"/></span>
 								<div class="replyReviseBtn_wrap" style="display:none">
@@ -74,7 +77,8 @@
 				<form id="replyForm" method="post">
 					<div class="replyInput_wrap">
 						<input type="text" name="replyContent" class="replyInput" placeholder="댓글을 입력해주세요.">
-						<input type="text" name="uid" class="replyInputUid" placeholder="작성자">
+						
+						<input type="hidden" name="uid" class="replyInputUid" value="${member.uid}" placeholder="작성자" readyonly>
 						<button class="replyInputBtn">등록</button>
 					</div>
 					
@@ -254,8 +258,12 @@
 	for (let i = 0; i < replyCount.length; i++) {
 		/* 댓글 삭제*/
 		$(".replyDeleteBtn").eq(i).on("click", function() {
-			$(".reviseForm").eq(i).attr("action", "/review/replyDelete.do");
-			$(".reviseForm").eq(i).submit();
+			if (confirm("정말 삭제하시겠습니까?") == true) {
+				$(".reviseForm").eq(i).attr("action", "/review/replyDelete.do");
+				$(".reviseForm").eq(i).submit();
+			} else {
+				return false;
+			}
 		});
 	}
 	
@@ -265,6 +273,18 @@
 			$(".reviseForm").eq(i).attr("action", "/review/replyRevise.do");
 			$(".reviseForm").eq(i).submit();
 		});
+	}
+	
+	/* 게시물 버튼 표시 */
+	if("${member.uid}" != "${rDetail.uid}") {
+			$(".writerBtn_wrap").css("display", "none");
+	}
+	
+	/* 댓글 버튼 표시 */
+	for (let i = 0; i < replyCount.length; i++) {
+		if("${member.uid}" != $("span.uid").eq(i).text()) {
+			$(".replyBtn_wrap").eq(i).css("display", "none");
+		}
 	}
 
 </script>

@@ -58,9 +58,9 @@
                         <when test="type == 'W'.toString()">
                             nickname like concat('%',#{keyword},'%' )
                         </when>
-<!--                         <when test="type == 'A'.toString()"> -->
-<!--                             address like concat('%',#{keyword},'%' ) -->
-<!--                         </when> -->
+                        <when test="type == 'A'.toString()">
+                            address like concat('%',#{keyword},'%' )
+                        </when>
                     </choose>
                 </trim>
             </foreach>
