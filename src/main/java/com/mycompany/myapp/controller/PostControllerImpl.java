@@ -81,10 +81,12 @@ public class PostControllerImpl implements PostController{
 		String image = upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		
+		
 		/*
 		 * MemberVO memberVO = (MemberVO) session.getAttribute("member"); String uid =
 		 * memberVO.getUid();
 		 */
+		 
 		 postMap.put("uid", "test");
 		 postMap.put("image", image);
 		 
@@ -136,17 +138,33 @@ public class PostControllerImpl implements PostController{
 	}
 	
 	//포스트 상세 조회(수정용)_페이지가 다름
-		@Override
-		@RequestMapping(value="/viewPost1", method=RequestMethod.GET)
-		public ModelAndView viewPost1(int postId, HttpServletRequest request, HttpServletResponse response)
-				throws Exception {
-			String viewName = (String)request.getAttribute("viewName");
-			postVO = postService.viewPost(postId);
-			ModelAndView mav = new ModelAndView();
-			mav.setViewName(viewName);
-			mav.addObject("post",postVO);
-			return mav;
-		}
+	@Override
+	@RequestMapping(value="/viewPost1", method=RequestMethod.GET)
+	public ModelAndView viewPost1(int postId, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		postVO = postService.viewPost(postId);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		mav.addObject("post",postVO);
+		return mav;
+	}
+		
+	//채팅 참여
+	@RequestMapping(value="/chat", method=RequestMethod.GET)
+	public ModelAndView process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String viewName = (String)request.getAttribute("viewName");
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName(viewName);
+		
+		/*
+		 * HttpSession session = request.getSession(); MemberVO memberVO = (MemberVO)
+		 * session.getAttribute("member"); String uid = memberVO.getUid();
+		 */
+		 
+		mav.addObject("uid", "test");
+		return mav;
+	}
 	
 	//포스트 수정
 	@Override
@@ -212,7 +230,6 @@ public class PostControllerImpl implements PostController{
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		
 		postService.removePost(postId);
-		System.out.println("&&&&&&&&&&&&&&&&&postId " + postId);
 		try {
 			msg = "<script>";
 			msg += " alert('글을 삭제했습니다.');";

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -9,7 +8,7 @@
 %>
 	<div class="pic_area">
          <p id="preview">
-             <img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/>
+             <img src="${contextPath}/download?postId=${post.postId}&image=${post.image}"/>
          </p>
      </div>
      <div class="text_area">
@@ -107,8 +106,10 @@
         	});
         	
         	//채팅
+        	var websocket;
         	$('#btn_join').click(function(){
-                window.open("${contextPath}/post/chat","_blank","width=430,height=700");
+        		var xPos = (document.body.offsetWidth) - 430;
+        		window.open("${contextPath}/post/chat","_blank","width=430,height=700, left=" + xPos +", top=10");
             });
         	
         	

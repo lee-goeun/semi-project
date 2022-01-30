@@ -22,7 +22,7 @@
             <input type="hidden"/>
             <input type="hidden" name="postId" value="${param.postId }"/>
             <p>
-				<img id="preview" src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/>
+				<img id="preview" src="${contextPath}/download?postId=${post.postId}&image=${post.image}"/>
             </p>
         </div>
         <div class="text_area">
