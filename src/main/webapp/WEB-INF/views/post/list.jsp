@@ -11,7 +11,8 @@
 %>
 	<div class="top">
       <div class="time_area">
-           <fmt:formatDate value="${today}" pattern="HH:mm:ss"/>
+      		<span>00</span> : <span>00</span> : <span>00</span>
+         <%--   <fmt:formatDate value="${today}" pattern="HH:mm:ss"/> --%>
       </div>
       <div class="search_area">
      	<form action="${contextPath}/post/list" method="get">
@@ -27,7 +28,7 @@
      	</form>
       </div>
       <div class="stt_area">
-          <input type="button" value="음성으로 말해요"/>
+          <input type="button" value="음성으로 찾아요"/>
       </div>
   </div>
   <div class="tab">
@@ -68,6 +69,29 @@
   </div>
 <script type="text/javascript">
    $(document).ready(function(){
+	   //시계
+	   var timer = setInterval(function(){
+		  var now = new Date(); 
+		  
+		  var hr = now.getHours();
+		  var min = now.getMinutes();
+		  var sec = now.getSeconds();
+		  
+		  $('.time_area').find('span').eq(0).text(hr);
+		  $('.time_area').find('span').eq(1).text(min);
+		  $('.time_area').find('span').eq(2).text(sec);
+		  
+		  if(hr<10){
+			  $('.time_area').find('span').eq(0).text("0"+hr);
+		  }
+		  if(min<10){
+			  $('.time_area').find('span').eq(1).text("0"+min);
+		  }
+		  if(sec<10){
+			  $('.time_area').find('span').eq(2).text("0"+sec);
+		  }
+	   },1000);
+	   
 	//   $('.tab').find('ul').find('li').eq(0).addClass('selected');
 	   $('form').submit(function(){
 		   var title = $('#title').val();

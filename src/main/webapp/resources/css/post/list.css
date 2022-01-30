@@ -1,6 +1,6 @@
 @charset "UTF-8";
 section{width:85%; margin:0 auto;}
-       section .top{margin:0 auto; width:980px; height:50px;}
+       section .top{margin:0 auto; width:1010px; height:50px;}
         .time_area{float:left; font-size:26px; line-height:50px; margin-right:10px;}
         .search_area{float:left; width:720px; height:50x; border-radius:10px; margin-right:10px; border:1px solid #eee;}
         .search_area fieldset{height:50px; line-height:50px; text-indent: 5px;}
