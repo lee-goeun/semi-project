@@ -200,7 +200,7 @@ public class PostControllerImpl implements PostController{
 	
 	//포스트 삭제
 	@Override
-	@RequestMapping(value="/removePost", method=RequestMethod.GET)
+	@RequestMapping(value="/removePost", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity removePost(@RequestParam("postId") int postId, 
 			HttpServletRequest request, HttpServletResponse response)
@@ -211,17 +211,19 @@ public class PostControllerImpl implements PostController{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		
+		postService.removePost(postId);
+		System.out.println("&&&&&&&&&&&&&&&&&postId " + postId);
 		try {
-			postService.removePost(postId);
-			
 			msg = "<script>";
 			msg += " alert('글을 삭제했습니다.');";
 			msg += " location.href='" + request.getContextPath() + "/post/list';";
+			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
 			msg = "<script>";
 			msg += " alert('작업 중 오류가 발생했습니다. 다시 시도해주세요.');";
 			msg += " location.href='" + request.getContextPath() + "/post/list';";
+			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		}
 		return resEnt;

@@ -59,11 +59,28 @@
          </div>
          <div class="btn_area">
          	 <a href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
-         	 <a id="btn_delete" href="${contextPath}/post/removePost?postId=${param.postId}">삭제하기</a>
+         	 <a id="btn_delete" onclick="deletePost('${contextPath}/post/removePost', ${param.postId})">삭제하기</a>
          	 <a href="">참여하기</a>
          </div>
      </div>
 	    <script type="text/javascript">
+	    
+	    //포스트삭제 post형식으로 보내기 
+	    //	(TODO : jqury형식이나 html에서 해결하는 방법 알아보기)
+	    function deletePost(url, postId){
+	    	var form = document.createElement("form");
+	    	form.setAttribute("method", "post");
+	    	form.setAttribute("action", url);
+	    	var postIdInput = document.createElement("input");
+	    	postIdInput.setAttribute("type","hidden");
+	    	postIdInput.setAttribute("name","postId");
+	    	postIdInput.setAttribute("value",postId);
+	    	
+	    	form.appendChild(postIdInput);
+	    	document.body.appendChild(form);
+	    	form.submit();
+	    	
+	    }
         $(document).ready(function(){
         	//음식값, 배달료, 총금액 계산하기
         	var maxMember = parseInt(${post.maxMember});
@@ -87,7 +104,6 @@
         			return false;
         		}
         	});
-        	
         	
         	
             $(".text_area").find('.person_area').find('div').eq(0).css({

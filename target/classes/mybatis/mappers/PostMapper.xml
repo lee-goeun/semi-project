@@ -25,10 +25,9 @@
 
 <!-- 포스트 조회(+검색) -->
 	<select id="selectAllPostsList" resultMap="postResult" parameterType="com.mycompany.myapp.vo.PostVO">
-		SELECT * FROM gatherTbl
-		<where>
+		SELECT * FROM gatherTbl where isDeleted = 0
 			<if test="isTogether != null and isTogether !=''">
-				isTogether = #{isTogether}
+				or isTogether = #{isTogether}
 			</if>
 			<if test="title != null and title != ''">
 				or title LIKE CONCAT('%', #{title}, '%')
@@ -36,7 +35,7 @@
 			<if test="category != null and category !=''">
 				or category LIKE CONCAT('%', #{category}, '%')
 			</if>
-		</where>
+			
 		ORDER BY deadline DESC
 	</select>
 	

@@ -9,8 +9,8 @@
  <a class="img_wrap" href="${contextPath}/post/list"><img src="${contextPath}/resources/image/logo.png"/></a>
 <nav>
     <ul>
-        <li><a href="#none">모집게시판</a></li>
-        <li><a href="#none">후기게시판</a></li>
+        <li><a href="${contextPath}/post/list" <c:if test=""></c:if>>모집게시판</a></li>
+        <li><a href="${contextPath}/review/list" <c:if test=""></c:if>>후기게시판</a></li>
     </ul>
 </nav>
 <div class="text_wrap">
