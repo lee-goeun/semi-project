@@ -32,9 +32,9 @@
   </div>
   <div class="tab">
       <ul>
-          <li class="selected"><a href="#none">전체보기</a></li>
-          <li><a href="#none">같이 먹어요</a></li>
-          <li><a href="#none">따로 먹어요</a></li>
+          <li <c:if test="${param.isTogether == null}">class="selected"</c:if>><a href="${contextPath}/post/list">전체보기</a></li>
+          <li <c:if test="${param.isTogether == 1}">class="selected"</c:if>><a href="${contextPath}/post/list?isTogether=1">같이 먹어요</a></li>
+          <li <c:if test="${param.isTogether == 0}">class="selected"</c:if>><a href="${contextPath}/post/list?isTogether=0">따로 먹어요</a></li>
       </ul>
   </div>
   <div class="content">
@@ -68,11 +68,17 @@
   </div>
 <script type="text/javascript">
    $(document).ready(function(){
+	//   $('.tab').find('ul').find('li').eq(0).addClass('selected');
 	   $('form').submit(function(){
 		   var title = $('#title').val();
 		   $('#category').val(title);
 	   });
-	   
+	  	
+	   $('.tab').find('ul').find('li').on('click', function(){
+		   $.ajax({
+			   
+		   })
+	   });
 	   
        
        $(".search_area").find('.search_btn').find('button').css({

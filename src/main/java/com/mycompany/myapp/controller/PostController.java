@@ -21,6 +21,9 @@ public interface PostController {
 	//포스트상세조회
 	public ModelAndView viewPost(@RequestParam("postId") int postId, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
+	//포스트 수정페이지로 진입
+	public ModelAndView viewPost1(@RequestParam("postId") int postId, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	//포스트수정
 	public ResponseEntity modPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	

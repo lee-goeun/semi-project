@@ -135,9 +135,22 @@ public class PostControllerImpl implements PostController{
 		return mav;
 	}
 	
+	//포스트 상세 조회(수정용)_페이지가 다름
+		@Override
+		@RequestMapping(value="/viewPost1", method=RequestMethod.GET)
+		public ModelAndView viewPost1(int postId, HttpServletRequest request, HttpServletResponse response)
+				throws Exception {
+			String viewName = (String)request.getAttribute("viewName");
+			postVO = postService.viewPost(postId);
+			ModelAndView mav = new ModelAndView();
+			mav.setViewName(viewName);
+			mav.addObject("post",postVO);
+			return mav;
+		}
+	
 	//포스트 수정
 	@Override
-	@RequestMapping(value="/modPost", method=RequestMethod.POST)
+	@RequestMapping(value="/modify", method=RequestMethod.POST)
 	public ResponseEntity modPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
@@ -147,11 +160,15 @@ public class PostControllerImpl implements PostController{
 			String name = (String)enu.nextElement();
 			String value = multipartRequest.getParameter(name);
 			postMap.put(name, value);
+			
 		}
 		String image = upload(multipartRequest);
 		postMap.put("image", image);
 		
-		int postId = (int)postMap.get("postId"); 
+		postMap.put("uid", "test");
+		
+		String postId = (String)postMap.get("postId"); 
+		
 		String msg;
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
@@ -159,10 +176,8 @@ public class PostControllerImpl implements PostController{
 		try {
 			postService.modPost(postMap);
 			if(image != null && image.length() !=0) {
-				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + image);
-				File destDir = new File(POST_IMAGE_REPO + "\\" + "temp" + postId);
-				FileUtils.moveFileToDirectory(srcFile, destDir, true);
-				
+				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+				File destDir = new File(POST_IMAGE_REPO + "\\" +  postId);
 				String originalFileName = (String)postMap.get("originalFileName");
 				File oldFile = new File(POST_IMAGE_REPO + "\\" + postId + "\\" + originalFileName);
 				oldFile.delete();
@@ -196,17 +211,19 @@ public class PostControllerImpl implements PostController{
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=UTF-8");
 		
+		postService.removePost(postId);
+		System.out.println("&&&&&&&&&&&&&&&&&postId " + postId);
 		try {
-			postService.removePost(postId);
-			
 			msg = "<script>";
 			msg += " alert('글을 삭제했습니다.');";
 			msg += " location.href='" + request.getContextPath() + "/post/list';";
+			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {
 			msg = "<script>";
 			msg += " alert('작업 중 오류가 발생했습니다. 다시 시도해주세요.');";
 			msg += " location.href='" + request.getContextPath() + "/post/list';";
+			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		}
 		return resEnt;

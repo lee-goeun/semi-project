@@ -47,6 +47,7 @@ public class PostServiceImpl implements PostService{
 	//포스트 수정
 	@Override
 	public void modPost(Map postMap) throws Exception {
+		
 		postDAO.updatePost(postMap);
 	}
 	

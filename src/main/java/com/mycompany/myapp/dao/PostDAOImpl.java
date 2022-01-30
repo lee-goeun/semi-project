@@ -47,7 +47,7 @@ public class PostDAOImpl implements PostDAO{
 	//포스트 삭제
 	@Override
 	public void deletePost(int postId) throws DataAccessException {
-		sqlSession.delete("mapper.post.deletePost", postId);
+		sqlSession.update("mapper.post.deletePost", postId);
 	}
 
 }
