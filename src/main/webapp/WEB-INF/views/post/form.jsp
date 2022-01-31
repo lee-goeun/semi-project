@@ -53,9 +53,10 @@
                 <label class="deadline" for="deadline">모집시간</label>
                 <input type="time" id="time" placeholder="모집시간"/>
                 <input type="hidden" name="deadline" value="" id="deadline"/>
-                <script type="text/javascript">
-                	 
-                </script>
+            </div>
+            <div>
+                <label class="content" for="content">음식명</label>
+                <input type="text" name="content" id="content" placeholder="음식명"/>
             </div>
             <div>
                 <label class="price" for="price">음식금액</label>
@@ -70,48 +71,56 @@
 </form>
 <script type="text/javascript">
     $(document).ready(function(){
+     var preview = "";
     	$('form').submit(function(){
+    	
     		//유효성 체크
-    		if($('.category').val() == ''){
+    		if($('#category').val() == 'all'){
     			alert('카테고리 선택은 필수입니다.');
     			return false;
     		}
-    		if($('.title').val() == ''){
+    		if($('#title').val() == ''){
     			alert('제목 입력은 필수입니다.');
     			return false;
     		}
-    		if($('.maxMember').val() == ''){
+    		if($('#maxMember').val() == ''){
     			alert('모집인원 입력은 필수입니다.');
     			return false;
     		}
-    		if($('.time').val() == ''){
+    		if($('#time').val() == ''){
     			alert('모집시간 입력은 필수입니다.');
     			return false;
     		}
-    		if($('.price').val() == ''){
+    		if($('#content').val() == ''){
+    			alert('음식명 입력은 필수입니다.');
+    			return false;
+    		}
+    		if($('#price').val() == ''){
     			alert('음식금액 입력은 필수입니다.');
     			return false;
     		}
-    		if($('.deliveryFee').val() == ''){
+    		if($('#deliveryFee').val() == ''){
     			alert('배달료 입력은 필수입니다.');
     			return false;
     		}
-    		
-    		
+    	
     		//deadline 날짜 + 시간 형식으로 보내기 
     		var curDate = new Date();
     		var nowDate = curDate.getFullYear() + "-" + curDate.getMonth()+1 + "-" + curDate.getDate();
     		
       		var time = $('#time').val();
-      		var test = nowDate + " " + time;
-      		alert(typeof test);
-      		alert(typeof $('#deliveryFee').val());
-      		console.log("newDAte", typeof test);
-          	$('#deadline').val(test);
+      		var fullDate = nowDate + " " + time;
+      		alert(time);
+          	$('#deadline').val(fullDate);
+          	
+          /* 	if($('#image').val() == ''){
+    			$('#image').val(preview+".jpg");
+    		}  */
     	});
     	
     	$('#category').on('change', function(){
     		$('#preview').attr('src', '${contextPath}/resources/image/' + this.value +'.jpg');
+    		preview = this.value;
     	});
     	 
      	$("form").find(".pic_area").find("#preview").css({

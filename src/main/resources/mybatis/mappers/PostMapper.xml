@@ -42,8 +42,8 @@
 <!-- 포스트 추가 -->
 <insert id="insertNewPost" parameterType="java.util.Map">
 	<![CDATA[
-			INSERT into gatherTbl(uid, category, isTogether, title, price, maxMember, deadline, deliveryFee, image) VALUES	
-			(#{uid}, #{category}, #{isTogether},#{title},#{price},#{maxMember},#{deadline},#{deliveryFee},#{image})
+			INSERT into gatherTbl(uid, category, isTogether, title, price, maxMember, deadline, deliveryFee, image, content) VALUES	
+			(#{uid}, #{category}, #{isTogether},#{title},#{price},#{maxMember},#{deadline},#{deliveryFee},#{image}, #{content})
 		]]>
 </insert>
 

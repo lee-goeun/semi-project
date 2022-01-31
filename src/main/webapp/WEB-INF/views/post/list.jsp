@@ -6,7 +6,11 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
-%>
+%>	
+	<div id="addr_area" onclick="execPostCode();">
+		<input name="address" value="동성구 봉명동" id="post_addr" type="text" readonly="readonly"/>
+		<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png'/>
+	</div>
 	<div class="top">
       <div class="time_area">
       		<span>00</span> : <span>00</span> : <span>00</span>
@@ -53,10 +57,11 @@
                		<a href="${contextPath}/post/viewPost?postId=${post.postId}">
                			<div class="item_img"><img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/></div> 
               				<div>
-                				<p class="name">${post.title}</p>
+                				<p class="name">${post.title} </p>
                   				<p class="location"><span>유성구 봉명동</span></p>
                  				<p class="maxMember"><span>1/${post.maxMember }</span></p>
-                  				<p class="deadline">마감시간 : <span><fmt:formatDate value="${post.deadline}" pattern="hh:mm"/></span></p>
+                  				<p class="deadline">마감시간 : <span><fmt:formatDate value="${post.deadline}" pattern="HH:mm"/></span></p>
+                  				
                 			</div>
                		</a>
                	</li>
@@ -65,7 +70,15 @@
           </c:choose>
       </ul>
   </div>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+	function execPostCode() {
+	    new daum.Postcode({
+	        oncomplete: function(data) {
+	           $("#post_addr").val(data.roadAddress);
+	       }
+	    }).open();
+	}
 	//마이크
 	const record = document.getElementById("record");
 	const stop = document.getElementById("stop");
@@ -73,62 +86,67 @@
 	const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 	const analyser = audioCtx.createAnalyser();
 	
-	if(navigator.mediaDevices){
-		console.log("getUseMedia supported");
-		
-		const constraints = {
-			audio:true
-		}
-		let chunks = [];
-		
-		navigator.mediaDevices.getUserMedia(constraints) //promise
-			.then(stream => {
-				//스트림 사용
-				const mediaRecorder = new MediaRecorder(stream);
-				record.onclick = () => {
-					mediaRecorder.start();
-					console.log(mediaRecorder.state);
-					console.log("recorder started");
-					record.style.backgroundColor = "#FF5555";
-				}
-				
-				stop.onclick = () => {
-					mediaRecorder.stop();
-					console.log(mediaRecorder.state);
-					console.log("recorder stopped");
-					record.style.backgroundColor = "#E1E1E1";
-				}
-				
-				mediaRecorder.onstop = e => {
-					const blob = new Blob(chunks, {
-						'type' : 'audio/ogg codecs=opus'
-					});
-					
-					//file upload
-					let formdata = new FormData();
-					formdata.append("fname", "audio.webm");
-					formdata.append("data", blob);
-					
-					let xhr = new XMLHttpRequest();
-					xhr.onload = () => {
-						if(xhr.status === 200){
-							console.log("response : " + xhr.response);
-							title.value = xhr.response;
-						}
-					}
-					console.log('upload');
-					xhr.open("POST", "mic", true);
-					xhr.send(formdata);
-				}
-				
-				mediaRecorder.ondataavailable = e => {
-					chunks.push(e.data)
-				}
-			})
-			.catch(err => {
-				console.log("The following error occurred: " + err)
-			})
-	}
+	if (navigator.mediaDevices) {
+        console.log('getUserMedia supported.')
+
+        const constraints = {
+        	//오디오를 요청한다.
+            audio: true
+        }
+        let chunks = [];
+
+        //비동기 처리
+        navigator.mediaDevices.getUserMedia(constraints) //promise
+            .then(stream => {
+            	//스트림 사용
+                const mediaRecorder = new MediaRecorder(stream);             
+                record.onclick = () => {
+                    mediaRecorder.start();
+                    console.log(mediaRecorder.state);
+                    console.log("recorder started");
+                    record.style.backgroundColor = "#FF5555";
+                }
+
+                stop.onclick = () => {
+                    mediaRecorder.stop();
+                    console.log(mediaRecorder.state);
+                    console.log("recorder stopped");
+                    record.style.backgroundColor = "#e1e1e1";
+                }
+
+                mediaRecorder.onstop = e => {
+                	const blob = new Blob(chunks, {
+                        'type': 'audio/ogg codecs=opus'
+                    });
+                	
+                	//file upload
+                    let formdata = new FormData();
+                    formdata.append("fname", "audio.webm");
+                    formdata.append("data", blob);
+                    
+
+                    let xhr = new XMLHttpRequest();
+                    xhr.onload = () => {
+                     	if (xhr.status === 200) {// HTTP가 잘 동작되었다는 뜻.
+                        	console.log("response:"+xhr.response);
+                        	title.value=xhr.response;       
+                    	}                 
+                    	
+                    }
+                    console.log('upload');
+                    xhr.open("POST", "mic", true);
+                    xhr.send(formdata);
+                }
+
+                mediaRecorder.ondataavailable = e => {
+                    chunks.push(e.data)
+                }
+            })
+            .catch(err => {
+            	// 오류 처리
+                console.log('The following error occurred: ' + err)
+            })
+    }
 	
    $(document).ready(function(){
 	   //시계

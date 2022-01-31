@@ -1,6 +1,6 @@
 package com.mycompany.myapp.vo;
 
-import java.util.Date;
+import java.sql.Date;
 
 import org.springframework.stereotype.Component;
 

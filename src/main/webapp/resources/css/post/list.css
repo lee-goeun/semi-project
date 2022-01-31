@@ -1,5 +1,8 @@
 @charset "UTF-8";
 section{width:85%; margin:0 auto;}
+		#addr_area{cursor:pointer; position:absolute; top:90px; left:50%; height:22px; line-height:22px; transform:translateX(-50%);}
+		#post_addr{font-size:12px; cursor:pointer;}
+		
        section .top{margin:0 auto; width:1010px; height:50px;}
         .time_area{float:left; font-size:26px; line-height:50px; margin-right:10px;}
         .search_area{float:left; width:720px; height:50x; border-radius:10px; margin-right:10px; border:1px solid #eee;}

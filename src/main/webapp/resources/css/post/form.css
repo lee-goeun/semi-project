@@ -1,7 +1,7 @@
 @charset "UTF-8";
 section{width:80%; margin:0 auto;}
         .page_name{font-size:28px;}
-        form .submit_btn #btn{width:100px; height:50px; line-height:50px; margin-bottom:20px; background-color: #E1E1E1; border-radius: 10px; float:right;}
+        form .submit_btn #btn{width:100px; height:50px; line-height:50px; margin-bottom:40px; background-color: #E1E1E1; border-radius: 10px; float:right;}
         form label{width:0; height:0;  display:none;}
         form .pic_area{position:relative; float:left; width:40%; margin-top:40px;}
         form .pic_area label{
@@ -13,11 +13,11 @@ section{width:80%; margin:0 auto;}
            background-position:center center; border:2px solid #ccc; border-radius:10px; }
 
         form .text_area{float:left; width:60%;}
-        form .text_area div{width:100%; height:60px;  border-bottom:1px solid #ccc;}
+        form .text_area div{width:100%; height:50px;  border-bottom:1px solid #ccc;}
         form .text_area select{width:100%; height:100%; font-size:20px; border-top:1px solid #ccc;}
         
-        form div input{width:100%; height:60px; line-height:60px; font-size: 20px;}
+        form div input{width:100%; height:50px; line-height:50px; font-size: 18px;}
 
-        form .text_area div:nth-child(2) label{margin-right:100px; display:block; float:left; width:100px; height:100%; line-height:60px; }
-        form .text_area div:nth-child(2) input{margin:0 10px 0 90px; display:block; float:left; width:40px; height:100%;}
+        form .text_area div:nth-child(2) label{margin-right:100px; display:block; float:left; width:100px; height:100%; line-height:50px; }
+        form .text_area div:nth-child(2) input{margin:0 10px 0 90px; display:block; float:left; width:30px; height:100%;}
         form textarea{width:100%; height:200px; border:none; font-size:20px;}

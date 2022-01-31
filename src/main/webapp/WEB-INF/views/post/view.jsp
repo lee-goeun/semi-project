@@ -16,7 +16,9 @@
              <div>
              </div>
              <div>
-                 <p class="uid"></p>
+                 <p class="uid">
+                 	<%-- ${post.uid } --%>
+                 </p>
                  <p class="addr">유성구 봉명동</p>
              </div>
          </div>
@@ -25,7 +27,12 @@
          </div>
          <div>
              <p class="isTogether">
-             	<%-- ${post.isTogether } --%>
+             	<%--  <c:if test="${post.isTogether}">
+             		같이 먹어요
+             	</c:if>
+				<c:if test="!${post.isTogether }">
+					따로 먹어요
+				</c:if>  --%>
              </p>
          </div>
          <div class="gather_area">
@@ -35,19 +42,19 @@
          <div>
              <span>요금을 확인해주세요</span>
              <div>
-                 <p class="grey left">포테킹 후라이드 금액</p>
-                 <p class="grey right">${post.price}원</p>
+                 <p class="grey left">${post.content} 금액</p>
+                 <p class="grey right"><fmt:formatNumber value="${post.price }" type="number"/>원</p>
              </div>
              <div>
-                 <p class="left">본인 몫(1/${post.maxMember})포테킹 후라이드 금액</p>
+                 <p class="left">본인 몫(1/${post.maxMember}) ${post.content} 금액</p>
                  <p class="right"><span class="myprice"></span>원</p>
              </div>
              <div>
                  <p class="grey left">배달이용료 금액</p>
-                 <p class="grey right">${post.deliveryFee}원</p>
+                 <p class="grey right"><fmt:formatNumber value="${post.deliveryFee }" type="number"/>원</p>
              </div>
              <div>
-                 <p class="left">본인 몫(1/${post.maxMember})배달이용료 금액</p>
+                 <p class="left">본인 몫(1/${post.maxMember}) 배달이용료 금액</p>
                  <p class="right"><span class="mydeliveryFee"></span>원</p>
              </div>
              
@@ -67,6 +74,11 @@
 	    //포스트삭제 post형식으로 보내기 
 	    //	(TODO : jqury형식이나 html에서 해결하는 방법 알아보기)
 	    function deletePost(url, postId){
+	    	var cnfrm = confirm("정말 삭제하시겠습니까?");
+	    	if(!cnfrm){
+	    		return false;
+	    	}
+	    	
 	    	var form = document.createElement("form");
 	    	form.setAttribute("method", "post");
 	    	form.setAttribute("action", url);
@@ -78,32 +90,29 @@
 	    	form.appendChild(postIdInput);
 	    	document.body.appendChild(form);
 	    	form.submit();
-	    	
 	    }
+	    
+	  	//천단위 콤마
+	    function addComma(value){
+	    	value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+	    	return value;
+	    }
+	    
         $(document).ready(function(){
+        	
         	//음식값, 배달료, 총금액 계산하기
         	var maxMember = parseInt(${post.maxMember});
         	var price = parseInt(${post.price});
         	var deliveryFee = parseInt(${post.deliveryFee});
         	
-        	$('.myprice').text(price/maxMember);
+        	var myprice = parseInt(price/maxMember);
+        	var mydeliveryFee = parseInt(deliveryFee/maxMember);
+        	
+        	$('.myprice').text(myprice);
         	$('.mydeliveryFee').text(deliveryFee/maxMember);
         	
-        	var myprice = parseInt($('.myprice').text());
-        	var mydeliveryFee = parseInt($('.mydeliveryFee').text());
+        	
         	$('.total').text(myprice + mydeliveryFee);
-        	
-        	$('.modify').click(function(){
-        		
-        	});
-        	
-        	//삭제
-        	$('#btn_delete').click(function(){
-        		var cnfrm = confirm("정말 삭제하시겠습니까?");
-        		if(!cnfrm){
-        			return false;
-        		}
-        	});
         	
         	//채팅
         	var websocket;
