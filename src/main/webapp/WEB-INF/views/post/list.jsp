@@ -54,17 +54,22 @@
               <c:otherwise>
                   <c:forEach var="post" items="${postsList}" varStatus="postNum">
                    <li>
-               		<a href="${contextPath}/post/viewPost?postId=${post.postId}">
-               			<div class="item_img"><img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/></div> 
-              				<div>
-                				<p class="name">${post.title} </p>
-                  				<p class="location"><span>유성구 봉명동</span></p>
-                 				<p class="maxMember"><span>1/${post.maxMember }</span></p>
-                  				<p class="deadline">마감시간 : <span><fmt:formatDate value="${post.deadline}" pattern="HH:mm"/></span></p>
-                  				
-                			</div>
-               		</a>
-               	</li>
+	               		<a href="${contextPath}/post/viewPost?postId=${post.postId}">
+	               			<div class="item_img"><img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/></div> 
+	             			<div>
+	               				<p class="name">${post.title} </p>
+	                			<p class="location"><span>유성구 봉명동</span></p>
+	               				<p class="maxMember"><span>1/${post.maxMember }</span></p>
+	                			<p class="deadline">마감시간 : <span><fmt:formatDate value="${post.deadline}" pattern="HH:mm"/></span></p>
+	               			</div>
+	               		</a>
+	               		<div class="closed">
+	               			<p>치킨행 열차 마감</p>
+	               		</div>
+	               		<div class="leave_soon">
+	               			출발<br/>임박
+	               		</div>
+               		</li>
                   </c:forEach>
               </c:otherwise>
           </c:choose>
@@ -72,6 +77,7 @@
   </div>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+	//주소검색
 	function execPostCode() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
@@ -79,6 +85,7 @@
 	       }
 	    }).open();
 	}
+	
 	//마이크
 	const record = document.getElementById("record");
 	const stop = document.getElementById("stop");
