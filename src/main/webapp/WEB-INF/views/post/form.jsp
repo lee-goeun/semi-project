@@ -26,7 +26,7 @@
         <div class="text_area">
             <div>
                 <label class="category" for="category">카테고리</label>
-                <select name="category">
+                <select name="category" id="category">
                     <option value="all" selected="selected">카테고리</option>
                     <option value="pizza">피자</option>
                     <option value="chicken">치킨</option>
@@ -110,7 +110,9 @@
           	$('#deadline').val(test);
     	});
     	
-    	
+    	$('#category').on('change', function(){
+    		$('#preview').attr('src', '${contextPath}/resources/image/' + this.value +'.jpg');
+    	});
     	 
      	$("form").find(".pic_area").find("#preview").css({
          	"backgroundImage":"url('${contextPath}/resources/image/outline_photo_camera_black_24dp.png')"
