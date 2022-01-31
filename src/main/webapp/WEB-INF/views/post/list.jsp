@@ -3,8 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set var="today" value="<%=new java.util.Date()%>" />
 
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -12,7 +10,6 @@
 	<div class="top">
       <div class="time_area">
       		<span>00</span> : <span>00</span> : <span>00</span>
-         <%--   <fmt:formatDate value="${today}" pattern="HH:mm:ss"/> --%>
       </div>
       <div class="search_area">
      	<form action="${contextPath}/post/list" method="get">
@@ -27,8 +24,9 @@
          </fieldset>
      	</form>
       </div>
-      <div class="stt_area">
-          <input type="button" value="음성으로 찾아요"/>
+      <div class="stt_area">	
+      		<button id="record"></button>
+      		<button id="stop"></button>
       </div>
   </div>
   <div class="tab">
@@ -68,6 +66,70 @@
       </ul>
   </div>
 <script type="text/javascript">
+	//마이크
+	const record = document.getElementById("record");
+	const stop = document.getElementById("stop");
+	const title = document.getElementById("title");
+	const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+	const analyser = audioCtx.createAnalyser();
+	
+	if(navigator.mediaDevices){
+		console.log("getUseMedia supported");
+		
+		const constraints = {
+			audio:true
+		}
+		let chunks = [];
+		
+		navigator.mediaDevices.getUserMedia(constraints) //promise
+			.then(stream => {
+				//스트림 사용
+				const mediaRecorder = new MediaRecorder(stream);
+				record.onclick = () => {
+					mediaRecorder.start();
+					console.log(mediaRecorder.state);
+					console.log("recorder started");
+					record.style.backgroundColor = "#FF5555";
+				}
+				
+				stop.onclick = () => {
+					mediaRecorder.stop();
+					console.log(mediaRecorder.state);
+					console.log("recorder stopped");
+					record.style.backgroundColor = "#E1E1E1";
+				}
+				
+				mediaRecorder.onstop = e => {
+					const blob = new Blob(chunks, {
+						'type' : 'audio/ogg codecs=opus'
+					});
+					
+					//file upload
+					let formdata = new FormData();
+					formdata.append("fname", "audio.webm");
+					formdata.append("data", blob);
+					
+					let xhr = new XMLHttpRequest();
+					xhr.onload = () => {
+						if(xhr.status === 200){
+							console.log("response : " + xhr.response);
+							title.value = xhr.response;
+						}
+					}
+					console.log('upload');
+					xhr.open("POST", "mic", true);
+					xhr.send(formdata);
+				}
+				
+				mediaRecorder.ondataavailable = e => {
+					chunks.push(e.data)
+				}
+			})
+			.catch(err => {
+				console.log("The following error occurred: " + err)
+			})
+	}
+	
    $(document).ready(function(){
 	   //시계
 	   var timer = setInterval(function(){
@@ -92,21 +154,23 @@
 		  }
 	   },1000);
 	   
-	//   $('.tab').find('ul').find('li').eq(0).addClass('selected');
+	   //전송
 	   $('form').submit(function(){
 		   var title = $('#title').val();
 		   $('#category').val(title);
 	   });
-	  	
-	   $('.tab').find('ul').find('li').on('click', function(){
-		   $.ajax({
-			   
-		   })
-	   });
 	   
-       
+       //css
        $(".search_area").find('.search_btn').find('button').css({
        	"backgroundImage":"url('${contextPath}/resources/image/outline_search_white_24dp.png')"
+       });
+       
+       $("#record").css({
+       	"backgroundImage":"url('${contextPath}/resources/image/outline_mic_white_24dp.png')"
+       });
+       
+       $("#stop").css({
+       	"backgroundImage":"url('${contextPath}/resources/image/outline_stop_white_24dp.png')"
        });
 
    });

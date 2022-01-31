@@ -35,7 +35,7 @@
             </div>
             <div>
                 
-                <input type="radio" name="isTogether" id="true" value="1"/>
+                <input type="radio" name="isTogether" id="true" value="1" checked/>
                 <label for="true">같이 먹어요</label>
                 <input type="radio" name="isTogether" id="false" value="0"/>
                 <label class="" for="false">따로 먹어요</label>
@@ -71,6 +71,33 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	$('form').submit(function(){
+    		//유효성 체크
+    		if($('.category').val() == ''){
+    			alert('카테고리 선택은 필수입니다.');
+    			return false;
+    		}
+    		if($('.title').val() == ''){
+    			alert('제목 입력은 필수입니다.');
+    			return false;
+    		}
+    		if($('.maxMember').val() == ''){
+    			alert('모집인원 입력은 필수입니다.');
+    			return false;
+    		}
+    		if($('.time').val() == ''){
+    			alert('모집시간 입력은 필수입니다.');
+    			return false;
+    		}
+    		if($('.price').val() == ''){
+    			alert('음식금액 입력은 필수입니다.');
+    			return false;
+    		}
+    		if($('.deliveryFee').val() == ''){
+    			alert('배달료 입력은 필수입니다.');
+    			return false;
+    		}
+    		
+    		
     		//deadline 날짜 + 시간 형식으로 보내기 
     		var curDate = new Date();
     		var nowDate = curDate.getFullYear() + "-" + curDate.getMonth()+1 + "-" + curDate.getDate();
@@ -83,10 +110,7 @@
           	$('#deadline').val(test);
     	});
     	
-    	 $('#btn').click(function(){
-    		 
-    	//	$('form').submit();
-    	}); 
+    	
     	 
      	$("form").find(".pic_area").find("#preview").css({
          	"backgroundImage":"url('${contextPath}/resources/image/outline_photo_camera_black_24dp.png')"

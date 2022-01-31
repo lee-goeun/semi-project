@@ -1,6 +1,13 @@
 package com.mycompany.myapp.controller;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -17,6 +24,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,9 +33,14 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.mycompany.myapp.service.PostService;
 import com.mycompany.myapp.vo.MemberVO;
 import com.mycompany.myapp.vo.PostVO;
+import com.oreilly.servlet.MultipartRequest;
+
+
 
 //http://localhost:8090/post/list
 
@@ -54,6 +67,75 @@ public class PostControllerImpl implements PostController{
 		mav.addObject("postsList",postsList);
 		
 		return mav;
+	}
+	
+	//음성으로 검색
+	@RequestMapping(value="/mic", method=RequestMethod.POST)
+	public void searchToMic(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String clientId = "r5h93jhquq";             
+		String clientSecret = "VMXcbadYPWH5ILKdQ5HXa7PBG8Y8oxHR2QklrgnD";  
+		
+		try {
+			
+			//마이크 시작
+			String saveDirectory = "c:/semi_project/temp";
+			MultipartRequest multi = new MultipartRequest(request, saveDirectory);
+			File voiceFile = multi.getFile("data");
+			//마이크 끝
+			System.out.println("***************0saveDirectory" + saveDirectory);
+			String language = "Kor";
+			String apiURL = "https://naveropenapi.apigw.ntruss.com/recog/v1/stt?lang=" + language;
+			URL url = new URL(apiURL);
+			
+			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+			conn.setUseCaches(false);
+			conn.setDoOutput(true);
+			conn.setDoInput(true);
+			conn.setRequestProperty("Content-Type", "application/octet-stream");
+			conn.setRequestProperty("X-NCP-APIGW-API-KEY-ID", clientId);
+            conn.setRequestProperty("X-NCP-APIGW-API-KEY", clientSecret);
+
+			OutputStream outputStream = conn.getOutputStream();
+			FileInputStream inputStream = new FileInputStream(voiceFile);
+			byte[] buffer = new byte[4096];
+			int bytesRead = -1;
+			int byteRead = -1;
+			while((bytesRead = inputStream.read(buffer)) != -1) {
+				outputStream.write(buffer, 0, bytesRead);
+			}
+			outputStream.flush();
+			inputStream.close();
+			BufferedReader br = null;
+			int responseCode = conn.getResponseCode();
+			if(responseCode == 200) {
+				br = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			}else {
+				System.out.println("error! responseCode= " + responseCode);
+				br = new BufferedReader(new InputStreamReader(conn.getErrorStream()));
+			}
+			String inputLine;
+			
+			if(br != null) {
+				StringBuffer resp = new StringBuffer();
+				while((inputLine = br.readLine()) != null) {
+					resp.append(inputLine);
+				}
+				br.close();
+				System.out.println(resp.toString());
+				
+				//google json 파싱
+				JsonParser parser = new JsonParser();
+				JsonObject jsonObject = (JsonObject) parser.parse(resp.toString());
+				response.setContentType("application/json; charset=utf-8");
+				PrintWriter out = response.getWriter();
+				out.print(jsonObject.get("text").getAsString());
+			}else {
+				System.out.println("error!");
+			}
+			
+		}catch(Exception e) {
+			System.out.println(e);
+		}
 	}
 	
 	
