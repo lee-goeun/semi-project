@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
@@ -60,15 +61,15 @@
 	               				<p class="name">${post.title} </p>
 	                			<p class="location"><span>유성구 봉명동</span></p>
 	               				<p class="maxMember"><span>1/${post.maxMember }</span></p>
-	                			<p class="deadline">마감시간 : <span><fmt:formatDate value="${post.deadline}" pattern="HH:mm"/></span></p>
+	                			<p class="deadline">마감시간 : <span>${post.deadline}</span></p>
 	               			</div>
 	               		</a>
-	               		<div class="closed">
+	               		<!-- <div class="closed">
 	               			<p>치킨행 열차 마감</p>
 	               		</div>
 	               		<div class="leave_soon">
 	               			출발<br/>임박
-	               		</div>
+	               		</div> -->
                		</li>
                   </c:forEach>
               </c:otherwise>
@@ -156,13 +157,14 @@
     }
 	
    $(document).ready(function(){
+	   	
 	   //시계
 	   var timer = setInterval(function(){
-		  var now = new Date(); 
-		  
-		  var hr = now.getHours();
-		  var min = now.getMinutes();
-		  var sec = now.getSeconds();
+		   var now = new Date(); 
+			  
+		  	var hr = now.getHours();
+		 	var min = now.getMinutes();
+		  	var sec = now.getSeconds();
 		  
 		  $('.time_area').find('span').eq(0).text(hr);
 		  $('.time_area').find('span').eq(1).text(min);
@@ -178,6 +180,7 @@
 			  $('.time_area').find('span').eq(2).text("0"+sec);
 		  }
 	   },1000);
+	   
 	   
 	   //전송
 	   $('form').submit(function(){

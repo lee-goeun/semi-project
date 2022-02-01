@@ -18,10 +18,11 @@
         </div>
         <div class="pic_area">
             <label class="image" for="image">사진</label>
-            <input type="file" name="image" id="image" onchange="readURL(this);"/>
             <p>
 				<img id="preview" src="#"/>
             </p>
+            <!-- <input type="hidden" name="image" id="image"/> -->
+           <input type="file" name="image" id="image" onchange="readURL(this);"/>
         </div>
         <div class="text_area">
             <div>
@@ -51,8 +52,8 @@
             
             <div>
                 <label class="deadline" for="deadline">모집시간</label>
-                <input type="time" id="time" placeholder="모집시간"/>
-                <input type="hidden" name="deadline" value="" id="deadline"/>
+                <input type="time" id="deadline" name="deadline" placeholder="모집시간"/>
+                <!-- <input type="hidden" name="deadline" value="" id="deadline"/> -->
             </div>
             <div>
                 <label class="content" for="content">음식명</label>
@@ -72,61 +73,74 @@
 <script type="text/javascript">
     $(document).ready(function(){
      var preview = "";
-    	$('form').submit(function(){
+     
+     $('#category').on('change', function(){
+    	/* $('#image').remove();
+    	$('.pic_area').append(
+    		'<input type="hidden" name="image" id="image"/>'
+    	); */
+ 		$('#preview').attr('src', '${contextPath}/resources/image/' + this.value +'.jpg');
+ 		preview = this.value;
+ 	});
+     
+   	 $('form').submit(function(){
+   	
+   		//유효성 체크
+   		if($('#category').val() == 'all'){
+   			alert('카테고리 선택은 필수입니다.');
+   			return false;
+   		}
+   		if($('#title').val() == ''){
+   			alert('제목 입력은 필수입니다.');
+   			return false;
+   		}
+   		if($('#maxMember').val() == ''){
+   			alert('모집인원 입력은 필수입니다.');
+   			return false;
+   		}
+   		if($('#time').val() == ''){
+   			alert('모집시간 입력은 필수입니다.');
+   			return false;
+   		}
+   		if($('#content').val() == ''){
+   			alert('음식명 입력은 필수입니다.');
+   			return false;
+   		}
+   		if($('#price').val() == ''){
+   			alert('음식금액 입력은 필수입니다.');
+   			return false;
+   		}
+   		if($('#deliveryFee').val() == ''){
+   			alert('배달료 입력은 필수입니다.');
+   			return false;
+   		}
+   	
+   		//deadline 날짜 + 시간 형식으로 보내기 
+   		/* var curDate = new Date();
+   		var nowDate = curDate.getFullYear() + "-" + curDate.getMonth()+1 + "-" + curDate.getDate();
+   		
+   		var time = $('#time').val();
+   		var fullDate = nowDate + " " + time;
+       	$('#deadline').val(fullDate); */
+       /* 	if($('#image').val() == null || $('#image').val() == ''){
+       		$('#image').val($('#preview').attr('src'));
+       	} */
+       	
+       	
+       	
+   	}); 
     	
-    		//유효성 체크
-    		if($('#category').val() == 'all'){
-    			alert('카테고리 선택은 필수입니다.');
-    			return false;
-    		}
-    		if($('#title').val() == ''){
-    			alert('제목 입력은 필수입니다.');
-    			return false;
-    		}
-    		if($('#maxMember').val() == ''){
-    			alert('모집인원 입력은 필수입니다.');
-    			return false;
-    		}
-    		if($('#time').val() == ''){
-    			alert('모집시간 입력은 필수입니다.');
-    			return false;
-    		}
-    		if($('#content').val() == ''){
-    			alert('음식명 입력은 필수입니다.');
-    			return false;
-    		}
-    		if($('#price').val() == ''){
-    			alert('음식금액 입력은 필수입니다.');
-    			return false;
-    		}
-    		if($('#deliveryFee').val() == ''){
-    			alert('배달료 입력은 필수입니다.');
-    			return false;
-    		}
-    	
-    		//deadline 날짜 + 시간 형식으로 보내기 
-    		var curDate = new Date();
-    		var nowDate = curDate.getFullYear() + "-" + curDate.getMonth()+1 + "-" + curDate.getDate();
-    		
-      		var time = $('#time').val();
-      		var fullDate = nowDate + " " + time;
-      		alert(time);
-          	$('#deadline').val(fullDate);
-          	
-          /* 	if($('#image').val() == ''){
-    			$('#image').val(preview+".jpg");
-    		}  */
-    	});
-    	
-    	$('#category').on('change', function(){
-    		$('#preview').attr('src', '${contextPath}/resources/image/' + this.value +'.jpg');
-    		preview = this.value;
-    	});
-    	 
-     	$("form").find(".pic_area").find("#preview").css({
-         	"backgroundImage":"url('${contextPath}/resources/image/outline_photo_camera_black_24dp.png')"
-         });
-     });
+    $("form").find(".pic_area").find("#preview").css({
+        	"backgroundImage":"url('${contextPath}/resources/image/outline_photo_camera_black_24dp.png')"
+        });
+    });
+    
+   /*  $('.image').click(function(){
+    	$('#image').remove();
+    	$('.pic_area').append(
+    		' <input type="file" name="image" id="image" onchange="readURL(this);"/>'
+    	);
+    }); */
      
     //이미지 보여주기
     function readURL(input){

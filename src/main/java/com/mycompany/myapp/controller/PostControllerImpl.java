@@ -144,16 +144,17 @@ public class PostControllerImpl implements PostController{
 			String name =(String)enu.nextElement();
 			String value = multipartRequest.getParameter(name);
 			postMap.put(name,value);
+			System.out.println("****************** " + name + " " + value);
 		}
 		
 		String image = upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
 		
 		
-		/*
-		 * MemberVO memberVO = (MemberVO) session.getAttribute("member"); String uid =
-		 * memberVO.getUid();
-		 */
+		
+		  MemberVO memberVO = (MemberVO) session.getAttribute("member"); 
+		  String uid = memberVO.getUid();
+		 
 		 
 		 postMap.put("uid", "test");
 		 postMap.put("image", image);
@@ -318,6 +319,7 @@ public class PostControllerImpl implements PostController{
 	private String upload(MultipartHttpServletRequest multipartRequest) throws Exception {
 		String image = null;
 		Iterator<String> fileNames = multipartRequest.getFileNames();
+		System.out.println("****************** " + fileNames);
 		
 		while(fileNames.hasNext()) {
 			String fileName = fileNames.next();

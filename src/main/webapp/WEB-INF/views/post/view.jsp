@@ -27,17 +27,17 @@
          </div>
          <div>
              <p class="isTogether">
-             	<%--  <c:if test="${post.isTogether}">
+             <%--   <c:if test="${post.isTogether}">
              		같이 먹어요
              	</c:if>
-				<c:if test="!${post.isTogether }">
+				<c:if test="!${post.isTogether}">
 					따로 먹어요
-				</c:if>  --%>
+				</c:if> --%>  
              </p>
          </div>
          <div class="gather_area">
              <p class="maxMember">모집인원 : 1 / ${post.maxMember }</p>
-             <p class="deadline">모집시간 :&nbsp;<fmt:formatDate value="${post.deadline}" pattern="HH:mm"/></p>
+             <p class="deadline">모집시간 : ${post.deadline}</p>
          </div>
          <div>
              <span>요금을 확인해주세요</span>
@@ -94,8 +94,7 @@
 	    
 	  	//천단위 콤마
 	    function addComma(value){
-	    	value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-	    	return value;
+	    	 return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 	    }
 	    
         $(document).ready(function(){
@@ -108,11 +107,11 @@
         	var myprice = parseInt(price/maxMember);
         	var mydeliveryFee = parseInt(deliveryFee/maxMember);
         	
-        	$('.myprice').text(myprice);
-        	$('.mydeliveryFee').text(deliveryFee/maxMember);
+        	$('.myprice').text(addComma(myprice));
+        	$('.mydeliveryFee').text(addComma(deliveryFee/maxMember));
         	
         	
-        	$('.total').text(myprice + mydeliveryFee);
+        	$('.total').text(addComma(myprice + mydeliveryFee));
         	
         	//채팅
         	var websocket;

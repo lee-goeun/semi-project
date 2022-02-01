@@ -28,9 +28,10 @@
 </div>
 <script type="text/javascript">
 	var websocket;
+	
 	$(document).ready(function(){
 		//웹 소켓 연결
-		websocket = new WebSocket("ws://${contextPath}/post/chatws");
+		websocket = new WebSocket("ws://localhost:8090/post/chatws");
 
 		websocket.onopen = onOpen;
 		websocket.onmessage = onMessage;

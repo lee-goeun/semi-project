@@ -1,6 +1,7 @@
 package com.mycompany.myapp.vo;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 import org.springframework.stereotype.Component;
 
@@ -15,8 +16,8 @@ public class PostVO {
 	private int price;
 	private int deliveryFee;
 	private String category;
-	private Date deadline;
-	private boolean isTogether;
+	private String deadline;
+	private int isTogether;
 	private Date postedDate;
 	private boolean isRevised;
 	private Date revisedDate;
@@ -125,22 +126,22 @@ public class PostVO {
 	}
 
 
-	public Date getDeadline() {
+	public String getDeadline() {
 		return deadline;
 	}
 
 
-	public void setDeadline(Date deadline) {
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 
 
-	public boolean isTogether() {
+	public int isTogether() {
 		return isTogether;
 	}
 
 
-	public void setTogether(boolean isTogether) {
+	public void setTogether(int isTogether) {
 		this.isTogether = isTogether;
 	}
 
