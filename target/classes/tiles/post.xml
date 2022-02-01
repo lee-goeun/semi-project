@@ -21,31 +21,31 @@
 
 	<!-- 메인에 들어갈 거 정의 -->
 	<definition name="/post/list" extends="baseLayout">
-		<put-attribute name="title" value="메인페이지"/>
+		<put-attribute name="title" value="모집 게시판"/>
  		<put-attribute name="css" value="/resources/css/post/list.css"/> 
 		<put-attribute name="body" value="/WEB-INF/views/post/list.jsp"/>
 	</definition>
 	
 	<definition name="/post/form" extends="baseLayout">
-		<put-attribute name="title" value="작성페이지"/>
+		<put-attribute name="title" value="모집 게시판"/>
 		<put-attribute name="css" value="/resources/css/post/form.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/form.jsp"/>
 	</definition>
 	
 	<definition name="/post/viewPost" extends="baseLayout">
-		<put-attribute name="title" value="상세페이지"/>
+		<put-attribute name="title" value="모집 게시판"/>
 		<put-attribute name="css" value="/resources/css/post/view.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/view.jsp"/>
 	</definition>
 	
 	<definition name="/post/viewPost1" extends="baseLayout">
-		<put-attribute name="title" value="수정페이지"/>
+		<put-attribute name="title" value="모집 게시판"/>
 		<put-attribute name="css" value="/resources/css/post/form.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/modify.jsp"/>
 	</definition>
 	
 	<definition name="/post/chat" extends="empty">
-		<put-attribute name="title" value="채팅페이지"/>
+		<put-attribute name="title" value="모집 게시판"/>
 		<put-attribute name="css" value="/resources/css/post/chat.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/chat.jsp"/>
 	</definition>
