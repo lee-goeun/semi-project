@@ -144,7 +144,7 @@ public class MemberController {
 		logger.info("로그아웃 버튼 확인");
 		return "/main";
 		
-		
+		 
 	}
 	
 	// 마이페이지 이동
