@@ -10,12 +10,6 @@
 		<put-attribute name="body" value=""/>
 	</definition>
 	
-	<definition name="/member/home" extends="baseLayout">
-		<put-attribute name="title" value="홈" />
-		<put-attribute name="css" value="/resources/css/home.css"/>
-		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
-	</definition>
-	
 	<definition name="review/list" extends="baseLayout">
 		<put-attribute name="title" value="후기 게시판"/>
 		<put-attribute name="css" value="/resources/css/review/list.css"/>

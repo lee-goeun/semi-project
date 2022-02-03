@@ -20,11 +20,20 @@
 	
 
 	<!-- 메인에 들어갈 거 정의 -->
+	<definition name="/member/home" extends="baseLayout">
+		<put-attribute name="title" value="홈" />
+		<put-attribute name="css" value="/resources/css/home.css"/>
+		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
+	</definition>
+	
+	
 	<definition name="/member/mypage" extends="baseLayout">
 		<put-attribute name="title" value="마이 페이지"/>
  		<put-attribute name="css" value="/resources/css/mypage.css"/> 
 		<put-attribute name="body" value="/WEB-INF/views/member/mypage.jsp"/>
 	</definition>
+	
+	
 
 
 </tiles-definitions>
