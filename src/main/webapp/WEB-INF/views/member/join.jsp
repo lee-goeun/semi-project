@@ -383,8 +383,9 @@ $(document).ready(function() {
 						}
 				
 				
-		if(nickname_check&&id_check&&id_info_check&&pass_check&&pass_info_check&&name_check&&email_check&&addressSpecific_check&&perfect_pass&&phone_check&&phone_check){
-				$("#join_form").attr("action", "/member/join");
+		/* if(nickname_check&&id_check&&id_info_check&&pass_check&&pass_info_check&&name_check&&email_check&&addressSpecific_check&&perfect_pass&&phone_check&&phone_check){ */
+			if(id_check==true){	
+			$("#join_form").attr("action", "/member/join");
 				$("#join_form").submit();
 				}
 			console.log("perfect_pass :" +perfect_pass)
