@@ -10,8 +10,9 @@
 		<put-attribute name="body" value=""/>
 	</definition>
 	
-	<definition name="home" extends="baseLayout">
+	<definition name="/member/home" extends="baseLayout">
 		<put-attribute name="title" value="홈" />
+		<put-attribute name="css" value="/resources/css/home.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
 	

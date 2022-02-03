@@ -63,7 +63,7 @@ public class MemberController {
 
 	
 	//로그인 check 
-	@RequestMapping(value = "/loginchk", method = RequestMethod.POST)
+	@RequestMapping(value = "/home", method = RequestMethod.POST)
 	public String login(MemberVO membervo, HttpServletRequest req, RedirectAttributes rttr) throws Exception {
 		logger.info("로그인 진행중");
 
@@ -79,7 +79,7 @@ public class MemberController {
 		
 			session.setAttribute("member", memberlogin);
 			
-			return "/member/temp";
+			return "/member/home";
 			
 			
 		}

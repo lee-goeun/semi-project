@@ -63,7 +63,7 @@
 $(document).ready(function(){
 	//로그인 버튼
 	$(".login_button").click(function(){
-		$("#login_form").attr("action", "/member/loginchk");
+		$("#login_form").attr("action", "/member/home");
 		$("#login_form").submit();
 		console.log("check")
 	});
