@@ -1,12 +1,217 @@
 @charset "UTF-8";
 
-#join_form{
 
+
+#join_form{
 position: absolute;
-left:50%;
+left:56%;
 top:50%;
 transform :translate(-50%,-50%);
 align-items:center;
+height:900px;
+width: 580px;
+} 
+
+
+*{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
 }
 
+.nickname_check{
+	display: none;
+}
+.id_check{
+	display: none;
+}
+
+.pass_fir_check{
+	display: none;
+}
+
+.pass_check{
+	display: none;
+}
+
+.name_check{
+	display: none;
+}
+
+.email_check{
+	display: none;
+}
+
+.address_check{
+	display: none;
+}
+
+.id_input_re_1{
+		color : green;
+		display : none;
+	}
+/* 중복아이디 존재하는 경우 */
+.id_input_re_2{
+	color : red;
+	display : none;
+}
+
+/* 비밀번호 같음 */
+.typecheck1{
+		color : green;
+		display : none;
+	}
+/* 비밀번호가 다른경우 */
+.typecheck2{
+	color : red;
+	display : none;
+}
+
+
+/* 닉네임 사용 가능*/
+.nick_input_re_1{
+		color : green;
+		display : none;
+	}
+/* 중복닉네임 존재하는 경우 */
+.nick_input_re_2{
+	color : red;
+	display : none;
+}
+
+
+.fir_pass_check_1{
+		color : red;
+		display : none;
+}
+
+.fir_pass_check_2{
+		color : green;
+		display : none;
+}
+
+.nickname_check{color : red;}
+.id_check{color : red;}
+.pass_fir_check{color : red;}
+.pass_check{color : red;}
+.name_check{color : red;}
+.email_check{color : red;}
+.address_check{color : red;}
+
+
+.email_type_check{
+	color : red;
+	display : none;
 	
+}
+
+
+
+/* .type_check_as{
+	display : none;
+} */
+/* 스타일 지정 ~~~~~~~~~~~~~~~*/
+
+
+.logo{
+height:110px;
+width:110px;
+margin-right: 10px;
+}
+
+
+#loginHead{
+     display: flex;
+    justify-content: center;
+}
+
+#loginTitle{
+font-size: 35px;
+font-weight: bold;
+vertical-align: middle;
+margin-right: 250px;
+
+}
+
+#textbox{
+height:26px;
+width:350px;		
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+}
+
+.form-control{
+height:26px;
+width:350px;		
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;	
+	
+}
+
+
+.jj{
+	
+padding-top: 30px;
+	
+}
+
+#phone{
+height:26px;
+width:350px;		
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;	
+}
+
+#phone2{
+height:26px;
+width:350px;		
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+}
+
+
+
+#post{
+line-height: 19px;
+color: #FFFFFF;
+background: #8BE0B0;
+border-radius: 10px;
+border:0px;
+}
+#phoneChk2{
+line-height: 19px;
+color: #FFFFFF;
+background: #8BE0B0;
+border-radius: 10px;
+border:0px;
+	
+}
+#phoneChk{
+line-height: 19px;
+color: #FFFFFF;
+background: #8BE0B0;
+border-radius: 10px;
+border:0px;
+	
+}
+
+/* Rectangle 1 */
+.join_button{
+height: 40px;
+width:300px;
+background: #8BE0B0;
+border-radius: 30px;
+border:0px;
+color: #FFFFFF;
+}
+
+#head_text{
+padding-bottom: 6px;	
+	
+	
+}
+
