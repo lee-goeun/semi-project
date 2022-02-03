@@ -144,15 +144,15 @@ public class MemberController {
 		logger.info("로그아웃 버튼 확인");
 		return "/main";
 		
-		 
+		
 	}
 	
 	// 마이페이지 이동
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public void  mypage(MemberVO membervo) throws Exception {
-		
+	public String  mypage(MemberVO membervo) throws Exception {
+		return "/member/mypage";
+
 	}
-	
 	
 	// 회원정보 수정 버튼
 	@RequestMapping(value="/memberUpdate", method = RequestMethod.POST)

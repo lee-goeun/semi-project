@@ -57,3 +57,67 @@
 	color: red;  
 	display : none;
 }
+
+
+.logo{
+margin-top: 20px;
+width : 100px;
+height:100px;
+float:left
+}
+
+#textbox{
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+width:400px;
+height: 40px;
+margin-bottom: 40px;
+margin-top: 0px;
+float: right;
+	
+}
+
+.all{
+height:800px;
+width:550px;
+position: absolute;
+left:50%;
+top:52%;
+transform :translate(-50%,-50%);
+align-items:center;
+}
+
+.fir_msg{
+  text-align: center;
+  font-size: 26px;
+}
+#btn{
+float:right;
+background: rgba(196, 196, 196, 0.5);
+border-radius: 10px;
+margin-bottom:  30px;
+width: 90px;
+height: 30px;
+font-size: 13px;
+
+}
+
+.middle_type{
+padding-top:40px;
+width:550px;
+height:150px;
+}
+
+.bottom_text{
+align-items:center;
+width:550px;
+height: 40px;
+margin-bottom: 40px;
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+	
+}
+
+

@@ -10,12 +10,12 @@
 
 
   	<select id="memberLogin" resultType="com.mycompany.myapp.vo.MemberVO">
-  	SELECT uid, upass , nickname FROM userTbl WHERE uid=#{uid} AND upass = #{upass} 
+  	SELECT uid, upass , nickname ,address, name, email FROM userTbl WHERE uid=#{uid} AND upass = #{upass} 
   	</select>
   	
   	
   	<update id = "memberUpdate">
-  	UPDATE userTbl SET upass=#{upass},nickname=#{nickname} WHERE uid = #{uid}
+  	UPDATE userTbl SET email=#{email},name=#{name} WHERE uid = #{uid}
 
   	</update>
   	
