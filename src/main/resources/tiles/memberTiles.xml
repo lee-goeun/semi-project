@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<!-- 레이아웃 설정(layout) -->
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout/layout.jsp">
+		<put-attribute name="title" value=""/>
+		<put-attribute name="css" value=""/>
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="body" value=""/>
+	</definition>
+	
+	<!-- 레이아웃 설정(empty) -->
+	<definition name="empty" template="/WEB-INF/views/common/layout/empty.jsp">
+		<put-attribute name="title" value=""/>
+		<put-attribute name="css" value=""/>
+		<put-attribute name="body" value=""/>
+	</definition>
+	
+
+	<!-- 메인에 들어갈 거 정의 -->
+	<definition name="/member/mypage" extends="baseLayout">
+		<put-attribute name="title" value="마이 페이지"/>
+ 		<put-attribute name="css" value="/resources/css/mypage.css"/> 
+		<put-attribute name="body" value="/WEB-INF/views/member/mypage.jsp"/>
+	</definition>
+
+
+</tiles-definitions>

@@ -149,12 +149,10 @@ public class MemberController {
 	
 	// 마이페이지 이동
 	@RequestMapping(value = "/mypage", method = RequestMethod.GET)
-	public String  mypage(MemberVO membervo) throws Exception {
-		return "member/mypage";
-		
-
+	public void  mypage(MemberVO membervo) throws Exception {
 		
 	}
+	
 	
 	// 회원정보 수정 버튼
 	@RequestMapping(value="/memberUpdate", method = RequestMethod.POST)

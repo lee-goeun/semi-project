@@ -1,17 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title></title>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<link rel="stylesheet" href="/resources/css/mypage.css" />
-</head>
+<!-- <link rel="stylesheet" href="/resources/css/mypage.css" /> -->
 
-
-<body>
 <form id="mypage_form" method="post">
 
 		<div id="loginHead">
@@ -247,5 +241,3 @@ $(document).ready(function(){
 
 
 </script>
-</body>
-</html>
