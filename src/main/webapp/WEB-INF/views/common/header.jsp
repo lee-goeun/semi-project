@@ -17,6 +17,11 @@
 			$('ul').find('li').eq(1).css({
 				'fontWeight':'700'
 			})
+		}else if($('title').text() === '회원관리'){
+			$('ul').find('li').css({'fontWeight':'400'});
+			$('ul').find('li').eq(2).css({
+				'fontWeight':'700'
+			})
 		}
 	 	
 	 	$('.logout').on('click', function(){
@@ -24,7 +29,10 @@
 			if(!logout){
 				return false;
 			}
+			$(this).find('a').attr("href", "${contextPath}/member/logout");
 		});
+	 	
+	 	
 	});
 </script>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
@@ -32,14 +40,17 @@
 <nav>
     <ul>
     	<!-- TODO:c:if로 할 수 있는 방법 찾아보기 -->
-        <li><a href="${contextPath}/post/list" >모집게시판</a></li>
+        <li><a href="${contextPath}/post/list">모집게시판</a></li>
         <li><a href="${contextPath}/review/list">후기게시판</a></li>
+        <c:if test="${member.uid=='admin'}">
+        	<li><a href="${contextPath}/member/memberview">회원관리</a></li>
+        </c:if>
     </ul>
 </nav>
 <div class="text_wrap">
     <p><span>${member.nickname}</span> 님, 안녕하세요</p>
     <ul>
-        <li><img src="${contextPath}/resources/image/outline_account_circle_black_24dp.png"/></li>
-        <li class="logout"><img src="${contextPath}/resources/image/outline_logout_black_24dp.png"/></li>
+        <li class="mypage"><a href="${contextPath}/member/mypage"><img src="${contextPath}/resources/image/outline_account_circle_black_24dp.png"/></a></li>
+        <li class="logout"><a><img src="${contextPath}/resources/image/outline_logout_black_24dp.png"/></a></li>
     </ul>
 </div> 
