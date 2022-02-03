@@ -10,7 +10,7 @@
 
 
   	<select id="memberLogin" resultType="com.mycompany.myapp.vo.MemberVO">
-  	SELECT uid, upass FROM userTbl WHERE uid=#{uid} AND upass = #{upass}
+  	SELECT uid, upass , nickname FROM userTbl WHERE uid=#{uid} AND upass = #{upass} 
   	</select>
   	
   	

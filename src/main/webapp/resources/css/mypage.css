@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+.re_pass_msg1 {
+	color: red;
+	display: none;
+}
+
+.re_pass_msg2 {
+	color: red;
+	display: none;
+}
+
+.re_pass_msg3 {
+	color: green;
+	display: none;
+}
+
+.nickname_msg1 {
+	color: red;
+	display: none;
+}
+
+.nickname_msg2 {
+	color: green;
+	display: none;
+}
+
+.nickname_msg3 {
+	color: red;
+	display: none;
+}
+
+.now_pass_msg1 {
+	color: red;
+	display: none;
+}
+
+.now_pass_msg2 {
+	color: red;
+	display: none;
+}
+
+.re_pass_check_msg1{
+		color: red;
+	display: none;
+}
+
+.re_pass_check_msg2{
+	color: red;
+	display: none;
+}
+.re_pass_check_msg3{
+	color: green;
+	display: none;
+}
+.re_pass_msg4{
+	color: red;  
+	display : none;
+}
