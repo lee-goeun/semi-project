@@ -37,7 +37,7 @@
     </ul>
 </nav>
 <div class="text_wrap">
-    <p><span>동동국수</span> 님, 안녕하세요</p>
+    <p><span>${member.nickname}</span> 님, 안녕하세요</p>
     <ul>
         <li><img src="${contextPath}/resources/image/outline_account_circle_black_24dp.png"/></li>
         <li class="logout"><img src="${contextPath}/resources/image/outline_logout_black_24dp.png"/></li>
