@@ -10,14 +10,12 @@
 
 
   	<select id="memberLogin" resultType="com.mycompany.myapp.vo.MemberVO">
-  	SELECT uid, upass FROM userTbl WHERE uid=#{uid} AND upass = #{upass}
+  	SELECT uid, upass , nickname FROM userTbl WHERE uid=#{uid} AND upass = #{upass} 
   	</select>
   	
   	
   	<update id = "memberUpdate">
-  	UPDATE userTbl SET uid = #{uid}, name = #{name}, upass = #{upass}, email = #{email}, address =#{address}, 
-  	nick=#{nickname}, postCode=#{postCode}, address=#{address}, addressSpecific=#{addressSpecific}
-  	WHERE uid = #{uid}
+  	UPDATE userTbl SET upass=#{upass},nickname=#{nickname} WHERE uid = #{uid}
 
   	</update>
   	
@@ -30,6 +28,18 @@
   	<delete id ="memberdelete" parameterType="String">
   	DELETE FROM usertbl where uid= #{uid}
   	</delete>
+  	
+  	<select id="idCheck" resultType="int">
+  	
+  	select count(*) from usertbl where uid = #{uid}
+  	
+  	</select>
+  	
+  	<select id="nickCheck" resultType="int">
+  	
+  	select count(*) from usertbl where nickname = #{nickname}
+  	
+  	</select>
   	
   </mapper>
   

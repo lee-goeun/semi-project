@@ -8,5 +8,9 @@ public interface MemberMapper {
 
 	public void memberLogin(MemberVO membervo);
 	
+	public int idCheck(String uid);
+	
+	public int nickCheck(String nickname);
+	
 	
 }

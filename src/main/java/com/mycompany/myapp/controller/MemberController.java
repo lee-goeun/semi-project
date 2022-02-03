@@ -83,6 +83,51 @@ public class MemberController {
 			
 			
 		}
+	
+	
+	
+	
+	// 아이디 중복 검사
+		@RequestMapping(value = "/memberIdChk", method = RequestMethod.POST)
+		@ResponseBody
+		public String memberIdChkPOST(String uid) throws Exception{
+			
+			int result = memberservice.idCheck(uid);
+			
+			if(result != 0) {
+				
+				return "fail";	// 중복 아이디가 존재
+				
+			} else {
+				
+				return "success";	// 중복 아이디 x
+				
+			}	
+			
+		} // memberIdChkPOST() 종료
+		
+		
+		// 닉네임
+		@RequestMapping(value = "/memberNickChk", method = RequestMethod.POST)
+		@ResponseBody
+		public String memberNickChkPOST(String nickname) throws Exception{
+			
+			int result = memberservice.nickCheck(nickname);
+			
+			if(result != 0) {
+				
+				return "fail";	// 중복 닉네임 존재
+				
+			} else {
+				
+				return "success";	// 중복 닉네임 없음
+				
+			}	
+			
+		} // memberNickChk() 종료
+	
+	
+	
 		
 	
 

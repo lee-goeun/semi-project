@@ -14,7 +14,8 @@
 
 
 <div>
-	<p>${member.uid}님 환영합니다 !!</p>
+	<p>이름 : ${member.uid}님 환영합니다 !!</p>
+	<p>닉네임 : ${member.nickname}님 환영합니다 !!</p>
 	
 
 </div>

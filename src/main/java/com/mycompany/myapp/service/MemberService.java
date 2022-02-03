@@ -18,4 +18,8 @@ public interface MemberService {
 		public List<MemberVO> memberView() throws Exception;
 		
 		public void memberDelete(String uid) throws Exception;
+		
+		public int idCheck(String uid) throws Exception;
+		
+		public int nickCheck(String nickname) throws Exception;
 }
