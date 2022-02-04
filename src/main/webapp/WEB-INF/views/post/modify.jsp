@@ -38,11 +38,9 @@
             </div>
             <div>
                 
-                <%-- <input type="radio" name="isTogether" id="true" value="1" <c:if test="${post.isTogether eq '1' }">checked="checked"</c:if>/> --%>
-                <input type="radio" name="isTogether" value="1" />
+                <input type="radio" name="isTogether" id="true" value="1" <c:if test="${post.isTogether == '1' }">checked="checked"</c:if>/>
                 <label for="true">같이 먹어요</label>
-               <%--  <input type="radio" name="isTogether" id="false" value="0" <c:if test="${post.isTogether eq '1' }">checked="checked"</c:if>/> --%>
-                <input type="radio" name="isTogether" value="0"/> 
+              <input type="radio" name="isTogether" id="false" value="0" <c:if test="${post.isTogether == '0' }">checked="checked"</c:if>/>
                 <label for="false">따로 먹어요</label>
             </div>
             <div>
@@ -58,10 +56,16 @@
                 <label class="deadline" for="deadline">모집시간</label>
                 <input type="time" id="deadline" name="deadline" placeholder="모집시간" value="${post.deadline }"/>
             </div>
-            <div>
-                <label class="price" for="price">음식금액</label>
-                <input type="number" name="price" id="price" placeholder="음식금액" value="${post.price }"/>
-            </div>
+            <c:if test="${post.isTogether == '1'}">
+            	<div>
+	                <label class="content" for="content">음식명</label>
+	                <input type="text" name="content" id="content" placeholder="음식명" value="${post.content }"/>
+	            </div>
+	            <div>
+	                <label class="price" for="price">음식금액</label>
+	                <input type="number" name="price" id="price" placeholder="음식금액" value="${post.price }"/>
+	            </div>
+            </c:if>
             <div>
                 <label class="deliveryFee" for="deliveryFee">배달료</label>
                 <input type="number" name="deliveryFee" id="deliveryFee" placeholder="배달료" value="${post.deliveryFee }"/>
@@ -92,14 +96,16 @@
        			alert('모집시간 입력은 필수입니다.');
        			return false;
        		}
-       		if($('#content').val() == ''){
-       			alert('음식명 입력은 필수입니다.');
-       			return false;
-       		}
-       		if($('#price').val() == ''){
-       			alert('음식금액 입력은 필수입니다.');
-       			return false;
-       		}
+       		if($("input[type='radio']").val() == '0'){
+       			if($('#content').val() == ''){
+       	   			alert('음식명 입력은 필수입니다.');
+       	   			return false;
+       	   		}
+       	   		if($('#price').val() == ''){
+       	   			alert('음식금액 입력은 필수입니다.');
+       	   			return false;
+       	   		}
+       		}	
        		if($('#deliveryFee').val() == ''){
        			alert('배달료 입력은 필수입니다.');
        			return false;

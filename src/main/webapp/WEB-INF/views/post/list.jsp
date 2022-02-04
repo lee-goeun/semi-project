@@ -32,6 +32,7 @@
       <div class="stt_area">	
       		<button id="record"></button>
       		<button id="stop"></button>
+      		
       </div>
   </div>
   <div class="tab">
@@ -79,13 +80,13 @@
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 	//주소검색
-	function execPostCode() {
+	 function execPostCode() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
 	           $("#post_addr").val(data.roadAddress);
 	       }
 	    }).open();
-	}
+	} 
 	
 	//마이크
 	const record = document.getElementById("record");
@@ -104,7 +105,7 @@
         let chunks = [];
 
         //비동기 처리
-        navigator.mediaDevices.getUserMedia(constraints) //promise
+        navigator.mediaDevices.getUserMedia(constraints)
             .then(stream => {
             	//스트림 사용
                 const mediaRecorder = new MediaRecorder(stream);             
@@ -126,11 +127,14 @@
                 	const blob = new Blob(chunks, {
                         'type': 'audio/ogg codecs=opus'
                     });
-                	
+                	let file = new File([blob], "c:/study/audio.webm");
+                    console.log(file.name);
+
                 	//file upload
                     let formdata = new FormData();
                     formdata.append("fname", "audio.webm");
                     formdata.append("data", blob);
+                    console.log("blob",blob);
                     
 
                     let xhr = new XMLHttpRequest();
@@ -143,11 +147,13 @@
                     }
                     console.log('upload');
                     xhr.open("POST", "mic", true);
+                    
                     xhr.send(formdata);
                 }
 
                 mediaRecorder.ondataavailable = e => {
                     chunks.push(e.data)
+                    console.log(e.data);
                 }
             })
             .catch(err => {
@@ -156,7 +162,7 @@
             })
     }
 	
-   $(document).ready(function(){
+    $(document).ready(function(){
 	   	
 	   //시계
 	   var timer = setInterval(function(){
@@ -184,8 +190,8 @@
 	   
 	   //전송
 	   $('form').submit(function(){
-		   var title = $('#title').val();
-		   $('#category').val(title);
+		   var title2 = $('#title').val();
+		   $('#category').val(title2);
 	   });
 	   
        //css
@@ -201,5 +207,5 @@
        	"backgroundImage":"url('${contextPath}/resources/image/outline_stop_white_24dp.png')"
        });
 
-   });
+   }); 
 </script>

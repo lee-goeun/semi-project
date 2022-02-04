@@ -17,9 +17,9 @@
              </div>
              <div>
                  <p class="uid">
-                 	<%-- ${post.uid } --%>
+                 	 ${member.uid }
                  </p>
-                 <p class="addr">유성구 봉명동</p>
+                 <p class="addr">${post.address}</p>
              </div>
          </div>
          <div>
@@ -41,14 +41,16 @@
          </div>
          <div>
              <span>요금을 확인해주세요</span>
-             <div>
-                 <p class="grey left">${post.content} 금액</p>
-                 <p class="grey right"><fmt:formatNumber value="${post.price }" type="number"/>원</p>
-             </div>
-             <div>
-                 <p class="left">본인 몫(1/${post.maxMember}) ${post.content} 금액</p>
-                 <p class="right"><span class="myprice"></span>원</p>
-             </div>
+             <c:if test="${post.isTogether == '1'}">
+	             <div>
+	                 <p class="grey left">${post.content} 금액</p>
+	                 <p class="grey right"><fmt:formatNumber value="${post.price }" type="number"/>원</p>
+	             </div>
+	             <div>
+	                 <p class="left">본인 몫(1/${post.maxMember}) ${post.content} 금액</p>
+	                 <p class="right"><span class="myprice"></span>원</p>
+	             </div>
+             </c:if>
              <div>
                  <p class="grey left">배달이용료 금액</p>
                  <p class="grey right"><fmt:formatNumber value="${post.deliveryFee }" type="number"/>원</p>
@@ -64,9 +66,12 @@
              <p class="right"><span class="total"></span>원</p>
          </div>
          <div class="btn_area">
-         	 <a href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
-         	 <a id="btn_delete" onclick="deletePost('${contextPath}/post/removePost', ${param.postId})">삭제하기</a>
-         	 <a id="btn_join" href="#none">참여하기</a>
+         	<a id="btn_join" href="#none">참여하기</a>
+         <c:if test="${member.uid == post.uid}">
+         	<a id="btn_delete" onclick="deletePost('${contextPath}/post/removePost', ${param.postId})">삭제하기</a>
+         	<a href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
+         </c:if>
+         	 
          </div>
      </div>
 	    <script type="text/javascript">

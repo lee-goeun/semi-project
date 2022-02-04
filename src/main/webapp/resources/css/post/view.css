@@ -20,5 +20,5 @@
          .text_area div .right{float:right;}
          .text_area div .grey{font-size:12px; color:#ccc; text-decoration: line-through;}
          .text_area .total_price{margin-top:20px; font-size:20px; font-weight:700;}
-         .text_area .btn_area {width:340px; float:right;}
-         .btn_area a{cursor:pointer; display:block; float:left; text-align:center; margin-top:10px; width:100px; height:40px; line-height:40px; border-radius:10px; margin-right:10px; background-color: #8BE0B0; color:#fff;}
+         .text_area .btn_area {}
+         .btn_area a{cursor:pointer; display:block; float:right; text-align:center; margin-top:10px; width:100px; height:40px; line-height:40px; border-radius:10px; margin-right:10px; background-color: #8BE0B0; color:#fff;}
