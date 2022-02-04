@@ -56,7 +56,7 @@ $(document).ready( function() {
 <div class="head">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
- <a class="img_wrap" href="${contextPath}/post/list"><img src="${contextPath}/resources/image/logo.png"/></a>
+ <a class="img_wrap" href="${contextPath}/member/home"><img src="${contextPath}/resources/image/logo.png"/></a>
 <nav>
     <ul>
     	<!-- TODO:c:if로 할 수 있는 방법 찾아보기 -->

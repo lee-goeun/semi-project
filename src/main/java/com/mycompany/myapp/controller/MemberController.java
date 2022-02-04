@@ -43,9 +43,10 @@ public class MemberController {
 	}
 	
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
-	public void infoGET() {
+	public String infoGET() {
 
 		logger.info("info 페이지 진입");
+		return "/member/info";
 
 	}
 
@@ -70,6 +71,8 @@ public class MemberController {
 		logger.info("로그인 페이지 진입");
 
 	}
+	
+	
 
 	
 	//로그인 check 
@@ -93,6 +96,15 @@ public class MemberController {
 			
 			
 		}
+	
+	// 로그인 페이지 이동
+		@RequestMapping(value = "/home", method = RequestMethod.GET)
+		public String homeGET() {
+
+			return "/member/home";
+
+		}
+	
 	
 	
 	
@@ -180,7 +192,8 @@ public class MemberController {
 	public String memberView(Locale locale, Model model) throws Exception{
 		List<MemberVO> memberview = memberservice.memberView();
 		model.addAttribute("memberview" , memberview);
-		return "member/memberview";
+		logger.info("memberView 진입");
+		return "/member/memberview";
 	}
 	
 //	//회원 삭제
