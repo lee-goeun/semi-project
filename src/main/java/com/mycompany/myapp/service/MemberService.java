@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.mycompany.myapp.vo.MemberVO;
 
 public interface MemberService {
-
+ 
 		
 		public void memberjoin(MemberVO membervo) throws Exception;
 		
