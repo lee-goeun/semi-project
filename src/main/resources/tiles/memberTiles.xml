@@ -34,6 +34,18 @@
 	</definition>
 	
 	
+	<definition name="/member/info" extends="baseLayout">
+		<put-attribute name="title" value="회사정보"/>
+ 		<put-attribute name="css" value="/resources/css/info.css"/> 
+		<put-attribute name="body" value="/WEB-INF/views/member/info.jsp"/>
+	</definition>
+	
+		<definition name="/member/memberview" extends="baseLayout">
+		<put-attribute name="title" value="관리자 페이지"/>
+		<put-attribute name="css" value="/resources/css/memberview.css"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/memberview.jsp"/>
+	</definition>
+	
 
 
 </tiles-definitions>

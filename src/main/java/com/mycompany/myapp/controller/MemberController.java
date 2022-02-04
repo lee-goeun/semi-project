@@ -1,11 +1,14 @@
 package com.mycompany.myapp.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mvel2.sh.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+ 
 import com.mycompany.myapp.service.MemberService;
 import com.mycompany.myapp.vo.MemberVO;
 
@@ -36,6 +39,14 @@ public class MemberController {
 	public void loginGET() {
 
 		logger.info("회원가입 페이지 진입");
+
+	}
+	
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public String infoGET() {
+
+		logger.info("info 페이지 진입");
+		return "/member/info";
 
 	}
 
@@ -60,6 +71,8 @@ public class MemberController {
 		logger.info("로그인 페이지 진입");
 
 	}
+	
+	
 
 	
 	//로그인 check 
@@ -83,6 +96,15 @@ public class MemberController {
 			
 			
 		}
+	
+	// 로그인 페이지 이동
+		@RequestMapping(value = "/home", method = RequestMethod.GET)
+		public String homeGET() {
+
+			return "/member/home";
+
+		}
+	
 	
 	
 	
@@ -170,7 +192,8 @@ public class MemberController {
 	public String memberView(Locale locale, Model model) throws Exception{
 		List<MemberVO> memberview = memberservice.memberView();
 		model.addAttribute("memberview" , memberview);
-		return "member/memberview";
+		logger.info("memberView 진입");
+		return "/member/memberview";
 	}
 	
 //	//회원 삭제
@@ -194,6 +217,8 @@ public class MemberController {
 		memberservice.certifiedPhoneNumber(userPhoneNumber,randomNumber); 
 		return Integer.toString(randomNumber); 
 		}
+
+	 
 	 
 	
 	
