@@ -14,6 +14,7 @@ public class PostVO {
 	private int maxMember;
 	private String image;
 	private int price;
+	private String address;
 	private int deliveryFee;
 	private String category;
 	private String deadline;
@@ -36,10 +37,33 @@ public class PostVO {
 	}
 
 
+	public String getAddress() {
+		return address;
+	}
+
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+
+	public int getIsTogether() {
+		return isTogether;
+	}
+
+
+	public void setIsTogether(int isTogether) {
+		this.isTogether = isTogether;
+	}
+
+
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-
+	
+	public String getUid() {
+		return uid;
+	}
 
 	public PostVO() {
 	}
