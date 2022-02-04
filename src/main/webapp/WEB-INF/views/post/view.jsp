@@ -66,7 +66,7 @@
              <p class="right"><span class="total"></span>원</p>
          </div>
          <div class="btn_area">
-         <a id="btn_join" href="#none">참여하기</a>
+         	<a id="btn_join" href="#none">참여하기</a>
          <c:if test="${member.uid == post.uid}">
          	<a id="btn_delete" onclick="deletePost('${contextPath}/post/removePost', ${param.postId})">삭제하기</a>
          	<a href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
