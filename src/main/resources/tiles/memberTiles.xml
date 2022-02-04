@@ -33,6 +33,18 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/mypage.jsp"/>
 	</definition>
 	
+<!-- 		<definition name="/member/temp" extends="baseLayout">
+		<put-attribute name="title" value="마이 페이지"/>
+ 		<put-attribute name="css" value="/resources/css/temp.css"/> 
+		<put-attribute name="body" value="/WEB-INF/views/member/temp.jsp"/>
+	</definition> -->
+	
+	<definition name="/member/info" extends="baseLayout">
+		<put-attribute name="title" value="회사정보"/>
+ 		<put-attribute name="css" value="/resources/css/info.css"/> 
+		<put-attribute name="body" value="/WEB-INF/views/member/info.jsp"/>
+	</definition>
+	
 	
 
 

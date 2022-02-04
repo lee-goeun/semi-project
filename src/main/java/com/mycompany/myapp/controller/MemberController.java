@@ -1,11 +1,14 @@
 package com.mycompany.myapp.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.mvel2.sh.Command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +39,13 @@ public class MemberController {
 	public void loginGET() {
 
 		logger.info("회원가입 페이지 진입");
+
+	}
+	
+	@RequestMapping(value = "/info", method = RequestMethod.GET)
+	public void infoGET() {
+
+		logger.info("info 페이지 진입");
 
 	}
 
@@ -194,6 +204,8 @@ public class MemberController {
 		memberservice.certifiedPhoneNumber(userPhoneNumber,randomNumber); 
 		return Integer.toString(randomNumber); 
 		}
+
+	 
 	 
 	
 	

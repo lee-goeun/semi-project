@@ -2,6 +2,10 @@ package com.mycompany.myapp.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+
 import com.mycompany.myapp.vo.MemberVO;
 
 public interface MemberService {
@@ -22,4 +26,5 @@ public interface MemberService {
 		public int idCheck(String uid) throws Exception;
 		
 		public int nickCheck(String nickname) throws Exception;
+		
 }

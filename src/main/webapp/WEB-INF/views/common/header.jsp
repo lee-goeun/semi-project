@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script src="https://code.jquery.com/jquery-latest.js"></script>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
@@ -34,8 +35,27 @@
 	 	
 	 	
 	});
+	
+$(document).ready( function() {
+		var offset = $('.head').offset();
+		$(window).scroll(function(){
+			if($(document).scrollTop()>offset.top ){
+				console.log("if문 감지")
+				 $('.head').addClass('Fixed');
+		    }
+		    else {
+		    	console.log("else 문")
+		      $('.head').removeClass('Fixed');
+			}
+
+		});
+	
+});
+
 </script>
+<div class="head">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+
  <a class="img_wrap" href="${contextPath}/post/list"><img src="${contextPath}/resources/image/logo.png"/></a>
 <nav>
     <ul>
@@ -54,3 +74,16 @@
         <li class="logout"><a><img src="${contextPath}/resources/image/outline_logout_black_24dp.png"/></a></li>
     </ul>
 </div> 
+</div>
+
+<style>
+.Fixed {
+  position: fixed;
+  top: 0px;
+   width: 100%;
+  
+}
+
+.head{
+background-color: white;}
+</style>
