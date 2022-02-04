@@ -152,13 +152,12 @@ public class PostControllerImpl implements PostController{
 		
 		
 		
-		/*
-		 * MemberVO memberVO = (MemberVO) session.getAttribute("member"); String uid =
-		 * memberVO.getUid();
-		 */
+		
+		  MemberVO memberVO = (MemberVO) session.getAttribute("member"); 
+		  String uid = memberVO.getUid();
 		 
 		 
-		 postMap.put("uid", "test");
+		 postMap.put("uid", uid);
 		 postMap.put("image", image);
 		 
 		 String msg;

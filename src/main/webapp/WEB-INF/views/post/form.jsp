@@ -21,7 +21,7 @@
             <p>
 				<img id="preview" src="#"/>
             </p>
-            <!-- <input type="hidden" name="image" id="image"/> -->
+            <input type="hidden" name="address" id="address" value="${member.address}"/> 
            <input type="file" name="image" id="image" onchange="readURL(this);"/>
         </div>
         <div class="text_area">
@@ -36,9 +36,9 @@
             </div>
             <div>
                 
-                <input type="radio" name="isTogether" id="true" value="1" checked/>
+                <input type="radio" name="isTogether" value="1" checked/>
                 <label for="true">같이 먹어요</label>
-                <input type="radio" name="isTogether" id="false" value="0"/>
+                <input type="radio" name="isTogether" value="0"/>
                 <label class="" for="false">따로 먹어요</label>
             </div>
             <div>
@@ -49,17 +49,16 @@
                 <label class="maxMember" for="maxMember">모집인원</label>
                 <input type="number" name="maxMember" id="maxMember" placeholder="모집인원"/>
             </div>
-            
             <div>
                 <label class="deadline" for="deadline">모집시간</label>
                 <input type="time" id="deadline" name="deadline" placeholder="모집시간"/>
                 <!-- <input type="hidden" name="deadline" value="" id="deadline"/> -->
             </div>
-            <div>
+            <div class="isChecked">
                 <label class="content" for="content">음식명</label>
                 <input type="text" name="content" id="content" placeholder="음식명"/>
             </div>
-            <div>
+            <div class="isChecked">
                 <label class="price" for="price">음식금액</label>
                 <input type="number" name="price" id="price" placeholder="음식금액"/>
             </div>
@@ -74,14 +73,18 @@
     $(document).ready(function(){
      var preview = "";
      
-     $('#category').on('change', function(){
-    	/* $('#image').remove();
-    	$('.pic_area').append(
-    		'<input type="hidden" name="image" id="image"/>'
-    	); */
+     /* $('#category').on('change', function(){
  		$('#preview').attr('src', '${contextPath}/resources/image/' + this.value +'.jpg');
  		preview = this.value;
- 	});
+ 	}); */
+     
+     $("input[type='radio']").on('change', function(){
+    	if($(this).val() == '0'){
+    		$('.isChecked').css({"display":"none"});
+    	}else{
+    		$('.isChecked').css({"display":"block"});
+    	}
+     });
      
    	 $('form').submit(function(){
    	
@@ -102,14 +105,16 @@
    			alert('모집시간 입력은 필수입니다.');
    			return false;
    		}
-   		if($('#content').val() == ''){
-   			alert('음식명 입력은 필수입니다.');
-   			return false;
-   		}
-   		if($('#price').val() == ''){
-   			alert('음식금액 입력은 필수입니다.');
-   			return false;
-   		}
+   		if($("input[type='radio']").val() == '0'){
+   			if($('#content').val() == ''){
+   	   			alert('음식명 입력은 필수입니다.');
+   	   			return false;
+   	   		}
+   	   		if($('#price').val() == ''){
+   	   			alert('음식금액 입력은 필수입니다.');
+   	   			return false;
+   	   		}
+   		}	
    		if($('#deliveryFee').val() == ''){
    			alert('배달료 입력은 필수입니다.');
    			return false;
