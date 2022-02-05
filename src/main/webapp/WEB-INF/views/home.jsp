@@ -42,11 +42,11 @@
     </script>
   </head>
   <body>
-  
+   
 <div class="quickmenu">
 <a><img class="bar" src="${contextPath}/resources/image/quickMenuBar.png"/></a>
 <a  href="/member/info"><img class="bar" src="${contextPath}/resources/image/bar_2.png"/></a>
-<a href="/member/customer" class="top_btn"><img class="bar" src="${contextPath}/resources/image/bar_3.png"/></a>
+<a href="/member/customer" class="top_btn"><img class="bar" src="${contextPath}/resources/image/bar_9.png"/></a>
 <a href="#" class="top_btn"><img class="bar" src="${contextPath}/resources/image/bar_4.png"/></a>
 </div>
   
