@@ -2,7 +2,6 @@ package com.mycompany.myapp.controller;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -12,7 +11,6 @@ import java.net.URL;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +25,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.MultiValueMap;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -36,29 +34,33 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.mycompany.myapp.common.PostCriteria;
+import com.mycompany.myapp.common.PostPageMaker;
 import com.mycompany.myapp.service.PostService;
 import com.mycompany.myapp.vo.MemberVO;
 import com.mycompany.myapp.vo.PostVO;
-import com.oreilly.servlet.MultipartRequest;
 
 //http://localhost:8090/post/list
 
 @Controller("postController")
 @RequestMapping("/post")
 public class PostControllerImpl implements PostController {
+	
 	private static final String POST_IMAGE_REPO = "C:\\semi_project\\post_image";
+	
 	@Autowired
 	private PostService postService;
+	
 	@Autowired
 	private PostVO postVO;
 
 	public PostControllerImpl() {
+		
 	}
 
 	// 포스트 조회(+검색)
-	@Override
+/*	
+ 	@Override
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView listPosts(HttpServletRequest request, HttpServletResponse response, PostVO vo)
 			throws Exception {
@@ -70,34 +72,47 @@ public class PostControllerImpl implements PostController {
 
 		return mav;
 	}
+*/
+	
+	// 포스트 조회 + 페이징 + 검색
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public String listPosts(Model model, PostCriteria cri) throws Exception {
+		
+		postService.updateState();	// 마감 상태 업데이트
+		
+		model.addAttribute("postsList", postService.getListPost(cri));
+		
+		int total = postService.getTotal(cri);
+		
+		PostPageMaker pageMake = new PostPageMaker(cri, total);
+		
+		model.addAttribute("pageMaker", pageMake);
+		
+		return "/post/list";
+	}
 
 	// 음성으로 검색
 	@RequestMapping(value = "/mic", method = RequestMethod.POST)
 	public void searchToMic(MultipartHttpServletRequest multi, HttpServletResponse response) throws Exception {
 
-		String clientId = "r5h93jhquq";
-		String clientSecret = "VMXcbadYPWH5ILKdQ5HXa7PBG8Y8oxHR2QklrgnD";
-
 		try {
-
 			// 마이크 시작
-			String saveDirectory = "c:/semi_project/temp";
 			MultipartFile orgfile = multi.getFile("data");
 			InputStream instream = orgfile.getInputStream();
 			String text = reqcsr(instream);
 			JSONParser parser = new JSONParser();
-			JSONObject jsonObject = (JSONObject)parser.parse(text);
-			String result = (String)jsonObject.get("text");
+			JSONObject jsonObject = (JSONObject) parser.parse(text);
+			String result = (String) jsonObject.get("text");
 			response.setContentType("application/json; charset=utf-8");
 			PrintWriter out = response.getWriter();
 			out.print(result);
 			System.out.println(result);
-			
+
 		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
-	
+
 	public String reqcsr(InputStream voiceStream) {
 		String clientId = "r5h93jhquq"; // Application Client ID";
 		String clientSecret = "VMXcbadYPWH5ILKdQ5HXa7PBG8Y8oxHR2QklrgnD"; // Application Client Secret";

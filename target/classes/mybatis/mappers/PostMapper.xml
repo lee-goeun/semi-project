@@ -2,7 +2,9 @@
 <!DOCTYPE mapper
       PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
 <mapper namespace="mapper.post">
+
  <resultMap id="postResult" type="com.mycompany.myapp.vo.PostVO">
  	<result property="postId" column="postId"/>
 	<result property="uid" column="uid"/>
@@ -14,6 +16,7 @@
 	<result property="deliveryFee" column="deliveryFee"/>
 	<result property="category" column="category"/>
 	<result property="deadline" column="deadline"/>
+	<result property="postState" column="postState"/>
 	<result property="isTogether" column="isTogether"/>
 	<result property="postedDate" column="postedDate"/>
 	<result property="isRevised" column="isRevised"/>
@@ -23,9 +26,9 @@
 	<result property="viewCount" column="viewCount"/>
 </resultMap> 
 
-<!-- 포스트 조회(+검색) -->
+	<!-- 포스트 조회 (+검색) -->	<!-- 사용X -->
 	<select id="selectAllPostsList" resultMap="postResult" parameterType="com.mycompany.myapp.vo.PostVO">
-		SELECT * FROM gatherTbl where isDeleted = 0
+		SELECT * FROM gatherTbl WHERE isDeleted = 0
 			<if test="isTogether != null and isTogether !=''">
 				or isTogether = #{isTogether}
 			</if>
@@ -35,43 +38,80 @@
 			<if test="category != null and category !=''">
 				or category LIKE CONCAT('%', #{category}, '%')
 			</if>
-			
 		ORDER BY deadline DESC
 	</select>
 	
-<!-- 포스트 추가 -->
-<insert id="insertNewPost" parameterType="java.util.Map">
-	INSERT into gatherTbl(uid, category, isTogether, title, <if test="isTogether == 1">price, content,</if> maxMember, deadline, deliveryFee, image, address) VALUES	
-	(#{uid}, #{category}, #{isTogether},#{title},<if test="isTogether == 1">#{price}, #{content},</if> #{maxMember},#{deadline},#{deliveryFee},#{image}, #{address})
-</insert>
+	<!-- 포스트 조회 + 페이징 + 검색 -->
+	<select id="getListPost" resultMap="postResult" parameterType="com.mycompany.myapp.vo.PostVO">
+		select *
+		from (
+				select g.postId, g.uid, g.title, g.content, g.maxMember, g.image, g.price, g.deliveryFee, g.category, g.deadline, g.postState,
+				g.isTogether, g.postedDate, g.isRevised, g.revisedDate, g.isDeleted, g.deletedDate, g.viewCount, u.nickname, u.address
+				from gatherTbl g left outer join userTbl u on g.uid = u.uid
+				where g.isDeleted = 0
+				<if test="keyword != null">
+					and title like concat('%',#{keyword},'%' )
+				</if>
+				<if test="tab == 1">
+					and isTogether = 1
+				</if>
+				<if test="tab == 2">
+					and isTogether = 0
+				</if>
+				) as T1
+				order by postState, deadline
+				<!-- limit #{skip}, #{amount} -->
+	</select>
+    
+	<!-- 포스트 총 개수 -->
+	<select id="getTotal" resultType="int">
+		select count(*)
+		from gatherTbl g left outer join userTbl u on g.uid = u.uid
+		where isDeleted = 0
+		<if test="keyword != null">
+			and title like concat('%',#{keyword},'%')
+		</if>
+	</select>
 
-<!-- 최근 입력한 데이터 id 조회 -->
+	<!-- 포스트 추가 -->
+	<insert id="insertNewPost" parameterType="java.util.Map">
+		INSERT into gatherTbl(uid, category, isTogether, title, <if test="isTogether == 1">price, content,</if> maxMember, deadline, deliveryFee, image, address)
+		VALUES (#{uid}, #{category}, #{isTogether},#{title},<if test="isTogether == 1">#{price}, #{content},</if> #{maxMember},#{deadline},#{deliveryFee},#{image}, #{address})
+	</insert>
+
+	<!-- 최근 입력한 데이터 id 조회 -->
 	<select id="selectNewPostId" resultType="int">
-		<![CDATA[
+	<![CDATA[
 		SELECT postId FROM gatherTbl ORDER BY postedDate DESC LIMIT 1
 	]]> 
 	</select>
 
-<!-- 포스트 상세 조회 -->
+	<!-- 포스트 상세 조회 -->
 	<select id="selectPost" resultMap="postResult" parameterType="int">
-		<![CDATA[
-			SELECT * FROM gatherTbl 
-			where postId = #{postId}
-		]]>
+	<![CDATA[
+		SELECT * FROM gatherTbl where postId = #{postId}
+	]]>
 	</select>
 	
-<!-- 포스트 수정 -->
+	<!-- 포스트 수정 -->
 	<update id="updatePost" parameterType="java.util.Map">
-		update gatherTbl set title=#{title}, deadline=#{deadline}, isTogether=#{isTogether}, maxMember=#{maxMember},
-		price=#{price}, deliveryFee=#{deliveryFee}, isRevised = '1'
+		update gatherTbl set title = #{title}, deadline = #{deadline}, isTogether = #{isTogether}, maxMember = #{maxMember}, price = #{price}, deliveryFee = #{deliveryFee}, isRevised = '1'
 		<if test="image != '' and image != null">
 		, image=#{image}
 		</if>
 		where postId=#{postId}
 	</update>
 
-<!-- 포스트 삭제 -->
+	<!-- 포스트 삭제 -->
 	<update id="deletePost" parameterType="int">
 		update gatherTbl set isDeleted = '1' where postId=#{postId}
-	</update>	
+	</update>
+	
+	<!-- 마감 상태 업데이트 -->
+    <update id="updateState">
+    <![CDATA[
+		update gatherTbl set postState = 1 where deadline < now()
+	]]>    
+    </update>
+    
 </mapper>
