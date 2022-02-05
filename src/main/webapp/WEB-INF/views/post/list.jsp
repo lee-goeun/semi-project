@@ -1,92 +1,177 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
 <%
-	request.setCharacterEncoding("UTF-8");
-%>	
-	<div id="addr_area" onclick="execPostCode();">
-		<input name="address" value="동성구 봉명동" id="post_addr" type="text" readonly="readonly"/>
-		<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png'/>
+request.setCharacterEncoding("UTF-8");
+%>
+
+<div class="container">
+
+	<div class="contents">
+
+		<!-- 지역 선택 -->
+		<div id="addr_area" onclick="execPostCode();">
+			<input name="address" value="${member.address}" id="post_addr" type="text" readonly="readonly" />
+			<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png' />
+		</div>
+
+		<div class="top">
+			<!-- 타이머 영역 -->
+			<div class="time_area">
+				<span>00</span> : <span>00</span> : <span>00</span>
+			</div>
+
+			<!-- 검색 영역 -->
+			<div class="search_area">
+				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="제목을 입력하세요." onKeyPress="if (event.keyCode==13){searchFunc();}">
+				<button class="searchBtn">
+					<img src="${contextPath}/resources/image/outline_search_white_24dp.png">
+				</button>
+				<div class="stt_area">
+					<button id="record" class="recordBtn">
+						<img src="${contextPath}/resources/image/outline_mic_white_24dp.png" />
+					</button>
+					<button id="stop" class="stopBtn">
+						<img src="${contextPath}/resources/image/outline_stop_white_24dp.png" />
+					</button>
+				</div>
+				<a href="/post/list" class="searchReset" style="display: none">취소</a>
+				<!-- 				<div class="stt_area"> -->
+				<%-- 					<button id="record"><img src="${contextPath}/resources/image/outline_mic_white_24dp.png" /></button> --%>
+				<%-- 					<button id="stop"><img src="${contextPath}/resources/image/outline_stop_white_24dp.png" /></button> --%>
+				<!-- 				</div> -->
+			</div>
+		</div>
+
+		<!-- 탭 영역 -->
+		<div class="tab">
+			<ul>
+				<li value="0"><a href="#">전체보기</a></li>
+				<li value="1"><a href="#">같이 먹어요</a></li>
+				<li value="2"><a href="#">따로 먹어요</a></li>
+			</ul>
+		</div>
+
+		<!-- 글쓰기 버튼 -->
+		<div class="btn_area">
+			<a class="goToWrite" href="${contextPath}/post/form">글쓰기</a>
+		</div>
+
+		<!-- 게시물 -->
+		<div class="post">
+			<!-- 게시물 리스트 -->
+			<ul class="item_list">
+				<c:choose>
+					<c:when test="${postsList == null }">
+						<li><a href=>등록된 상품이 없습니다.</a></li>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="post" items="${postsList}" varStatus="postNum">
+							<c:if test="${member.address == post.address}">
+								<li class="postInfo"><a href="${contextPath}/post/viewPost?postId=${post.postId}"> <img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />
+										<div class="item_list">
+											${post.postState}
+											<p class="name">${post.title}</p>
+											<p class="location">${post.address}</p>
+											<p class="maxMember">1/${post.maxMember}</p>
+											<p class="deadline">
+												<span class="_deadline" style="display: none">${post.deadline}</span> 마감시간 : <span>${post.deadline}</span>
+											</p>
+											<p class="isTogether">
+												<c:out value="${post.isTogether}" />
+											</p>
+										</div>
+										<div class="closed" style="display: none;">
+											<p>치킨행 열차 마감</p>
+										</div>
+								</a>
+									<div class="leave_soon" style="display: none;">
+										출발<br />임박
+									</div></li>
+							</c:if>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</ul>
+			<!-- 더보기 버튼 -->
+			<div class="load_btn_wrap">
+				<a href="#" class="load"> 더보기(<span class="listNum"></span>/<span class="allListNum"></span>) <i class="fas fa-chevron-down"></i>
+				</a>
+			</div>
+			<div class="reviewSearchNone" style="display: none">
+				<td>검색 결과가 없어요.</td>
+			</div>
+			<div class="postNone" style="display: none">
+				<td>아직 게시물이 없어요.</td>
+			</div>
+
+			<!-- 페이징 -->
+			<!-- 			<div class="paging_wrap"> -->
+			<!-- 				<ul class="pageInfo"> -->
+			<%-- 					<c:if test="${pageMaker.prev}"> --%>
+			<%-- 						<li class="prevBtn"><a href="${pageMaker.startPage-1}"><i class="fas fa-angle-left"></i></a></li> --%>
+			<%-- 					</c:if> --%>
+			<%-- 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num"> --%>
+			<%-- 						<li class=" ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li> --%>
+			<%-- 					</c:forEach> --%>
+			<%-- 					<c:if test="${pageMaker.next}"> --%>
+			<%-- 						<li class="nextBtn"><a href="${pageMaker.endPage + 1 }"><i class="fas fa-angle-right"></i></a></li> --%>
+			<%-- 					</c:if> --%>
+			<!-- 				</ul> -->
+			<!-- 			</div> -->
+		</div>
+
+		<form id="listForm" method="get">
+			<%-- 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> --%>
+			<%-- 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }"> --%>
+			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+			<input type="hidden" name="tab" value="${pageMaker.cri.tab}">
+		</form>
 	</div>
-	<div class="top">
-      <div class="time_area">
-      		<span>00</span> : <span>00</span> : <span>00</span>
-      </div>
-      <div class="search_area">
-     	<form action="${contextPath}/post/list" method="get">
-     		<fieldset>
-             <div>
-                 <input name="title" id="title" type="text" placeholder="상품명을 입력하세요."/>
-                 <input type="hidden" name="category" id="category"/>
-             </div>
-             <div class="search_btn">
-                 <button id="search_btn"></button>
-             </div>
-         </fieldset>
-     	</form>
-      </div>
-      <div class="stt_area">	
-      		<button id="record"></button>
-      		<button id="stop"></button>
-      		
-      </div>
-  </div>
-  <div class="tab">
-      <ul>
-          <li <c:if test="${param.isTogether == null}">class="selected"</c:if>><a href="${contextPath}/post/list">전체보기</a></li>
-          <li <c:if test="${param.isTogether == 1}">class="selected"</c:if>><a href="${contextPath}/post/list?isTogether=1">같이 먹어요</a></li>
-          <li <c:if test="${param.isTogether == 0}">class="selected"</c:if>><a href="${contextPath}/post/list?isTogether=0">따로 먹어요</a></li>
-      </ul>
-  </div>
-  <div class="content">
-      <div class="btn_area">
-          <a class="goToWrite" href="${contextPath}/post/form">글쓰기</a>
-      </div>
-      <ul class="item_list">
-          <c:choose>
-              <c:when test="${postsList == null }">
-              <li>
-                  <a href=>등록된 상품이 없습니다.</a>
-              </li>
-              </c:when>
-              <c:otherwise>
-                  <c:forEach var="post" items="${postsList}" varStatus="postNum">
-                   <li>
-	               		<a href="${contextPath}/post/viewPost?postId=${post.postId}">
-	               			<div class="item_img"><img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}"/></div> 
-	             			<div>
-	               				<p class="name">${post.title} </p>
-	                			<p class="location"><span>유성구 봉명동</span></p>
-	               				<p class="maxMember"><span>1/${post.maxMember }</span></p>
-	                			<p class="deadline">마감시간 : <span>${post.deadline}</span></p>
-	               			</div>
-	               		</a>
-	               		<!-- <div class="closed">
-	               			<p>치킨행 열차 마감</p>
-	               		</div>
-	               		<div class="leave_soon">
-	               			출발<br/>임박
-	               		</div> -->
-               		</li>
-                  </c:forEach>
-              </c:otherwise>
-          </c:choose>
-      </ul>
-  </div>
+</div>
+
+<!-- script -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
+
+$(document).ready(function(){
+   	
+	   //시계
+	   var timer = setInterval(function(){
+		   var now = new Date(); 
+			  
+		  	var hr = now.getHours();
+		 	var min = now.getMinutes();
+		  	var sec = now.getSeconds();
+		  
+		  $('.time_area').find('span').eq(0).text(hr);
+		  $('.time_area').find('span').eq(1).text(min);
+		  $('.time_area').find('span').eq(2).text(sec);
+		  
+		  if(hr<10){
+			  $('.time_area').find('span').eq(0).text("0"+hr);
+		  }
+		  if(min<10){
+			  $('.time_area').find('span').eq(1).text("0"+min);
+		  }
+		  if(sec<10){
+			  $('.time_area').find('span').eq(2).text("0"+sec);
+		  }
+	   },1000);
+});
+
+
 	//주소검색
-	 function execPostCode() {
+	function execPostCode() {
 	    new daum.Postcode({
 	        oncomplete: function(data) {
 	           $("#post_addr").val(data.roadAddress);
 	       }
 	    }).open();
-	} 
+	}
 	
 	//마이크
 	const record = document.getElementById("record");
@@ -121,6 +206,7 @@
                     console.log(mediaRecorder.state);
                     console.log("recorder stopped");
                     record.style.backgroundColor = "#e1e1e1";
+                    title.focus();
                 }
 
                 mediaRecorder.onstop = e => {
@@ -162,50 +248,122 @@
             })
     }
 	
-    $(document).ready(function(){
-	   	
-	   //시계
-	   var timer = setInterval(function(){
-		   var now = new Date(); 
-			  
-		  	var hr = now.getHours();
-		 	var min = now.getMinutes();
-		  	var sec = now.getSeconds();
-		  
-		  $('.time_area').find('span').eq(0).text(hr);
-		  $('.time_area').find('span').eq(1).text(min);
-		  $('.time_area').find('span').eq(2).text(sec);
-		  
-		  if(hr<10){
-			  $('.time_area').find('span').eq(0).text("0"+hr);
-		  }
-		  if(min<10){
-			  $('.time_area').find('span').eq(1).text("0"+min);
-		  }
-		  if(sec<10){
-			  $('.time_area').find('span').eq(2).text("0"+sec);
-		  }
-	   },1000);
-	   
-	   
-	   //전송
-	   $('form').submit(function(){
-		   var title2 = $('#title').val();
-		   $('#category').val(title2);
-	   });
-	   
-       //css
-       $(".search_area").find('.search_btn').find('button').css({
-       	"backgroundImage":"url('${contextPath}/resources/image/outline_search_white_24dp.png')"
-       });
-       
-       $("#record").css({
-       	"backgroundImage":"url('${contextPath}/resources/image/outline_mic_white_24dp.png')"
-       });
-       
-       $("#stop").css({
-       	"backgroundImage":"url('${contextPath}/resources/image/outline_stop_white_24dp.png')"
-       });
+   
+   
+   /* 페이징 */
+	const listForm = $("#listForm");
+//   $(".pageInfo a").on("click", function(e) {
+// 		e.preventDefault();
+//   		listForm.find("input[name='pageNum']").val($(this).attr("href"));
+//   		listForm.attr("action", "/post/list");
+//   		listForm.submit();
+//   	});
+  
+  /* 검색 기능 */
+  	$(".search_area .searchBtn").on("click", function(e) {
+  		e.preventDefault();
+  		searchFunc();
+  	});
+  
+  	function searchFunc() {
+		let keyword = $(".search_area input[name='keyword']").val();
+		let tab = ${pageMaker.cri.tab };
 
-   }); 
+		if (!keyword) {
+			location.href = "/post/list";
+		}
+
+		listForm.find("input[name='keyword']").val(keyword);
+// 		listForm.find("input[name='pageNum']").val(1);
+		listForm.find("input[name='tab']").val(tab);
+		listForm.attr("action", "/post/list");
+		listForm.submit();
+	}
+  	
+ // 카테고리 필터
+    $(".tab ul li").click(function (e) {
+      e.preventDefault();
+
+      let idx = $(this).index();
+      
+//       listForm.find("input[name='pageNum']").val(1);
+      listForm.find("input[name='tab']").val(idx);
+      listForm.attr("action", "/post/list");
+		listForm.submit();
+    });
+  
+  $(".tab ul li").removeClass("selected");
+  $(".tab ul li").eq(${pageMaker.cri.tab }).addClass("selected");
+  
+  /* 게시물이 없을 경우 */
+	const isPostInfo = document.querySelectorAll('.postInfo');
+	let keyword = $(".search_area input[name='keyword']").val();
+	
+	if (isPostInfo.length <= 0) {
+		if (keyword) { // 검색 결과가 없을 경우
+			document.querySelector(".reviewSearchNone").style.display = '';
+		} else {
+			document.querySelector(".postNone").style.display = '';
+		}
+	}
+  
+  /* 검색하면 취소 버튼 표시 */
+	if (keyword) {
+			document.querySelector(".searchReset").style.display = '';
+	} else {
+			document.querySelector(".searchReset").style.display = 'none';
+	}
+  	
+  /* 더보기 */
+  document.querySelector(".listNum").textContent = 1;
+  document.querySelector(".allListNum").textContent = Math.ceil(isPostInfo.length / 9);
+  
+  if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent || document.querySelector(".allListNum").textContent == 0){
+      document.querySelector(".load_btn_wrap").style.display = 'none';
+  }
+  
+  $(function(){
+    $(".post ul li").slice(0, 9).show(); // select the first ten
+    
+    $(".load").click(function(e){ // click event for load more
+        e.preventDefault();
+    
+        $(".post ul li:hidden").slice(0, 9).show(); // select next 10 hidden divs and show them
+        
+        document.querySelector(".listNum").textContent = Number(document.querySelector(".listNum").textContent) + 1;
+        
+        if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent){
+            document.querySelector(".load_btn_wrap").style.display = 'none';
+        }
+        
+    });
+});
+  
+  /* 열차 마감 */
+  const orderDate = document.querySelectorAll("._deadline");
+	const closed = document.querySelectorAll(".closed");
+	const leave_soon = document.querySelectorAll(".leave_soon");
+	const today = new Date();
+	
+// 	alert(orderDate[0].textContent);
+	
+	for(let i=0; i<orderDate.length; i++){
+		let oDate = new Date(orderDate[i].textContent);
+		
+		let dateDiff = oDate.getTime()-today.getTime();
+		
+		let diffHour = Math.floor((dateDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+		let diffMin = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
+		let diffSec = Math.floor((dateDiff % (1000 * 60)) / 1000);
+		
+		/* 현재 시간 - 마감 시간 < 1시간 => 마감 임박 */
+		if(diffHour == 0) {
+			leave_soon[i].style.display= "block";
+		}
+		/* 현재 시간 < 마감 시간 => 열차 마감 */
+		if(oDate < today){
+			closed[i].style.display= "block";
+		}
+	}
+  
 </script>

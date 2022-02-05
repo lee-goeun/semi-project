@@ -58,7 +58,7 @@ public class PostControllerImpl implements PostController {
 		
 	}
 
-	// 포스트 조회(+검색)
+	// 포스트 조회 (+검색) - 사용X
 /*	
  	@Override
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
