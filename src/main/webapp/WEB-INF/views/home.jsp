@@ -44,11 +44,10 @@
   <body>
   
 <div class="quickmenu">
-<div>기차사진</div>
- <div><a href="">회사정보</a></div>
-  <div><a href="/member/info">고객문의</a></div>
-<div>대표번호</div>
-<a href="#" class="top_btn"><img class="top" src="${contextPath}/resources/image/top_btn.png"/></a>
+<a><img class="bar" src="${contextPath}/resources/image/quickMenuBar.png"/></a>
+<a  href="/member/info"><img class="bar" src="${contextPath}/resources/image/bar_2.png"/></a>
+<a href="/member/customer" class="top_btn"><img class="bar" src="${contextPath}/resources/image/bar_3.png"/></a>
+<a href="#" class="top_btn"><img class="bar" src="${contextPath}/resources/image/bar_4.png"/></a>
 </div>
   
   

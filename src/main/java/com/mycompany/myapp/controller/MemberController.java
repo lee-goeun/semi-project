@@ -104,6 +104,15 @@ public class MemberController {
 			return "/member/home";
 
 		}
+		
+
+		// 로그인 페이지 이동
+			@RequestMapping(value = "/customer", method = RequestMethod.GET)
+			public String custmoerGET() {
+
+				return "/member/customer";
+
+			}
 	
 	
 	

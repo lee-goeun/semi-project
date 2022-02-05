@@ -46,6 +46,12 @@
 		<put-attribute name="body" value="/WEB-INF/views/member/memberview.jsp"/>
 	</definition>
 	
+		<definition name="/member/customer" extends="baseLayout">
+		<put-attribute name="title" value="고객센터"/>
+		<put-attribute name="css" value="/resources/css/customer.css"/>
+		<put-attribute name="body" value="/WEB-INF/views/member/customer.jsp"/>
+	</definition>
+	
 
 
 </tiles-definitions>
