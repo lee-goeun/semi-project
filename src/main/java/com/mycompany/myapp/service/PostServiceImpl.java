@@ -72,8 +72,7 @@ public class PostServiceImpl implements PostService {
 	// 마감 상태 업데이트
 	@Override
 	public int updateState() throws Exception {
-		// TODO Auto-generated method stub
-		return 0;
+		return postDAO.updateState();
 	}
 
 }
