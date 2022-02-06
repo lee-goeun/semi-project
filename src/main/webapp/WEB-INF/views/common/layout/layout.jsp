@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
 
@@ -12,9 +13,10 @@
 	
 	<!-- css -->
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/reset.css" />
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
+	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}<tiles:getAsString name = "css"  ignore="true"/>" />
-	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
 	
 	<!-- favicon -->
 	<link rel="shortcut icon" href="${contextPath}/resources/image/favicon.ico">

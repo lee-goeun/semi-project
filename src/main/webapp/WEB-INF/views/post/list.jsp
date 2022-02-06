@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
@@ -23,7 +23,6 @@ request.setCharacterEncoding("UTF-8");
 			<div class="time_area">
 				<span>00</span> : <span>00</span> : <span>00</span>
 			</div>
-
 			<!-- 검색 영역 -->
 			<div class="search_area">
 				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="제목을 입력하세요." onKeyPress="if (event.keyCode==13){searchFunc();}">
@@ -39,10 +38,6 @@ request.setCharacterEncoding("UTF-8");
 					</button>
 				</div>
 				<a href="/post/list" class="searchReset" style="display: none">취소</a>
-				<!-- 				<div class="stt_area"> -->
-				<%-- 					<button id="record"><img src="${contextPath}/resources/image/outline_mic_white_24dp.png" /></button> --%>
-				<%-- 					<button id="stop"><img src="${contextPath}/resources/image/outline_stop_white_24dp.png" /></button> --%>
-				<!-- 				</div> -->
 			</div>
 		</div>
 
@@ -63,7 +58,7 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 게시물 -->
 		<div class="post">
 			<!-- 게시물 리스트 -->
-			<ul class="item_list">
+			<ul class="item_list slider">
 				<c:choose>
 					<c:when test="${postsList == null }">
 						<li><a href=>등록된 상품이 없습니다.</a></li>
@@ -71,37 +66,48 @@ request.setCharacterEncoding("UTF-8");
 					<c:otherwise>
 						<c:forEach var="post" items="${postsList}" varStatus="postNum">
 							<c:if test="${member.address == post.address}">
-								<li class="postInfo"><a href="${contextPath}/post/viewPost?postId=${post.postId}"> <img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />
-										<div class="item_list">
-											${post.postState}
-											<p class="name">${post.title}</p>
-											<p class="location">${post.address}</p>
-											<p class="maxMember">1/${post.maxMember}</p>
-											<p class="deadline">
-												<span class="_deadline" style="display: none">${post.deadline}</span> 마감시간 : <span>${post.deadline}</span>
+								<li class="item">
+									<a href="${contextPath}/post/viewPost?postId=${post.postId}"> 
+										<img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />
+										<div class="list_info">
+											<p class="title">${post.title}</p>
+											<p class="tag_wrap">
+												<span class="isTogether">
+													<c:if test="${post.isTogether == 0}">#따로</c:if>
+													<c:if test="${post.isTogether == 1}">#같이</c:if>
+												</span>
+												<span class="category">#${post.category}</span>
+												<span class="location">#${post.address}</span>
 											</p>
-											<p class="isTogether">
-												<c:out value="${post.isTogether}" />
+											<p class="recruit_wrap">
+												<span class="_deadline" style="display: none">${post.deadline}</span>
+												<span class="deadline">
+												<i></i>
+<%-- 												<c:out value="${post.deadline}"/> --%>
+<%-- 													<fmt:parseDate value="${post.deadline}" var="dateValue" pattern="yyyy-MM-dd hh:mm:ss"/> --%>
+												</span>
+												<span class="headcount"><i></i>1 / ${post.maxMember}</span>
 											</p>
 										</div>
 										<div class="closed" style="display: none;">
 											<p>치킨행 열차 마감</p>
 										</div>
-								</a>
+									</a>
 									<div class="leave_soon" style="display: none;">
 										출발<br />임박
-									</div></li>
+									</div>
+								</li>
 							</c:if>
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
 			</ul>
 			<!-- 더보기 버튼 -->
-			<div class="load_btn_wrap">
+			<!-- <div class="load_btn_wrap">
 				<a href="#" class="load"> 더보기(<span class="listNum"></span>/<span class="allListNum"></span>) <i class="fas fa-chevron-down"></i>
 				</a>
-			</div>
-			<div class="reviewSearchNone" style="display: none">
+			</div> -->
+			<div class="postSearchNone" style="display: none">
 				<td>검색 결과가 없어요.</td>
 			</div>
 			<div class="postNone" style="display: none">
@@ -135,6 +141,8 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- script -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -296,12 +304,12 @@ $(document).ready(function(){
   $(".tab ul li").eq(${pageMaker.cri.tab }).addClass("selected");
   
   /* 게시물이 없을 경우 */
-	const isPostInfo = document.querySelectorAll('.postInfo');
+	const isPostInfo = document.querySelectorAll('.item');
 	let keyword = $(".search_area input[name='keyword']").val();
 	
 	if (isPostInfo.length <= 0) {
 		if (keyword) { // 검색 결과가 없을 경우
-			document.querySelector(".reviewSearchNone").style.display = '';
+			document.querySelector(".postSearchNone").style.display = '';
 		} else {
 			document.querySelector(".postNone").style.display = '';
 		}
@@ -315,37 +323,35 @@ $(document).ready(function(){
 	}
   	
   /* 더보기 */
-  document.querySelector(".listNum").textContent = 1;
-  document.querySelector(".allListNum").textContent = Math.ceil(isPostInfo.length / 9);
+//   document.querySelector(".listNum").textContent = 1;
+//   document.querySelector(".allListNum").textContent = Math.ceil(isPostInfo.length / 9);
   
-  if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent || document.querySelector(".allListNum").textContent == 0){
-      document.querySelector(".load_btn_wrap").style.display = 'none';
-  }
+//   if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent || document.querySelector(".allListNum").textContent == 0){
+//       document.querySelector(".load_btn_wrap").style.display = 'none';
+//   }
   
-  $(function(){
-    $(".post ul li").slice(0, 9).show(); // select the first ten
+//   $(function(){
+//     $(".post ul li").slice(0, 9).show(); // select the first ten
     
-    $(".load").click(function(e){ // click event for load more
-        e.preventDefault();
+//     $(".load").click(function(e){ // click event for load more
+//         e.preventDefault();
     
-        $(".post ul li:hidden").slice(0, 9).show(); // select next 10 hidden divs and show them
+//         $(".post ul li:hidden").slice(0, 9).show(); // select next 10 hidden divs and show them
         
-        document.querySelector(".listNum").textContent = Number(document.querySelector(".listNum").textContent) + 1;
+//         document.querySelector(".listNum").textContent = Number(document.querySelector(".listNum").textContent) + 1;
         
-        if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent){
-            document.querySelector(".load_btn_wrap").style.display = 'none';
-        }
+//         if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent){
+//             document.querySelector(".load_btn_wrap").style.display = 'none';
+//         }
         
-    });
-});
+//     });
+// });
   
   /* 열차 마감 */
-  const orderDate = document.querySelectorAll("._deadline");
+	 const orderDate = document.querySelectorAll("._deadline");
 	const closed = document.querySelectorAll(".closed");
 	const leave_soon = document.querySelectorAll(".leave_soon");
 	const today = new Date();
-	
-// 	alert(orderDate[0].textContent);
 	
 	for(let i=0; i<orderDate.length; i++){
 		let oDate = new Date(orderDate[i].textContent);
@@ -365,5 +371,30 @@ $(document).ready(function(){
 			closed[i].style.display= "block";
 		}
 	}
+	
+	/* slick slider */
+	if ($('.slider li.item').length == 0) {
+			$('.slider').slick({
+				slidesToShow: 3,
+				slidesToScroll: 3,
+				rows: 3,
+				infinite: true,
+				speed: 500,
+				arrows: true,
+				draggable: true, 
+				dots: false,
+			});
+		} else {
+			$('.slider').slick({
+				slidesToShow: 3,
+				slidesToScroll: 3,
+				rows: 3,
+				infinite: true,
+				speed: 500,
+				arrows: true,
+				draggable: true,
+				dots: true,
+			});
+		}
   
 </script>
