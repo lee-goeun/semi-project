@@ -77,7 +77,7 @@
 								<tr>
 					<th><div type="button" class="th_1" id="list_btn_4">
 
-							<img src="/resources/image/list_4.png" class="logo" />원하는 지역과 음식을  <a class="bold">검색할 수 있어요</a> <img
+							<img src="/resources/image/list_4.png" class="logo" />원하는 지역을  <a class="bold">검색할 수 있어요</a> <img
 								src="/resources/image/down_btn.png" class="logo_1" />
 						</div></th>
 
@@ -85,7 +85,7 @@
 				</tr>
 
 				<tr>
-					<td class="tr_1" id="list_list_4"><br><br>ㆍ'검색 버튼'을 통하여 지역 / 음식을 검색할 수 있어요!</td>
+					<td class="tr_1" id="list_list_4"><br><br>ㆍ'검색 버튼'을 통하여 지역을 검색할 수 있어요!</td>
 				</tr>
 				
 				
