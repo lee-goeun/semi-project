@@ -15,11 +15,12 @@ import com.mycompany.myapp.service.ChatService;
 import com.mycompany.myapp.vo.ChatVO;
 
 public class ChatWebSocketHandler extends TextWebSocketHandler{
-	@Autowired
-	private ChatService chatService;
-	@Autowired
-	private ChatVO chatVO;
-	private ObjectMapper objectMapper;
+	/*
+	 * @Autowired private ChatService chatService;
+	 */
+	/*
+	 * @Autowired private ChatVO chatVO; private ObjectMapper objectMapper;
+	 */
 	
 	public static List<WebSocketSession> list = new ArrayList<WebSocketSession>();
 	
@@ -42,9 +43,9 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 
 		//특정 session 클라이언트에서 전송된 메세지를 받음
 		String msg = (String)message.getPayload();
-		ChatVO chatMessage = objectMapper.readValue(msg, ChatVO.class);
-		ChatRoom chatRoom = chatService.viewChat(chatMessage.getChatId()); 
-		chatRoom.handleMessage(session, chatMessage, objectMapper);
+		//ChatVO chatMessage = objectMapper.readValue(msg, ChatVO.class);
+		//ChatRoom chatRoom = chatService.viewChat(chatMessage.getChatId()); 
+		//chatRoom.handleMessage(session, chatMessage, objectMapper);
 		//int postId = (int) session.getAttributes().get("postId");
 		//현재 websocket에 접속된 모든 클라이언트에 메세지를 전송
 		/*for(WebSocketSession socket:list) {

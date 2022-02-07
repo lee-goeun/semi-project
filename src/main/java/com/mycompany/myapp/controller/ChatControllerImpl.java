@@ -25,8 +25,9 @@ public class ChatControllerImpl {
 	@Autowired
 	private ChatService chatService;
 	
-	@Autowired
-	private ChatVO chatVo;
+	/*
+	 * @Autowired private ChatVO chatVo;
+	 */
 	
 	public ChatControllerImpl() {
 	}
