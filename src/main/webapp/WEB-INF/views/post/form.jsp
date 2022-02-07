@@ -69,6 +69,9 @@
         </div>
     </fieldset>
 </form>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="${contextPath}/resources/js/post/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript">
     $(document).ready(function(){
      var preview = "";

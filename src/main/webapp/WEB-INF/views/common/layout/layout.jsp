@@ -14,8 +14,10 @@
 	<!-- css -->
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/reset.css" />
 	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css">
-	<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}/resources/css/common.css" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}<tiles:getAsString name = "css1"  ignore="true"/>" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}<tiles:getAsString name = "css2"  ignore="true"/>" />
+	<link rel="stylesheet" type="text/css" href="${contextPath}<tiles:getAsString name = "css3"  ignore="true"/>" />
 	<link rel="stylesheet" type="text/css" href="${contextPath}<tiles:getAsString name = "css"  ignore="true"/>" />
 	
 	<!-- favicon -->
