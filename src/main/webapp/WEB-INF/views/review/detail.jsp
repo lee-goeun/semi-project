@@ -11,7 +11,7 @@
 				<div class="nick_wrap">
 					<span class="nickImg"></span>
 					<span name="uid" class="nick"><c:out value="${rDetail.nickname}"/></span>
-					<span name="" class="address"><c:out value="${rDetail.address}"/></span>
+					<span name="" class="address"><c:out value="${rDetail.region2} ${rDetail.region3}"/></span>
 					
 					<div class="btn_wrap">
 						<!-- 로그인한 회원과 게시물 작성자가 동일한 경우 표시 -->
@@ -54,7 +54,7 @@
 									</div>
 								</div>
 								</span>
-								<span class="address"><c:out value="${listReply.address}"/></span>
+								<span class="address"><c:out value="${listReply.region2} ${listReply.region3}"/></span>
 								<div class="replyReviseBtn_wrap" style="display:none">
 									<button type="button" class="replyReviseCancle">취소</button>
 									<button type="button" class="replyReviseWrite">완료</button>

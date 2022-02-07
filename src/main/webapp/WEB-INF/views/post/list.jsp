@@ -14,7 +14,7 @@ request.setCharacterEncoding("UTF-8");
 
 		<!-- 지역 선택 -->
 		<div id="addr_area" onclick="execPostCode();">
-			<input name="address" value="${member.address}" id="post_addr" type="text" readonly="readonly" />
+			<input name="address" value="${member.region1} ${member.region2}" id="post_addr" type="text" readonly="readonly" />
 			<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png' />
 		</div>
 
@@ -65,7 +65,7 @@ request.setCharacterEncoding("UTF-8");
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="post" items="${postsList}" varStatus="postNum">
-							<c:if test="${member.address == post.address}">
+							<c:if test="${member.region1 == post.region1}">
 								<li class="item">
 									<a href="${contextPath}/post/viewPost?postId=${post.postId}"> 
 										<img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />
@@ -81,7 +81,7 @@ request.setCharacterEncoding("UTF-8");
 													<c:if test="${post.category == 'chicken'}">#치킨</c:if>
 													<c:if test="${post.category == 'hamburger'}">#햄버거</c:if>
 												</span>
-												<span class="location">#${post.address}</span>
+												<span class="location">#${post.region3}</span>
 											</p>
 											<p class="recruit_wrap">
 												<span class="_deadline" style="display: none">${post.deadline}</span>

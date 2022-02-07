@@ -46,11 +46,11 @@
 		select *
 		from (
 				select g.postId, g.uid, g.title, g.content, g.maxMember, g.image, g.price, g.deliveryFee, g.category, g.deadline, g.postState,
-				g.isTogether, g.postedDate, g.isRevised, g.revisedDate, g.isDeleted, g.deletedDate, g.viewCount, u.nickname, u.address
+				g.isTogether, g.postedDate, g.isRevised, g.revisedDate, g.isDeleted, g.deletedDate, g.viewCount, u.nickname, u.address, u.region1, u.region2, u.region3
 				from gatherTbl g left outer join userTbl u on g.uid = u.uid
 				where g.isDeleted = 0
 				<if test="keyword != null">
-					and title like concat('%',#{keyword},'%' )
+					and title like concat('%',#{keyword},'%' ) OR region3 like concat('%',#{keyword},'%' )
 				</if>
 				<if test="tab == 1">
 					and isTogether = 1
@@ -89,7 +89,10 @@
 	<!-- 포스트 상세 조회 -->
 	<select id="selectPost" resultMap="postResult" parameterType="int">
 	<![CDATA[
-		SELECT * FROM gatherTbl where postId = #{postId}
+		select g.postId, g.uid, g.title, g.content, g.maxMember, g.image, g.price, g.deliveryFee, g.category, g.deadline, g.postState,
+				g.isTogether, g.postedDate, g.isRevised, g.revisedDate, g.isDeleted, g.deletedDate, g.viewCount, u.nickname, u.address, u.region1, u.region2, u.region3
+		from gatherTbl g left outer join userTbl u on g.uid = u.uid
+		where postId = #{postId}
 	]]>
 	</select>
 	

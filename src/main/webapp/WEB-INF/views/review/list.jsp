@@ -52,7 +52,7 @@
 										</a>
 									</td>
 									<td class="nickname"><c:out value="${rList.nickname}" /></td>
-									<td class="address"><c:out value="${rList.address}" /></td>
+									<td class="address"><c:out value="${rList.region2} ${rList.region3}" /></td>
 									<td class="reviewedDate"><c:out value="${rList.reviewedDate}" /></td>
 								</tr>
 <%-- 							</c:if> --%>
