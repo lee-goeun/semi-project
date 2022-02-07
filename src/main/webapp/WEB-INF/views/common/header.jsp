@@ -2,10 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <%
 	request.setCharacterEncoding("UTF-8");
 %>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 	 	if($('title').text().substring(0,2) === '모집'){
@@ -35,7 +39,7 @@
 	 	
 	 	
 	});
-	
+/* 	
 $(document).ready( function() {
 		var offset = $('.head').offset();
 		$(window).scroll(function(){
@@ -50,11 +54,12 @@ $(document).ready( function() {
 
 		});
 	
-});
+}); */
 
 </script>
 <div class="head">
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+	<div>&nbsp;</div>
 
  <a class="img_wrap" href="${contextPath}/member/home"><img src="${contextPath}/resources/image/logo.png"/></a>
 <nav>
@@ -77,13 +82,23 @@ $(document).ready( function() {
 </div>
 
 <style>
-.Fixed {
+/* .Fixed {
   position: fixed;
-  top: 0px;
    width: 100%;
   
 }
-
+ */
 .head{
-background-color: white;}
+background-color: white;
+position: fixed;
+z-index:1;
+width:100%;
+top:0px;
+margin-top: 0px;
+padding-top: 0px}
+
+
+
+*{font-family: 'Noto Sans KR', sans-serif;
+}
 </style>
