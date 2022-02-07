@@ -75,8 +75,8 @@
 
 	<!-- 포스트 추가 -->
 	<insert id="insertNewPost" parameterType="java.util.Map">
-		INSERT into gatherTbl(uid, category, isTogether, title, <if test="isTogether == 1">price, content,</if> maxMember, deadline, deliveryFee, image, address)
-		VALUES (#{uid}, #{category}, #{isTogether},#{title},<if test="isTogether == 1">#{price}, #{content},</if> #{maxMember},#{deadline},#{deliveryFee},#{image}, #{address})
+		INSERT into gatherTbl(uid, category, isTogether, title, <if test="isTogether == 1">price, content,</if> maxMember, deadline, deliveryFee, image)
+		VALUES (#{uid}, #{category}, #{isTogether},#{title},<if test="isTogether == 1">#{price}, #{content},</if> #{maxMember},#{deadline},#{deliveryFee},#{image})
 	</insert>
 
 	<!-- 최근 입력한 데이터 id 조회 -->

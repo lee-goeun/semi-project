@@ -76,15 +76,17 @@ request.setCharacterEncoding("UTF-8");
 													<c:if test="${post.isTogether == 0}">#따로</c:if>
 													<c:if test="${post.isTogether == 1}">#같이</c:if>
 												</span>
-												<span class="category">#${post.category}</span>
+												<span class="category">
+													<c:if test="${post.category == 'pizza'}">#피자</c:if>
+													<c:if test="${post.category == 'chicken'}">#치킨</c:if>
+													<c:if test="${post.category == 'hamburger'}">#햄버거</c:if>
+												</span>
 												<span class="location">#${post.address}</span>
 											</p>
 											<p class="recruit_wrap">
 												<span class="_deadline" style="display: none">${post.deadline}</span>
 												<span class="deadline">
-												<i></i>
-<%-- 												<c:out value="${post.deadline}"/> --%>
-<%-- 													<fmt:parseDate value="${post.deadline}" var="dateValue" pattern="yyyy-MM-dd hh:mm:ss"/> --%>
+													<i></i><span></span>
 												</span>
 												<span class="headcount"><i></i>1 / ${post.maxMember}</span>
 											</p>
@@ -396,4 +398,17 @@ $(document).ready(function(){
 			});
 		}
   
+	/* 모집시간 포맷 변경 */
+	const deadline = document.querySelectorAll("._deadline");
+	const deadlineFormat = document.querySelectorAll(".recruit_wrap span.deadline span");
+		
+	for(let i = 0; i < deadline.length; i++){
+		$(function() {
+			var time1 = deadline[i].innerText.substr(5, 2);
+			var time2 = deadline[i].innerText.substr(8, 2);
+			var time3 = deadline[i].innerText.substr(11, 2);
+			var time4 = deadline[i].innerText.substr(14, 2);
+			$(deadlineFormat).eq(i).text(time1 + "월" + time2 + "일 " + time3 + ":" + time4 + "");
+		});
+	}
 </script>
