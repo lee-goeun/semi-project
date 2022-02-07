@@ -49,11 +49,8 @@ request.setCharacterEncoding("UTF-8");
 				<!-- 				<label class="deadline" for="deadline">모집시간</label> -->
 				<!-- 				<input type="time" id="deadline" name="deadline" placeholder="모집시간" /> -->
 				<label for="deadline">모집시간</label>
-				<!-- 				<input type="text" name="deadline" id="deadlineF"> -->
+				<input type="hidden" name="deadline" id="deadlineF">
 				<input type="text" id="deadline" class="deadline" placeholder="시간을 입력하세요." readonly>
-			</div>
-			<div>
-				<input type="text" name="deadline" id="deadlineF">
 			</div>
 			<div class="isChecked">
 				<label class="content" for="content">음식명</label>
@@ -67,9 +64,7 @@ request.setCharacterEncoding("UTF-8");
 				<label class="deliveryFee" for="deliveryFee">배달료</label>
 				<input type="number" name="deliveryFee" id="deliveryFee" placeholder="배달료" />
 			</div>
-			<div>
-				<input type="text" name="uid" value="${member.uid}" placeholder="작성자" readonly>
-			</div>
+			<input type="hidden" name="uid" value="${member.uid}" placeholder="작성자" readonly>
 		</div>
 	</fieldset>
 </form>

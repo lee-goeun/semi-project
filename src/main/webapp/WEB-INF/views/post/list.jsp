@@ -349,7 +349,7 @@ $(document).ready(function(){
 // });
   
   /* 열차 마감 */
-	 const orderDate = document.querySelectorAll("._deadline");
+	const orderDate = document.querySelectorAll("._deadline");
 	const closed = document.querySelectorAll(".closed");
 	const leave_soon = document.querySelectorAll(".leave_soon");
 	const today = new Date();
@@ -359,12 +359,13 @@ $(document).ready(function(){
 		
 		let dateDiff = oDate.getTime()-today.getTime();
 		
+		let diffDay= Math.floor((dateDiff / (1000 * 60 * 60 * 24)));
 		let diffHour = Math.floor((dateDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
 		let diffMin = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
 		let diffSec = Math.floor((dateDiff % (1000 * 60)) / 1000);
 		
 		/* 현재 시간 - 마감 시간 < 1시간 => 마감 임박 */
-		if(diffHour == 0) {
+		if(diffDay == 0 && diffHour == 0) {
 			leave_soon[i].style.display= "block";
 		}
 		/* 현재 시간 < 마감 시간 => 열차 마감 */
