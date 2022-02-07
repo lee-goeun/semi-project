@@ -141,8 +141,7 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- script -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="${contextPath}/resources/js/post/slick.js"></script>
+<script src="/resources/js/post/slick.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){
