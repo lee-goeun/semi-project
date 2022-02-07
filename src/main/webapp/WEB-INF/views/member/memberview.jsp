@@ -70,7 +70,7 @@ function memberDel(uid){
         <tbody>
         	
             <c:forEach items="${memberview}" var="member">
-             
+              
                 <tr>
             		<td>${member.nickname}</td>
                     <td>${member.upass}</td>
