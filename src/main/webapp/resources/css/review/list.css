@@ -33,6 +33,10 @@ section {
 	padding-top: calc(30vh - 220px);
 }
 
+.top {
+	position: relative;
+}
+
 /* 검색창 */
 .search_wrap {
 	position: relative;
@@ -70,6 +74,28 @@ section {
   top: 5px;
   right: -45px;
   color: #ccc;
+}
+
+/* 버튼 */
+.btn_wrap {
+	position: absolute;
+	bottom: -1px;
+	right: 0;
+}
+
+.btn_wrap a.writeBtn {
+	display: inline-block;
+	width: 80px;
+	height: 40px;
+	line-height: 40px;
+	color: #fff;
+	text-align: center;
+	background: #8be0b0;
+	border-radius: 10px;
+}
+
+.btn_wrap a.writeBtn:hover {
+	background: #53d189;
 }
 
 /* 게시물 목록 */
@@ -223,27 +249,6 @@ section {
 
 .paging_wrap ul.pageInfo li a i {
 	font-weight: bold;
-}
-
-/* 버튼 */
-.btn_wrap {
-	position: absolute;
-	bottom: -55px;
-	right: 0;
-}
-
-.btn_wrap a.writeBtn {
-	display: inline-block;
-	width: 80px;
-	height: 40px;
-	line-height: 40px;
-	text-align: center;
-	background: #e1e1e1;
-	border-radius: 10px;
-}
-
-.btn_wrap a.writeBtn:hover {
-	background: #bbb;
 }
 
 li.active {

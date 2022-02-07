@@ -7,19 +7,28 @@
 
 		<div class="contents">
 		
-			<!-- 검색 -->
-			<div class="search_wrap">
-				<select name="type" class="searchSelect">
-					<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
-					<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
-					<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>작성자</option>
-					<option value="A" <c:out value="${pageMaker.cri.type eq 'A'?'selected':'' }"/>>지역</option>
-				</select>
-				<input type="text" name="keyword" class="searchInput" value="${pageMaker.cri.keyword }" onKeyPress="if (event.keyCode==13){searchFunc();}">
-				<button class="searchBtn">
-					<i class="fas fa-search"></i>
-				</button>
-				<a href="/review/list" class="searchReset" style="display:none">취소</a>
+			<div class="top">
+				<!-- 검색 -->
+				<div class="search_wrap">
+					<select name="type" class="searchSelect">
+						<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
+						<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
+						<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>작성자</option>
+						<option value="A" <c:out value="${pageMaker.cri.type eq 'A'?'selected':'' }"/>>지역</option>
+					</select>
+					<input type="text" name="keyword" class="searchInput" value="${pageMaker.cri.keyword }" onKeyPress="if (event.keyCode==13){searchFunc();}">
+					<button class="searchBtn">
+						<i class="fas fa-search"></i>
+					</button>
+					<a href="/review/list" class="searchReset" style="display:none">취소</a>
+				</div>
+				
+				<!-- 글쓰기 버튼 -->
+				<c:if test="${ member != null}">
+					<div class="btn_wrap">
+						<a href="/review/write" class="writeBtn">글쓰기</a>
+					</div>
+				</c:if>
 			</div>
 
 			<!-- 게시물 목록 -->
@@ -73,13 +82,6 @@
 						</c:if>
 					</ul>
 				</div>
-				
-				<!-- 버튼 -->
-				<c:if test="${ member != null}">
-					<div class="btn_wrap">
-						<a href="/review/write" class="writeBtn">글쓰기</a>
-					</div>
-				</c:if>
 			</div>
 			
 			<!-- 상세 페이지 & 페이징 처리 폼 -->
