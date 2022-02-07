@@ -43,7 +43,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <body>
 
-<h1>관리자용</h1>
+<h1>회원 정보</h1>
 
 <script type="text/javascript">
 function memberDel(uid){
@@ -68,7 +68,7 @@ function memberDel(uid){
             </tr>
         </thead>
         <tbody>
-        
+        	
             <c:forEach items="${memberview}" var="member">
              
                 <tr>
@@ -81,8 +81,7 @@ function memberDel(uid){
                     <td>${member.address}</td>
                     <td>${member.addressSpecific}</td>
                 
-                   <!--  <td><input type="button" class="del_btn" value="삭제" onclick="memberDel(${membervo.uid})"> </td>           
-                 --></tr>
+                  </tr>
                 
             </c:forEach>
             

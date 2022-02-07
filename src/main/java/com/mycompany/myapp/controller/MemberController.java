@@ -106,11 +106,11 @@ public class MemberController {
 		}
 		
 
-		// 로그인 페이지 이동
-			@RequestMapping(value = "/customer", method = RequestMethod.GET)
+		// 가이드 페이지 이동
+			@RequestMapping(value = "/guide", method = RequestMethod.GET)
 			public String custmoerGET() {
 
-				return "/member/customer";
+				return "/member/guide";
 
 			}
 	
