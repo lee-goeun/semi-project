@@ -66,9 +66,9 @@
 	//websocket에 메세지가 왔을 때
 	function onMessage(e){
 		var data = e.data;
-		var dateArr = data.split(":");
+		var dataArr = data.split(":");
 		console.log("dataArr" , dataArr);
-		if(dataArr[0] == ${uid}){
+		if(dataArr[0] == '${uid}'){
 			$('#chat_area').append(
 				'<div class="me">'+
 			       ' <p class="text">' + dataArr[1] + '</p>'+

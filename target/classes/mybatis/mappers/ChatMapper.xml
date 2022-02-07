@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.chat">
+<resultMap id="chatResult" type="com.mycompany.myapp.vo.ChatVO">
+	<result property="chatId" column="chatId"/>
+ 	<result property="postId" column="postId"/>
+	<result property="uid" column="uid"/>
+	<result property="name" column="name"/>
+	<result property="chatDate " column="chatDate "/>
+	<result property="isDeleted" column="isDeleted"/>
+	<result property="deletedDate" column="deletedDate"/>
+	<result property="msg" column="msg"/>
+	<result property="type" column="type"/>
+</resultMap> 
+
+	<!-- 채팅방 생성 -->
+	<insert id="insertNewChat" parameterType="java.util.Map">
+		INSERT into chattbl(uid, postId) VALUES (#{uid}, #{postId})
+	</insert>
+	
+	<!-- 채팅방 선택 -->
+	<select id="selectChat" resultMap="chatResult" parameterType="java.util.Map">
+		<![CDATA[
+			SELECT * FROM chattbl where postId=#{postId}
+		]]>
+	</select>
+	
+</mapper>
