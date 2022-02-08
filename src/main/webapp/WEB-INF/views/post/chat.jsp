@@ -26,32 +26,39 @@
 <div id="msg_area">
     <input id="msg" type="text" placeholder="메세지를 입력하세요" value=""/>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script type="text/javascript">
 	var websocket;
-	
 	$(document).ready(function(){
 		//웹 소켓 연결
-		websocket = new WebSocket("ws://localhost:8090/post/chatws");
+		websocket = new WebSocket("ws://localhost:8090/chatws");
+		
 
 		websocket.onopen = onOpen;
-		websocket.onmessage = onMessage;
 		websocket.onclose = onClose;
+		websocket.onmessage = onMessage;
 		
+		var postId = ${param.postId};
 		
 		$('#msg').on('keyup', function(e){
+			const nick = $('#myId').val();
+			const msg = $('#msg').val();
+			
+			console.log(nick);
+			console.log(msg);
+			
 			if(e.keyCode == 13){
-				const nick = $('#myId').val();
-				const msg = $('#msg').val();
-				
 				//메세지 전송
-				websocket.send(nick+":"+msg);
-				
+				websocket.send(JSON.stringify({postId : postId,type:'CHAT', uid:nick, msg : msg}));
 				$('#msg').val("");
 			}
 		});
 		
 		//웹 소켓 연결 해제
 		$('#btn_exit').on('click', function(){
+			const nick = $('#myId').val();
+			
+			websocket.send(JSON.stringify({postId : postId, type:'LEAVE', uid:nick}));
 			websocket.close();
 		});
 		
@@ -59,8 +66,12 @@
 	});// end ready();
 	
 	///////////////////////////////////////////////////
+	var nick = document.getElementById('myId').value;
+	var postId = ${param.postId};
+	
 	//websocket 연결이 되는 경우
 	function onOpen(){
+		websocket.send(JSON.stringify({postId : postId, type:'ENTER', uid:nick}));
 	}
 	
 	//websocket에 메세지가 왔을 때
@@ -90,11 +101,13 @@
 	//webSocket이 연결이 해제되는 경우
 	function onClose(e){
 		console.log("웹 소켓 종료");
+		websocket.send(JSON.stringify({postId : postId,type:'LEAVE',uid:nick}));
 		$('#chat_area').remove();
 	}
 	
 	//브라우저 창 종료
-	$(window).on('close', function(){
+	/* $(window).on('close', function(){
+		websocket.send(JSON.stringify({chatRoomId : roomId,type:'LEAVE',writer:nickname}));
 		websocket.close();
-	});
+	}); */
 </script>

@@ -20,11 +20,12 @@ public class ChatServiceImpl implements ChatService{
 		chatDAO.insertNewChat(chatMap);
 	}
 	
-	//채팅 조회
+	//채팅메세지 조회
 	@Override
 	public ChatRoom viewChat(int postId) throws Exception {
-		ChatRoom chatVO = chatDAO.selectChat(postId);
-		return chatVO;
+		ChatRoom chat = chatDAO.selectChat(postId);
+		System.out.println("************** " + chat);
+		return chat;
 	}
 	
 }

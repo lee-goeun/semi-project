@@ -178,6 +178,7 @@ public class PostControllerImpl implements PostController {
 	public ResponseEntity addNewPost(MultipartHttpServletRequest multipartRequest, HttpServletResponse response)
 			throws Exception {
 		multipartRequest.setCharacterEncoding("utf-8");
+		Map<String, Object> chatMap = new HashMap<String, Object>();
 		Map<String, Object> postMap = new HashMap<String, Object>();
 		Enumeration enu = multipartRequest.getParameterNames();
 		while (enu.hasMoreElements()) {
@@ -186,6 +187,8 @@ public class PostControllerImpl implements PostController {
 			postMap.put(name, value);
 			System.out.println("****************** " + name + " " + value);
 		}
+		
+		
 
 		String image = upload(multipartRequest);
 		HttpSession session = multipartRequest.getSession();
@@ -202,12 +205,16 @@ public class PostControllerImpl implements PostController {
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 
 		postService.addNewPost(postMap);
+		int postId = postService.selectNewId();
+		
+		//채팅 생성
+		chatMap.put("postId", postId);
+		chatMap.put("uid", uid);
+		chatService.addNewChat(chatMap);
 
 		try {
 			if (image != null && image.length() != 0) {
-				int postId = postService.selectNewId();
 				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
-
 				File destDir = new File(POST_IMAGE_REPO + "\\" + postId);
 				FileUtils.moveFileToDirectory(srcFile, destDir, true);
 			}
@@ -235,14 +242,8 @@ public class PostControllerImpl implements PostController {
 	@RequestMapping(value = "/viewPost", method = RequestMethod.GET)
 	public ModelAndView viewPost(int postId, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		Map<String, Object> chatMap = new HashMap<String, Object>();
 		String viewName = (String) request.getAttribute("viewName");
 		postVO = postService.viewPost(postId);
-		
-		//채팅 생성
-		chatMap.put("postId", postId);
-		chatMap.put("uid", postVO.getUid());
-		chatService.addNewChat(chatMap);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);

@@ -48,7 +48,7 @@
 		<put-attribute name="body" value="/WEB-INF/views/post/modify.jsp"/>
 	</definition>
 	
-	<definition name="/post/chat" extends="empty">
+	<definition name="/chat/room" extends="empty">
 		<put-attribute name="title" value="모집 게시판"/>
 		<put-attribute name="css" value="/resources/css/post/chat.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/chat.jsp"/>

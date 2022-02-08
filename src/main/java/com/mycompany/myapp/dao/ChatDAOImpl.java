@@ -22,8 +22,8 @@ public class ChatDAOImpl implements ChatDAO{
 	
 	//채팅조회
 	@Override
-	public ChatRoom selectChat(int chatId) throws DataAccessException {
-		return sqlSession.selectOne("mapper.chat.selectChat", chatId);
+	public ChatRoom selectChat(int postId) throws DataAccessException {
+		return sqlSession.selectOne("mapper.chat.selectChat", postId);
 	}
 
 }
