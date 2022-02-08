@@ -36,6 +36,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.common.PostCriteria;
 import com.mycompany.myapp.common.PostPageMaker;
+import com.mycompany.myapp.handler.ChatRoomRepository;
 import com.mycompany.myapp.service.ChatService;
 import com.mycompany.myapp.service.PostService;
 import com.mycompany.myapp.vo.MemberVO;
@@ -211,6 +212,9 @@ public class PostControllerImpl implements PostController {
 		chatMap.put("postId", postId);
 		chatMap.put("uid", uid);
 		chatService.addNewChat(chatMap);
+		
+		String chatPostId = Integer.toString(postId);
+		ChatRoomRepository.createChatRoom(chatPostId);
 
 		try {
 			if (image != null && image.length() != 0) {

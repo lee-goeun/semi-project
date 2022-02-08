@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.mycompany.myapp.handler.ChatRoom;
 
-@Repository("ChatDAO")
+@Repository("chatDAO")
 public class ChatDAOImpl implements ChatDAO{
 	@Autowired
 	private SqlSession sqlSession;
@@ -19,11 +19,14 @@ public class ChatDAOImpl implements ChatDAO{
 	public void insertNewChat(Map chatMap) throws DataAccessException {
 		sqlSession.insert("mapper.chat.insertNewChat", chatMap);
 	}
-	
-	//채팅조회
+
 	@Override
-	public ChatRoom selectChat(int postId) throws DataAccessException {
-		return sqlSession.selectOne("mapper.chat.selectChat", postId);
+	public void insertMsg(Map chatMap) throws DataAccessException {
+		sqlSession.insert("mapper.chat.insertMsg", chatMap);
+	}
+	
+	public int selectChatId(String msg) throws DataAccessException{
+		return sqlSession.selectOne("mapper.chat.selectChatId", msg);
 	}
 
 }

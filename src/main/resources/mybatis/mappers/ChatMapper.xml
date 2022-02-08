@@ -21,10 +21,12 @@
 	</insert>
 	
 	<!-- 채팅방 선택 -->
-	<select id="selectChat" resultMap="chatResult" resultType="String" parameterType="int">
-		<![CDATA[
-			SELECT msg FROM chattbl where postId=#{postId}
-		]]>
+	<insert id="insertMsg" parameterType="java.util.Map">
+			insert into chattbl(msg, uid, postId) values(#{msg}, #{uid}, #{postId})
+	</insert>
+	
+	<select id="selectChatId" resultType="int" parameterType="String">
+			select chatId from chattbl where msg =#{msg}
 	</select>
 	
 </mapper>

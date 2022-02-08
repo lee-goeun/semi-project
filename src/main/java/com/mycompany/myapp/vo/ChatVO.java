@@ -2,6 +2,10 @@ package com.mycompany.myapp.vo;
 
 import java.sql.Date;
 
+import org.springframework.stereotype.Component;
+
+
+@Component("chatVO")
 public class ChatVO {
 	private int chatId;
 	private int postId;

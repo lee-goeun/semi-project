@@ -12,5 +12,8 @@ public interface ChatDAO {
 	public void insertNewChat(Map chatMap) throws DataAccessException;
 	
 	//채팅방 조회
-	public ChatRoom selectChat(int postId) throws DataAccessException;
+	public void insertMsg(Map chatMap) throws DataAccessException;
+	
+	//채팅방메세지에 대한 아이디 조회
+	public int selectChatId(String msg) throws DataAccessException;
 }

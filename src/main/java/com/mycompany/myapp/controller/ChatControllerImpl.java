@@ -65,8 +65,9 @@ public class ChatControllerImpl {
 		
 		mav.addObject("uid",uid);
 		
-		ChatRoom room = chatService.viewChat(postId);
-		mav.addObject("room", room);
+		/*
+		 * ChatRoom room = chatService.viewChat(postId); mav.addObject("room", room);
+		 */
 		return mav;
 	}
 }

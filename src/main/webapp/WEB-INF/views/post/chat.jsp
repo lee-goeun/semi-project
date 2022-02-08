@@ -35,7 +35,7 @@
 		
 
 		websocket.onopen = onOpen;
-		websocket.onclose = onClose;
+		//websocket.onclose = onClose;
 		websocket.onmessage = onMessage;
 		
 		var postId = ${param.postId};
@@ -71,12 +71,14 @@
 	
 	//websocket 연결이 되는 경우
 	function onOpen(){
+		console.log('연결됨');
 		websocket.send(JSON.stringify({postId : postId, type:'ENTER', uid:nick}));
 	}
 	
 	//websocket에 메세지가 왔을 때
 	function onMessage(e){
-		var data = e.data;
+		var data = e.data.substring(1, e.data.length-1);
+		console.log(data);
 		var dataArr = data.split(":");
 		console.log("dataArr" , dataArr);
 		if(dataArr[0] == '${uid}'){
@@ -101,7 +103,7 @@
 	//webSocket이 연결이 해제되는 경우
 	function onClose(e){
 		console.log("웹 소켓 종료");
-		websocket.send(JSON.stringify({postId : postId,type:'LEAVE',uid:nick}));
+		//websocket.send(JSON.stringify({postId : postId,type:'LEAVE',uid:nick}));
 		$('#chat_area').remove();
 	}
 	
