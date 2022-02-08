@@ -18,7 +18,7 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 .contents { padding-top: calc(22.125vh - 175.5px); }
  
 /* 지역 선택 */
-#addr_area { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); width: 150px; margin: 0 auto; text-align: center; } 
+#addr_area { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); margin: 0 auto; text-align: center; } 
 #addr_area input { width: 150px; height: 30px; line-height: 22px; text-align: center; background: inherit; cursor: pointer; } 
 #addr_area img { position: absolute; top: 7px; right: 0; } 
 

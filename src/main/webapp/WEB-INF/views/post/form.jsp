@@ -186,6 +186,7 @@ request.setCharacterEncoding("UTF-8");
 
 					// timeFormat: 'HH:mm:ss',
 					timeFormat : 'HH시 mm분',
+					stepMinute: 5,
 					showSecond : false,
 					controlType : 'select',
 					oneLine : true,

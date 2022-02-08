@@ -94,8 +94,7 @@ line-height: 42px;
 text-align: center;
 color: #FFFFFF;
 border: 0px;
-
-
+cursor: pointer;
 }
 
 #login_form{

@@ -15,7 +15,7 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 지역 선택 -->
 		<div id="addr_area" onclick="execPostCode();">
 			<input name="address" value="${member.region1} ${member.region2}" id="post_addr" type="text" readonly="readonly" />
-			<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png' />
+<%-- 			<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png' /> --%>
 		</div>
 
 		<div class="top">

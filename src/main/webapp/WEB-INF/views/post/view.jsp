@@ -17,9 +17,9 @@
              </div>
              <div>
                  <p class="uid">
-                 	 ${member.uid }
+                 	 ${member.nickname}
                  </p>
-                 <p class="addr">${post.address}</p>
+                 <p class="addr">${member.region2} ${member.region3}</p>
              </div>
          </div>
          <div>

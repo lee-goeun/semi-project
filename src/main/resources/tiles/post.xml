@@ -45,6 +45,9 @@
 	<definition name="/post/viewPost1" extends="baseLayout">
 		<put-attribute name="title" value="모집 게시판"/>
 		<put-attribute name="css" value="/resources/css/post/form.css"/>
+		<put-attribute name="css1" value="/resources/css/post/datepicker.css"/>
+		<put-attribute name="css2" value="/resources/css/post/jquery-ui-timepicker-addon.css"/>
+		<put-attribute name="css3" value="/resources/css/post/datepicker-custom.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/post/modify.jsp"/>
 	</definition>
 	
