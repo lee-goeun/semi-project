@@ -88,7 +88,7 @@ request.setCharacterEncoding("UTF-8");
 												<span class="deadline">
 													<i></i><span></span>
 												</span>
-												<span class="headcount"><i></i>1 / ${post.maxMember}</span>
+												<span class="headcount"><i></i>${post.chatNum} / ${post.maxMember}</span>
 											</p>
 										</div>
 										<div class="closed" style="display: none;">

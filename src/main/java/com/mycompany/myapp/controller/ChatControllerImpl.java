@@ -55,6 +55,7 @@ public class ChatControllerImpl {
 	@RequestMapping(value = "/room", method = RequestMethod.GET)
 	public ModelAndView selectChat(int postId, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String viewName = (String) request.getAttribute("viewName");
+		Map<String, Object> chatMap = new HashMap<String, Object>();
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		
@@ -64,6 +65,11 @@ public class ChatControllerImpl {
 		String uid = memberVO.getUid();
 		
 		mav.addObject("uid",uid);
+		
+		//채팅 생성
+		chatMap.put("postId", postId);
+		chatMap.put("uid", uid);
+		chatService.addNewChat(chatMap);
 		
 		/*
 		 * ChatRoom room = chatService.viewChat(postId); mav.addObject("room", room);

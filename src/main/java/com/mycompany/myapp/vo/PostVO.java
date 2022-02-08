@@ -33,6 +33,10 @@ public class PostVO {
 	private String region2;		// 지역(시도)
 	private String region3;		// 지역(시도)
 	
+	/* chatTbl에서 가져옴 */
+	private int chatNum;		// 참가인원
+	
+	
 	public PostVO() {
 		
 	}
@@ -220,5 +224,14 @@ public class PostVO {
 	public void setRegion3(String region3) {
 		this.region3 = region3;
 	}
+	
+	public int getChatNum() {
+		return chatNum;
+	}
+
+	public void setChatNum(int chatNum) {
+		this.chatNum = chatNum;
+	}
+
 	
 }
