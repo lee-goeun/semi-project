@@ -25,8 +25,14 @@ public class ChatDAOImpl implements ChatDAO{
 		sqlSession.insert("mapper.chat.insertMsg", chatMap);
 	}
 	
+	@Override
 	public int selectChatId(String msg) throws DataAccessException{
 		return sqlSession.selectOne("mapper.chat.selectChatId", msg);
+	}
+
+	@Override
+	public void exitChat(Map chatMap) throws DataAccessException {
+		sqlSession.delete("mapper.chat.exitChat", chatMap);
 	}
 
 }

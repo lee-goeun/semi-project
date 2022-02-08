@@ -25,8 +25,13 @@
 			insert into chattbl(msg, uid, postId) values(#{msg}, #{uid}, #{postId})
 	</insert>
 	
+	<!--  -->
 	<select id="selectChatId" resultType="int" parameterType="String">
 			select chatId from chattbl where msg =#{msg}
 	</select>
 	
+	<!-- 채팅방 나가기 -->
+	<delete id="exitChat" parameterType="java.util.Map">
+		delete from chattbl where postId = #{postId} and uid = #{uid};
+	</delete>
 </mapper>
