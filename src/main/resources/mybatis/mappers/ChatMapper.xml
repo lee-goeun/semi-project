@@ -21,9 +21,9 @@
 	</insert>
 	
 	<!-- 채팅방 선택 -->
-	<select id="selectChat" resultMap="chatResult" parameterType="java.util.Map">
+	<select id="selectChat" resultMap="chatResult" resultType="String" parameterType="int">
 		<![CDATA[
-			SELECT * FROM chattbl where postId=#{postId}
+			SELECT msg FROM chattbl where postId=#{postId}
 		]]>
 	</select>
 	

@@ -15,7 +15,13 @@ public class ChatVO {
 	
 	public ChatVO() {
 	}
-
+	
+	public ChatVO( int postId, String uid, MessageType type) {
+		this.postId = postId;
+		this.uid = uid;
+		this.type = type;
+	}
+	
 	public int getChatId() {
 		return chatId;
 	}

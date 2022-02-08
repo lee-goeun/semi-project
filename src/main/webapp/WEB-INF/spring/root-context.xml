@@ -7,10 +7,11 @@
 	
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	<!-- WebSocket 등록 -->
-	<bean id="chatWebSocketHandler" class="com.mycompany.myapp.handler.ChatWebSocketHandler"/>
+ <bean id="chatWebSocketHandler" class="com.mycompany.myapp.handler.ChatWebSocketHandler"/> 
 	
 	<!-- WebSocket에 url(chatws) 연결 -->
-	<websocket:handlers>
-		<websocket:mapping handler="chatWebSocketHandler" path="/post/chatws"/>
-	</websocket:handlers>
+ 	<websocket:handlers>
+		<websocket:mapping handler="chatWebSocketHandler" path="/chatws"/>
+		<!-- <websocket:sockjs/> -->
+	</websocket:handlers> 
 </beans>
