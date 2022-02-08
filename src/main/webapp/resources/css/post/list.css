@@ -15,7 +15,7 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 
 /*////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////// */
 
-.contents { padding-top: calc(22.125vh - 175.5px); padding-bottom: calc(44.25vh - 335px); }
+.contents { padding-top: calc(22.125vh - 175.5px); }
  
 /* 지역 선택 */
 #addr_area { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); width: 150px; margin: 0 auto; text-align: center; } 
@@ -36,7 +36,7 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 .top .search_area .searchReset { position: absolute; top: 5px; right: -112px; color: #ccc; } 
 
 /* 탭 영역 */
-.tab { float: left; width: 400px; height: 30px; margin-left: 30px; } 
+.tab { float: left; width: 400px; height: 30px; margin-left: 30px; margin-bottom: 25px; } 
 .tab li { width: 100px; height: 40px; line-height: 40px; float: left; border: 1px solid #ccc; text-align: center; } 
 .tab li:nth-child(2), .tab li:last-child { margin-left: -1px; } 
 .tab li:hover { color: #fff; background-color: #ccc; transition: all 0.2s; } 
@@ -49,9 +49,13 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 .btn_area .goToWrite:hover { background: #53d189; } 
 
 /* 게시물 */
-.post { clear: both; } 
+.post { clear: both; height: 56vh; overflow-y: scroll; margin-top: calc(22.125vh - 165.5px); } 
+.post ul.item_list { display: flex; flex-wrap: wrap; padding: 10px; } 
+.post ul.item_list li.item { position: relative; width: 31%; height: 120px; margin: 1.5vh 1.1%; padding: 1vh 15px; background: #fff; border: 1px solid #eee; border-radius: 3px; box-sizing: border-box; box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.1); }
+/* .post::-webkit-scrollbar { display: none; } */
+/* .post { clear: both; }  */
 .post ul.item_list { /* display: flex; */ /* flex-wrap: wrap; */ /* padding: 10px; */ }
-.post ul.item_list li.item { position: relative; /* width: 30%; */ /* height: 120px; */ margin: 1.5vh 2px; padding: 1.5vh 15px; background: #fff; border: 1px solid #eee; border-radius: 3px; box-sizing: border-box; box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.1); } 
+/* .post ul.item_list li.item { position: relative; width: 30%; height: 120px; margin: 1.5vh 2px; padding: 1.5vh 15px; background: #fff; border: 1px solid #eee; border-radius: 3px; box-sizing: border-box; box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.1); }  */
 .post ul.item_list li.item img { float: left; width: 100px; height: 100px; } 
 .post ul.item_list li.item .list_info { float: left; width: calc(100% - 120px); padding-left: 20px; line-height: 30px; text-align: left; } 
 .post ul.item_list li.item .list_info .title { font-size: 18px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; } 
@@ -78,7 +82,19 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 .post .postSearchNone { height: 100px; line-height: 100px; margin: 0 30px; border-top: solid 10px #e1e1e1; border-bottom: solid 10px #e1e1e1; }
 
 /* 게시물 X */
-.post .postNone { height: 100px; line-height: 100px; margin: 0 30px; border-top: solid 10px #e1e1e1; border-bottom: solid 10px #e1e1e1; } 
+.post .postNone { height: 100px; line-height: 100px; margin: 0 30px; border-top: solid 10px #e1e1e1; border-bottom: solid 10px #e1e1e1; }
+
+/* 다운 아이콘 */
+.down { margin-top: 20px; /* background-color: #53d189; */}
+.down i { color: #eee; font-size: 30px; animation-name: motion; animation-direction: alternate-reverse; animation-iteration-count: infinite; animation-timing-function: ease-in; animation-duration: .8s; } 
+@keyframes motion {
+  0% {
+    padding-top: 0px;
+  }
+  100% {
+    padding-top: 13px;
+  }
+}
 
 /* 페이징 */
 .paging_wrap { width: 100%; position: absolute; bottom: -50px; left: 50%; transform: translate(-50%, 0); } 
@@ -96,9 +112,9 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 /* .post .load_btn_wrap .load { color: #ccc; font-size: 18px; }  */
 
 /* slick*/
-.slider { } 
-.slick-list { padding: 15px 0; } 
-.slick-slide { margin: 0 1vw; } 
+/* .slider { }  */
+/* .slick-list { padding: 15px 0; }  */
+/* .slick-slide { margin: 0 1vw; }  */
 
 /* slick 이전, 다음 버튼 */
 .slick-prev, .slick-next { position: absolute; font-size: 0; top: 43%; cursor: pointer; z-index: 99; } 

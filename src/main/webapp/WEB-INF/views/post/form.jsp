@@ -46,11 +46,9 @@ request.setCharacterEncoding("UTF-8");
 				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원" />
 			</div>
 			<div>
-				<!-- 				<label class="deadline" for="deadline">모집시간</label> -->
-				<!-- 				<input type="time" id="deadline" name="deadline" placeholder="모집시간" /> -->
 				<label for="deadline">모집시간</label>
 				<input type="hidden" name="deadline" id="deadlineF">
-				<input type="text" id="deadline" class="deadline" placeholder="시간을 입력하세요." readonly>
+				<input type="text" id="deadline" class="deadline" placeholder="마감시간" readonly>
 			</div>
 			<div class="isChecked">
 				<label class="content" for="content">음식명</label>

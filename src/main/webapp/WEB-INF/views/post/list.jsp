@@ -131,6 +131,10 @@ request.setCharacterEncoding("UTF-8");
 			<!-- 				</ul> -->
 			<!-- 			</div> -->
 		</div>
+		
+		<div class="down">
+			<i class="fas fa-angle-double-down"></i>
+		</div>
 
 		<form id="listForm" method="get">
 			<%-- 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> --%>
@@ -375,7 +379,7 @@ $(document).ready(function(){
 	}
 	
 	/* slick slider */
-	if ($('.slider li.item').length == 0) {
+	/* if ($('.slider li.item').length == 0) {
 			$('.slider').slick({
 				slidesToShow: 3,
 				slidesToScroll: 3,
@@ -397,7 +401,7 @@ $(document).ready(function(){
 				draggable: true,
 				dots: true,
 			});
-		}
+		} */
   
 	/* 모집시간 포맷 변경 */
 	const deadline = document.querySelectorAll("._deadline");
