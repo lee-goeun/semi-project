@@ -243,6 +243,7 @@
 		replyReviseInput[i].readOnly = "readOnly";	// inut readOnly 설정
 		replyReviseInput[i].classList.remove("readonlyF");	// 스타일 클래스 제거
 		replyReviseBtnWrap[i].style.display = "none";	// 수정 취소, 완료 버튼 제거
+		window.location.reload();	// 새로고침
 	}
 	
 	/* 함수 실행 */
