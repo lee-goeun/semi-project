@@ -15,7 +15,7 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 
 /*////////////////////////////////////////////////////////////////////////////////////////// ///////////////////////////////////// */
 
-.contents { padding-top: calc(22.125vh - 175.5px); }
+.contents { padding-top: max(10px, calc(22.125vh - 162.5px)); }
  
 /* 지역 선택 */
 #addr_area { position: absolute; top: 120px; left: 50%; transform: translateX(-50%); margin: 0 auto; text-align: center; } 
@@ -23,7 +23,7 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 #addr_area img { position: absolute; top: 7px; right: 0; } 
 
 /* 타이머 영역 */
-.top { margin-bottom: calc(22.125vh - 165.5px); } 
+.top { margin-bottom: max(10px, calc(22.125vh - 162.5px)) } 
 .top .time_area { display: inline-block; margin-right: 50px; font-size: 26px; } 
 
 /* 검색 영역 */
@@ -49,7 +49,7 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 .btn_area .goToWrite:hover { background: #53d189; } 
 
 /* 게시물 */
-.post { clear: both; height: 56vh; overflow-y: scroll; margin-top: calc(22.125vh - 165.5px); } 
+.post { clear: both; height: 52vh; overflow-y: scroll; margin-top: max(60px, calc(22.125vh - 100.5px)); } 
 .post ul.item_list { display: flex; flex-wrap: wrap; padding: 10px; } 
 .post ul.item_list li.item { position: relative; width: 31%; height: 120px; margin: 1.5vh 1.1%; padding: 1vh 15px; background: #fff; border: 1px solid #eee; border-radius: 3px; box-sizing: border-box; box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.1); }
 /* .post::-webkit-scrollbar { display: none; } */
@@ -85,7 +85,7 @@ section { width: 100%; height: calc(100vh - 150px); box-sizing: border-box; }
 .post .postNone { height: 100px; line-height: 100px; margin: 0 30px; border-top: solid 10px #e1e1e1; border-bottom: solid 10px #e1e1e1; }
 
 /* 다운 아이콘 */
-.down { margin-top: 20px; /* background-color: #53d189; */}
+.down { height: 45px; margin-top: 20px; }
 .down i { color: #eee; font-size: 30px; animation-name: motion; animation-direction: alternate-reverse; animation-iteration-count: infinite; animation-timing-function: ease-in; animation-duration: .8s; } 
 @keyframes motion {
   0% {
