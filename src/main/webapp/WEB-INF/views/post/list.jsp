@@ -25,7 +25,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<!-- 검색 영역 -->
 			<div class="search_area">
-				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="제목을 입력하세요." onKeyPress="if (event.keyCode==13){searchFunc();}">
+				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="검색어를 입력하세요." onKeyPress="if (event.keyCode==13){searchFunc();}">
 				<button class="searchBtn">
 					<img src="${contextPath}/resources/image/outline_search_white_24dp.png">
 				</button>

@@ -15,7 +15,7 @@
          .text_area div .isTogether{font-size:20px; font-weight:700;}
 
          .text_area .gather_area p{float:left; margin-right:20px; font-size:20px; margin-bottom:20px;}
-         .text_area div span{font-weight: 700;}
+         .text_area div.fee span{font-weight: 700;}
          .text_area div .left{float:left;}
          .text_area div .right{float:right;}
          .text_area div .grey{font-size:12px; color:#ccc; text-decoration: line-through;}

@@ -309,8 +309,9 @@ public class PostControllerImpl implements PostController {
 		ResponseEntity resEnt = null;
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
+		
+		postService.modPost(postMap);
 		try {
-			postService.modPost(postMap);
 			if (image != null && image.length() != 0) {
 				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
 				File destDir = new File(POST_IMAGE_REPO + "\\" + postId);

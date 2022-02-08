@@ -53,8 +53,11 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 
 			<div>
+				<input type=vart" name="deadline" id="deadlineF" readonly>
+			</div>
+			<div>
 				<label for="deadline">모집시간</label>
-				<input type="hidden" name="deadline" id="deadlineF">
+<!-- 				<input type="text" name="deadline" id="deadlineF" readonly> -->
 				<input type="text" id="deadline" class="deadline" value="${post.deadline}" placeholder="마감시간" readonly>
 			</div>
 			<c:if test="${post.isTogether == '1'}">
@@ -84,12 +87,8 @@ request.setCharacterEncoding("UTF-8");
 			.ready(
 					function() {
 
-						var timeSet = $
-						{
-							post.deadline
-						}
-						;
-						alert(timeSet);
+// 						var timeSet = ${post.deadline};
+// 						alert(timeSet);
 						$('form').submit(
 								function() {
 									//유효성 체크
@@ -196,6 +195,12 @@ request.setCharacterEncoding("UTF-8");
 	$(function() {
 		$(deadline).change(
 				function() {
+					time1 = deadline.value.substr(0, 4);
+					time2 = deadline.value.substr(6, 2);
+					time3 = deadline.value.substr(10, 2);
+					time4 = deadline.value.substr(14, 2);
+					time5 = deadline.value.substr(18, 2);
+					
 					deadlineFormat.value = time1 + "-" + time2 + "-" + time3 + " " + time4 + ":" + time5 + ":00";
 				})
 	});

@@ -37,9 +37,9 @@
          </div>
          <div class="gather_area">
              <p class="maxMember">모집인원 : 1 / ${post.maxMember }</p>
-             <p class="deadline">모집시간 : ${post.deadline}</p>
+             <p class="deadline">모집시간 : <span>${post.deadline}</span></p>
          </div>
-         <div>
+         <div class="fee">
              <span>요금을 확인해주세요</span>
              <c:if test="${post.isTogether == '1'}">
 	             <div>
@@ -130,4 +130,12 @@
             	"backgroundImage":"url('${contextPath}/resources/image/baseline_person_black_24dp.png')"
             });
         });
+        
+        /* 모집시간 포맷 변경 */
+    	const deadline = document.querySelector(".gather_area .deadline span");
+    	let time2 = deadline.innerText.substr(5, 2);
+    	let time3 = deadline.innerText.substr(8, 2);
+    	let time4 = deadline.innerText.substr(11, 2);
+    	let time5 = deadline.innerText.substr(14, 2);
+    	deadline.innerText = time2 + "월 " + time3 + "일 " + time4 + ":" + time5;
     </script>
