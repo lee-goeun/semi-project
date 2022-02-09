@@ -23,6 +23,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.mycompany.myapp.handler.ChatRoom;
+import com.mycompany.myapp.handler.ChatRoomRepository;
+import com.mycompany.myapp.handler.ChatWebSocketHandler;
 import com.mycompany.myapp.service.ChatService;
 import com.mycompany.myapp.vo.ChatVO;
 import com.mycompany.myapp.vo.MemberVO;
@@ -72,14 +74,19 @@ public class ChatControllerImpl {
 		
 		mav.addObject("uid",uid);
 		
-		//채팅 생성
+		//채팅 생성		
 		chatMap.put("postId", postId);
 		chatMap.put("uid", uid);
-		chatService.addNewChat(chatMap);
 		
-		/*
-		 * ChatRoom room = chatService.viewChat(postId); mav.addObject("room", room);
-		 */
+		//채팅 접속여부 확인
+		int size = chatService.confirmUid(chatMap).size();
+		if(size == 0) {
+			chatService.addNewChat(chatMap);
+		}
+		
+		String chatPostId = Integer.toString(postId);
+		ChatRoomRepository.checkRoom(chatPostId);
+		
 		return mav;
 	}
 	
@@ -87,16 +94,13 @@ public class ChatControllerImpl {
 	@RequestMapping(value="/exit", method=RequestMethod.POST)
 	@ResponseBody
 	public ResponseEntity exitChat(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		System.out.println("##############################");
 		request.setCharacterEncoding("utf-8");
 		Map<String, Object> chatMap = new HashMap<String, Object>();
 		Enumeration enu = request.getParameterNames();
-		System.out.println("^^^^^^^^^^^^^^^ " + request.getParameter("postId"));
 		while(enu.hasMoreElements()) {
 			String name = (String) enu.nextElement();
 			String value = request.getParameter(name);
 			chatMap.put(name, value);
-			System.out.println("&&&&&& " + name + " " + value);
 		}
 		
 		String msg; 
@@ -104,7 +108,7 @@ public class ChatControllerImpl {
 		HttpHeaders responseHeaders = new HttpHeaders();
 		responseHeaders.add("Content-Type", "text/html; charset=utf-8");
 		chatService.exitChat(chatMap);
-		System.out.println("*******************");
+		
 		try {
 			
 			msg = "<script>";

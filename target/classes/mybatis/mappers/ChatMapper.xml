@@ -30,8 +30,13 @@
 			select chatId from chattbl where msg =#{msg}
 	</select>
 	
+	<!-- uid가 채팅방에 있는 지 여부 확인 -->
+	<select id="confirmUid" resultMap="chatResult" parameterType="java.util.Map">
+		select * from chattbl where postId = #{postId} and uid = #{uid}
+	</select>
+	
 	<!-- 채팅방 나가기 -->
 	<delete id="exitChat" parameterType="java.util.Map">
-		delete from chattbl where postId = #{postId} and uid = #{uid};
+		delete from chattbl where postId = #{postId} and uid = #{uid}
 	</delete>
 </mapper>

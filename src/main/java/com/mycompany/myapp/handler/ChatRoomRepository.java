@@ -19,9 +19,18 @@ public class ChatRoomRepository {
         chatRoomMap = new LinkedHashMap<>();    
     }
     
-    public ChatRoom findRoomById(String id){
+    public static ChatRoom findRoomById(String id){
         return chatRoomMap.get(id);
     }
+    
+    public static void checkRoom(String id) {
+    	if(chatRoomMap.get(id) == null) {
+    		createChatRoom(id);
+    	}else {
+    		findRoomById(id);
+    	}
+    }
+    
     public static ChatRoom createChatRoom(String postId){
         ChatRoom chatRoom = ChatRoom.create(postId);
         chatRoomMap.put(postId, chatRoom);

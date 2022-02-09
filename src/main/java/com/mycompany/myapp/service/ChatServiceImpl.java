@@ -1,5 +1,6 @@
 package com.mycompany.myapp.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,11 +37,20 @@ public class ChatServiceImpl implements ChatService{
 	public int selectChatId(String msg) throws Exception{
 		return chatDAO.selectChatId(msg);
 	}
-
+	
+	@Override
+	public List<ChatVO> confirmUid(Map chatMap) throws Exception {
+		return chatDAO.confirmUid(chatMap);
+	}
+	
 	@Override
 	public void exitChat(Map chatMap) throws Exception {
 		chatDAO.exitChat(chatMap);
 	}
+
+	
+
+	
 	
 	
 }

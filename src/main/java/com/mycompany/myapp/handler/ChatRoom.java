@@ -26,8 +26,10 @@ public class ChatRoom {
 	public void setRoomId(String roomId) {
 		this.roomId = roomId;
 	}
+	
 	public ChatRoom() {
 	}	
+	
 	public static ChatRoom create(String postId){
         ChatRoom chatRoom = new ChatRoom();
         chatRoom.roomId =  postId;
@@ -35,7 +37,6 @@ public class ChatRoom {
     }
 	
 	public void handleMessage(WebSocketSession session, ChatVO chatMessage, ObjectMapper objectMapper) throws IOException{
-		System.out.println("SSSSSSSSSSSS " + chatMessage.getType());
 		if(chatMessage.getType() == MessageType.ENTER) {
 			sessions.add(session);
 		}else if(chatMessage.getType() == MessageType.LEAVE) {
@@ -44,9 +45,8 @@ public class ChatRoom {
 			chatMessage.setMsg(chatMessage.getUid() + ":" + chatMessage.getMsg());
 			send(chatMessage, objectMapper);
 		}
-		
-		
 	}
+	
 	private void send(ChatVO  chatMessage, ObjectMapper objectMapper) throws IOException{
 		TextMessage textMessage = new TextMessage(objectMapper.writeValueAsString(chatMessage.getMsg()));
 		for(WebSocketSession sess:sessions) {
