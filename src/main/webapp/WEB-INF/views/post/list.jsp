@@ -94,7 +94,9 @@ request.setCharacterEncoding("UTF-8");
 											</p>
 										</div>
 										<div class="closed" style="display: none;">
-											<p>치킨행 열차 마감</p>
+											<p>
+												<c:if test="${post.category == 'pizza'}">피자</c:if><c:if test="${post.category == 'chicken'}">치킨</c:if><c:if test="${post.category == 'hamburger'}">햄버거</c:if>행 열차 마감
+											</p>
 										</div>
 									</a>
 									<div class="leave_soon" style="display: none;">
