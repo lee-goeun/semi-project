@@ -51,7 +51,7 @@
 				from gatherTbl g left outer join userTbl u on g.uid = u.uid left outer join (select postId, count(distinct uid) as CNT from chattbl group by postId) as c on g.postId = c.postId
 				where g.isDeleted = 0
 				<if test="keyword != null">
-					and title like concat('%',#{keyword},'%' ) OR region3 like concat('%',#{keyword},'%' )
+					and (title like concat('%',#{keyword},'%' ) OR region3 like concat('%',#{keyword},'%' ))
 				</if>
 				<if test="tab == 1">
 					and isTogether = 1
