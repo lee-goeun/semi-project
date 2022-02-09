@@ -8,20 +8,10 @@
 
 <div id="btn_out">
     <input type="button" id="btn_exit" value="채팅 나가기"/>
+    <input type="hidden" id="myNick" value="${nickname}"/>
     <input type="hidden" id="myId" value="${uid}"/>
 </div>
 <div id="chat_area">
-    <%-- <div class="other_user">
-        <div><img src="../img/baseline_person_black_24dp.png"/></div>
-        <div>
-            <p class="user_id">엽떡조아</p>
-            <p class="text">안녕하세요.</p>
-        </div>
-    </div>
-    <div class="me">
-    	<input class="myId" type="hidden" value="${uid}"/>
-        <p class="text">안녕하세요</p>
-    </div> --%>
 </div>
 <div id="msg_area">
     <input id="msg" type="text" placeholder="메세지를 입력하세요" value=""/>
@@ -41,7 +31,7 @@
 		var postId = ${param.postId};
 		
 		$('#msg').on('keyup', function(e){
-			const nick = $('#myId').val();
+			const nick = $('#myNick').val();
 			const msg = $('#msg').val();
 			
 			console.log(nick);
@@ -49,7 +39,7 @@
 			
 			if(e.keyCode == 13){
 				//메세지 전송
-				websocket.send(JSON.stringify({postId : postId,type:'CHAT', uid:nick, msg : msg}));
+				websocket.send(JSON.stringify({postId : postId,type:'CHAT', nickname:nick, msg : msg}));
 				$('#msg').val("");
 			}
 		});
@@ -61,8 +51,8 @@
 				return false;
 			}
 			
-			const nick = $('#myId').val();
-			websocket.send(JSON.stringify({postId : postId, type:'LEAVE', uid:nick}));
+			const nick = $('#myNick').val();
+			websocket.send(JSON.stringify({postId : postId, type:'LEAVE', nickname:nick}));
 			websocket.close();
 			
 			//form 생성해서 서버 전송
@@ -81,7 +71,7 @@
 			var input2 = document.createElement('input');
 			input2.setAttribute("type","hidden");
 			input2.setAttribute("name","uid");
-			input2.setAttribute("value", nick);
+			input2.setAttribute("value", uid);
 			form.appendChild(input2);
 			
 			document.body.appendChild(form);
@@ -92,13 +82,13 @@
 	});// end ready();
 	
 	///////////////////////////////////////////////////
-	var nick = document.getElementById('myId').value;
+	var nick = document.getElementById('myNick').value;
 	var postId = ${param.postId};
 	
 	//websocket 연결이 되는 경우
 	function onOpen(){
 		console.log('연결됨');
-		websocket.send(JSON.stringify({postId : postId, type:'ENTER', uid:nick}));
+		websocket.send(JSON.stringify({postId : postId, type:'ENTER', nickname:nick}));
 	}
 	
 	//websocket에 메세지가 왔을 때
@@ -107,7 +97,7 @@
 		console.log(data);
 		var dataArr = data.split(":");
 		console.log("dataArr" , dataArr);
-		if(dataArr[0] == '${uid}'){
+		if(dataArr[0] == '${nickname}'){
 			$('#chat_area').append(
 				'<div class="me">'+
 			       ' <p class="text">' + dataArr[1] + '</p>'+

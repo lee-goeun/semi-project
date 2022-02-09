@@ -17,9 +17,12 @@ public class ChatVO {
 	private String msg;
 	private MessageType type;
 	
+	/* userTbl에서 가져옴 */
+	private String nickname;	// 모집글 작성자 닉네임
+	
 	public ChatVO() {
 	}
-	
+
 	public ChatVO( int postId, String uid, MessageType type) {
 		this.postId = postId;
 		this.uid = uid;
@@ -96,6 +99,14 @@ public class ChatVO {
 
 	public void setType(MessageType type) {
 		this.type = type;
+	}
+	
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 	

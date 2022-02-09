@@ -42,7 +42,8 @@ public class ChatRoom {
 		}else if(chatMessage.getType() == MessageType.LEAVE) {
 			sessions.remove(session);
 		}else {
-			chatMessage.setMsg(chatMessage.getUid() + ":" + chatMessage.getMsg());
+			System.out.println("*********** " + chatMessage);
+			chatMessage.setMsg(chatMessage.getNickname() + ":" + chatMessage.getMsg());
 			send(chatMessage, objectMapper);
 		}
 	}

@@ -36,29 +36,6 @@ public class ChatControllerImpl {
 	@Autowired
 	private ChatService chatService;
 	
-	/*
-	 * @Autowired private ChatVO chatVo;
-	 */
-	
-	public ChatControllerImpl() {
-	}
-	
-	//채팅 생성
-	/*@RequestMapping(value = "/new", method = RequestMethod.GET)
-	public ModelAndView newChat(int postId, String uid, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		Map<String, Object> chatMap = new HashMap<String, Object>();
-		chatMap.put("postId", postId);
-		chatMap.put("uid", uid);
-		
-		chatService.addNewChat(chatMap);
-		
-		String viewName = (String) request.getAttribute("viewName");
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName(viewName);
-		 
-		return mav;
-	}*/
-	
 	//채팅 선택
 	@RequestMapping(value = "/room", method = RequestMethod.GET)
 	public ModelAndView selectChat(int postId, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -70,9 +47,11 @@ public class ChatControllerImpl {
 		
 		HttpSession session = request.getSession(); 
 		MemberVO memberVO = (MemberVO)session.getAttribute("member"); 
+		String nickname = memberVO.getNickname();
 		String uid = memberVO.getUid();
 		
-		mav.addObject("uid",uid);
+		mav.addObject("nickname",nickname);
+		mav.addObject("uid", uid);
 		
 		//채팅 생성		
 		chatMap.put("postId", postId);
