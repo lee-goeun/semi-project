@@ -13,7 +13,7 @@ request.setCharacterEncoding("UTF-8");
 	<div class="contents">
 
 		<!-- 지역 선택 -->
-		<div id="addr_area" onclick="execPostCode();">
+		<div id="addr_area">
 			<input name="address" value="${member.region1} ${member.region2}" id="post_addr" type="text" readonly="readonly" />
 <%-- 			<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png' /> --%>
 		</div>
@@ -51,9 +51,11 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<!-- 글쓰기 버튼 -->
-		<div class="btn_area">
-			<a class="goToWrite" href="${contextPath}/post/form">글쓰기</a>
-		</div>
+		<c:if test="${ member != null}">
+			<div class="btn_area">
+				<a class="goToWrite" href="${contextPath}/post/form">글쓰기</a>
+			</div>
+		</c:if>
 
 		<!-- 게시물 -->
 		<div class="post">
@@ -147,7 +149,6 @@ request.setCharacterEncoding("UTF-8");
 
 <!-- script -->
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-<script src="/resources/js/post/slick.js"></script>
 <script type="text/javascript">
 
 $(document).ready(function(){

@@ -23,7 +23,6 @@
 	<definition name="/post/list" extends="baseLayout">
 		<put-attribute name="title" value="모집 게시판"/>
  		<put-attribute name="css" value="/resources/css/post/list.css"/> 
- 		<put-attribute name="css1" value="/resources/css/post/slick.css"/> 
 		<put-attribute name="body" value="/WEB-INF/views/post/list.jsp"/>
 	</definition>
 	

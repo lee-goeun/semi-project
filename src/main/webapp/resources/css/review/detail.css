@@ -241,7 +241,6 @@ section {
 }
 /* 댓글 버튼 영역 */
 .replyBtn_wrap {
-	/* background-color: yellow; */
 	display: inline-block;
 	margin-left: 3px;
 	font-size: 14px;
@@ -334,10 +333,12 @@ section {
 	width: 100%;
 	height: 50px;
 	margin-top: 10px;
+	padding-right: 75px;
 	font-size: 18px;
 	text-indent: 20px;
 	border-radius: 25px;
 	background: #eee;
+    box-sizing: border-box;
 }
 
 .reply_wrap .replyInput_wrap .replyInput::placeholder {
@@ -346,7 +347,7 @@ section {
 
 .reply_wrap .replyInput_wrap .replyInputBtn {
 	position: absolute;
-	top: 20px;
+	top: 21px;
 	right: 25px;
 	color: #aaa;
 	font-size: 18px;

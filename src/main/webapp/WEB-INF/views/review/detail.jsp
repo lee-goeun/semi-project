@@ -74,16 +74,18 @@
 					<p>첫번째 댓글을 남겨주세요.</p>
 				</div>
 				
-				<form id="replyForm" method="post">
-					<div class="replyInput_wrap">
-						<input type="text" name="replyContent" class="replyInput" placeholder="댓글을 입력해주세요.">
+				<c:if test="${ member != null}">
+					<form id="replyForm" method="post">
+						<div class="replyInput_wrap">
+							<input type="text" name="replyContent" class="replyInput" placeholder="댓글을 입력해주세요.">
+							
+							<input type="hidden" name="uid" class="replyInputUid" value="${member.uid}" placeholder="작성자" readyonly>
+							<button class="replyInputBtn">등록</button>
+						</div>
 						
-						<input type="hidden" name="uid" class="replyInputUid" value="${member.uid}" placeholder="작성자" readyonly>
-						<button class="replyInputBtn">등록</button>
-					</div>
-					
-					<input type="hidden" id="reviewId" name="reviewId" value='<c:out value="${rDetail.reviewId}"/>' />
-				</form>
+						<input type="hidden" id="reviewId" name="reviewId" value='<c:out value="${rDetail.reviewId}"/>' />
+					</form>
+				</c:if>
 			</div>
 			
 			<form id="detailForm" method="get">
