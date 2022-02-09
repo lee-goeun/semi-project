@@ -16,4 +16,7 @@ public interface ChatDAO {
 	
 	//채팅방메세지에 대한 아이디 조회
 	public int selectChatId(String msg) throws DataAccessException;
+	
+	//채팅방 나가기
+	public void exitChat(Map chatMap) throws DataAccessException;
 }

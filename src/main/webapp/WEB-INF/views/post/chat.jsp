@@ -56,10 +56,36 @@
 		
 		//웹 소켓 연결 해제
 		$('#btn_exit').on('click', function(){
-			const nick = $('#myId').val();
+			var cnfrm = confirm("채팅을 나가시겠습니까?");
+			if(!cnfrm){
+				return false;
+			}
 			
+			const nick = $('#myId').val();
 			websocket.send(JSON.stringify({postId : postId, type:'LEAVE', uid:nick}));
 			websocket.close();
+			
+			//form 생성해서 서버 전송
+			var form = document.createElement('form');
+			form.setAttribute("method", "post");
+			form.setAttribute("action", "${contextPath}/chat/exit");
+			
+			  //postId
+			var input1 = document.createElement('input');
+			input1.setAttribute("type","hidden");
+			input1.setAttribute("name","postId");
+			input1.setAttribute("value", postId);
+			form.appendChild(input1);
+			
+			  //uid
+			var input2 = document.createElement('input');
+			input2.setAttribute("type","hidden");
+			input2.setAttribute("name","uid");
+			input2.setAttribute("value", nick);
+			form.appendChild(input2);
+			
+			document.body.appendChild(form);
+			form.submit();
 		});
 		
 		

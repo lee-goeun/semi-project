@@ -36,7 +36,7 @@
              </p>
          </div>
          <div class="gather_area">
-             <p class="maxMember">모집인원 : 1 / ${post.maxMember }</p>
+             <p class="maxMember">모집인원 : ${post.chatNum} / ${post.maxMember }</p>
              <p class="deadline">모집시간 : <span>${post.deadline}</span></p>
          </div>
          <div class="fee">
@@ -67,7 +67,7 @@
          </div>
          <div class="btn_area">
          	<a id="btn_join" href="#none">참여하기</a>
-         <c:if test="${member.uid == post.uid}">
+         <c:if test="${member.uid == post.uid && post.chatNum <= 1}">
          	<a id="btn_delete" onclick="deletePost('${contextPath}/post/removePost', ${param.postId})">삭제하기</a>
          	<a href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
          </c:if>

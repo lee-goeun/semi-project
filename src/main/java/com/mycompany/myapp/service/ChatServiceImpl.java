@@ -36,6 +36,11 @@ public class ChatServiceImpl implements ChatService{
 	public int selectChatId(String msg) throws Exception{
 		return chatDAO.selectChatId(msg);
 	}
+
+	@Override
+	public void exitChat(Map chatMap) throws Exception {
+		chatDAO.exitChat(chatMap);
+	}
 	
 	
 }
