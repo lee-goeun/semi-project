@@ -1,0 +1,44 @@
+@charset "UTF-8";
+#pass_up_form{
+	margin:auto;
+
+	text-align: left;
+}
+.div1{font-size:20px;}
+
+#pass_box{
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+width:350px;
+height:25px;
+}
+
+#son_upass{
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+width:350px;
+height:25px;
+}
+.new_pass_box{
+border: 2px solid #CCCCCC;
+box-sizing: border-box;
+border-radius: 10px;
+width:350px;
+height:25px;
+	
+}
+.check{
+	display:none;
+	color:red;
+}
+
+.btn{
+background: rgba(196, 196, 196, 0.5);
+border-radius: 10px;
+border:none;
+height:25px;
+width:100px;
+cursor:pointer;
+}
