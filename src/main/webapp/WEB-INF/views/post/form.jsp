@@ -33,9 +33,9 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<div>
 				<input type="radio" name="isTogether" value="1" checked />
-				<label for="true">같이 먹어요</label>
+				<label>같이 먹어요</label>
 				<input type="radio" name="isTogether" value="0" />
-				<label class="" for="false">따로 먹어요</label>
+				<label>따로 먹어요</label>
 			</div>
 			<div>
 				<label class="title" for="title">제목</label>

@@ -35,12 +35,10 @@ request.setCharacterEncoding("UTF-8");
 				</select>
 			</div>
 			<div>
-				<input type="radio" name="isTogether" id="true" value="1"
-					<c:if test="${post.isTogether == '1' }">checked="checked"</c:if> />
-				<label for="true">같이 먹어요</label>
-				<input type="radio" name="isTogether" id="false" value="0"
-					<c:if test="${post.isTogether == '0' }">checked="checked"</c:if> />
-				<label for="false">따로 먹어요</label>
+				<input type="radio" name="isTogether" value="1" <c:if test="${post.isTogether == '1' }">checked</c:if> />
+				<label>같이 먹어요</label>
+				<input type="radio" name="isTogether" value="0" <c:if test="${post.isTogether == '0' }">checked</c:if> />
+				<label>따로 먹어요</label>
 			</div>
 			<div>
 				<label class="title" for="title">제목</label>
@@ -56,16 +54,14 @@ request.setCharacterEncoding("UTF-8");
 				<input type="hidden" name="deadline" id="deadlineF" value="${post.deadline}" readonly>
 				<input type="text" id="deadline" class="deadline" value="${post.deadline}" placeholder="마감시간" readonly>
 			</div>
-			<c:if test="${post.isTogether == '1'}">
-				<div>
+				<div class="isChecked">
 					<label class="content" for="content">음식명</label>
 					<input type="text" name="content" id="content" placeholder="음식명" value="${post.content }" />
 				</div>
-				<div>
+				<div class="isChecked">
 					<label class="price" for="price">음식금액</label>
 					<input type="number" name="price" id="price" placeholder="음식금액" value="${post.price }" />
 				</div>
-			</c:if>
 			<div>
 				<label class="deliveryFee" for="deliveryFee">배달료</label>
 				<input type="number" name="deliveryFee" id="deliveryFee" placeholder="배달료"
@@ -79,65 +75,82 @@ request.setCharacterEncoding("UTF-8");
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="${contextPath}/resources/js/post/jquery-ui-timepicker-addon.js"></script>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
+	$(document).ready(function() {
 
-// 						var timeSet = ${post.deadline};
-// 						alert(timeSet);
-						$('form').submit(
-								function() {
-									//유효성 체크
-									if ($('#category').val() == 'all') {
-										alert('카테고리 선택은 필수입니다.');
-										return false;
-									}
-									if ($('#title').val() == '') {
-										alert('제목 입력은 필수입니다.');
-										return false;
-									}
-									if ($('#maxMember').val() == '') {
-										alert('모집인원 입력은 필수입니다.');
-										return false;
-									}
-									if ($('#time').val() == '') {
-										alert('모집시간 입력은 필수입니다.');
-										return false;
-									}
-									if ($("input[type='radio']").val() == '0') {
-										if ($('#content').val() == '') {
-											alert('음식명 입력은 필수입니다.');
-											return false;
-										}
-										if ($('#price').val() == '') {
-											alert('음식금액 입력은 필수입니다.');
-											return false;
-										}
-									}
-									if ($('#deliveryFee').val() == '') {
-										alert('배달료 입력은 필수입니다.');
-										return false;
-									}
+	//var timeSet = ${post.deadline};
+	//alert(timeSet);
+	$('form').submit(function() {
+		//유효성 체크
+		if ($('#category').val() == 'all') {
+			alert('카테고리 선택은 필수입니다.');
+			return false;
+		}
+		if ($('#title').val() == '') {
+			alert('제목 입력은 필수입니다.');
+			return false;
+		}
+		if ($('#maxMember').val() == '') {
+			alert('모집인원 입력은 필수입니다.');
+			return false;
+		}
+		if ($('#time').val() == '') {
+			alert('모집시간 입력은 필수입니다.');
+			return false;
+		}
+		if ($("input[type='radio']").val() == '0') {
+			if ($('#content').val() == '') {
+				alert('음식명 입력은 필수입니다.');
+				return false;
+			}
+			if ($('#price').val() == '') {
+				alert('음식금액 입력은 필수입니다.');
+				return false;
+			}
+		}
+		if ($('#deliveryFee').val() == '') {
+			alert('배달료 입력은 필수입니다.');
+			return false;
+		}
 
-									//deadline 날짜 + 시간 형식으로 보내기 
-									var curDate = new Date();
-									var nowDate = curDate.getFullYear() + "-"
-											+ curDate.getMonth() + 1 + "-"
-											+ curDate.getDate();
+		//deadline 날짜 + 시간 형식으로 보내기 
+		var curDate = new Date();
+		var nowDate = curDate.getFullYear() + "-"
+				+ curDate.getMonth() + 1 + "-"
+				+ curDate.getDate();
 
-									var time = $('#time').val();
-									var fullDate = nowDate + " " + time;
-									$('#deadline').val(fullDate);
-								});
+		var time = $('#time').val();
+		var fullDate = nowDate + " " + time;
+		$('#deadline').val(fullDate);
+	});
 
-						$("form")
-								.find(".pic_area")
-								.find("#preview")
-								.css(
-										{
-											"backgroundImage" : "url('${contextPath}/resources/image/outline_photo_camera_black_24dp.png')"
-										});
-					});
+		$("form").find(".pic_area").find("#preview").css({
+			"backgroundImage" : "url('${contextPath}/resources/image/outline_photo_camera_black_24dp.png')"
+		});
+		
+		
+		if($("input[type='radio']:checked").val() == '0'){
+			$('.isChecked').css({
+				"display" : "none"
+			});
+		}else{
+			$('.isChecked').css({
+				"display" : "block"
+			});
+		}
+		
+		//같이먹어요, 따로 먹어요 체인지
+		$("input[type='radio']").on('change', function() {
+			if ($(this).val() == '0') {
+				$('.isChecked').css({
+					"display" : "none"
+				});
+			} else {
+				$('.isChecked').css({
+					"display" : "block"
+				});
+			}
+		});
+	});
 
 	//이미지 보여주기
 	function readURL(input) {
