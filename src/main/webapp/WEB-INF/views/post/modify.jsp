@@ -51,13 +51,9 @@ request.setCharacterEncoding("UTF-8");
 				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원"
 					value="${post.maxMember}" />
 			</div>
-
-			<div>
-				<input type=vart" name="deadline" id="deadlineF" readonly>
-			</div>
 			<div>
 				<label for="deadline">모집시간</label>
-<!-- 				<input type="text" name="deadline" id="deadlineF" readonly> -->
+				<input type="hidden" name="deadline" id="deadlineF" value="${post.deadline}" readonly>
 				<input type="text" id="deadline" class="deadline" value="${post.deadline}" placeholder="마감시간" readonly>
 			</div>
 			<c:if test="${post.isTogether == '1'}">
@@ -204,4 +200,5 @@ request.setCharacterEncoding("UTF-8");
 					deadlineFormat.value = time1 + "-" + time2 + "-" + time3 + " " + time4 + ":" + time5 + ":00";
 				})
 	});
+	
 </script>
