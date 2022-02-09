@@ -16,7 +16,7 @@ public class ChatRoomRepository {
 	
 	@PostConstruct
     private void init(){
-        chatRoomMap = new LinkedHashMap<>();    
+        chatRoomMap = new LinkedHashMap();    
     }
     
     public static ChatRoom findRoomById(String id){

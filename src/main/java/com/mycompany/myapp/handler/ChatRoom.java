@@ -16,7 +16,7 @@ import com.mycompany.myapp.vo.MessageType;
 
 public class ChatRoom {
 	private String roomId;
-	private Set<WebSocketSession> sessions = new HashSet<>();
+	private Set<WebSocketSession> sessions = new HashSet();
 	
 	
 	public String getRoomId() {
