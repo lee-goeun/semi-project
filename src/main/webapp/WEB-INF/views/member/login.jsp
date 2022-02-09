@@ -5,10 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <script src="https://code.jquery.com/jquery-3.4.1.js"integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
   crossorigin="anonymous"></script>
 <link rel="stylesheet" href="/resources/css/login.css" />
+
+<!-- favicon -->
+<link rel="shortcut icon" href="${contextPath}/resources/image/favicon.ico">
 </head>
 <body>
 <div class="container">

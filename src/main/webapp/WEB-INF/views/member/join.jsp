@@ -12,6 +12,9 @@
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7524b1e3ab93a0a3e7653e480563c4ce&libraries=services"></script>
 	<!-- <script src="/resources/js/join.js"></script> -->
 	<link rel="stylesheet" href="/resources/css/join.css" />
+
+	<!-- favicon -->
+	<link rel="shortcut icon" href="${contextPath}/resources/image/favicon.ico">
 </head>
 
 

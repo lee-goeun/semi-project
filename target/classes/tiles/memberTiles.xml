@@ -17,15 +17,12 @@
 		<put-attribute name="css" value=""/>
 		<put-attribute name="body" value=""/>
 	</definition>
-	
 
-	<!-- 메인에 들어갈 거 정의 -->
 	<definition name="/member/home" extends="baseLayout">
-		<put-attribute name="title" value="홈" />
+		<put-attribute name="title" value="칰칰폭폭" />
 		<put-attribute name="css" value="/resources/css/home.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/home.jsp" />
 	</definition>
-	
 	
 	<definition name="/member/mypage" extends="baseLayout">
 		<put-attribute name="title" value="마이 페이지"/>
@@ -51,7 +48,5 @@
 		<put-attribute name="css" value="/resources/css/guide.css"/>
 		<put-attribute name="body" value="/WEB-INF/views/member/guide.jsp"/>
 	</definition>
-	
-
 
 </tiles-definitions>

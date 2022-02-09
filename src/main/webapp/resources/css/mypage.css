@@ -79,13 +79,14 @@ float: right;
 }
 
 .all{
-height:800px;
+/* height:800px; */
 width:550px;
-position: absolute;
+/* position: absolute;
 left:50%;
 top:52%;
 transform :translate(-50%,-50%);
-align-items:center;
+align-items:center; */
+margin: 0 auto;
 }
 
 .fir_msg{

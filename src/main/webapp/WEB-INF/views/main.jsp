@@ -4,9 +4,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>index.page</title>
+<title>칰칰폭폭</title>
 
 <link rel="stylesheet" href="/resources/css/main.css" />
+
+<!-- favicon -->
+<link rel="shortcut icon" href="${contextPath}/resources/image/favicon.ico">
 
 </head>
 <body>
