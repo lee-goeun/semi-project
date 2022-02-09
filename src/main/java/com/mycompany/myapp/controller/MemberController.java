@@ -113,6 +113,14 @@ public class MemberController {
 				return "/member/guide";
 
 			}
+			
+			// pop 페이지 이동
+						@RequestMapping(value = "/popup", method = RequestMethod.GET)
+						public void popGET() {
+
+							
+
+						}
 	
 	
 	

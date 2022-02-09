@@ -13,12 +13,12 @@
 
 	<!-- 로그인 -->
  	<select id="memberLogin" resultType="com.mycompany.myapp.vo.MemberVO">
- 		SELECT uid, upass, nickname, address, name, email, region1, region2, region3 FROM userTbl WHERE uid = #{uid} AND upass = #{upass} 
+ 		SELECT uid, upass,postCode, nickname, address,addressSpecific, name, email, region1, region2, region3 FROM userTbl WHERE uid = #{uid} AND upass = #{upass} 
  	</select>
  	
 	<!-- 회원정보 수정 -->  	
  	<update id = "memberUpdate">
-  	UPDATE userTbl SET email = #{email}, name = #{name} WHERE uid = #{uid}
+  	UPDATE userTbl SET email = #{email}, name = #{name}, upass = #{upass},postCode = #{postCode}, address = #{address}, addressSpecific = #{addressSpecific} WHERE uid = #{uid}
  	</update>
  	
  	<!-- 회원정보 보기 -->
