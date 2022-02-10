@@ -19,7 +19,7 @@
 	<!-- 회원정보 수정 -->  	
  	<update id = "memberUpdate">
 	  	UPDATE userTbl
-	  	SET email = #{email}, name = #{name}, upass = #{upass}, postCode = #{postCode}, address = #{address}, addressSpecific = #{addressSpecific}, region1 = #{region1}, region2 = #{region2}, region3 = #{region3}
+	  	SET email = #{email}, upass = #{upass}, postCode = #{postCode}, address = #{address}, addressSpecific = #{addressSpecific}, region1 = #{region1}, region2 = #{region2}, region3 = #{region3}
 	  	WHERE uid = #{uid}
  	</update>
  	
