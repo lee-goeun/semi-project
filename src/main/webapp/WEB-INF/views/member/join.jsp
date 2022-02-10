@@ -543,7 +543,7 @@
 					});
 				}
 			}).open();
-		}
+		window.close();}
 		
 		
 		$(document).ready(function() {
