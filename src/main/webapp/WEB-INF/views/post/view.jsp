@@ -69,7 +69,7 @@
          	<a id="btn_join" href="#none">참여하기</a>
          <c:if test="${member.uid == post.uid && post.chatNum <= 1}">
          	<a id="btn_delete" onclick="deletePost('${contextPath}/post/removePost', ${param.postId})">삭제하기</a>
-         	<a href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
+         	<a id="btn_modify" href="${contextPath}/post/viewPost1?postId=${param.postId}">수정하기</a>
          </c:if>
          	 
          </div>
@@ -79,6 +79,15 @@
 	    //포스트삭제 post형식으로 보내기 
 	    //	(TODO : jqury형식이나 html에서 해결하는 방법 알아보기)
 	    function deletePost(url, postId){
+    		const oDate = new Date('${post.deadline}');
+    		const today = new Date();
+    		
+   			/* 현재 시간 < 마감 시간 => 삭제 불가*/
+   			if(oDate < today){
+   				alert('마감된 게시글은 삭제할 수 없습니다.');
+   				return false;
+   			}
+   			
 	    	var cnfrm = confirm("정말 삭제하시겠습니까?");
 	    	if(!cnfrm){
 	    		return false;
@@ -138,6 +147,18 @@
         		window.open("${contextPath}/chat/room?postId="+${post.postId}+"&uid="+'${post.uid}',"_blank","width=430,height=700, left=" + xPos +", top=10");
             });
         	
+        	// 마감된 게시글 수정 불가
+        	$('#btn_modify').on('click', function(){
+        		var text = $(this).text().substring(0,2);
+        		const oDate = new Date('${post.deadline}');
+        		const today = new Date();
+        		
+       			/* 현재 시간 < 마감 시간 => 수정 불가 */
+       			if(oDate < today){
+       				alert('마감된 게시글은 수정할 수 없습니다.');
+       				return false;
+       			}
+        	});
         	
             $(".text_area").find('.person_area').find('div').eq(0).css({
             	"backgroundImage":"url('${contextPath}/resources/image/baseline_person_black_24dp.png')"
