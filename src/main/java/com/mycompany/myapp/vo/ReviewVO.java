@@ -18,13 +18,12 @@ public class ReviewVO {
 	private int isRevised;		// 게시글 수정 여부
 	private int isDeleted;		// 게시글 삭제 여부
 	private int replyCount;		// 게시글 댓글수
+	private String region1;		// 지역(시도)
+	private String region2;		// 지역(구)
+	private String region3;		// 지역(동)
 	
 	/* userTbl에서 가져옴 */
 	private String nickname;	// 작성자 닉네임
-	private String address;		// 작성자 주소
-	private String region1;		// 지역(시도)
-	private String region2;		// 지역(시도)
-	private String region3;		// 지역(시도)
 	
 	public int getReviewId() {
 		return reviewId;
@@ -120,14 +119,6 @@ public class ReviewVO {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getRegion1() {

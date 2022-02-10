@@ -13,12 +13,12 @@
 	
 	<!-- 게시판 작성 -->
 	<insert id="reviewWrite">
-		insert into reviewTbl(uid, title, content) values (#{uid}, #{title}, #{content})
+		insert into reviewTbl(uid, title, content, region1, region2, region3) values (#{uid}, #{title}, #{content}, #{region1}, #{region2}, #{region3})
 	</insert>
 	
 	<!-- 게시판 상세 -->
 	<select id="reviewDetail" resultType="com.mycompany.myapp.vo.ReviewVO">
-		select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, r.replyCount, u.nickname, u.address, u.region1, u.region2, u.region3
+		select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, r.replyCount, u.nickname, r.region1, r.region2, r.region3
 		from reviewTbl r left outer join userTbl u on r.uid = u.uid
 		where reviewId = #{reviewId}
 	</select>
@@ -59,7 +59,7 @@
                             nickname like concat('%',#{keyword},'%' )
                         </when>
                         <when test="type == 'A'.toString()">
-                            address like concat('%',#{keyword},'%' ) OR region1 like concat('%',#{keyword},'%' ) OR region2 like concat('%',#{keyword},'%' ) OR region3 like concat('%',#{keyword},'%' )
+                            r.region1 like concat('%',#{keyword},'%' ) OR r.region2 like concat('%',#{keyword},'%' ) OR r.region3 like concat('%',#{keyword},'%' )
                         </when>
                     </choose>
                 </trim>
@@ -82,7 +82,7 @@
 	<select id="reviewListPaging" resultType="com.mycompany.myapp.vo.ReviewVO">
 		select *
 		from (
-				select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, r.replyCount, u.nickname, u.address, u.region1, u.region2, u.region3
+				select r.reviewId, r.uid, r.title, r.content, r.viewCount, r.reviewedDate, r.revisedDate, r.deletedDate, r.isRevised, r.isDeleted, r.replyCount, u.nickname, r.region1, r.region2, r.region3
 				from reviewTbl r left outer join userTbl u on r.uid = u.uid
 				where r.isDeleted = 0
 				<if test="keyword != null">
