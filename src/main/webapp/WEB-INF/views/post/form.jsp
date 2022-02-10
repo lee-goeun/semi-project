@@ -46,7 +46,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<div>
 				<label class="maxMember" for="maxMember">모집인원</label>
-				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원" />
+				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원" min="0" />
 			</div>
 			<div>
 				<label for="deadline">모집시간</label>
@@ -59,11 +59,11 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<div class="isChecked">
 				<label class="price" for="price">음식금액</label>
-				<input type="number" name="price" id="price" placeholder="음식금액" />
+				<input type="number" name="price" id="price" placeholder="음식금액" min="0"/>
 			</div>
 			<div>
 				<label class="deliveryFee" for="deliveryFee">배달료</label>
-				<input type="number" name="deliveryFee" id="deliveryFee" placeholder="배달료" />
+				<input type="number" name="deliveryFee" id="deliveryFee" placeholder="배달료" min="0"/>
 			</div>
 			<input type="hidden" name="uid" value="${member.uid}" placeholder="작성자" readonly>
 		</div>
