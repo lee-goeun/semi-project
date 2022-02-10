@@ -122,7 +122,7 @@
         	var websocket;
         	$('#btn_join').click(function(){
         		var xPos = (document.body.offsetWidth) - 430;
-        		window.open("${contextPath}/chat/room?postId="+${post.postId},"_blank","width=430,height=700, left=" + xPos +", top=10");
+        		window.open("${contextPath}/chat/room?postId="+${post.postId}+"&uid="+'${post.uid}',"_blank","width=430,height=700, left=" + xPos +", top=10");
             });
         	
         	
