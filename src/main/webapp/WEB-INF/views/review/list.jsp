@@ -38,7 +38,7 @@
 						<c:forEach items="${rList}" var="rList">
 <%-- 							<c:if test="${rList.isDeleted == 0}"> --%> <!-- mapper에 적용했음 -->
 								<tr class="reviewInfo">
-									<td class="reviewId"><c:out value="${rList.reviewId}" /></td>
+<%-- 									<td class="reviewId"><c:out value="${rList.reviewId}" /></td> --%>
 									<td class="title_wrap">
 <%-- 										<a href='/review/detail?reviewId=<c:out value="${rList.reviewId}"/>'> --%>
 										<a href='<c:out value="${rList.reviewId}"/>'>
