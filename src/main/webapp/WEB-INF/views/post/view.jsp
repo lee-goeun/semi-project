@@ -121,6 +121,15 @@
         	//채팅
         	var websocket;
         	$('#btn_join').click(function(){
+        		const oDate = new Date('${post.deadline}');
+        		const today = new Date();
+        		
+       			/* 현재 시간 < 마감 시간 =>  채팅 참여 불가 */
+       			if(oDate < today){
+       				alert('마감된 게시글은 참여할 수 없습니다.');
+       				return false;
+       			}
+        		
         		var xPos = (document.body.offsetWidth) - 430;
         		window.open("${contextPath}/chat/room?postId="+${post.postId}+"&uid="+'${post.uid}',"_blank","width=430,height=700, left=" + xPos +", top=10");
             });
