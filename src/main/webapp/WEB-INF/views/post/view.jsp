@@ -121,6 +121,10 @@
         	//채팅
         	var websocket;
         	$('#btn_join').click(function(){
+        		if(${post.chatNum} >= ${post.maxMember}){
+        			alert('모집인원이 초과되었습니다.');
+       				return false;
+        		}
         		const oDate = new Date('${post.deadline}');
         		const today = new Date();
         		
