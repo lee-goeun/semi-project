@@ -33,7 +33,7 @@
 
 		<div class="nickname" id="head_text">닉네임</div>
 		<div class="nick_box">
-			<input class="nickname_input" id="textbox" name="nickname">
+			<input class="nickname_input" id="textbox" name="nickname" maxlength="10">
 			<span class="nickname_check">필수 정보입니다.</span>
 			<span class="nick_input_re_1">사용 가능한 닉네임입니다.</span>
 			<span class="nick_input_re_2">닉네임이 이미 존재합니다.</span>
@@ -42,7 +42,7 @@
 
 		<div class="id_name" id="head_text">아이디</div>
 		<div class="id_input_box">
-			<input class="id_input" id="textbox" name="uid">
+			<input class="id_input" id="textbox" maxlength="10" name="uid">
 			<span class="id_check">필수 정보입니다.</span> <span class="id_input_re_1">사용 가능한 아이디입니다.</span>
 			<span class="id_input_re_2">아이디가 이미 존재합니다.</span>
 			<div>&nbsp;</div>
@@ -50,7 +50,7 @@
 
 		<div class="pw_pass" id="head_text">비밀번호</div>
 		<div class="pw_input_box">
-			<input type="password" class="pw_fir_input" id="textbox" name="upass_fir">
+			<input type="password" class="pw_fir_input" id="textbox" maxlength="30" name="upass_fir">
 			<span class="pass_fir_check">필수 정보입니다.</span>
 			<span class="fir_pass_check_1">비밀번호 안전도:매우낮음</span>
 			<span class="fir_pass_check_2">비밀번호 안전도:높음</span>
@@ -59,7 +59,7 @@
 
 		<div class="pw_name" id="head_text">비밀번호 확인</div>
 		<div class="pw_input_box">
-			<input type="password" class="pw_input" id="textbox" name="upass">
+			<input type="password" class="pw_input" id="textbox"  maxlength="30"name="upass">
 			<span class="pass_check">필수 정보입니다.</span>
 			<div class="typecheck0">&nbsp;</div>
 			<span class="typecheck1">비밀번호가 일치합니다.</span>
@@ -68,14 +68,14 @@
 
 		<div class="id_name" id="head_text">성명</div>
 		<div class="id_input_box">
-			<input class="name_input" id="textbox" name="name">
+			<input class="name_input" id="textbox" maxlength="5" name="name">
 			<span class="name_check">필수 정보입니다.</span>
 			<div>&nbsp;</div>
 		</div>
 
 		<div class="pw_name" id="head_text">이메일</div>
 		<div class="pw_input_box">
-			<input class="email_input" id="textbox" name="email">
+			<input class="email_input" id="textbox" name="email" maxlength="30" >
 			<span class="email_check">필수 정보입니다.</span>
 			<span class="email_type_check">이메일 형식이 올바르지 않습니다.</span>
 			<div class="type_check_as">&nbsp;</div>
@@ -93,7 +93,7 @@
 			<input class="form-control" style="top: 5px;" placeholder="도로명 주소" name="address" id="addr2"	type="text" readonly="readonly" />
 		</div>
 		<div class="form-group">
-			<input class="form-control" placeholder="상세주소" name="addressSpecific" id="addressSpecific" type="text" />
+			<input class="form-control" placeholder="상세주소" name="addressSpecific" id="addressSpecific" type="text" maxlength="30" />
 			<span class="address_check">필수 정보입니다.</span>
 			<div>&nbsp;</div>
 		</div>

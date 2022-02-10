@@ -3,13 +3,11 @@
 
 
 #join_form{
-position: absolute;
-left:56%;
-top:50%;
-transform :translate(-50%,-50%);
+margin:auto;
 align-items:center;
 height:900px;
 width: 580px;
+padding-left: 10%;
 } 
 
 

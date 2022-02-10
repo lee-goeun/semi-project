@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 
-<div class="temp_1">
+<div class="all">
 <div class="temp_2"><img src="/resources/image/logo.png" class="logo" /></div>
 <div class="temp_3">오시는길</div>
 

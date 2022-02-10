@@ -17,26 +17,26 @@
 
 	<!-- 채팅방 생성 -->
 	<insert id="insertNewChat" parameterType="java.util.Map">
-		INSERT into chattbl(uid, postId) VALUES (#{uid}, #{postId})
+		INSERT into chatTbl(uid, postId) VALUES (#{uid}, #{postId})
 	</insert>
 	
 	<!-- 채팅방 선택 -->
 	<insert id="insertMsg" parameterType="java.util.Map">
-			insert into chattbl(msg, uid, postId) values(#{msg}, #{uid}, #{postId})
+			insert into chatTbl(msg, uid, postId) values(#{msg}, #{uid}, #{postId})
 	</insert>
 	
 	<!--  -->
 	<select id="selectChatId" resultType="int" parameterType="String">
-			select chatId from chattbl where msg =#{msg}
+			select chatId from chatTbl where msg =#{msg}
 	</select>
 	
 	<!-- uid가 채팅방에 있는 지 여부 확인 -->
 	<select id="confirmUid" resultMap="chatResult" parameterType="java.util.Map">
-		select * from chattbl where postId = #{postId} and uid = #{uid}
+		select * from chatTbl where postId = #{postId} and uid = #{uid}
 	</select>
 	
 	<!-- 채팅방 나가기 -->
 	<delete id="exitChat" parameterType="java.util.Map">
-		delete from chattbl where postId = #{postId} and uid = #{uid}
+		delete from chatTbl where postId = #{postId} and uid = #{uid}
 	</delete>
 </mapper>
