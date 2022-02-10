@@ -48,8 +48,8 @@
 	
 	
 	<div>
-	<input type="hidden" name="upass" id="upass"  value="${member.upass}"/>
-	<input type="hidden"  name="uid" value="${member.uid}" />
+		<input type="hidden" name="upass" id="upass"  value="${member.upass}"/>
+		<input type="hidden"  name="uid" value="${member.uid}" />
 	</div>
 
 
