@@ -46,12 +46,17 @@
 		
 		//웹 소켓 연결 해제
 		$('#btn_exit').on('click', function(){
+			if(${member.uid == param.uid}){
+				alert('게시글 작성자는 채팅을 나갈 수 없습니다.');
+				return false;
+			}
 			var cnfrm = confirm("채팅을 나가시겠습니까?");
 			if(!cnfrm){
 				return false;
 			}
 			
 			const nick = $('#myNick').val();
+			const uid =$('#myId').val();
 			websocket.send(JSON.stringify({postId : postId, type:'LEAVE', nickname:nick}));
 			websocket.close();
 			
