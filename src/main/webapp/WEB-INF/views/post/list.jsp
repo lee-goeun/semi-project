@@ -67,7 +67,7 @@ request.setCharacterEncoding("UTF-8");
 					</c:when>
 					<c:otherwise>
 						<c:forEach var="post" items="${postsList}" varStatus="postNum">
-							<c:if test="${member.region1 == post.region1}">
+							<c:if test="${member.region1 == post.region1 and member.region2 == post.region2}">
 								<li class="item">
 									<a href="${contextPath}/post/viewPost?postId=${post.postId}"> 
 										<img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />

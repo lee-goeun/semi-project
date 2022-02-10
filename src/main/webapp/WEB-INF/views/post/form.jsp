@@ -20,6 +20,9 @@ request.setCharacterEncoding("UTF-8");
 				<img id="preview" src="#" />
 			</p>
 			<input type="hidden" name="address" id="address" value="${member.address}" />
+			<input type="hidden" name="region1" id="region1" value="${member.region1}" />
+			<input type="hidden" name="region2" id="region2" value="${member.region2}" />
+			<input type="hidden" name="region3" id="region3" value="${member.region3}" />
 			<input type="file" name="image" id="image" onchange="readURL(this);" />
 		</div>
 		<div class="text_area">

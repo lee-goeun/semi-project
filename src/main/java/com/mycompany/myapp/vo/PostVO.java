@@ -25,13 +25,12 @@ public class PostVO {
 	private boolean isDeleted;	// 모집글 삭제여부
 	private Date deletedDate;	// 모집글 삭제일
 	private int viewCount;		// 모집글 조회수
+	private String region1;		// 모집글 작성자 지역(시도)
+	private String region2;		// 모집글 작성자 지역(구)
+	private String region3;		// 모집글 작성자 지역(동)
 
 	/* userTbl에서 가져옴 */
 	private String nickname;	// 모집글 작성자 닉네임
-	private String address;		// 모집글 작성자 주소
-	private String region1;		// 지역(시도)
-	private String region2;		// 지역(시도)
-	private String region3;		// 지역(시도)
 	
 	/* chatTbl에서 가져옴 */
 	private int chatNum;		// 참가인원
@@ -191,14 +190,6 @@ public class PostVO {
 
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getRegion1() {
