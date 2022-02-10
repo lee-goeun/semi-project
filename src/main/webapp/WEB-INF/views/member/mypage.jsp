@@ -4,6 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <script src="https://code.jquery.com/jquery-latest.js"></script>
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=7524b1e3ab93a0a3e7653e480563c4ce&libraries=services"></script>
 <!-- <link rel="stylesheet" href="/resources/css/mypage.css" /> -->
 
 <form id="mypage_form" method="post">
@@ -48,8 +49,11 @@
 	
 	
 	<div>
-	<input type="hidden" name="upass" id="upass"  value="${member.upass}"/>
-	<input type="hidden"  name="uid" value="${member.uid}" />
+		<input type="hidden" name="upass" id="upass"  value="${member.upass}"/>
+		<input type="hidden" name="uid" value="${member.uid}" />
+		<input type="hidden" name="region1"  value="${member.region1}" placeholder="시도"/>
+		<input type="hidden" name="region2" value="${member.region2}" placeholder="구"/>
+		<input type="hidden" name="region3" value="${member.region3}" placeholder="동"/>
 	</div>
 
 
@@ -89,7 +93,10 @@ $(document).ready(function(){
 	
 	
 	
+	/* 도로명 주소 찾기 */
 	
+	// 주소-좌표 변환 객체 생성
+	var geocoder = new daum.maps.services.Geocoder();
 	
 	  function execPostCode() {
 	         new daum.Postcode({
@@ -126,6 +133,41 @@ $(document).ready(function(){
 	                
 	                $("[name=postCode]").val(data.zonecode);
 	                $("[name=address]").val(fullRoadAddr); 
+	                
+	                /* 도로명 주소 => 행정 주소 변환 */
+	                var addr = data.address; // 최종 주소 변수
+	                geocoder.addressSearch(data.address, function (results, status) {
+						// 정상적으로 검색이 완료되면
+						if (status === daum.maps.services.Status.OK) {
+
+							var result = results[0]; // 첫번째 결과의 값을 활용
+
+							var coords = new daum.maps.LatLng(result.y, result.x); // 해당 주소에 대한 좌표
+
+							let lat = result.y;
+							let lng = result.x;
+							getAddr(lat, lng);
+							function getAddr(lat, lng) {
+								let geocoder = new kakao.maps.services.Geocoder();
+
+								let coord = new kakao.maps.LatLng(lat, lng);
+								let callback = function (result, status) {
+									if (status === kakao.maps.services.Status.OK) {
+										console.log(result[0].address.address_name);
+										console.log(result[0].address.region_1depth_name);
+										console.log(result[0].address.region_2depth_name);
+										console.log(result[0].address.region_3depth_name);
+										console.log(result[0].address.region_3depth_h_name);
+										
+										$("[name=region1]").val(result[0].address.region_1depth_name);
+										$("[name=region2]").val(result[0].address.region_2depth_name);
+										$("[name=region3]").val(result[0].address.region_3depth_name);
+									}
+								}
+								geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+							}
+						}
+					});
 	            }
 	         }).open();
 	     }   
