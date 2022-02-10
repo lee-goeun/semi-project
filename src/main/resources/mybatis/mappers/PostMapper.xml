@@ -48,7 +48,7 @@
 				select g.postId, g.uid, g.title, g.content, g.maxMember, g.image, g.price, g.deliveryFee, g.category, g.deadline, g.postState,
 				g.isTogether, g.postedDate, g.isRevised, g.revisedDate, g.isDeleted, g.deletedDate, g.viewCount, u.nickname, g.region1, g.region2, g.region3,
 				IFNULL(c.CNT, 0) as chatNum
-				from gatherTbl g left outer join userTbl u on g.uid = u.uid left outer join (select postId, count(distinct uid) as CNT from chattbl group by postId) as c on g.postId = c.postId
+				from gatherTbl g left outer join userTbl u on g.uid = u.uid left outer join (select postId, count(distinct uid) as CNT from chatTbl group by postId) as c on g.postId = c.postId
 				where g.isDeleted = 0
 				<if test="keyword != null">
 					and (title like concat('%',#{keyword},'%' ) OR g.region3 like concat('%',#{keyword},'%' ))
@@ -93,7 +93,7 @@
 		select g.postId, g.uid, g.title, g.content, g.maxMember, g.image, g.price, g.deliveryFee, g.category, g.deadline, g.postState,
 				g.isTogether, g.postedDate, g.isRevised, g.revisedDate, g.isDeleted, g.deletedDate, g.viewCount, u.nickname, g.region1, g.region2, g.region3,
 				c.chatNum
-		from gatherTbl g left outer join userTbl u on g.uid = u.uid left outer join (select postId, count(*) as chatNum from chattbl where postId = #{postId}) as c on c.postId = #{postId}
+		from gatherTbl g left outer join userTbl u on g.uid = u.uid left outer join (select postId, count(*) as chatNum from chatTbl where postId = #{postId}) as c on c.postId = #{postId}
 		where g.postId = #{postId}
 	]]>
 	</select>
