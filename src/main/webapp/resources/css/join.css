@@ -218,3 +218,116 @@ input[type="button"] {
 	cursor: pointer;
 }
 
+.delete_btn{ 
+outline:none;
+margin-left: -35px;
+box-sizing: border-box;
+background-color: white;
+border:none;
+width:15px;
+height:15px;
+
+
+}
+
+.delete_logo{
+	width:15px;
+	height:15px;
+	cursor:pointer;
+
+} 
+.delete{
+	display: none;
+}
+
+.eye_all{
+	display:none;
+}
+
+.eye_btn{ 
+outline:none;
+margin-left:-34px;
+box-sizing: border-box;
+background-color: white;
+border:none;
+width:15px;
+height:15px;
+}
+
+.eye_logo{
+	width:15px;
+	height:15px;
+	cursor:pointer;
+
+} 
+
+
+
+
+.close_eye_btn{ 
+outline:none;
+margin-left:-34px;
+box-sizing: border-box;
+background-color: white;
+border:none;
+width:15px;
+height:15px;
+}
+
+.close_eye_logo{
+	width:15px;
+	height:15px;
+	cursor:pointer;
+
+} 
+
+
+
+
+
+
+
+
+
+
+.re_eye_all{
+	display:none;
+}
+
+.re_eye_btn{ 
+outline:none;
+margin-left:-34px;
+box-sizing: border-box;
+background-color: white;
+border:none;
+width:15px;
+height:15px;
+}
+
+.re_eye_logo{
+	width:15px;
+	height:15px;
+	cursor:pointer;
+
+} 
+
+
+
+
+.re_close_eye_btn{ 
+outline:none;
+margin-left:-34px;
+box-sizing: border-box;
+background-color: white;
+border:none;
+width:15px;
+height:15px;
+}
+
+.re_close_eye_logo{
+	width:15px;
+	height:15px;
+	cursor:pointer;
+
+} 
+
