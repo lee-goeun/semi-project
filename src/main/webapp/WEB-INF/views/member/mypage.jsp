@@ -26,7 +26,7 @@
 	<div class="middle_type">
 		<img src="/resources/image/mypage.png" class="logo" />
 		
-	<input type="text" id="textbox"   class="rightbtn" name="nickname" value="${member.nickname}" disabled />
+	<input type="text" id="textbox" class="rightbtn" name="nickname" value="${member.nickname}" disabled />
 	<input type="text" id="textbox" class="rightbtn" name="name" value="${member.name}" disabled />
 				
 	</div>
@@ -48,16 +48,11 @@
 	</div>
 
 	<div>
-<<<<<<< HEAD
 		<input type="hidden" name="upass" id="upass"  value="${member.upass}"/>
 		<input type="hidden"  name="uid" value="${member.uid}" />
-=======
-	<input type="hidden" name="upass" id="upass"  value="${member.upass}"/>
-	<input type="hidden"  name="uid" value="${member.uid}" />
-	<input type="hidden" name="region1"  value="${member.region1}" placeholder="시도"/>
+		<input type="hidden" name="region1"  value="${member.region1}" placeholder="시도"/>
 		<input type="hidden" name="region2" value="${member.region2}" placeholder="구"/>
 		<input type="hidden" name="region3" value="${member.region3}" placeholder="동"/>
->>>>>>> branch 'master' of https://github.com/lee-goeun/semi_project.git
 	</div>
 
 
@@ -93,9 +88,6 @@ $(document).ready(function(){
 		var url ="popup";
 		window.open(url,"","width=400,height=400");
 	}
-	
-	
-	
 	
 	
 	/* 도로명 주소 찾기 */
