@@ -2,104 +2,96 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<!-- <section id="main"> -->
-	<div class="container">
-
-		<div class="contents">
-		
-			<div class="top">
-				<!-- 검색 -->
-				<div class="search_wrap">
-					<select name="type" class="searchSelect">
-						<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
-						<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
-						<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>작성자</option>
-						<option value="A" <c:out value="${pageMaker.cri.type eq 'A'?'selected':'' }"/>>지역</option>
-					</select>
-					<input type="text" name="keyword" class="searchInput" value="${pageMaker.cri.keyword }" onKeyPress="if (event.keyCode==13){searchFunc();}">
-					<button class="searchBtn">
-						<i class="fas fa-search"></i>
-					</button>
-					<a href="/review/list" class="searchReset" style="display:none">취소</a>
-				</div>
-				
-				<!-- 글쓰기 버튼 -->
-				<c:if test="${ member != null}">
-					<div class="btn_wrap">
-						<a href="/review/write" class="writeBtn">글쓰기</a>
-					</div>
-				</c:if>
+<div class="container">
+	<div class="contents">
+	
+		<!-- 상단 부분 -->
+		<div class="top">
+			<!-- 검색 -->
+			<div class="search_wrap">
+				<select name="type" class="searchSelect">
+					<option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':'' }"/>>제목</option>
+					<option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':'' }"/>>내용</option>
+					<option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':'' }"/>>작성자</option>
+					<option value="A" <c:out value="${pageMaker.cri.type eq 'A'?'selected':'' }"/>>지역</option>
+				</select>
+				<input type="text" name="keyword" class="searchInput" value="${pageMaker.cri.keyword }" onKeyPress="if (event.keyCode==13){searchFunc();}">
+				<button class="searchBtn"><i class="fas fa-search"></i></button>
+				<a href="/review/list" class="searchReset" style="display:none">취소</a>
 			</div>
-
-			<!-- 게시물 목록 -->
-			<div class="list_wrap">
-				<table>
-					<tbody>
-						<c:forEach items="${rList}" var="rList">
-<%-- 							<c:if test="${rList.isDeleted == 0}"> --%> <!-- mapper에 적용했음 -->
-								<tr class="reviewInfo">
-<%-- 									<td class="reviewId"><c:out value="${rList.reviewId}" /></td> --%>
-									<td class="title_wrap">
-<%-- 										<a href='/review/detail?reviewId=<c:out value="${rList.reviewId}"/>'> --%>
-										<a href='<c:out value="${rList.reviewId}"/>'>
-											<div class="title">
-												<c:out value="${rList.title}" />
-											</div>
-											<div class="count_wrap">
-												<span class="replyCount"><i></i>답변 <c:out value="${rList.replyCount}" /></span>
-												<span class="viewCount"><i></i>조회수 <c:out value="${rList.viewCount}" /></span>
-											</div>
-										</a>
-									</td>
-									<td class="nickname"><c:out value="${rList.nickname}" /></td>
-									<td class="address"><c:out value="${rList.region2} ${rList.region3}" /></td>
-									<td class="reviewedDate"><c:out value="${rList.reviewedDate}" /></td>
-								</tr>
-<%-- 							</c:if> --%>
-						</c:forEach>
-						<tr class="reviewSearchNone" style="display: none">
-							<td>검색 결과가 없어요.</td>
-						</tr>
-						<tr class="reviewNone" style="display: none">
-								<td>아직 게시물이 없어요.</td>
-						</tr>
-					</tbody>
-				</table>
-				
-				<!-- 페이징 -->
-				<div class="paging_wrap">
-					<ul class="pageInfo">
-						<c:if test="${pageMaker.prev}">
-							<li class="prevBtn"><a href="${pageMaker.startPage-1}"><i class="fas fa-angle-left"></i></a></li>
-						</c:if>
-						<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
-							<li class=" ${pageMaker.cri.pageNum == num ? "active":"" }">
-								<a href="${num}">${num}</a>
-							</li>
-						</c:forEach>
-						<c:if test="${pageMaker.next}">
-							<li class="nextBtn"><a href="${pageMaker.endPage + 1 }"><i class="fas fa-angle-right"></i></a></li>
-						</c:if>
-					</ul>
+			<!-- 글쓰기 버튼 -->
+			<c:if test="${ member != null}">
+				<div class="btn_wrap">
+					<a href="/review/write" class="writeBtn">글쓰기</a>
 				</div>
+			</c:if>
+		</div>
+
+		<!-- 게시물 목록 -->
+		<div class="list_wrap">
+			<table>
+				<tbody>
+					<c:forEach items="${rList}" var="rList">
+						<tr class="reviewInfo">
+							<td class="title_wrap">
+								<a href='<c:out value="${rList.reviewId}"/>'>
+									<div class="title">
+										<c:out value="${rList.title}" />
+									</div>
+									<div class="count_wrap">
+										<span class="replyCount"><i></i>답변 <c:out value="${rList.replyCount}" /></span>
+										<span class="viewCount"><i></i>조회수 <c:out value="${rList.viewCount}" /></span>
+									</div>
+								</a>
+							</td>
+							<td class="nickname"><c:out value="${rList.nickname}" /></td>
+							<td class="address"><c:out value="${rList.region2} ${rList.region3}" /></td>
+							<td class="reviewedDate"><c:out value="${rList.reviewedDate}" /></td>
+						</tr>
+					</c:forEach>
+					<tr class="reviewSearchNone" style="display: none">
+						<td>검색 결과가 없어요.</td>
+					</tr>
+					<tr class="reviewNone" style="display: none">
+						<td>아직 게시물이 없어요.</td>
+					</tr>
+				</tbody>
+			</table>
+			
+			<!-- 페이징 -->
+			<div class="paging_wrap">
+				<ul class="pageInfo">
+					<c:if test="${pageMaker.prev}">
+						<li class="prevBtn"><a href="${pageMaker.startPage-1}"><i class="fas fa-angle-left"></i></a></li>
+					</c:if>
+					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num">
+						<li class=" ${pageMaker.cri.pageNum == num ? "active":"" }">
+							<a href="${num}">${num}</a>
+						</li>
+					</c:forEach>
+					<c:if test="${pageMaker.next}">
+						<li class="nextBtn"><a href="${pageMaker.endPage + 1 }"><i class="fas fa-angle-right"></i></a></li>
+					</c:if>
+				</ul>
 			</div>
-			
-			<!-- 상세 페이지 & 페이징 처리 폼 -->
-			<form id="listForm" method="get">
-				<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
-				<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
-				<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
-				<input type="hidden" name="type" value="${pageMaker.cri.type }">
-			</form>
-			
 		</div>
 		
+		<!-- 상세 페이지 & 페이징 처리 폼 -->
+		<form id="listForm" method="get">
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }">
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount }">
+			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+			<input type="hidden" name="type" value="${pageMaker.cri.type }">
+		</form>
+		
 	</div>
-<!-- </section> -->
+</div>
 
 <!-- script  -->
 <script>
 	$(document).ready(function() {
+
+		/* alert */
 		let result = '<c:out value="${result}"/>';
 
 		if (result === "write success") {
@@ -131,7 +123,7 @@
 
 	const listForm = $("#listForm");
 	
-	/* 상세페이지 */
+	/* 상세페이지 이동 */
 	$(".title_wrap a").on("click", function(e){
         e.preventDefault();
         listForm.find("input[name='reviewId']").remove();
@@ -140,6 +132,7 @@
         listForm.submit();
     });
 
+	/* 페이징 */
 	$(".pageInfo a").on("click", function(e) {
 		e.preventDefault();
 		listForm.find("input[name='pageNum']").val($(this).attr("href"));
@@ -148,11 +141,6 @@
 	});
 
 	/* 검색 기능 */
-	$(".search_wrap .searchBtn").on("click", function(e) {
-		e.preventDefault();
-		searchFunc();
-	});
-	
 	function searchFunc() {
 		let type = $(".search_wrap select").val();
 		let keyword = $(".search_wrap input[name='keyword']").val();
@@ -170,12 +158,8 @@
 		listForm.submit();
 	}
 	
-	/* 뒤로가기 이벤트 발생시 */
-// 	window.onpageshow = function(event){
-// 		if(event.persisted){
-// 			listForm.find("input[name='reviewId']").remove();
-// 			listForm.attr("action", "/review/list");
-// 			listForm.submit();
-// 		}
-// 	}
+	$(".search_wrap .searchBtn").on("click", function(e) {
+		e.preventDefault();
+		searchFunc();
+	});
 </script>
