@@ -252,6 +252,20 @@ public class PostControllerImpl implements PostController {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName(viewName);
 		mav.addObject("post", postVO);
+		
+		//채팅 참여여부 확인
+		Map<String, Object> chatMap = new HashMap<String, Object>();
+		HttpSession session = request.getSession();
+
+		MemberVO memberVO = (MemberVO) session.getAttribute("member");
+		String uid = memberVO.getUid();
+		
+		chatMap.put("postId", postId);
+		chatMap.put("uid", uid);
+		
+		int chkUid = chatService.confirmUid(chatMap).size();
+		mav.addObject("chkUid", chkUid);
+		
 		return mav;
 	}
 

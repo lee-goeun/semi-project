@@ -105,23 +105,23 @@
 			<div>&nbsp;</div>
 		</div>
 
-		<tr class="mobileNo">
+<!-- 		<tr class="mobileNo">
 			<th><label for="phone">휴대폰 번호</label></th>
 			<td>
 				<p>
 					<input id="phone" type="text" name="phone" title="전화번호 입력" required />
-					<!-- <span  id="phoneChk" class="doubleChk">인증번호 보내기</span><br/> -->
+					<span  id="phoneChk" class="doubleChk">인증번호 보내기</span><br/>
 					<input type="button" id="phoneChk" class="doubleChk" value="인증번호 보내기" />
 					<br />
 					<input id="phone2" type="text" name="phone2" title="인증번호 입력" disabled required />
-					<!-- <span id="phoneChk2" class="doubleChk">본인인증</span> -->
+					<span id="phoneChk2" class="doubleChk">본인인증</span>
 					<input type="button" id="phoneChk2" class="doubleChk" value="본인인증" />
 					<br />
 					<span class="point successPhoneChk">휴대폰 번호 입력후 인증번호 보내기를 해주세요</span>
 					<input type="hidden" id="phoneDoubleChk" />
 				<p>
 			</td>
-		</tr>
+		</tr> -->
 
 		<div class="join_button_wrap">
 			<input type="button" class="join_button" value="가입하기">
@@ -135,7 +135,7 @@
 	<script>
 		var nickname_check = false; //닉네임 
 		var id_check = false; // 아이디 
-		var id_info_check = false // 아이디중복
+
 		var pass_check = false; //비번
 		var pass_info_check = false //비번확인
 		var name_check = false; //이름 확인
@@ -158,7 +158,7 @@
 						data : data,
 						success : function(result) {
 							if (result == 'success') {
-								id_info_check = true;
+							
 								id_check = true;
 								$('.id_input_re_1').css("display",
 										"inline-block");
@@ -181,6 +181,9 @@
 							}
 
 						}//success;
+						error :function(){
+							alert("에러발생")
+						}
 					}); // ajax;
 
 				});// function 종료
@@ -199,7 +202,7 @@
 						data : data,
 						success : function(result) {
 							if (result == 'success') {
-								id_info_check = true;
+							
 								nickname_check = true;
 								$('.nickname_check').css('display', 'none');
 								$('.nick_input_re_2').css("display", "none");
@@ -402,21 +405,20 @@
 
 				}
 
-				/* if(nickname_check&&id_check&&id_info_check&&pass_check&&pass_info_check&&name_check&&email_check&&addressSpecific_check&&perfect_pass&&phone_check&&phone_check){ */
-				if (id_check == true) {
+	/* 			if(nickname_check&&id_check&&pass_check&&pass_info_check&&name_check&&email_check&&addressSpecific_check&&perfect_pass&&phone_check&&phone_check){ */
+					if(nickname_check&&id_check&&pass_check&&pass_info_check&&name_check&&email_check&&addressSpecific_check&&perfect_pass){
 					$("#join_form").attr("action", "/member/join");
 					$("#join_form").submit();
 				}
 				console.log("perfect_pass :" + perfect_pass)
 				console.log("nickname_check :" + nickname_check)
 				console.log("id_check:" + id_check)
-				console.log("id_info_check:" + id_info_check)
 				console.log("pass_check:" + pass_check)
 				console.log("pass_info_check:" + pass_info_check)
 				console.log("name_check:" + name_check)
 				console.log("email_check:" + email_check)
 				console.log("addressSpecific_check:" + addressSpecific_check)
-				console.log(phone_check);
+				
 
 				return false;
 			});

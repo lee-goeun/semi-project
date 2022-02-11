@@ -19,6 +19,7 @@ font-weight: normal;
 
 .nickname_check{
 	display: none;
+
 }
 .id_check{
 	display: none;
@@ -81,6 +82,7 @@ font-weight: normal;
 .fir_pass_check_1{
 		color : red;
 		display : none;
+	
 }
 
 .fir_pass_check_2{
@@ -252,12 +254,14 @@ background-color: white;
 border:none;
 width:15px;
 height:15px;
+margin-right: 0px;
 }
 
 .eye_logo{
 	width:15px;
 	height:15px;
 	cursor:pointer;
+	margin-right: 100px;
 
 } 
 
@@ -272,6 +276,7 @@ background-color: white;
 border:none;
 width:15px;
 height:15px;
+margin-right: 19px;
 }
 
 .close_eye_logo{
@@ -322,6 +327,7 @@ background-color: white;
 border:none;
 width:15px;
 height:15px;
+margin-right: 19px;
 }
 
 .re_close_eye_logo{
@@ -331,3 +337,4 @@ height:15px;
 
 } 
 
+.nickname_input, .id_input, .name_input, .form_control{margin-right: 6px;}
