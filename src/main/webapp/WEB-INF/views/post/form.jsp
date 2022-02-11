@@ -17,7 +17,7 @@ request.setCharacterEncoding("UTF-8");
 		<div class="pic_area">
 			<label class="image" for="image">사진</label>
 			<p>
-				<img id="preview" src="#" />
+				<img id="preview" src=""/>
 			</p>
 			<input type="hidden" name="address" id="address" value="${member.address}" />
 			<input type="hidden" name="region1" id="region1" value="${member.region1}" />
@@ -46,7 +46,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<div>
 				<label class="maxMember" for="maxMember">모집인원</label>
-				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원" min="0" />
+				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원" min="2" />
 			</div>
 			<div>
 				<label for="deadline">모집시간</label>
@@ -76,12 +76,10 @@ request.setCharacterEncoding("UTF-8");
 	$(document)
 			.ready(
 					function() {
-						var preview = "";
-
-						/* $('#category').on('change', function(){
+						
+						 $('#category').on('change', function(){
 							$('#preview').attr('src', '${contextPath}/resources/image/' + this.value +'.jpg');
-							preview = this.value;
-						}); */
+						}); 
 
 						$("input[type='radio']").on('change', function() {
 							if ($(this).val() == '0') {

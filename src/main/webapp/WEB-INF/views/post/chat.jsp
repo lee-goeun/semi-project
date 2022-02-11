@@ -21,7 +21,8 @@
 	var websocket;
 	$(document).ready(function(){
 		//웹 소켓 연결
-		websocket = new WebSocket("ws://localhost:8090/chatws");
+		var url = "ws://118.67.143.112:8080/chatws";
+		websocket = new SockJS("${contextPath}/chatws");
 		
 
 		websocket.onopen = onOpen;
