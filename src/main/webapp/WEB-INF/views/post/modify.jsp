@@ -125,7 +125,7 @@ request.setCharacterEncoding("UTF-8");
 		var now = new Date();
 		var dDate = new Date($('#deadlineF').val());
 		if(dDate.getTime() < now.getTime()) {
-			alert("마감시간을 다시 선택하하세요.");
+			alert("마감시간을 다시 선택하세요.");
 			$('#deadlineF').val('');
 			$('#deadline').val('');
 			return false;
