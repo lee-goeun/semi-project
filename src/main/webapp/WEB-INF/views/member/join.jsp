@@ -181,6 +181,9 @@
 							}
 
 						}//success;
+						error :function(){
+							alert("에러발생")
+						}
 					}); // ajax;
 
 				});// function 종료
