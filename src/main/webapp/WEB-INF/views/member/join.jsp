@@ -180,7 +180,7 @@
 								$('.id_check').css('display', 'inline-block');
 							}
 
-						}//success;
+						},//success;
 						error :function(){
 							alert("에러발생")
 						}
