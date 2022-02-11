@@ -23,16 +23,12 @@ public interface ReviewService {
 	public void reviewDelete(ReviewVO reviewVO) throws Exception;
 	
 	/* 조회수 증가 */
-	// 게시판 상세 serviceImpl에 바로 추가
 	public void reviewViews(int reviewId) throws Exception;
 	
-	/* 게시판 목록 + 페이징 */
+	/* 게시판 목록 + 페이징 + 검색 */
 	public List<ReviewVO> reviewListPaging(Criteria cri) throws Exception;
 	
 	/* 개시물 총 개수 */
 	public int reviewTotal(Criteria cri) throws Exception;
-	
-	/* 게시물 댓글 수 갱신 */
-//	public void replyCountUpdate(int reviewId) throws Exception;
 	
 }

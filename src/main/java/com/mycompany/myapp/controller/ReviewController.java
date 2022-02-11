@@ -27,8 +27,6 @@ import com.mycompany.myapp.vo.ReviewReplyVO;
 import com.mycompany.myapp.vo.ReviewVO;
 import com.mysql.cj.util.StringUtils;
 
-//http://localhost:8090/review/list
-
 @Controller("reviewController")
 @RequestMapping(value = "/review")
 public class ReviewController {
@@ -41,7 +39,7 @@ public class ReviewController {
 	@Autowired
 	private ReviewReplyService replyService;
 
-	/* 후기게시판 목록 페이지 + 페이징 */
+	/* 후기게시판 목록 페이지 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void reviewListGET(Model model, Criteria cri) throws Exception {
 		logger.info("후기게시판 목록 페이지입니다.");
@@ -65,10 +63,6 @@ public class ReviewController {
 	@RequestMapping(value = "/write.do", method = RequestMethod.POST)
 	public String reviewWritePOST(ReviewVO reviewVO, RedirectAttributes rttr, HttpServletRequest request) throws Exception {
 		logger.info("후기게시판 게시물 작성");
-		
-		// 로그인 체크
-//		HttpSession session = request.getSession();
-//		MemberVO mvo = (MemberVO) session.getAttribute("member");
 
 		reviewService.reviewWrite(reviewVO);
 
@@ -76,22 +70,7 @@ public class ReviewController {
 
 		return "redirect:/review/list";
 	}
-
-	/* 후기게시판 상세 페이지 */
-//	@RequestMapping(value = "/detail", method = RequestMethod.GET)
-//	public void reviewDetailGET(int reviewId, Model model, Criteria cri) throws Exception {
-//		logger.info("후기게시판 상세 페이지입니다.");
-//
-//		model.addAttribute("rDetail", reviewService.reviewDetail(reviewId));
-//		
-//		model.addAttribute("cri", cri);
-//		
-//		/* 댓글 목록 */
-//		List<ReviewReplyVO> listReply = replyService.listReply(reviewId);
-//		
-//		model.addAttribute("listReply", listReply);
-//	}
-
+	
 	/* 후기게시판 수정 페이지 */
 	@RequestMapping(value = "/revise", method = RequestMethod.GET)
 	public void reviewReviseGET(int reviewId, Model model, Criteria cri) throws Exception {
@@ -111,7 +90,6 @@ public class ReviewController {
 
 		rttr.addFlashAttribute("result", "revise success");
 
-//		return "redirect:/review/list";
 		return "redirect:/review/detail?reviewId=" + Integer.toString(reviewVO.getReviewId());
 	}
 
@@ -134,8 +112,8 @@ public class ReviewController {
 
 		replyService.writeReply(replyVO);
 
-		String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
-		return "redirect:" + referer; // 이전 페이지
+		String referer = request.getHeader("Referer");	// 헤더에서 이전 페이지를 읽는다.
+		return "redirect:" + referer; 					// 이전 페이지
 	}
 
 	/* 댓글 수정 */
@@ -147,9 +125,8 @@ public class ReviewController {
 
 		logger.info(replyVO.toString());
 
-//		return "redirect:/review/detail?reviewId=" + Integer.toString(replyVO.getReviewId());
-		String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
-		return "redirect:" + referer; // 이전 페이지
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 
 	/* 댓글 삭제 */
@@ -159,9 +136,8 @@ public class ReviewController {
 
 		replyService.deleteReview(replyVO);
 
-//		return "redirect:/review/detail?reviewId=" + Integer.toString(reviewVO.getReviewId());
-		String referer = request.getHeader("Referer"); // 헤더에서 이전 페이지를 읽는다.
-		return "redirect:" + referer; // 이전 페이지
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 
 	/* 후기게시판 상세 페이지 */
@@ -170,10 +146,6 @@ public class ReviewController {
 			HttpServletResponse res) throws Exception {
 		logger.info("후기게시판 상세 페이지입니다. : " + reviewId);
 
-		/* 조회수 증가 */
-//		reviewService.reviewViews(reviewId);
-
-		////////////////////////////////////////////////////////////////
 		// 저장된 쿠키 불러오기
 		Cookie cookies[] = req.getCookies();
 		Map mapCookie = new HashMap();
@@ -198,8 +170,7 @@ public class ReviewController {
 			
 			reviewService.reviewViews(reviewId); // 조회수 업데이트
 		}
-
-		////////////////////////////////////////////////////////////////////////////////
+		
 		model.addAttribute("rDetail", reviewService.reviewDetail(reviewId));
 
 		model.addAttribute("cri", cri);

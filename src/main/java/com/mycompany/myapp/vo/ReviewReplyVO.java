@@ -22,15 +22,15 @@ public class ReviewReplyVO {
 	
 	/* userTbl에서 가져옴 */
 	private String nickname;		// 댓글 작성자 닉네임
-	
+
 	public int getReplyId() {
 		return replyId;
 	}
-	
+
 	public void setReplyId(int replyId) {
 		this.replyId = replyId;
 	}
-	
+
 	public int getReviewId() {
 		return reviewId;
 	}
@@ -42,65 +42,57 @@ public class ReviewReplyVO {
 	public String getUid() {
 		return uid;
 	}
-	
+
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	
+
 	public String getReplyContent() {
 		return replyContent;
 	}
-	
+
 	public void setReplyContent(String replyContent) {
 		this.replyContent = replyContent;
 	}
-	
+
 	public Date getRepliedDate() {
 		return repliedDate;
 	}
-	
+
 	public void setRepliedDate(Date repliedDate) {
 		this.repliedDate = repliedDate;
 	}
-	
+
 	public Date getRevisedDate() {
 		return revisedDate;
 	}
-	
+
 	public void setRevisedDate(Date revisedDate) {
 		this.revisedDate = revisedDate;
 	}
-	
+
 	public Date getDeletedDate() {
 		return deletedDate;
 	}
-	
+
 	public void setDeletedDate(Date deletedDate) {
 		this.deletedDate = deletedDate;
 	}
-	
+
 	public boolean isRevised() {
 		return isRevised;
 	}
-	
+
 	public void setRevised(boolean isRevised) {
 		this.isRevised = isRevised;
 	}
-	
+
 	public boolean isDeleted() {
 		return isDeleted;
 	}
-	
+
 	public void setDeleted(boolean isDeleted) {
 		this.isDeleted = isDeleted;
-	}
-	
-	public String getNickname() {
-		return nickname;
-	}
-	
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 
 	public String getRegion1() {
@@ -127,5 +119,13 @@ public class ReviewReplyVO {
 		this.region3 = region3;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+	
 }
 

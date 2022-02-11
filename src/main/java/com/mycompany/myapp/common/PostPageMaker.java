@@ -75,11 +75,5 @@ public class PostPageMaker {
 	public void setCri(PostCriteria cri) {
 		this.cri = cri;
 	}
-
-	@Override
-	public String toString() {
-		return "PageMaker [startPage=" + startPage + ", endPage=" + endPage + ", prev=" + prev + ", next=" + next
-				+ ", total=" + total + ", cri=" + cri + "]";
-	}
 	
 }

@@ -30,8 +30,6 @@ public class ReviewServiceImpl implements ReviewService {
 	/* 게시판 상세 */
 	@Override
 	public ReviewVO reviewDetail(int reviewId) throws Exception {
-		/* 조회수 증가 */
-//		reviewDAO.reviewViews(reviewId);
 		/* 댓글수 갱신 */
 		reviewDAO.replyCountUpdate(reviewId);
 
@@ -67,11 +65,5 @@ public class ReviewServiceImpl implements ReviewService {
 	public int reviewTotal(Criteria cri) throws Exception{
 		return reviewDAO.reviewTotal(cri);
 	}
-
-	/* 게시물 댓글 수 갱신 */
-//	@Override
-//	public void replyCountUpdate(int reviewId) throws Exception {
-//		reviewDAO.replyCountUpdate(reviewId);
-//	}
 
 }
