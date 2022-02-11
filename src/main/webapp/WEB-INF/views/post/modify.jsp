@@ -93,7 +93,7 @@ request.setCharacterEncoding("UTF-8");
 			alert('모집인원 입력은 필수입니다.');
 			return false;
 		}
-		if ($('#time').val() == '') {
+		if ($('#deadline').val() == '') {
 			alert('모집시간 입력은 필수입니다.');
 			return false;
 		}
@@ -109,6 +109,16 @@ request.setCharacterEncoding("UTF-8");
 		}
 		if ($('#deliveryFee').val() == '') {
 			alert('배달료 입력은 필수입니다.');
+			return false;
+		}
+		
+		// 마감시간 - 현재 이후로 선택
+		var now = new Date();
+		var dDate = new Date($('#deadlineF').val());
+		if(dDate.getTime() < now.getTime()) {
+			alert("마감시간을 다시 선택하하세요.");
+			$('#deadlineF').val('');
+			$('#deadline').val('');
 			return false;
 		}
 
