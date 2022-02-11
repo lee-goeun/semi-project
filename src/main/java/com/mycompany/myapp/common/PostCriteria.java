@@ -84,11 +84,5 @@ public class PostCriteria {
 	public void setTab(int tab) {
 		this.tab = tab;
 	}
-
-	@Override
-	public String toString() {
-		return "PostCriteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + ", keyword=" + keyword
-				+ ", type=" + type + ", typeArr=" + Arrays.toString(typeArr) + ", tab=" + tab + "]";
-	}
 	
 }

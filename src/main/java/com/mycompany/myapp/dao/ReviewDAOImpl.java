@@ -51,7 +51,7 @@ public class ReviewDAOImpl implements ReviewDAO {
 		sqlSession.update("reviewMapper.reviewViews", reviewId);
 	}
 	
-	/* 게시판 목록 + 페이징 */
+	/* 게시판 목록 + 페이징 + 검색 */
 	@Override
 	public List<ReviewVO> reviewListPaging(Criteria cri) throws Exception {
 		return sqlSession.selectList("reviewMapper.reviewListPaging", cri);

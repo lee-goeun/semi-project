@@ -25,7 +25,7 @@ public interface ReviewDAO {
 	/* 조회수 증가 */
 	public void reviewViews(int reviewId) throws Exception;
 	
-	/* 게시판 목록 + 페이징 */
+	/* 게시판 목록 + 페이징 + 검색 */
 	public List<ReviewVO> reviewListPaging(Criteria cri) throws Exception;
 	
 	/* 개시물 총 개수 */

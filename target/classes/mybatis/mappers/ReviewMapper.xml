@@ -44,7 +44,6 @@
 	
 	<!-- 검색 조건문 -->
 	 <sql id="criteria">
-<!--         <trim prefix="where (" suffix=")" prefixOverrides="OR"> -->
         <trim prefix="and (" suffix=")" prefixOverrides="OR">
             <foreach collection="typeArr" item="type">
                 <trim prefix="OR">
@@ -66,19 +65,8 @@
             </foreach>
         </trim>
     </sql>
-	
-	<!-- 게시판 목록 + 페이징 + 검색 -->
-<!-- 	<select id="reviewListPaging" resultType="com.mycompany.myapp.vo.ReviewVO"> -->
-<!-- 		select * from ( -->
-<!--                 select * -->
-<!--                 from reviewTbl -->
-<!--                 where isDeleted = 0 -->
-<!--                 <if test="keyword != null"> -->
-<!--                     <include refid="criteria"></include> -->
-<!--                 </if> -->
-<!--                 order by reviewId desc) as T1  -->
-<!--         limit #{skip}, #{amount} -->
-<!-- 	</select> -->
+    
+    <!-- 게시판 목록 + 페이징 + 검색 -->
 	<select id="reviewListPaging" resultType="com.mycompany.myapp.vo.ReviewVO">
 		select *
 		from (

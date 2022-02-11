@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 public class Criteria {
 
-	private int pageNum;	// 현재 페이지
-	private int amount;		// 한 페이지 당 게시물 수
-	private int skip;		// 스킵할 게시물 수
+	private int pageNum;		// 현재 페이지
+	private int amount;			// 한 페이지 당 게시물 수
+	private int skip;			// 스킵할 게시물 수
 	
 	private String keyword;		// 검색 키워드
 	private String type;		// 검색 타입
@@ -73,12 +73,6 @@ public class Criteria {
 
 	public void setTypeArr(String[] typeArr) {
 		this.typeArr = typeArr;
-	}
-
-	@Override
-	public String toString() {
-		return "Criteria [pageNum=" + pageNum + ", amount=" + amount + ", skip=" + skip + ", keyword=" + keyword
-				+ ", type=" + type + ", typeArr=" + Arrays.toString(typeArr) + "]";
 	}
 	
 }

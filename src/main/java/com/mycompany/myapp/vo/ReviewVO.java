@@ -24,101 +24,93 @@ public class ReviewVO {
 	
 	/* userTbl에서 가져옴 */
 	private String nickname;	// 작성자 닉네임
-	
+
 	public int getReviewId() {
 		return reviewId;
 	}
-	
+
 	public void setReviewId(int reviewId) {
 		this.reviewId = reviewId;
 	}
-	
+
 	public String getUid() {
 		return uid;
 	}
-	
+
 	public void setUid(String uid) {
 		this.uid = uid;
 	}
-	
+
 	public String getTitle() {
 		return title;
 	}
-	
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
 	public String getContent() {
 		return content;
 	}
-	
+
 	public void setContent(String content) {
 		this.content = content;
 	}
-	
+
 	public int getViewCount() {
 		return viewCount;
 	}
-	
+
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
-	
+
 	public Date getReviewedDate() {
 		return reviewedDate;
 	}
-	
+
 	public void setReviewedDate(Date reviewedDate) {
 		this.reviewedDate = reviewedDate;
 	}
-	
+
 	public Date getRevisedDate() {
 		return revisedDate;
 	}
-	
+
 	public void setRevisedDate(Date revisedDate) {
 		this.revisedDate = revisedDate;
 	}
-	
+
 	public Date getDeletedDate() {
 		return deletedDate;
 	}
-	
+
 	public void setDeletedDate(Date deletedDate) {
 		this.deletedDate = deletedDate;
 	}
-	
+
 	public int getIsRevised() {
 		return isRevised;
 	}
-	
+
 	public void setIsRevised(int isRevised) {
 		this.isRevised = isRevised;
 	}
-	
+
 	public int getIsDeleted() {
 		return isDeleted;
 	}
-	
+
 	public void setIsDeleted(int isDeleted) {
 		this.isDeleted = isDeleted;
 	}
-	
+
 	public int getReplyCount() {
 		return replyCount;
 	}
 
 	public void setReplyCount(int replyCount) {
 		this.replyCount = replyCount;
-	}
-
-	public String getNickname() {
-		return nickname;
-	}
-
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
 	}
 
 	public String getRegion1() {
@@ -143,6 +135,14 @@ public class ReviewVO {
 
 	public void setRegion3(String region3) {
 		this.region3 = region3;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
 	}
 
 }
