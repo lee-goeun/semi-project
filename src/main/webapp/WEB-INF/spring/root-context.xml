@@ -12,6 +12,6 @@
 	<!-- WebSocket에 url(chatws) 연결 -->
  	<websocket:handlers>
 		<websocket:mapping handler="chatWebSocketHandler" path="/chatws"/>
-		<!-- <websocket:sockjs/> -->
+	 	<websocket:sockjs/> 
 	</websocket:handlers> 
 </beans>
