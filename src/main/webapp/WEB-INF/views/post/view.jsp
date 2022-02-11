@@ -84,7 +84,6 @@
          </div>
      </div>
 	    <script type="text/javascript">
-	    
 	    //포스트삭제 post형식으로 보내기 
 	    //	(TODO : jqury형식이나 html에서 해결하는 방법 알아보기)
 	    function deletePost(url, postId){
@@ -139,7 +138,7 @@
         	//채팅
         	var websocket;
         	$('#btn_join').click(function(){
-        		if(${post.chatNum} >= ${post.maxMember}){
+        		if(${post.chatNum} >= ${post.maxMember} && ${chkUid == '0'}){
         			alert('모집인원이 초과되었습니다.');
        				return false;
         		}
