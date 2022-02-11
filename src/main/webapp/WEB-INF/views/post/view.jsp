@@ -36,12 +36,12 @@
          </div>
          <div>
              <p class="isTogether">
-             <%--   <c:if test="${post.isTogether}">
+              	<c:if test="${post.isTogether == '1'}">
              		같이 먹어요
              	</c:if>
-				<c:if test="!${post.isTogether}">
+				<c:if test="${post.isTogether == '0'}">
 					따로 먹어요
-				</c:if> --%>  
+				</c:if> 
              </p>
          </div>
          <div class="gather_area">

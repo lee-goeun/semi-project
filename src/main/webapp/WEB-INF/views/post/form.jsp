@@ -46,7 +46,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<div>
 				<label class="maxMember" for="maxMember">모집인원</label>
-				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원" min="0" />
+				<input type="number" name="maxMember" id="maxMember" placeholder="모집인원" min="2" />
 			</div>
 			<div>
 				<label for="deadline">모집시간</label>
