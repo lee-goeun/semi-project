@@ -7,18 +7,18 @@
 
 	<!-- 회원가입 -->
  	<insert id="memberJoin">
- 		INSERT INTO userTbl(uid, upass, name, nickname, email, postCode, address, addressSpecific, region1, region2, region3, signupDate, authority, grade)
+ 		INSERT INTO usertbl(uid, upass, name, nickname, email, postCode, address, addressSpecific, region1, region2, region3, signupDate, authority, grade)
  		VALUES (#{uid}, #{upass}, #{name}, #{nickname}, #{email}, #{postCode}, #{address}, #{addressSpecific}, #{region1}, #{region2}, #{region3}, now(), 1, 1)
  	</insert>
 
 	<!-- 로그인 -->
  	<select id="memberLogin" resultType="com.mycompany.myapp.vo.MemberVO">
- 		SELECT uid, upass,postCode, nickname, address,addressSpecific, name, email, region1, region2, region3 FROM userTbl WHERE uid = #{uid} AND upass = #{upass} 
+ 		SELECT uid, upass,postCode, nickname, address,addressSpecific, name, email, region1, region2, region3 FROM usertbl WHERE uid = #{uid} AND upass = #{upass} 
  	</select>
  	
 	<!-- 회원정보 수정 -->  	
  	<update id = "memberUpdate">
-	  	UPDATE userTbl
+	  	UPDATE usertbl
 	  	SET email = #{email}, upass = #{upass}, postCode = #{postCode}, address = #{address}, addressSpecific = #{addressSpecific}, region1 = #{region1}, region2 = #{region2}, region3 = #{region3}
 	  	WHERE uid = #{uid}
  	</update>
