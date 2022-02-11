@@ -92,7 +92,10 @@ public class ChatControllerImpl {
 			
 			msg = "<script>";
 			msg += " alert('퇴장했습니다');";
+		//	msg += " opener.parent.location = redirect:/post/list";
+			msg += " opener.parent.location.reload();";
 			msg += " window.close();";
+			
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		}catch(Exception e) {

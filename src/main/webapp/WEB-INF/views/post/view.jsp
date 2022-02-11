@@ -138,6 +138,7 @@
         	//채팅
         	var websocket;
         	$('#btn_join').click(function(){
+        	 	
         		if(${post.chatNum} >= ${post.maxMember} && ${chkUid == '0'}){
         			alert('모집인원이 초과되었습니다.');
        				return false;
@@ -153,6 +154,7 @@
         		
         		var xPos = (document.body.offsetWidth) - 430;
         		window.open("${contextPath}/chat/room?postId="+${post.postId}+"&uid="+'${post.uid}',"_blank","width=430,height=700, left=" + xPos +", top=10");
+        		window.location.href="${context.path}/post/viewPost?postId="+${post.postId};
             });
         	
         	// 마감된 게시글 수정 불가

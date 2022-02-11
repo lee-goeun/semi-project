@@ -164,7 +164,6 @@ request.setCharacterEncoding("UTF-8");
 <script type="text/javascript">
 
 $(document).ready(function(){
-   	
 	   //시계
 	   var timer = setInterval(function(){
 		   var now = new Date(); 
