@@ -180,10 +180,8 @@
 								$('.id_check').css('display', 'inline-block');
 							}
 
-						},//success;
-						error :function(){
-							alert("에러발생")
-						}
+						}//success;
+						
 					}); // ajax;
 
 				});// function 종료
