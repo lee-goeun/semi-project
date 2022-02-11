@@ -33,7 +33,10 @@
 
 		<div class="nickname" id="head_text">닉네임</div>
 		<div class="nick_box">
+			<!-- <input class="nickname_input" id="textbox" name="nickname" maxlength="10"><button type="button">지우기</button> -->
 			<input class="nickname_input" id="textbox" name="nickname" maxlength="10">
+			<a class="delete"><button type="button" class="delete_btn"><img src="/resources/image/delete_logo.png" class="delete_logo" /></button></a>
+			
 			<span class="nickname_check">필수 정보입니다.</span>
 			<span class="nick_input_re_1">사용 가능한 닉네임입니다.</span>
 			<span class="nick_input_re_2">닉네임이 이미 존재합니다.</span>
@@ -51,6 +54,8 @@
 		<div class="pw_pass" id="head_text">비밀번호</div>
 		<div class="pw_input_box">
 			<input type="password" class="pw_fir_input" id="textbox" maxlength="30" name="upass_fir">
+			<a class="eye_all"><button type="button" class="eye_btn"><img src="/resources/image/eye.png" class="eye_logo" /></button></a>
+			<a class="close_eye_all"><button type="button" class="close_eye_btn"><img src="/resources/image/close_eye.png" class="close_eye_logo" /></button></a>
 			<span class="pass_fir_check">필수 정보입니다.</span>
 			<span class="fir_pass_check_1">비밀번호 안전도:매우낮음</span>
 			<span class="fir_pass_check_2">비밀번호 안전도:높음</span>
@@ -60,6 +65,8 @@
 		<div class="pw_name" id="head_text">비밀번호 확인</div>
 		<div class="pw_input_box">
 			<input type="password" class="pw_input" id="textbox"  maxlength="30"name="upass">
+						<a class="re_eye_all"><button type="button" class="re_eye_btn"><img src="/resources/image/eye.png" class="re_eye_logo" /></button></a>
+			<a class="re_close_eye_all"><button type="button" class="re_close_eye_btn"><img src="/resources/image/close_eye.png" class="re_close_eye_logo" /></button></a>
 			<span class="pass_check">필수 정보입니다.</span>
 			<div class="typecheck0">&nbsp;</div>
 			<span class="typecheck1">비밀번호가 일치합니다.</span>
@@ -215,6 +222,13 @@
 										"inline-block");
 
 							}
+							if(nickname!=""){
+								$('.delete').css("display", "inline-block");
+								
+							}
+							if(nickname==""){
+								$('.delete').css("display", "none");
+							}
 
 						}//success;
 					}); // ajax;
@@ -247,6 +261,14 @@
 						$('.fir_pass_check_2').css("display", "inline-block")
 					}
 					;
+/* 					if(pw_fir_input==""){
+						$('.close_eye_all').css("display", "inline-block");
+					
+					}
+					if(pw_fir_input!=""){
+						$('.close_eye_all').css("display", "none");
+						
+					} */
 
 				});
 
@@ -521,7 +543,82 @@
 					});
 				}
 			}).open();
-		}
+		window.close();}
+		
+		
+		$(document).ready(function() {
+		
+		
+			//닉네임 clear 버튼 
+			$(".delete_btn").click(function() {
+				$('.nickname_input').val('')
+			
+			
+				});
+			});
+		// 비밀번호 버튼타입 바꾸는 버튼
+		$(document).ready(function() {
+			var eye_check = true; //눈감은 상태 type = password 
+			
+			// 비밀번호 버튼타입 바꾸는 버튼
+			$(".close_eye_btn").click(function() {
+				if(eye_check==true){
+					$('.pw_fir_input').prop("type","text");
+					$('.close_eye_all').css("display", "none");
+					$('.eye_all').css("display", "inline-block");
+					console.log("true 출력")
+					return eye_check= false;
+					
+				}
+			});
+				
+				
+			$(".eye_btn").click(function() {
+				if(eye_check==false){
+					$('.pw_fir_input').prop("type","password");
+					$('.eye_all').css("display", "none");
+					$('.close_eye_all').css("display", "inline-block");
+					console.log("false 출력")
+					return eye_check=true;
+					
+				}
+			});
+				
+			});
+		
+		// re 비밀번호 버튼타입 바꾸는 버튼
+		$(document).ready(function() {
+			var re_eye_check = true; //눈감은 상태 type = password 
+			
+			// 비밀번호 버튼타입 바꾸는 버튼
+			$(".re_close_eye_btn").click(function() {
+				if(re_eye_check==true){
+					$('.pw_input').prop("type","text");
+					$('.re_close_eye_all').css("display", "none");
+					$('.re_eye_all').css("display", "inline-block");
+					console.log("re true 출력")
+					return re_eye_check= false;
+					
+				}
+			});
+				
+				
+			$(".re_eye_btn").click(function() {
+				if(re_eye_check==false){
+					$('.pw_input').prop("type","password");
+					$('.re_eye_all').css("display", "none");
+					$('.re_close_eye_all').css("display", "inline-block");
+					console.log("re false 출력")
+					return re_eye_check=true;
+					
+				}
+			});
+				
+			});
+		
+		
+		
+
 	</script>
 </body>
 </html>
