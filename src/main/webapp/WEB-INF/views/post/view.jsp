@@ -8,7 +8,16 @@
 %>
 	<div class="pic_area">
          <p id="preview">
-             <img src="${contextPath}/download?postId=${post.postId}&image=${post.image}"/>
+             <c:choose>
+				<c:when test="${post.image != ''}">
+					<img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />
+				</c:when>
+				<c:otherwise>
+					<c:if test="${post.category == 'pizza'}"><img src="${contextPath}/resources/image/pizza.jpg" /></c:if>
+					<c:if test="${post.category == 'chicken'}"><img src="${contextPath}/resources/image/chicken.jpg" /></c:if>
+					<c:if test="${post.category == 'hamburger'}"><img src="${contextPath}/resources/image/hamburger.jpg" /></c:if>
+				</c:otherwise>
+			</c:choose> 
          </p>
      </div>
      <div class="text_area">

@@ -69,8 +69,18 @@ request.setCharacterEncoding("UTF-8");
 						<c:forEach var="post" items="${postsList}" varStatus="postNum">
 							<c:if test="${member.region1 == post.region1 and member.region2 == post.region2}">
 								<li class="item">
-									<a href="${contextPath}/post/viewPost?postId=${post.postId}"> 
-										<img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />
+									<a href="${contextPath}/post/viewPost?postId=${post.postId}">
+										<c:choose>
+											<c:when test="${post.image != ''}">
+												<img src="${contextPath}/download.do?postId=${post.postId}&image=${post.image}" />
+											</c:when>
+											<c:otherwise>
+												<c:if test="${post.category == 'pizza'}"><img src="${contextPath}/resources/image/pizza.jpg" /></c:if>
+												<c:if test="${post.category == 'chicken'}"><img src="${contextPath}/resources/image/chicken.jpg" /></c:if>
+												<c:if test="${post.category == 'hamburger'}"><img src="${contextPath}/resources/image/hamburger.jpg" /></c:if>
+											</c:otherwise>
+										</c:choose> 
+										
 										<div class="list_info">
 											<p class="title">${post.title}</p>
 											<p class="tag_wrap">
