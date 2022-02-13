@@ -140,39 +140,38 @@ request.setCharacterEncoding("UTF-8");
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 
-$(document).ready(function(){
-	//시계
-	var timer = setInterval(function(){
-	var now = new Date(); 
+	$(document).ready(function(){
+		//시계
+		var timer = setInterval(function(){
+		var now = new Date(); 
+				  
+		var hr = now.getHours();
+		var min = now.getMinutes();
+		var sec = now.getSeconds();
 			  
-	var hr = now.getHours();
-	var min = now.getMinutes();
-	var sec = now.getSeconds();
+		  $('.time_area').find('span').eq(0).text(hr);
+		  $('.time_area').find('span').eq(1).text(min);
+		  $('.time_area').find('span').eq(2).text(sec);
 		  
-	  $('.time_area').find('span').eq(0).text(hr);
-	  $('.time_area').find('span').eq(1).text(min);
-	  $('.time_area').find('span').eq(2).text(sec);
-	  
-	  if(hr<10){
-		  $('.time_area').find('span').eq(0).text("0"+hr);
-	  }
-	  if(min<10){
-		  $('.time_area').find('span').eq(1).text("0"+min);
-	  }
-	  if(sec<10){
-		  $('.time_area').find('span').eq(2).text("0"+sec);
-	  }
-   },1000);
-});
-
-
+		  if(hr<10){
+			  $('.time_area').find('span').eq(0).text("0"+hr);
+		  }
+		  if(min<10){
+			  $('.time_area').find('span').eq(1).text("0"+min);
+		  }
+		  if(sec<10){
+			  $('.time_area').find('span').eq(2).text("0"+sec);
+		  }
+	   },1000);
+	});
+	
 	//주소검색
 	function execPostCode() {
-	    new daum.Postcode({
-	        oncomplete: function(data) {
-	           $("#post_addr").val(data.roadAddress);
-	       }
-	    }).open();
+		new daum.Postcode({
+			oncomplete: function(data) {
+			$("#post_addr").val(data.roadAddress);
+			}
+		}).open();
 	}
 	
 	//마이크
@@ -183,115 +182,113 @@ $(document).ready(function(){
 	const analyser = audioCtx.createAnalyser();
 	
 	if (navigator.mediaDevices) {
-        console.log('getUserMedia supported.')
-
-        const constraints = {
-        	//오디오를 요청한다.
-            audio: true
-        }
-        let chunks = [];
-
-        //비동기 처리
-        navigator.mediaDevices.getUserMedia(constraints)
-            .then(stream => {
-            	//스트림 사용
-                const mediaRecorder = new MediaRecorder(stream);             
-                record.onclick = () => {
-                    mediaRecorder.start();
-                    console.log(mediaRecorder.state);
-                    console.log("recorder started");
-                    record.style.backgroundColor = "#FF5555";
-                }
-
-                stop.onclick = () => {
-                    mediaRecorder.stop();
-                    console.log(mediaRecorder.state);
-                    console.log("recorder stopped");
-                    record.style.backgroundColor = "#e1e1e1";
-                    title.focus();
-                }
-
-                mediaRecorder.onstop = e => {
-                	const blob = new Blob(chunks, {
-                        'type': 'audio/ogg codecs=opus'
-                    });
-                	let file = new File([blob], "c:/study/audio.webm");
-                    console.log(file.name);
-
-                	//file upload
-                    let formdata = new FormData();
-                    formdata.append("fname", "audio.webm");
-                    formdata.append("data", blob);
-                    console.log("blob",blob);
-                    
-
-                    let xhr = new XMLHttpRequest();
-                    xhr.onload = () => {
-                     	if (xhr.status === 200) {// HTTP가 잘 동작되었다는 뜻.
-                        	console.log("response:"+xhr.response);
-                        	title.value=xhr.response;       
-                    	}                 
-                    	
-                    }
-                    console.log('upload');
-                    xhr.open("POST", "mic", true);
-                    
-                    xhr.send(formdata);
-                }
-
-                mediaRecorder.ondataavailable = e => {
-                    chunks.push(e.data)
-                    console.log(e.data);
-                }
-            })
-            .catch(err => {
-            	// 오류 처리
-                console.log('The following error occurred: ' + err)
-            })
-    }
+		console.log('getUserMedia supported.')
 	
-   
-   
-const listForm = $("#listForm");
-  
-  /* 검색 기능 */
-  	$(".search_area .searchBtn").on("click", function(e) {
-  		e.preventDefault();
-  		searchFunc();
-  	});
-  
-  	function searchFunc() {
+		const constraints = {
+			//오디오를 요청한다.
+			audio: true
+		}
+		let chunks = [];
+	
+		//비동기 처리
+	    navigator.mediaDevices.getUserMedia(constraints)
+		.then(stream => {
+			//스트림 사용
+			const mediaRecorder = new MediaRecorder(stream);             
+			record.onclick = () => {
+				mediaRecorder.start();
+				console.log(mediaRecorder.state);
+				console.log("recorder started");
+				record.style.backgroundColor = "#FF5555";
+			}
+	
+			stop.onclick = () => {
+				mediaRecorder.stop();
+				console.log(mediaRecorder.state);
+				console.log("recorder stopped");
+				record.style.backgroundColor = "#e1e1e1";
+				title.focus();
+			}
+	
+			mediaRecorder.onstop = e => {
+				const blob = new Blob(chunks, {
+				'type': 'audio/ogg codecs=opus'
+				});
+	          		let file = new File([blob], "c:/study/audio.webm");
+				console.log(file.name);
+	
+				//file upload
+				let formdata = new FormData();
+				formdata.append("fname", "audio.webm");
+				formdata.append("data", blob);
+				console.log("blob",blob);
+					                
+	
+				let xhr = new XMLHttpRequest();
+				xhr.onload = () => {
+					if (xhr.status === 200) {// HTTP가 잘 동작되었다는 뜻.
+						console.log("response:"+xhr.response);
+						title.value=xhr.response;       
+					}                 
+	             		 }
+				console.log('upload');
+				xhr.open("POST", "mic", true);
+					                
+				xhr.send(formdata);
+			}
+	
+			mediaRecorder.ondataavailable = e => {
+				chunks.push(e.data)
+				console.log(e.data);
+			}
+		})
+	       .catch(err => {
+			// 오류 처리
+			console.log('The following error occurred: ' + err)
+		})
+	}
+		
+	   
+	const listForm = $("#listForm");
+	 
+	/* 검색 기능 */
+	$(".search_area .searchBtn").on("click", function(e) {
+		e.preventDefault();
+		searchFunc();
+	});
+	  
+	function searchFunc() {
 		let keyword = $(".search_area input[name='keyword']").val();
 		let tab = ${pageMaker.cri.tab };
-
+	
 		if (!keyword) {
 			location.href = "/post/list";
 		}
-
+	
 		listForm.find("input[name='keyword']").val(keyword);
 		listForm.find("input[name='tab']").val(tab);
 		listForm.attr("action", "/post/list");
 		listForm.submit();
 	}
-  	
- // 카테고리 필터
-    $(".tab ul li").click(function (e) {
-      e.preventDefault();
-
-      let idx = $(this).index();
-      
-      listForm.find("input[name='tab']").val(idx);
-      listForm.attr("action", "/post/list");
+	 	
+	/* 탭 메뉴 */
+	$(".tab ul li").click(function (e) {
+		e.preventDefault();
+	
+		let idx = $(this).index();
+	      
+		listForm.find("input[name='tab']").val(idx);
+		listForm.attr("action", "/post/list");
 		listForm.submit();
-    });
-  
-  $(".tab ul li").removeClass("selected");
-  $(".tab ul li").eq(${pageMaker.cri.tab }).addClass("selected");
-  
-  /* 게시물이 없을 경우 */
+	});
+	  
+	$(".tab ul li").removeClass("selected");
+	$(".tab ul li").eq(${pageMaker.cri.tab }).addClass("selected");
+	  
+	/* 게시물이 없을 경우 */
 	const isPostInfo = document.querySelectorAll('.item');
 	let keyword = $(".search_area input[name='keyword']").val();
-	
+		
 	if (isPostInfo.length <= 0) {
 		if (keyword) { // 검색 결과가 없을 경우
 			document.querySelector(".postSearchNone").style.display = '';
@@ -299,30 +296,28 @@ const listForm = $("#listForm");
 			document.querySelector(".postNone").style.display = '';
 		}
 	}
-  
-  /* 검색하면 취소 버튼 표시 */
+	  
+	/* 검색하면 취소 버튼 표시 */
 	if (keyword) {
-			document.querySelector(".searchReset").style.display = '';
+		document.querySelector(".searchReset").style.display = '';
 	} else {
-			document.querySelector(".searchReset").style.display = 'none';
+		document.querySelector(".searchReset").style.display = 'none';
 	}
-  
-  /* 열차 마감 */
+	  
+	/* 열차 마감 */
 	const orderDate = document.querySelectorAll("._deadline");
 	const closed = document.querySelectorAll(".closed");
 	const leave_soon = document.querySelectorAll(".leave_soon");
 	const today = new Date();
-	
+		
 	for(let i=0; i<orderDate.length; i++){
 		let oDate = new Date(orderDate[i].textContent);
-		
 		let dateDiff = oDate.getTime()-today.getTime();
-		
 		let diffDay= Math.floor((dateDiff / (1000 * 60 * 60 * 24)));
 		let diffHour = Math.floor((dateDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		let diffMin = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
-		let diffSec = Math.floor((dateDiff % (1000 * 60)) / 1000);
-		
+	// 	let diffMin = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
+	// 	let diffSec = Math.floor((dateDiff % (1000 * 60)) / 1000);
+			
 		/* 현재 시간 - 마감 시간 < 1시간 => 마감 임박 */
 		if(diffDay == 0 && diffHour == 0) {
 			leave_soon[i].style.display= "block";
@@ -332,11 +327,11 @@ const listForm = $("#listForm");
 			closed[i].style.display= "block";
 		}
 	}
-  
+	  
 	/* 모집시간 포맷 변경 */
 	const deadline = document.querySelectorAll("._deadline");
 	const deadlineFormat = document.querySelectorAll(".recruit_wrap span.deadline span");
-		
+			
 	for(let i = 0; i < deadline.length; i++){
 		$(function() {
 			var time1 = deadline[i].innerText.substr(5, 2);
@@ -346,4 +341,5 @@ const listForm = $("#listForm");
 			$(deadlineFormat).eq(i).text(time1 + "월" + time2 + "일 " + time3 + ":" + time4 + "");
 		});
 	}
+	
 </script>

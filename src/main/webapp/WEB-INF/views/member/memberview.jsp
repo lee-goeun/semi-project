@@ -56,10 +56,10 @@ function memberDel(uid){
         <thead>
        
             <tr class="table2">
+            	<th>성명</th>
             	<th>닉네임</th>
                 <th>아이디</th>
                 <th>비밀번호</th>
-                <th>성명</th>
                 <th>이메일</th>
                 <th>우편번호</th>
                 <th>도로명주소</th>
@@ -72,11 +72,11 @@ function memberDel(uid){
             <c:forEach items="${memberview}" var="member">
               
                 <tr>
+               	 	<td>${member.name}</td>
             		<td>${member.nickname}</td>
+            		 <td>${member.uid}</td>
                     <td>${member.upass}</td>
-                    <td>${member.name}</td>
-                    <td>${member.email}</td>
-                    <td>${member.uid}</td>
+                    <td>${member.email}</td>   
                     <td>${member.postCode}</td>
                     <td>${member.address}</td>
                     <td>${member.addressSpecific}</td>

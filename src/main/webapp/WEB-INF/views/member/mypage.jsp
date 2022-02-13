@@ -30,7 +30,7 @@
 	<input type="text" id="textbox" class="rightbtn" name="name" value="${member.name}" disabled />
 				
 	</div>
-	<input type="text"  class="bottom_text" name="email" value="${member.email}"  placeholder="이메일">
+	<input type="text"  id="emeail_box"class="bottom_text" name="email" value="${member.email}"  placeholder="이메일">
 	
 	
 	<div class="form-group">
@@ -60,118 +60,130 @@
 
 <script>
 
-var name_email = $('.bottom_text').val();
-var temp = $("#upass").val();
-
+	
 
 $(document).ready(function(){
+
 		//회원정보 수정 버튼
 		$(".change_button").click(function(){
-		
+			var check_email = $('.bottom_text').val();
+			var temp = $("#upass").val();
+			var email_type = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;	
+	if (check_email == "") {
+				alert("이메일을 입력해주세요")
+				console.log("no email")
+				return false;
+			} else if (email_type.test(check_email) == false) {
 			
-	if(name_email==""){
-				console.log(name_email)
-				alert("이름과 이메일을 모두 입력해주세요")
+				alert("올바르지 않은 이메일 형식입니다.")
 				return false;
 			}
-			
-			alert("수정완료")
-			alert("다시 로그인 해주세요.")
-			$("#mypage_form").attr("action", "/member/memberUpdate");
-			$("#mypage_form").submit();
-			
-			
+			else {
+				alert("수정완료")
+				alert("다시 로그인 해주세요.")
+				$("#mypage_form").attr("action", "/member/memberUpdate");
+				$("#mypage_form").submit();
+			}
 		});
-});
-		
-	function popup(){
-		var url ="popup";
-		window.open(url,"","width=400,height=400");
+	});
+
+	function popup() {
+		var url = "popup";
+		window.open(url, "", "width=400,height=400");
 	}
-	
-	
+
 	/* 도로명 주소 찾기 */
-	
+
 	// 주소-좌표 변환 객체 생성
 	var geocoder = new daum.maps.services.Geocoder();
-	
+
 	function execPostCode() {
-		new daum.Postcode({
-			oncomplete : function(data) {
-				// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+		new daum.Postcode(
+				{
+					oncomplete : function(data) {
+						// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
 
-				// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
-				// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-				var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
-				var extraRoadAddr = ''; // 도로명 조합형 주소 변수
+						// 도로명 주소의 노출 규칙에 따라 주소를 조합한다.
+						// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+						var fullRoadAddr = data.roadAddress; // 도로명 주소 변수
+						var extraRoadAddr = ''; // 도로명 조합형 주소 변수
 
-				// 법정동명이 있을 경우 추가한다. (법정리는 제외)
-				// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
-				if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
-					extraRoadAddr += data.bname;
-				}
-				// 건물명이 있고, 공동주택일 경우 추가한다.
-				if (data.buildingName !== '' && data.apartment === 'Y') {
-					extraRoadAddr += (extraRoadAddr !== '' ? ', '
-							+ data.buildingName : data.buildingName);
-				}
-				// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
-				if (extraRoadAddr !== '') {
-					extraRoadAddr = ' (' + extraRoadAddr + ')';
-				}
-				// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
-				if (fullRoadAddr !== '') {
-					fullRoadAddr += extraRoadAddr;
-				}
- 
-				// 우편번호와 주소 정보를 해당 필드에 넣는다.
-				console.log(data.zonecode);
-				console.log(fullRoadAddr);
-
-				$("[name=postCode]").val(data.zonecode);
-				$("[name=address]").val(fullRoadAddr);
-				
-				/* 도로명 주소 => 행정 주소 변환 */
-                var addr = data.address; // 최종 주소 변수
-                geocoder.addressSearch(data.address, function (results, status) {
-					// 정상적으로 검색이 완료되면
-					if (status === daum.maps.services.Status.OK) {
-
-						var result = results[0]; // 첫번째 결과의 값을 활용
-
-						var coords = new daum.maps.LatLng(result.y, result.x); // 해당 주소에 대한 좌표
-
-						let lat = result.y;
-						let lng = result.x;
-						getAddr(lat, lng);
-						function getAddr(lat, lng) {
-							let geocoder = new kakao.maps.services.Geocoder();
-
-							let coord = new kakao.maps.LatLng(lat, lng);
-							let callback = function (result, status) {
-								if (status === kakao.maps.services.Status.OK) {
-//										console.log(result[0].address.address_name);
-//										console.log(result[0].address.region_1depth_name);
-//										console.log(result[0].address.region_2depth_name);
-//										console.log(result[0].address.region_3depth_name);
-//										console.log(result[0].address.region_3depth_h_name);
-									
-									$("[name=region1]").val(result[0].address.region_1depth_name);
-									$("[name=region2]").val(result[0].address.region_2depth_name);
-									$("[name=region3]").val(result[0].address.region_3depth_name);
-								}
-							}
-							geocoder.coord2Address(coord.getLng(), coord.getLat(), callback);
+						// 법정동명이 있을 경우 추가한다. (법정리는 제외)
+						// 법정동의 경우 마지막 문자가 "동/로/가"로 끝난다.
+						if (data.bname !== '' && /[동|로|가]$/g.test(data.bname)) {
+							extraRoadAddr += data.bname;
 						}
+						// 건물명이 있고, 공동주택일 경우 추가한다.
+						if (data.buildingName !== '' && data.apartment === 'Y') {
+							extraRoadAddr += (extraRoadAddr !== '' ? ', '
+									+ data.buildingName : data.buildingName);
+						}
+						// 도로명, 지번 조합형 주소가 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
+						if (extraRoadAddr !== '') {
+							extraRoadAddr = ' (' + extraRoadAddr + ')';
+						}
+						// 도로명, 지번 주소의 유무에 따라 해당 조합형 주소를 추가한다.
+						if (fullRoadAddr !== '') {
+							fullRoadAddr += extraRoadAddr;
+						}
+
+						// 우편번호와 주소 정보를 해당 필드에 넣는다.
+						console.log(data.zonecode);
+						console.log(fullRoadAddr);
+
+						$("[name=postCode]").val(data.zonecode);
+						$("[name=address]").val(fullRoadAddr);
+
+						/* 도로명 주소 => 행정 주소 변환 */
+						var addr = data.address; // 최종 주소 변수
+						geocoder
+								.addressSearch(
+										data.address,
+										function(results, status) {
+											// 정상적으로 검색이 완료되면
+											if (status === daum.maps.services.Status.OK) {
+
+												var result = results[0]; // 첫번째 결과의 값을 활용
+
+												var coords = new daum.maps.LatLng(
+														result.y, result.x); // 해당 주소에 대한 좌표
+
+												let lat = result.y;
+												let lng = result.x;
+												getAddr(lat, lng);
+												function getAddr(lat, lng) {
+													let geocoder = new kakao.maps.services.Geocoder();
+
+													let coord = new kakao.maps.LatLng(
+															lat, lng);
+													let callback = function(
+															result, status) {
+														if (status === kakao.maps.services.Status.OK) {
+															//										console.log(result[0].address.address_name);
+															//										console.log(result[0].address.region_1depth_name);
+															//										console.log(result[0].address.region_2depth_name);
+															//										console.log(result[0].address.region_3depth_name);
+															//										console.log(result[0].address.region_3depth_h_name);
+
+															$("[name=region1]")
+																	.val(
+																			result[0].address.region_1depth_name);
+															$("[name=region2]")
+																	.val(
+																			result[0].address.region_2depth_name);
+															$("[name=region3]")
+																	.val(
+																			result[0].address.region_3depth_name);
+														}
+													}
+													geocoder.coord2Address(
+															coord.getLng(),
+															coord.getLat(),
+															callback);
+												}
+											}
+										});
 					}
-				});
-			}
-		}).open();
+				}).open();
 	}
-	
-	
-	
-	
-	
-	
 </script>

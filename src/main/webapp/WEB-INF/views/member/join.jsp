@@ -526,10 +526,10 @@
 								let coord = new kakao.maps.LatLng(lat, lng);
 								let callback = function (result, status) {
 									if (status === kakao.maps.services.Status.OK) {
-// 										console.log(result[0].address.address_name);
-// 										console.log(result[0].address.region_1depth_name);
-// 										console.log(result[0].address.region_2depth_name);
-// 										console.log(result[0].address.region_3depth_name);
+										console.log(result[0].address.address_name);
+										console.log(result[0].address.region_1depth_name);
+										console.log(result[0].address.region_2depth_name);
+										console.log(result[0].address.region_3depth_name);
 // 										console.log(result[0].address.region_3depth_h_name);
 										
 										$("[name=region1]").val(result[0].address.region_1depth_name);
