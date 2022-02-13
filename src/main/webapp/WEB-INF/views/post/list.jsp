@@ -24,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<!-- 검색 영역 -->
 			<div class="search_area">
-				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="검색어를 입력하세요." onKeyPress="if (event.keyCode==13){searchFunc();}">
+				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="지역이나 제목을 검색할 수 있어요." onKeyPress="if (event.keyCode==13){searchFunc();}">
 				<button class="searchBtn">
 					<img src="${contextPath}/resources/image/outline_search_white_24dp.png">
 				</button>
@@ -214,14 +214,11 @@ request.setCharacterEncoding("UTF-8");
 				const blob = new Blob(chunks, {
 				'type': 'audio/ogg codecs=opus'
 				});
-	          		let file = new File([blob], "c:/study/audio.webm");
-				console.log(file.name);
 	
 				//file upload
 				let formdata = new FormData();
 				formdata.append("fname", "audio.webm");
 				formdata.append("data", blob);
-				console.log("blob",blob);
 					                
 	
 				let xhr = new XMLHttpRequest();

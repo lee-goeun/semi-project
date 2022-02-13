@@ -15,13 +15,13 @@
 </div>
 <div id="msg_area">
     <input id="msg" type="text" placeholder="메세지를 입력하세요" value=""/>
+    <input id="btn_submit" type="button" value="전송"/>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.4.0/sockjs.min.js"></script>
 <script type="text/javascript">
 	var websocket;
 	$(document).ready(function(){
 		//웹 소켓 연결
-		var url = "ws://118.67.143.112:8080/chatws";
 		websocket = new SockJS("${contextPath}/chatws");
 		
 
@@ -39,10 +39,19 @@
 			console.log(msg);
 			
 			if(e.keyCode == 13){
-				//메세지 전송
+				/*메세지 전송*/
 				websocket.send(JSON.stringify({postId : postId,type:'CHAT', nickname:nick, msg : msg}));
 				$('#msg').val("");
 			}
+		});
+		
+		//전송 버튼
+		$('#btn_submit').on('click', function(){
+			const nick = $('#myNick').val();
+			const msg = $('#msg').val();
+			
+			websocket.send(JSON.stringify({postId : postId,type:'CHAT', nickname:nick, msg : msg}));
+			$('#msg').val("");
 		});
 		
 		//웹 소켓 연결 해제
