@@ -15,7 +15,6 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 지역 선택 -->
 		<div id="addr_area">
 			<input name="address" value="${member.region1} ${member.region2}" id="post_addr" type="text" readonly="readonly" />
-<%-- 			<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png' /> --%>
 		</div>
 
 		<div class="top">
@@ -118,32 +117,12 @@ request.setCharacterEncoding("UTF-8");
 					</c:otherwise>
 				</c:choose>
 			</ul>
-			<!-- 더보기 버튼 -->
-			<!-- <div class="load_btn_wrap">
-				<a href="#" class="load"> 더보기(<span class="listNum"></span>/<span class="allListNum"></span>) <i class="fas fa-chevron-down"></i>
-				</a>
-			</div> -->
 			<div class="postSearchNone" style="display: none">
 				<td>검색 결과가 없어요.</td>
 			</div>
 			<div class="postNone" style="display: none">
 				<td>아직 게시물이 없어요.</td>
 			</div>
-
-			<!-- 페이징 -->
-			<!-- 			<div class="paging_wrap"> -->
-			<!-- 				<ul class="pageInfo"> -->
-			<%-- 					<c:if test="${pageMaker.prev}"> --%>
-			<%-- 						<li class="prevBtn"><a href="${pageMaker.startPage-1}"><i class="fas fa-angle-left"></i></a></li> --%>
-			<%-- 					</c:if> --%>
-			<%-- 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num"> --%>
-			<%-- 						<li class=" ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li> --%>
-			<%-- 					</c:forEach> --%>
-			<%-- 					<c:if test="${pageMaker.next}"> --%>
-			<%-- 						<li class="nextBtn"><a href="${pageMaker.endPage + 1 }"><i class="fas fa-angle-right"></i></a></li> --%>
-			<%-- 					</c:if> --%>
-			<!-- 				</ul> -->
-			<!-- 			</div> -->
 		</div>
 		
 		<div class="down">
@@ -151,8 +130,6 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<form id="listForm" method="get">
-			<%-- 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> --%>
-			<%-- 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }"> --%>
 			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 			<input type="hidden" name="tab" value="${pageMaker.cri.tab}">
 		</form>
@@ -164,28 +141,28 @@ request.setCharacterEncoding("UTF-8");
 <script type="text/javascript">
 
 $(document).ready(function(){
-	   //시계
-	   var timer = setInterval(function(){
-		   var now = new Date(); 
+	//시계
+	var timer = setInterval(function(){
+	var now = new Date(); 
 			  
-		  	var hr = now.getHours();
-		 	var min = now.getMinutes();
-		  	var sec = now.getSeconds();
+	var hr = now.getHours();
+	var min = now.getMinutes();
+	var sec = now.getSeconds();
 		  
-		  $('.time_area').find('span').eq(0).text(hr);
-		  $('.time_area').find('span').eq(1).text(min);
-		  $('.time_area').find('span').eq(2).text(sec);
-		  
-		  if(hr<10){
-			  $('.time_area').find('span').eq(0).text("0"+hr);
-		  }
-		  if(min<10){
-			  $('.time_area').find('span').eq(1).text("0"+min);
-		  }
-		  if(sec<10){
-			  $('.time_area').find('span').eq(2).text("0"+sec);
-		  }
-	   },1000);
+	  $('.time_area').find('span').eq(0).text(hr);
+	  $('.time_area').find('span').eq(1).text(min);
+	  $('.time_area').find('span').eq(2).text(sec);
+	  
+	  if(hr<10){
+		  $('.time_area').find('span').eq(0).text("0"+hr);
+	  }
+	  if(min<10){
+		  $('.time_area').find('span').eq(1).text("0"+min);
+	  }
+	  if(sec<10){
+		  $('.time_area').find('span').eq(2).text("0"+sec);
+	  }
+   },1000);
 });
 
 
@@ -275,14 +252,7 @@ $(document).ready(function(){
 	
    
    
-   /* 페이징 */
-	const listForm = $("#listForm");
-//   $(".pageInfo a").on("click", function(e) {
-// 		e.preventDefault();
-//   		listForm.find("input[name='pageNum']").val($(this).attr("href"));
-//   		listForm.attr("action", "/post/list");
-//   		listForm.submit();
-//   	});
+const listForm = $("#listForm");
   
   /* 검색 기능 */
   	$(".search_area .searchBtn").on("click", function(e) {
@@ -299,7 +269,6 @@ $(document).ready(function(){
 		}
 
 		listForm.find("input[name='keyword']").val(keyword);
-// 		listForm.find("input[name='pageNum']").val(1);
 		listForm.find("input[name='tab']").val(tab);
 		listForm.attr("action", "/post/list");
 		listForm.submit();
@@ -311,7 +280,6 @@ $(document).ready(function(){
 
       let idx = $(this).index();
       
-//       listForm.find("input[name='pageNum']").val(1);
       listForm.find("input[name='tab']").val(idx);
       listForm.attr("action", "/post/list");
 		listForm.submit();
@@ -338,31 +306,6 @@ $(document).ready(function(){
 	} else {
 			document.querySelector(".searchReset").style.display = 'none';
 	}
-  	
-  /* 더보기 */
-//   document.querySelector(".listNum").textContent = 1;
-//   document.querySelector(".allListNum").textContent = Math.ceil(isPostInfo.length / 9);
-  
-//   if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent || document.querySelector(".allListNum").textContent == 0){
-//       document.querySelector(".load_btn_wrap").style.display = 'none';
-//   }
-  
-//   $(function(){
-//     $(".post ul li").slice(0, 9).show(); // select the first ten
-    
-//     $(".load").click(function(e){ // click event for load more
-//         e.preventDefault();
-    
-//         $(".post ul li:hidden").slice(0, 9).show(); // select next 10 hidden divs and show them
-        
-//         document.querySelector(".listNum").textContent = Number(document.querySelector(".listNum").textContent) + 1;
-        
-//         if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent){
-//             document.querySelector(".load_btn_wrap").style.display = 'none';
-//         }
-        
-//     });
-// });
   
   /* 열차 마감 */
 	const orderDate = document.querySelectorAll("._deadline");
@@ -389,31 +332,6 @@ $(document).ready(function(){
 			closed[i].style.display= "block";
 		}
 	}
-	
-	/* slick slider */
-	/* if ($('.slider li.item').length == 0) {
-			$('.slider').slick({
-				slidesToShow: 3,
-				slidesToScroll: 3,
-				rows: 3,
-				infinite: true,
-				speed: 500,
-				arrows: true,
-				draggable: true, 
-				dots: false,
-			});
-		} else {
-			$('.slider').slick({
-				slidesToShow: 3,
-				slidesToScroll: 3,
-				rows: 3,
-				infinite: true,
-				speed: 500,
-				arrows: true,
-				draggable: true,
-				dots: true,
-			});
-		} */
   
 	/* 모집시간 포맷 변경 */
 	const deadline = document.querySelectorAll("._deadline");
