@@ -309,14 +309,10 @@ request.setCharacterEncoding("UTF-8");
 		
 	for(let i=0; i<orderDate.length; i++){
 		let oDate = new Date(orderDate[i].textContent);
-		let dateDiff = oDate.getTime()-today.getTime();
-		let diffDay= Math.floor((dateDiff / (1000 * 60 * 60 * 24)));
-		let diffHour = Math.floor((dateDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-	// 	let diffMin = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
-	// 	let diffSec = Math.floor((dateDiff % (1000 * 60)) / 1000);
+		let diffHour = (oDate.getTime() - today.getTime()) / (1000 * 60 * 60);
 			
 		/* 현재 시간 - 마감 시간 < 1시간 => 마감 임박 */
-		if(diffDay == 0 && diffHour == 0) {
+		if(diffHour < 1 && diffHour > 0) {
 			leave_soon[i].style.display= "block";
 		}
 		/* 현재 시간 < 마감 시간 => 열차 마감 */
