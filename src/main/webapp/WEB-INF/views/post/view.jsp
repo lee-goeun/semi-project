@@ -132,8 +132,12 @@
         	$('.myprice').text(addComma(myprice));
         	$('.mydeliveryFee').text(addComma(deliveryFee/maxMember));
         	
+        	if(${post.isTogether} == '1'){
+        		$('.total').text(addComma(myprice + mydeliveryFee));
+        	}else{
+        		$('.total').text(addComma(mydeliveryFee));
+        	}
         	
-        	$('.total').text(addComma(myprice + mydeliveryFee));
         	
         	//채팅
         	var websocket;
