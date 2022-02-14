@@ -181,6 +181,8 @@ request.setCharacterEncoding("UTF-8");
 	const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 	const analyser = audioCtx.createAnalyser();
 	
+	console.log(navigator);
+	
 	if (navigator.mediaDevices) {
 		console.log('getUserMedia supported.')
 	
