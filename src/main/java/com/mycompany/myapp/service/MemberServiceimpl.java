@@ -84,7 +84,7 @@ public class MemberServiceimpl implements MemberService {
 	@Override
 	public void certifiedPhoneNumber(String userPhoneNumber, int randomNumber) {
 		String api_key = "NCSHYSJMYM84M2G6"; 
-		String api_secret = ""; 
+		String api_secret = "SLGNRXFDZHGRT7ST7XCXSJKZX9MRTRCV"; 
 		Message coolsms = new Message(api_key, api_secret); // 4 params(to, from, type, text) are mandatory. must be filled 
 		HashMap<String, String> params = new HashMap<String, String>(); 
 		params.put("to", userPhoneNumber); // 수신전화번호 

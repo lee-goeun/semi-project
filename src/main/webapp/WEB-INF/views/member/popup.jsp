@@ -29,7 +29,7 @@
 		<div>
 		<button type="button"  class="btn" id="close_btn">취소</button>
 			<button type="button"  class="btn" id="com_btn">수정완료</button>
-			<div>수정하기 버튼을 눌러야 </div>
+			
 			
 		
 		</div>
@@ -83,6 +83,7 @@ $('.pre_pass').on("propertychange change keyup paste input", function(){
 				
 				
 				alert("비밀번호 변경완료")
+				alert("'수정하기' 버튼을 눌러야 회원정보 수정이 완료 됩니다.")
 				
 				self.close();
 				}
