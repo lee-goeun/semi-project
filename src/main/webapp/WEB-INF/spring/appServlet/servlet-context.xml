@@ -57,6 +57,14 @@
 			<mapping path="/*/*" />
 			<beans:bean class="com.mycompany.myapp.interceptor.ViewNameInterceptor" />
 		</interceptor>
+		<!-- <interceptor>
+			<mapping path="/member/mypage" />
+			<mapping path="/member/info" />
+			<mapping path="/member/guide" />
+			<mapping path="/post/**" />
+			<mapping path="/review/**" />
+			<beans:bean id="PageInterceptor" class="com.mycompany.myapp.interceptor.PageInterceptor" />
+		</interceptor> -->
 	</interceptors> 
 	
 	

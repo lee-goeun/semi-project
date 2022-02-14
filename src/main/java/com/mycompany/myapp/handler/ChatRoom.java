@@ -37,6 +37,7 @@ public class ChatRoom {
     }
 	
 	public void handleMessage(WebSocketSession session, ChatVO chatMessage, ObjectMapper objectMapper) throws IOException{
+		
 		if(chatMessage.getType() == MessageType.ENTER) {
 			sessions.add(session);
 		}else if(chatMessage.getType() == MessageType.LEAVE) {

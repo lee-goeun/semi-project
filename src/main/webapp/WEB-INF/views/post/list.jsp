@@ -15,7 +15,6 @@ request.setCharacterEncoding("UTF-8");
 		<!-- 지역 선택 -->
 		<div id="addr_area">
 			<input name="address" value="${member.region1} ${member.region2}" id="post_addr" type="text" readonly="readonly" />
-<%-- 			<img src='${contextPath}/resources/image/outline_expand_more_black_18dp.png' /> --%>
 		</div>
 
 		<div class="top">
@@ -25,7 +24,7 @@ request.setCharacterEncoding("UTF-8");
 			</div>
 			<!-- 검색 영역 -->
 			<div class="search_area">
-				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="검색어를 입력하세요." onKeyPress="if (event.keyCode==13){searchFunc();}">
+				<input type="text" name="keyword" id="title" class="searchInput" value="${pageMaker.cri.keyword}" placeholder="지역이나 제목을 검색할 수 있어요." onKeyPress="if (event.keyCode==13){searchFunc();}">
 				<button class="searchBtn">
 					<img src="${contextPath}/resources/image/outline_search_white_24dp.png">
 				</button>
@@ -118,32 +117,12 @@ request.setCharacterEncoding("UTF-8");
 					</c:otherwise>
 				</c:choose>
 			</ul>
-			<!-- 더보기 버튼 -->
-			<!-- <div class="load_btn_wrap">
-				<a href="#" class="load"> 더보기(<span class="listNum"></span>/<span class="allListNum"></span>) <i class="fas fa-chevron-down"></i>
-				</a>
-			</div> -->
 			<div class="postSearchNone" style="display: none">
 				<td>검색 결과가 없어요.</td>
 			</div>
 			<div class="postNone" style="display: none">
 				<td>아직 게시물이 없어요.</td>
 			</div>
-
-			<!-- 페이징 -->
-			<!-- 			<div class="paging_wrap"> -->
-			<!-- 				<ul class="pageInfo"> -->
-			<%-- 					<c:if test="${pageMaker.prev}"> --%>
-			<%-- 						<li class="prevBtn"><a href="${pageMaker.startPage-1}"><i class="fas fa-angle-left"></i></a></li> --%>
-			<%-- 					</c:if> --%>
-			<%-- 					<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="num"> --%>
-			<%-- 						<li class=" ${pageMaker.cri.pageNum == num ? "active":"" }"><a href="${num}">${num}</a></li> --%>
-			<%-- 					</c:forEach> --%>
-			<%-- 					<c:if test="${pageMaker.next}"> --%>
-			<%-- 						<li class="nextBtn"><a href="${pageMaker.endPage + 1 }"><i class="fas fa-angle-right"></i></a></li> --%>
-			<%-- 					</c:if> --%>
-			<!-- 				</ul> -->
-			<!-- 			</div> -->
 		</div>
 		
 		<div class="down">
@@ -151,8 +130,6 @@ request.setCharacterEncoding("UTF-8");
 		</div>
 
 		<form id="listForm" method="get">
-			<%-- 			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }"> --%>
-			<%-- 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }"> --%>
 			<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 			<input type="hidden" name="tab" value="${pageMaker.cri.tab}">
 		</form>
@@ -163,15 +140,15 @@ request.setCharacterEncoding("UTF-8");
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script type="text/javascript">
 
-$(document).ready(function(){
-	   //시계
-	   var timer = setInterval(function(){
-		   var now = new Date(); 
+	$(document).ready(function(){
+		//시계
+		var timer = setInterval(function(){
+		var now = new Date(); 
+				  
+		var hr = now.getHours();
+		var min = now.getMinutes();
+		var sec = now.getSeconds();
 			  
-		  	var hr = now.getHours();
-		 	var min = now.getMinutes();
-		  	var sec = now.getSeconds();
-		  
 		  $('.time_area').find('span').eq(0).text(hr);
 		  $('.time_area').find('span').eq(1).text(min);
 		  $('.time_area').find('span').eq(2).text(sec);
@@ -186,16 +163,15 @@ $(document).ready(function(){
 			  $('.time_area').find('span').eq(2).text("0"+sec);
 		  }
 	   },1000);
-});
-
-
+	});
+	
 	//주소검색
 	function execPostCode() {
-	    new daum.Postcode({
-	        oncomplete: function(data) {
-	           $("#post_addr").val(data.roadAddress);
-	       }
-	    }).open();
+		new daum.Postcode({
+			oncomplete: function(data) {
+			$("#post_addr").val(data.roadAddress);
+			}
+		}).open();
 	}
 	
 	//마이크
@@ -206,124 +182,110 @@ $(document).ready(function(){
 	const analyser = audioCtx.createAnalyser();
 	
 	if (navigator.mediaDevices) {
-        console.log('getUserMedia supported.')
-
-        const constraints = {
-        	//오디오를 요청한다.
-            audio: true
-        }
-        let chunks = [];
-
-        //비동기 처리
-        navigator.mediaDevices.getUserMedia(constraints)
-            .then(stream => {
-            	//스트림 사용
-                const mediaRecorder = new MediaRecorder(stream);             
-                record.onclick = () => {
-                    mediaRecorder.start();
-                    console.log(mediaRecorder.state);
-                    console.log("recorder started");
-                    record.style.backgroundColor = "#FF5555";
-                }
-
-                stop.onclick = () => {
-                    mediaRecorder.stop();
-                    console.log(mediaRecorder.state);
-                    console.log("recorder stopped");
-                    record.style.backgroundColor = "#e1e1e1";
-                    title.focus();
-                }
-
-                mediaRecorder.onstop = e => {
-                	const blob = new Blob(chunks, {
-                        'type': 'audio/ogg codecs=opus'
-                    });
-                	let file = new File([blob], "c:/study/audio.webm");
-                    console.log(file.name);
-
-                	//file upload
-                    let formdata = new FormData();
-                    formdata.append("fname", "audio.webm");
-                    formdata.append("data", blob);
-                    console.log("blob",blob);
-                    
-
-                    let xhr = new XMLHttpRequest();
-                    xhr.onload = () => {
-                     	if (xhr.status === 200) {// HTTP가 잘 동작되었다는 뜻.
-                        	console.log("response:"+xhr.response);
-                        	title.value=xhr.response;       
-                    	}                 
-                    	
-                    }
-                    console.log('upload');
-                    xhr.open("POST", "mic", true);
-                    
-                    xhr.send(formdata);
-                }
-
-                mediaRecorder.ondataavailable = e => {
-                    chunks.push(e.data)
-                    console.log(e.data);
-                }
-            })
-            .catch(err => {
-            	// 오류 처리
-                console.log('The following error occurred: ' + err)
-            })
-    }
+		console.log('getUserMedia supported.')
 	
-   
-   
-   /* 페이징 */
+		const constraints = {
+			//오디오를 요청한다.
+			audio: true
+		}
+		let chunks = [];
+	
+		//비동기 처리
+	    navigator.mediaDevices.getUserMedia(constraints)
+		.then(stream => {
+			//스트림 사용
+			const mediaRecorder = new MediaRecorder(stream);             
+			record.onclick = () => {
+				mediaRecorder.start();
+				console.log(mediaRecorder.state);
+				console.log("recorder started");
+				record.style.backgroundColor = "#FF5555";
+			}
+	
+			stop.onclick = () => {
+				mediaRecorder.stop();
+				console.log(mediaRecorder.state);
+				console.log("recorder stopped");
+				record.style.backgroundColor = "#e1e1e1";
+				title.focus();
+			}
+	
+			mediaRecorder.onstop = e => {
+				const blob = new Blob(chunks, {
+				'type': 'audio/ogg codecs=opus'
+				});
+	
+				//file upload
+				let formdata = new FormData();
+				formdata.append("fname", "audio.webm");
+				formdata.append("data", blob);
+					                
+	
+				let xhr = new XMLHttpRequest();
+				xhr.onload = () => {
+					if (xhr.status === 200) {// HTTP가 잘 동작되었다는 뜻.
+						console.log("response:"+xhr.response);
+						title.value=xhr.response;       
+					}                 
+	             		 }
+				console.log('upload');
+				xhr.open("POST", "mic", true);
+					                
+				xhr.send(formdata);
+			}
+	
+			mediaRecorder.ondataavailable = e => {
+				chunks.push(e.data)
+				console.log(e.data);
+			}
+		})
+	       .catch(err => {
+			// 오류 처리
+			console.log('The following error occurred: ' + err)
+		})
+	}
+		
+	   
 	const listForm = $("#listForm");
-//   $(".pageInfo a").on("click", function(e) {
-// 		e.preventDefault();
-//   		listForm.find("input[name='pageNum']").val($(this).attr("href"));
-//   		listForm.attr("action", "/post/list");
-//   		listForm.submit();
-//   	});
-  
-  /* 검색 기능 */
-  	$(".search_area .searchBtn").on("click", function(e) {
-  		e.preventDefault();
-  		searchFunc();
-  	});
-  
-  	function searchFunc() {
+	 
+	/* 검색 기능 */
+	$(".search_area .searchBtn").on("click", function(e) {
+		e.preventDefault();
+		searchFunc();
+	});
+	  
+	function searchFunc() {
 		let keyword = $(".search_area input[name='keyword']").val();
 		let tab = ${pageMaker.cri.tab };
-
+	
 		if (!keyword) {
 			location.href = "/post/list";
 		}
-
+	
 		listForm.find("input[name='keyword']").val(keyword);
-// 		listForm.find("input[name='pageNum']").val(1);
 		listForm.find("input[name='tab']").val(tab);
 		listForm.attr("action", "/post/list");
 		listForm.submit();
 	}
-  	
- // 카테고리 필터
-    $(".tab ul li").click(function (e) {
-      e.preventDefault();
-
-      let idx = $(this).index();
-      
-//       listForm.find("input[name='pageNum']").val(1);
-      listForm.find("input[name='tab']").val(idx);
-      listForm.attr("action", "/post/list");
+	 	
+	/* 탭 메뉴 */
+	$(".tab ul li").click(function (e) {
+		e.preventDefault();
+	
+		let idx = $(this).index();
+	      
+		listForm.find("input[name='tab']").val(idx);
+		listForm.attr("action", "/post/list");
 		listForm.submit();
-    });
-  
-  $(".tab ul li").removeClass("selected");
-  $(".tab ul li").eq(${pageMaker.cri.tab }).addClass("selected");
-  
-  /* 게시물이 없을 경우 */
+	});
+	  
+	$(".tab ul li").removeClass("selected");
+	$(".tab ul li").eq(${pageMaker.cri.tab }).addClass("selected");
+	  
+	/* 게시물이 없을 경우 */
 	const isPostInfo = document.querySelectorAll('.item');
 	let keyword = $(".search_area input[name='keyword']").val();
-	
+		
 	if (isPostInfo.length <= 0) {
 		if (keyword) { // 검색 결과가 없을 경우
 			document.querySelector(".postSearchNone").style.display = '';
@@ -331,57 +293,26 @@ $(document).ready(function(){
 			document.querySelector(".postNone").style.display = '';
 		}
 	}
-  
-  /* 검색하면 취소 버튼 표시 */
+	  
+	/* 검색하면 취소 버튼 표시 */
 	if (keyword) {
-			document.querySelector(".searchReset").style.display = '';
+		document.querySelector(".searchReset").style.display = '';
 	} else {
-			document.querySelector(".searchReset").style.display = 'none';
+		document.querySelector(".searchReset").style.display = 'none';
 	}
-  	
-  /* 더보기 */
-//   document.querySelector(".listNum").textContent = 1;
-//   document.querySelector(".allListNum").textContent = Math.ceil(isPostInfo.length / 9);
-  
-//   if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent || document.querySelector(".allListNum").textContent == 0){
-//       document.querySelector(".load_btn_wrap").style.display = 'none';
-//   }
-  
-//   $(function(){
-//     $(".post ul li").slice(0, 9).show(); // select the first ten
-    
-//     $(".load").click(function(e){ // click event for load more
-//         e.preventDefault();
-    
-//         $(".post ul li:hidden").slice(0, 9).show(); // select next 10 hidden divs and show them
-        
-//         document.querySelector(".listNum").textContent = Number(document.querySelector(".listNum").textContent) + 1;
-        
-//         if(document.querySelector(".listNum").textContent == document.querySelector(".allListNum").textContent){
-//             document.querySelector(".load_btn_wrap").style.display = 'none';
-//         }
-        
-//     });
-// });
-  
-  /* 열차 마감 */
+	  
+	/* 열차 마감 */
 	const orderDate = document.querySelectorAll("._deadline");
 	const closed = document.querySelectorAll(".closed");
 	const leave_soon = document.querySelectorAll(".leave_soon");
 	const today = new Date();
-	
+		
 	for(let i=0; i<orderDate.length; i++){
 		let oDate = new Date(orderDate[i].textContent);
-		
-		let dateDiff = oDate.getTime()-today.getTime();
-		
-		let diffDay= Math.floor((dateDiff / (1000 * 60 * 60 * 24)));
-		let diffHour = Math.floor((dateDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-		let diffMin = Math.floor((dateDiff % (1000 * 60 * 60)) / (1000 * 60));
-		let diffSec = Math.floor((dateDiff % (1000 * 60)) / 1000);
-		
+		let diffHour = (oDate.getTime() - today.getTime()) / (1000 * 60 * 60);
+			
 		/* 현재 시간 - 마감 시간 < 1시간 => 마감 임박 */
-		if(diffDay == 0 && diffHour == 0) {
+		if(diffHour < 1 && diffHour > 0) {
 			leave_soon[i].style.display= "block";
 		}
 		/* 현재 시간 < 마감 시간 => 열차 마감 */
@@ -389,36 +320,11 @@ $(document).ready(function(){
 			closed[i].style.display= "block";
 		}
 	}
-	
-	/* slick slider */
-	/* if ($('.slider li.item').length == 0) {
-			$('.slider').slick({
-				slidesToShow: 3,
-				slidesToScroll: 3,
-				rows: 3,
-				infinite: true,
-				speed: 500,
-				arrows: true,
-				draggable: true, 
-				dots: false,
-			});
-		} else {
-			$('.slider').slick({
-				slidesToShow: 3,
-				slidesToScroll: 3,
-				rows: 3,
-				infinite: true,
-				speed: 500,
-				arrows: true,
-				draggable: true,
-				dots: true,
-			});
-		} */
-  
+	  
 	/* 모집시간 포맷 변경 */
 	const deadline = document.querySelectorAll("._deadline");
 	const deadlineFormat = document.querySelectorAll(".recruit_wrap span.deadline span");
-		
+			
 	for(let i = 0; i < deadline.length; i++){
 		$(function() {
 			var time1 = deadline[i].innerText.substr(5, 2);
@@ -428,4 +334,5 @@ $(document).ready(function(){
 			$(deadlineFormat).eq(i).text(time1 + "월" + time2 + "일 " + time3 + ":" + time4 + "");
 		});
 	}
+	
 </script>

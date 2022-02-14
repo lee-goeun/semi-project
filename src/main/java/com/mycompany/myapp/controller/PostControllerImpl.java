@@ -48,7 +48,7 @@ import com.mycompany.myapp.vo.PostVO;
 @RequestMapping("/post")
 public class PostControllerImpl implements PostController {
 	
-	private static final String POST_IMAGE_REPO = "C:\\semi_project\\post_image";
+	private static final String POST_IMAGE_REPO = "resources/image_upload_file";
 	
 	@Autowired
 	private PostService postService;
@@ -218,8 +218,8 @@ public class PostControllerImpl implements PostController {
 
 		try {
 			if (image != null && image.length() != 0) {
-				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
-				File destDir = new File(POST_IMAGE_REPO + "\\" + postId);
+				File srcFile = new File(POST_IMAGE_REPO + "/" + "temp" + "/" + image);
+				File destDir = new File(POST_IMAGE_REPO + "/" + postId);
 				FileUtils.moveFileToDirectory(srcFile, destDir, true);
 			}
 
@@ -229,7 +229,7 @@ public class PostControllerImpl implements PostController {
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+			File srcFile = new File(POST_IMAGE_REPO + "/" + "temp" + "/" + image);
 			srcFile.delete();
 
 			msg = " <script>";
@@ -327,10 +327,10 @@ public class PostControllerImpl implements PostController {
 		postService.modPost(postMap);
 		try {
 			if (image != null && image.length() != 0) {
-				File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
-				File destDir = new File(POST_IMAGE_REPO + "\\" + postId);
+				File srcFile = new File(POST_IMAGE_REPO + "/" + "temp" + "/" + image);
+				File destDir = new File(POST_IMAGE_REPO + "/" + postId);
 				String originalFileName = (String) postMap.get("originalFileName");
-				File oldFile = new File(POST_IMAGE_REPO + "\\" + postId + "\\" + originalFileName);
+				File oldFile = new File(POST_IMAGE_REPO + "/" + postId + "/" + originalFileName);
 				oldFile.delete();
 			}
 			msg = "<script>";
@@ -339,7 +339,7 @@ public class PostControllerImpl implements PostController {
 			msg += "</script>";
 			resEnt = new ResponseEntity(msg, responseHeaders, HttpStatus.CREATED);
 		} catch (Exception e) {
-			File srcFile = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image);
+			File srcFile = new File(POST_IMAGE_REPO + "/" + "temp" + "/" + image);
 			srcFile.delete();
 			msg = "<script>";
 			msg += " alert('오류가 발생했습니다.다시 수정해주세요');";
@@ -388,11 +388,11 @@ public class PostControllerImpl implements PostController {
 			String fileName = fileNames.next();
 			MultipartFile mFile = multipartRequest.getFile(fileName);
 			image = mFile.getOriginalFilename();
-			File file = new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + fileName);
+			File file = new File(POST_IMAGE_REPO + "/" + "temp" + "/" + fileName);
 			if (mFile.getSize() != 0) { // file null check
 				if (!file.exists()) {
 					file.getParentFile().mkdirs();
-					mFile.transferTo(new File(POST_IMAGE_REPO + "\\" + "temp" + "\\" + image));
+					mFile.transferTo(new File(POST_IMAGE_REPO + "/" + "temp" + "/" + image));
 				}
 			}
 		}

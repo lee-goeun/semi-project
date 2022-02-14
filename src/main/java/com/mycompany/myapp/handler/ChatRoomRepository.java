@@ -26,9 +26,10 @@ public class ChatRoomRepository {
     public static void checkRoom(String id) {
     	if(chatRoomMap.get(id) == null) {
     		createChatRoom(id);
-    	}else {
-    		findRoomById(id);
     	}
+		/*
+		  else { findRoomById(id); }
+		 */
     }
     
     public static ChatRoom createChatRoom(String postId){
