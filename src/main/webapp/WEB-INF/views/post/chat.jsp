@@ -31,6 +31,14 @@
 		
 		var postId = ${param.postId};
 		
+		websocket.onclose = function(){
+			console.log('다시 연결');
+			setTimeout(function(){
+				onOpen();
+				console.log('다시 연결111');
+			},100);
+		}
+		
 		$('#msg').on('keyup', function(e){
 			const nick = $('#myNick').val();
 			const msg = $('#msg').val();
@@ -135,7 +143,8 @@
 	function onClose(e){
 		console.log("웹 소켓 종료");
 		//websocket.send(JSON.stringify({postId : postId,type:'LEAVE',uid:nick}));
-		$('#chat_area').remove();
+		//$('#chat_area').remove();
+		//onOpen();
 	}
 	
 	//브라우저 창 종료

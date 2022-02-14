@@ -35,11 +35,12 @@ public class ChatWebSocketHandler extends TextWebSocketHandler{
 		ChatRoom chatRoom = new ChatRoom();
 		objectMapper = new ObjectMapper();
 		chatRoomRepository = new ChatRoomRepository();
-		
 		String msg = message.getPayload();
+		System.out.println("******************** " + msg);
         ChatVO chatMessage = objectMapper.readValue(msg,ChatVO.class);
+        chatRoomRepository.checkRoom(msg);
         chatRoom = chatRoomRepository.findRoomById(Integer.toString(chatMessage.getPostId()));
-        
+       
         chatRoom.handleMessage(session,chatMessage,objectMapper);
     }
 	
