@@ -37,3 +37,7 @@ width: 1000px;
 width:1000px;
 margin:auto;
 }
+
+#map {
+	z-index: 0;
+}
